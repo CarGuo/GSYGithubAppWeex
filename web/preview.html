@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Weex Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="format-detection" content="telephone=no, email=no">
+  <link rel="stylesheet" href="./assets/preview.css">
+  <script src="./assets/qrcode.js"></script>
+</head>
+<body>
+  <!-- <header class="header center">
+    <h1 class="page-title">Weex Preview</h1>
+  </header> -->
+  <div class="content center">
+    <main class="main">
+      <div class="mock-phone">
+        <div class="camera"></div>
+        <div class="earpiece"></div>
+        <div class="inner">
+          <iframe id="preview" src="/" frameborder="0"></iframe>
+        </div>
+        <div class="home-btn"></div>
+      </div>
+      <div class="qrcode-box">
+        <a class="qrcode" id="qrcode" target="_blank"></a>
+        <p class="qrcode-tips">Use <a target="_blank" href="https://weex-project.io/playground.html">Weex playground app</a> to scan it.</p>
+        <div class="pages-box">
+
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    (function(){
+      const page = getUrlParam('page');
+      const entrys = getUrlParam('entrys');
+      function getUrlParam (key) {
+        var reg = new RegExp('[?|&]' + key + '=([^&]+)')
+        var match = location.search.match(reg)
+        return match && match[1]
+      }
+      function createQRCode (url) {
+        var $QR = document.querySelector('#qrcode')
+        var QR = qrcode(0, 'L')
+        url += '?_wx_tpl=' + url
+        $QR.setAttribute('href', url)
+        QR.addData(url)
+        QR.make()
+        $QR.innerHTML = QR.createImgTag(6, 12)
+      }
+      if (page) {
+        var $preview = document.querySelector('#preview')
+        $preview.src = `/${page.replace('.js', '.html')}`;
+      }
+      if (entrys) {
+        var pageEntrys = decodeURI(entrys).replace('\\', '/').split('|');
+        var $pages = document.querySelector('.pages-box');
+        var contents = '';
+        pageEntrys.forEach(function(entry){
+          if (entry === getUrlParam('page').replace('.js', '')) {
+            contents += `<a href="?page=${entry}.js&entrys=${entrys}" class="page-item active">${entry}</a>`
+          }
+          else {
+            contents += `<a href="?page=${entry}.js&entrys=${entrys}" class="page-item">${entry}</a>`
+          }
+        })
+        $pages.innerHTML = contents;
+      }
+      var host = window.location.host;
+      createQRCode(`http://${host}/dist/${page || 'index.js'}`)
+    })();
+  </script>
+</body>
+<!-- Webpack Dev Server reload -->
+<script src="/webpack-dev-server.js"></script>
+</html>
