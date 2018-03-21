@@ -1,9 +1,10 @@
 import Vuex from 'vuex'
-import user from './core/store/modules/user'
+import Vue from 'vue'
+import user from './modules/user'
 
-if (WXEnvironment.platform !== 'Web') {
-    Vue.use(Vuex)
-}
+
+Vue.use(Vuex)
+
 
 export default new Vuex.Store({
     modules: {
