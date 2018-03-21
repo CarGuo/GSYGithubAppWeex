@@ -37,4 +37,4 @@ assets/tools/
 
 package-lock.json
 
-.temp
+ignoreConfig.js
