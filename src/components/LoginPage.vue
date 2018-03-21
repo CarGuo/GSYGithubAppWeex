@@ -42,7 +42,7 @@
     const modal = weex.requireModule('modal');
     import {WxcButton} from 'weex-ui'
     import {Buffer} from 'buffer'
-    import Api from '../core/net/api'
+    import user from '../core/net/user'
     import * as Constant from '../core/common/constant'
     import {setCache} from '../core/common/storageUtils'
     import * as ignoreConfig from '../core/common/ignoreConfig'
@@ -66,24 +66,11 @@
                 this.password = event.value;
             },
             onLogin() {
-                this.doLogin(this.username, this.password)
+                this.$store.dispatch('doLogin', {
+                    username: this.username,
+                    password: this.password,
+                }).then(() => {});
             },
-            async doLogin(userName, password) {
-                let base64Str = Buffer(userName + ":" + password).toString('base64');
-                await setCache(Constant.USER_NAME_KEY, userName);
-                await setCache(Constant.USER_BASIC_CODE, base64Str);
-                let requestParams = {
-                    scopes: ['user', 'repo', 'gist', 'notifications'],
-                    note: "admin_script",
-                    client_id: ignoreConfig.CLIENT_ID,
-                    client_secret: ignoreConfig.CLIENT_SECRET
-                };
-                Api.clearAuthorization();
-                let res = await Api.netFetch("https://api.github.com/authorizations", 'POST', requestParams, true);
-                modal.toast({
-                    message: res
-                })
-            }
         }
     }
 </script>
