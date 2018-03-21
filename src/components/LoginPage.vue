@@ -5,11 +5,16 @@
         <input class="input" @change="onPWChange" type="password" placeholder="密码"/>
         <wxc-button text="登录"
                     type="red"
-                    :btn-style="{width:'620px',marginTop: '30px'}"
+                    :btn-style="{flex:'1',width:'620px',marginTop: '30px'}"
                     @wxcButtonClicked="onLogin"></wxc-button>
     </div>
 </template>
 <style scoped>
+    .wrapper {
+        align-items: center;
+        justify-content: center;
+    }
+
     .input {
         margin-left: 106px;
         margin-right: 106px;
@@ -29,11 +34,18 @@
     .logo {
         width: 424px;
         height: 200px;
+        align-items: center;
+        justify-content: center;
     }
 </style>
 <script>
     const modal = weex.requireModule('modal');
     import {WxcButton} from 'weex-ui'
+    import {Buffer} from 'buffer'
+    import Api from '../core/net/api'
+    import * as Constant from '../core/common/constant'
+    import {setCache} from '../core/common/storageUtils'
+    import * as ignoreConfig from '../core/common/ignoreConfig'
 
     export default {
         components: {WxcButton},
@@ -53,10 +65,23 @@
                 console.log('on pw change:', event.value);
                 this.password = event.value;
             },
-            onLogin(e) {
-                const {type, disabled} = e;
+            onLogin() {
+                this.doLogin(this.username, this.password)
+            },
+            async doLogin(userName, password) {
+                let base64Str = Buffer(userName + ":" + password).toString('base64');
+                await setCache(Constant.USER_NAME_KEY, userName);
+                await setCache(Constant.USER_BASIC_CODE, base64Str);
+                let requestParams = {
+                    scopes: ['user', 'repo', 'gist', 'notifications'],
+                    note: "admin_script",
+                    client_id: ignoreConfig.CLIENT_ID,
+                    client_secret: ignoreConfig.CLIENT_SECRET
+                };
+                Api.clearAuthorization();
+                let res = await Api.netFetch("https://api.github.com/authorizations", 'POST', requestParams, true);
                 modal.toast({
-                    message: disabled ? `disabled=${disabled}` : `type=${type}`
+                    message: res
                 })
             }
         }
