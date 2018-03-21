@@ -8,6 +8,7 @@ import {setCache} from '../common/storageUtils'
 import * as ignoreConfig from '../common/ignoreConfig'
 
 const doLogin = async (userName, password) => {
+    console.log("user " + userName + " pw " + password)
     let base64Str = Buffer(userName + ":" + password).toString('base64');
     await setCache(Constant.USER_NAME_KEY, userName);
     await setCache(Constant.USER_BASIC_CODE, base64Str);
