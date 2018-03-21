@@ -1,7 +1,7 @@
 import {TOKEN_KEY, USER_BASIC_CODE, DEBUG} from '../common/constant'
 import {getCache, removeCache, setCache} from '../common/storageUtils'
 
-const stream = weex.requireModule('stream');
+
 
 
 export const CONTENT_TYPE_JSON = "application/json";
@@ -195,6 +195,7 @@ class HttpManager {
     }
 
     fetch(path, requestParams) {
+        const stream = weex.requireModule('stream');
         return new Promise((resolve, reject) => {
             stream.fetch({
                 method: requestParams.method,
