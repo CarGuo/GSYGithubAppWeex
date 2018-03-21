@@ -7,7 +7,7 @@
                     type="red"
                     :btn-style="{flex:'1',width:'620px',marginTop: '30px', marginBottom:'30px'}"
                     @wxcButtonClicked="onLogin"></wxc-button>
-        <text>{{ "userName: " + tipData}}</text>
+        <text>{{ "UserName: " + tipData}}</text>
     </div>
 </template>
 <style scoped>
@@ -60,8 +60,8 @@
         computed:{
             tipData() {
                 let login = 'wait your login';
-                if(this.$store.default.state.user.userInfo.login) {
-                    login = this.$store.default.state.user.userInfo.login;
+                if(this.$store.state.user.userInfo.login) {
+                    login = this.$store.state.user.userInfo.login;
                 }
                 return login
             }
@@ -77,7 +77,7 @@
             },
             onLogin() {
                 console.log(this.$store);
-                this.$store.default.dispatch('doLogin', {
+                this.$store.dispatch('doLogin', {
                     username: this.username,
                     password: this.password,
                 });
