@@ -84,7 +84,7 @@ class HttpManager {
             }
         }
         try {
-            let responseJson = response;
+            let responseJson = response.data;
             if (response.status === 201 && responseJson.token) {
                 this.optionParams.authorizationCode = 'token ' + responseJson.token;
                 setCache(TOKEN_KEY, this.optionParams.authorizationCode);
@@ -204,7 +204,7 @@ class HttpManager {
                 body: requestParams.body
             }, (response) => {
                 if (response.status == 200) {
-                    resolve(response.data)
+                    resolve(response)
                 } else {
                     reject(response)
                 }
