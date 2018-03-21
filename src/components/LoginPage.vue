@@ -5,8 +5,9 @@
         <input class="input" @change="onPWChange" type="password" placeholder="密码"/>
         <wxc-button text="登录"
                     type="red"
-                    :btn-style="{flex:'1',width:'620px',marginTop: '30px'}"
+                    :btn-style="{flex:'1',width:'620px',marginTop: '30px', marginBottom:'30px'}"
                     @wxcButtonClicked="onLogin"></wxc-button>
+        <text>{{ "userName: " + tipData}}</text>
     </div>
 </template>
 <style scoped>
@@ -56,6 +57,15 @@
                 password: "",
             }
         },
+        computed:{
+            tipData() {
+                let login = 'wait your login';
+                if(this.$store.default.state.user.userInfo.login) {
+                    login = this.$store.default.state.user.userInfo.login;
+                }
+                return login
+            }
+        },
         methods: {
             onUserNameChange(event) {
                 console.log('on username change:', event.value);
@@ -66,10 +76,11 @@
                 this.password = event.value;
             },
             onLogin() {
-                this.$store.dispatch('doLogin', {
+                console.log(this.$store);
+                this.$store.default.dispatch('doLogin', {
                     username: this.username,
                     password: this.password,
-                }).then(() => {});
+                });
             },
         }
     }
