@@ -13,11 +13,12 @@ const getters = {};
 // actions
 const actions = {
 
-    initUserInfo({commit, state}) {
+    initUserInfo({commit, state}, callback) {
         user.initUserInfo().then((res) => {
             if (res && res.result) {
                 commit('storeUserInfo', res.data);
             }
+            callback && callback(res);
         });
 
     },

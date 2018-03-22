@@ -84,7 +84,6 @@
                 const modal = weex.requireModule('modal');
                 let username = this.username;
                 let password =  this.password;
-                console.log(modal)
                 if (isEmptyString(username)) {
                     modal.toast({
                         message: "用户名不能为空"
