@@ -32,7 +32,7 @@
         created: function () {
             this.$store.dispatch('initUserInfo', (res)=>{
                 if (res && res.result) {
-                    this.reset("/login")
+                    this.reset("/main")
                 } else {
                     this.reset("/login")
                 }
