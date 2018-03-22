@@ -12,23 +12,35 @@ const getters = {};
 
 // actions
 const actions = {
-    doLogin({commit, state}, params) {
-        user.doLogin(params.username, params.password).then((res) => {
-            if (res && res.result) {
-                return user.getUserInfoDao();
-            } else {
-                //登录失败
-            }
-        }).then((res) => {
+
+    initUserInfo({commit, state}) {
+        user.initUserInfo().then((res) => {
             if (res && res.result) {
                 commit('storeUserInfo', res.data);
             }
-        })
+        });
+
+    },
+    doLogin({commit, state}, params) {
+        user.doLogin(params.username, params.password)
+            .then((res) => {
+                if (res && res.result) {
+                    return user.getUserInfoDao();
+                } else {
+                    //登录失败
+                }
+            })
+            .then((res) => {
+                if (res && res.result) {
+                    commit('storeUserInfo', res.data);
+                }
+                params.resultCallback && params.resultCallback(res);
+            })
     },
     getUserInfo({commit, state}, userName) {
         user.getUserInfo(userName).then((res) => {
             if (res && res.result) {
-                commit('storeUserInfo', res.data);
+                //todo 其他用户的应该不用保存在state
             }
         });
     },

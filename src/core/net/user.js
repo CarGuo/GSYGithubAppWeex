@@ -4,9 +4,43 @@ import {Buffer} from 'buffer'
 import Api from './api'
 import Address from './address'
 import * as Constant from '../common/constant'
-import {setCache} from '../common/storageUtils'
+import {getCache, setCache} from '../common/storageUtils'
 import * as ignoreConfig from '../common/ignoreConfig'
 
+/**
+ * 初始化用户信息
+ */
+const initUserInfo = async () => {
+    let token = await getCache(Constant.TOKEN_KEY);
+    let res = await getUserInfoLocal();
+    return {
+        result: res.result && (token !== null),
+        data: res.data
+    };
+
+};
+
+/**
+ * 获取本地登录用户信息
+ */
+const getUserInfoLocal = async () => {
+    let userText = await getCache(Constant.USER_INFO);
+    if (userText) {
+        let res = JSON.parse(userText);
+        return {
+            result: true,
+            data: res
+        }
+    } else {
+        return {
+            result: false
+        }
+    }
+};
+
+/**
+ * 登录
+ */
 const doLogin = async (userName, password) => {
     console.log("user " + userName + " pw " + password)
     let base64Str = Buffer(userName + ":" + password).toString('base64');
@@ -98,4 +132,6 @@ const getUserStaredCountNet = async (userName) => {
 export default {
     doLogin,
     getUserInfoDao,
+    initUserInfo,
+    getUserInfoLocal,
 }
