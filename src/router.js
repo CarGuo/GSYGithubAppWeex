@@ -6,7 +6,7 @@ import MainTabPage from '@/components/MainTabPage'
 
 Vue.use(Router)
 
-export default new Router({
+module.exports = new Router({
     routes: [
         {
             path: '/login',
@@ -14,12 +14,12 @@ export default new Router({
             component: LoginPage
         },
         {
-            path: '/gg',
+            path: '/',
             name: 'WelcomePage',
             component: WelcomePage
         },
         {
-            path: '/',
+            path: '/main',
             name: 'MainTabPage',
             component: MainTabPage
         }

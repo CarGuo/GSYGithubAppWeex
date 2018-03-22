@@ -1,0 +1,34 @@
+
+
+1、关于weex.requireModule(包括插件weex-ui)中，在全局获取返回null的原因，
+是因为entry.js中的router对象不能用import 和 export default，只能用require 和  module.exports 配合。
+
+2、es6一些语法问题，可以用"babel-plugin-transform-runtime"，在.babelrc中设置
+```
+{
+  "presets": [
+    "es2015",
+    "stage-0"
+  ],
+  "plugins": [  [
+    "component",
+    {
+      "libraryName": "weex-ui",
+      "libDir": "packages",
+      "style": false
+    }
+  ],[
+    "transform-runtime",
+    {
+      "helpers": false,
+      "polyfill": false,
+      "regenerator": true,
+      "moduleName": "babel-runtime"
+    }
+  ]]
+}
+```
+
+3、export default 和require混合使用的时候，会多一个default对象，比如this.$store.default.state这样才对的问题
+
+4、自定义的js文件类中，不能使用全局的weex.requireModule

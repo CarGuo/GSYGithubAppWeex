@@ -50,8 +50,8 @@
     import user from '../core/net/user'
     import * as Constant from '../core/common/constant'
     import {isEmptyString} from '../core/common/commonUtils'
-    import {setCache} from '../core/common/storageUtils'
     import * as ignoreConfig from '../core/common/ignoreConfig'
+    const modal = weex.requireModule('modal');
 
     export default {
         components: {WxcButton, WxcLoading},
@@ -81,7 +81,6 @@
                 this.password = event.value;
             },
             onLogin() {
-                const modal = weex.requireModule('modal');
                 let username = this.username;
                 let password =  this.password;
                 if (isEmptyString(username)) {
