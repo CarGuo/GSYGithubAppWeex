@@ -4,10 +4,48 @@
                  title-type="iconFont"
                  @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
         <div class="item-container" :style="contentStyle">
-            <text>首页</text>
+            <dynamic-page/>
         </div>
         <div class="item-container" :style="contentStyle">
-            <text>特别推荐</text>
+            <scroller>
+                <text>特别推荐1</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐2</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐3</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐4</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐5</text>
+                <text>特别推荐</text>
+                <text>特别推荐</text>
+                <text>特别推荐6</text>
+                <event-item></event-item>
+            </scroller>
         </div>
         <div class="item-container" :style="contentStyle">
             <text>{{"我的主页\n测试图标"}}</text>
@@ -27,10 +65,13 @@
 <script>
     import {WxcTabBar, Utils} from 'weex-ui';
     import Config from './config/MainTabConfig'
+    import EventItem from './widget/EventItem'
+    import DynamicPage from './DynamicPage'
+
     const dom = weex.requireModule('dom');
 
     export default {
-        components: {WxcTabBar},
+        components: {WxcTabBar, EventItem, DynamicPage},
         data: () => ({
             tabTitles: Config.tabIconFontTitles,
             tabStyles: Config.tabIconFontStyles

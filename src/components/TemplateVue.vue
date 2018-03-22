@@ -19,6 +19,9 @@
         },
         methods: {
 
+        },
+        created:{
+
         }
     }
 </script>
