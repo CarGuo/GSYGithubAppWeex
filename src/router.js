@@ -2,10 +2,11 @@
 import Router from 'vue-router'
 import LoginPage from '@/components/LoginPage'
 import WelcomePage from '@/components/WelcomePage'
+import MainTabPage from '@/components/MainTabPage'
 
 Vue.use(Router)
 
-module.exports = new Router({
+export default new Router({
     routes: [
         {
             path: '/login',
@@ -13,9 +14,14 @@ module.exports = new Router({
             component: LoginPage
         },
         {
-            path: '/',
+            path: '/gg',
             name: 'WelcomePage',
             component: WelcomePage
+        },
+        {
+            path: '/',
+            name: 'MainTabPage',
+            component: MainTabPage
         }
     ]
 })

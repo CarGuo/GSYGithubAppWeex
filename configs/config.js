@@ -8,6 +8,7 @@ const config = {
   pluginFilePath: 'plugins/plugins.js',
   // router
   routerFilePath: 'router.js',
+  storeFilePath: 'store.js',
   // common
   templateDir: '.temp',
   entryFilePath: 'entry.js',
