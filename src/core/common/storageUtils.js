@@ -1,7 +1,6 @@
 
 
 
-
 export function getCache(key) {
     let storage = weex.requireModule('storage');
     return new Promise(function (resolve) {

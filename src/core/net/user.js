@@ -1,5 +1,5 @@
 
-const modal = weex.requireModule('modal');
+
 import {Buffer} from 'buffer'
 import Api from './api'
 import Address from './address'
