@@ -10,7 +10,8 @@
             <text>特别推荐</text>
         </div>
         <div class="item-container" :style="contentStyle">
-            <text>我的主页</text>
+            <text>{{"我的主页\n测试图标"}}</text>
+            <text :style="{fontFamily: 'wxcIconFont',fontSize: '40px', color:'red'}">{{"\ue661"}}</text>
         </div>
     </wxc-tab-bar>
 </template>
@@ -26,6 +27,7 @@
 <script>
     import {WxcTabBar, Utils} from 'weex-ui';
     import Config from './config/MainTabConfig'
+    const dom = weex.requireModule('dom');
 
     export default {
         components: {WxcTabBar},
@@ -38,6 +40,11 @@
             const tabPageHeight = Utils.env.getPageHeight();
             const {tabStyles} = this;
             this.contentStyle = {height: (tabPageHeight - tabStyles.height) + 'px'};
+
+            dom.addRule('fontFace', {
+                'fontFamily': "wxcIconFont",
+                'src': `url('../../static/font/iconfont.ttf')`
+            });
         },
         methods: {
             wxcTabBarCurrentTabSelected(e) {
