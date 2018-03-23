@@ -115,7 +115,7 @@ const webConfig = {
    */
   module: {
     // webpack 2.0 
-    rules: useEslint.concat([
+    rules: [
       {
         test: /\.js$/,
         use: [{
@@ -158,7 +158,7 @@ const webConfig = {
           })
         }]
       }
-    ])
+    ]
   },
   /*
    * Add additional plugins to the compiler.

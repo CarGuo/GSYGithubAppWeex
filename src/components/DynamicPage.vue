@@ -1,9 +1,9 @@
 <template>
-    <list class="list" @loadmore="fetch" @onloadmore="fetch" loadmoreoffset="10">
+    <list class="list" @loadmore="loadMore" @onloadmore="loadMore" loadmoreoffset="30">
         <cell class="cell" v-for="(rowData, index) in dataList">
             <div class="panel">
                 <event-item
-                        actionTime="10分钟后"
+                        :actionTime="rowData.created_at | resolveTime"
                         :actionUser="rowData.actor.display_login"
                         :actionUserPic="rowData.actor.avatar_url"
                         :actionTarget="rowData.actionStr"
@@ -17,18 +17,19 @@
 
 <script>
     const modal = weex.requireModule('modal')
-    const LOADMORE_COUNT = 4
 
     import EventItem from './widget/EventItem'
 
     export default {
         components: {EventItem},
         data() {
-            return {}
+            return {
+                currentPage: 1,
+            }
         },
         created: function () {
             this.$store.dispatch('getEventReceived', {
-                page: 0, callback: (res) => {
+                page: this.currentPage, callback: (res) => {
                     console.info("getEventReceived", res)
                 },
                 userInfo: this.getUserInfo()
@@ -40,18 +41,20 @@
             }
         },
         methods: {
-            fetch(event) {
-                modal.toast({message: 'loadmore', duration: 1})
+            loadMore() {
                 setTimeout(() => {
-                    const length = this.lists.length
-                    for (let i = length; i < length + LOADMORE_COUNT; ++i) {
-                        this.lists.push(i + 1)
-                    }
-                }, 800)
+                    this.currentPage++;
+                    this.$store.dispatch('getEventReceived', {
+                        page: this.currentPage, callback: (res) => {
+                            console.info("getEventReceived", res)
+                        },
+                        userInfo: this.getUserInfo()
+                    })
+                }, 300)
             },
             itemClick(event) {
                 console.log("click index ", event.index);
-                modal.toast({message:"click index " +  event.index})
+                modal.toast({message: "click index " + event.index})
             }
         }
     }
@@ -65,11 +68,6 @@
         margin-top: 30px;
     }
 
-    .text {
-        font-size: 50px;
-        text-align: center;
-        color: #41B883;
-    }
 
     .list {
         height: 1334px;
