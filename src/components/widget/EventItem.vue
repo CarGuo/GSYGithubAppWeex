@@ -59,6 +59,13 @@
     .des-text {
         color: rgba(97, 97, 97, 0.6);
         font-size: 28px;
+        display: -webkit-box;
+        overflow: hidden;
+        white-space: normal!important;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
 
     .content-text {

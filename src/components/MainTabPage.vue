@@ -55,7 +55,7 @@
 
             dom.addRule('fontFace', {
                 'fontFamily': "wxcIconFont",
-                'src': `url('../static/font/iconfont.ttf')`
+                'src': `url('../../static/font/iconfont.ttf')`
             });
         },
         methods: {

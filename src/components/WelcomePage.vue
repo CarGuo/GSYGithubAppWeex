@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <image src="../static/img/welcome.png" class="logo" resize="contain"></image>
+        <image src="../../static/img/welcome.png" class="logo" resize="contain"></image>
     </div>
 </template>
 <style scoped>
