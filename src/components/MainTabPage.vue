@@ -1,5 +1,5 @@
 <template>
-    <wxc-tab-bar :tab-titles="tabTitles"
+    <tab-bar :tab-titles="tabTitles"
                  :tab-styles="tabStyles"
                  title-type="iconFont"
                  @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
@@ -7,7 +7,7 @@
             <dynamic-page/>
         </div>
         <div class="item-container" :style="contentStyle">
-            <scroller>
+            <scroller style="align-items: center;justify-content: center;">
                 <text>特别推荐1</text>
                 <text>特别推荐</text>
                 <text>特别推荐</text>
@@ -44,34 +44,31 @@
                 <text>特别推荐</text>
                 <text>特别推荐</text>
                 <text>特别推荐6</text>
-                <event-item></event-item>
             </scroller>
         </div>
         <div class="item-container" :style="contentStyle">
             <text>{{"我的主页\n测试图标"}}</text>
             <text :style="{fontFamily: 'wxcIconFont',fontSize: '40px', color:'red'}">{{"\ue661"}}</text>
         </div>
-    </wxc-tab-bar>
+    </tab-bar>
 </template>
 
 <style scoped>
     .item-container {
         width: 750px;
         background-color: #f2f3f4;
-        align-items: center;
-        justify-content: center;
     }
 </style>
 <script>
     import {WxcTabBar, Utils} from 'weex-ui';
     import Config from './config/MainTabConfig'
-    import EventItem from './widget/EventItem'
+    import TabBar from './widget/TabBar'
     import DynamicPage from './DynamicPage'
 
     const dom = weex.requireModule('dom');
 
     export default {
-        components: {WxcTabBar, EventItem, DynamicPage},
+        components: {WxcTabBar, DynamicPage,TabBar},
         data: () => ({
             tabTitles: Config.tabIconFontTitles,
             tabStyles: Config.tabIconFontStyles
