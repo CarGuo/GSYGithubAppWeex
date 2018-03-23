@@ -99,6 +99,9 @@
                     password: password,
                     resultCallback: (res) => {
                         this.isLoading = false;
+                        if(res && res.result) {
+                            this.reset("/main")
+                        }
                         console.info("resultCallback", res)
                     }
                 })
