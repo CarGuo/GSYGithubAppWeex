@@ -1,8 +1,15 @@
 <template>
-    <list class="list" @loadmore="fetch" @onloadmore="fetch"  loadmoreoffset="10">
-        <cell class="cell" v-for="num in lists">
+    <list class="list" @loadmore="fetch" @onloadmore="fetch" loadmoreoffset="10">
+        <cell class="cell" v-for="(rowData, index) in dataList">
             <div class="panel">
-                <text class="text">{{num}}</text>
+                <event-item
+                        actionTime="10分钟后"
+                        :actionUser="rowData.actor.display_login"
+                        :actionUserPic="rowData.actor.avatar_url"
+                        :actionTarget="rowData.actionStr"
+                        :des="rowData.des"
+                        @onItemClick="itemClick"
+                        :itemIndex="index"></event-item>
             </div>
         </cell>
     </list>
@@ -12,22 +19,39 @@
     const modal = weex.requireModule('modal')
     const LOADMORE_COUNT = 4
 
+    import EventItem from './widget/EventItem'
+
     export default {
-        data () {
-            return {
-                lists: [1, 2, 3, 4, 5]
+        components: {EventItem},
+        data() {
+            return {}
+        },
+        created: function () {
+            this.$store.dispatch('getEventReceived', {
+                page: 0, callback: (res) => {
+                    console.info("getEventReceived", res)
+                },
+                userInfo: this.getUserInfo()
+            })
+        },
+        computed: {
+            dataList() {
+                return this.$store.state.event.received_events_data_list;
             }
         },
         methods: {
-            fetch (event) {
-                modal.toast({ message: 'loadmore', duration: 1 })
-
+            fetch(event) {
+                modal.toast({message: 'loadmore', duration: 1})
                 setTimeout(() => {
                     const length = this.lists.length
                     for (let i = length; i < length + LOADMORE_COUNT; ++i) {
                         this.lists.push(i + 1)
                     }
                 }, 800)
+            },
+            itemClick(event) {
+                console.log("click index ", event.index);
+                modal.toast({message:"click index " +  event.index})
             }
         }
     }
@@ -35,25 +59,19 @@
 
 <style scoped>
     .panel {
-        width: 600px;
-        height: 250px;
-        margin-left: 75px;
-        margin-top: 35px;
-        margin-bottom: 35px;
         flex-direction: column;
+        align-items: center;
         justify-content: center;
-        border-width: 2px;
-        border-style: solid;
-        border-color: rgb(162, 217, 192);
-        background-color: rgba(162, 217, 192, 0.2);
+        margin-top: 30px;
     }
+
     .text {
         font-size: 50px;
         text-align: center;
         color: #41B883;
     }
 
-    .list{
+    .list {
         height: 1334px;
     }
 </style>

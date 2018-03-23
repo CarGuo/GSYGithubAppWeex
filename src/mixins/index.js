@@ -9,6 +9,9 @@ export default {
             if (this.$router) {
                 this.$router.replace(to)
             }
+        },
+        getUserInfo() {
+            return this.$store.state.user.userInfo
         }
     }
 }
