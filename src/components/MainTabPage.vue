@@ -8,7 +8,14 @@
         </div>
         <div class="item-container" :style="contentStyle">
             <div style="align-items: center;justify-content: center;">
-                <event-item></event-item>
+                <event-item
+                        actionTime="10分钟后"
+                        actionUser="CarGuo"
+                        actionUserPic="https://avatars2.githubusercontent.com/u/10770362?s=400&u=d3d1be0401171c6a45ecfe50f63e73f0cdc6bd1a&v=4"
+                        actionTarget="star XXXXX/CCCCCC"
+                        des="新空间发了啥空间发了束带结发凉快圣诞节"
+                        @onItemClick="itemClick"
+                        :itemIndex=0></event-item>
             </div>
         </div>
         <div class="item-container" :style="contentStyle">
@@ -22,7 +29,7 @@
     .item-container {
         width: 750px;
         background-color: #f2f3f4;
-        overflow:scroll;
+        overflow: scroll;
     }
 </style>
 <script>
@@ -33,6 +40,7 @@
     import DynamicPage from './DynamicPage'
 
     const dom = weex.requireModule('dom');
+    const modal = weex.requireModule('modal');
 
     export default {
         components: {DynamicPage, EventItem, TabBar},
@@ -55,6 +63,10 @@
             wxcTabBarCurrentTabSelected(e) {
                 const index = e.page;
                 // console.log(index);
+            },
+            itemClick(event) {
+                console.log("click index ", event.index);
+                modal.toast({message:"click index " +  event.index})
             }
         }
     };
