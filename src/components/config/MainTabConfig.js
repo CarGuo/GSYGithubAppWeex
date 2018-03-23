@@ -32,6 +32,6 @@ export default {
         iconFontMarginBottom: 8,
         iconFontColor: '#AAAAAA',
         activeIconFontColor: 'black',
-        iconFontUrl: '../../../static/font/iconfont.ttf'
+        iconFontUrl: '../../static/font/iconfont.ttf'
     }
 }
