@@ -36,3 +36,5 @@
 5、和tabber结合是，list必须有高度或者overflow为scroll才能滑动，而且overflow的位置必须是不会影响其他页面的
 
 6、height 1334 和 width 750
+
+7、list的loadmore，必须给list设置高度样式，才能在web中正常触发
