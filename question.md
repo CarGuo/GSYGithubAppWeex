@@ -32,3 +32,7 @@
 3、export default 和require混合使用的时候，会多一个default对象，比如this.$store.default.state这样才对的问题
 
 4、自定义的js文件类中，不能使用全局的weex.requireModule
+
+5、和tabber结合是，list必须有高度或者overflow为scroll才能滑动，而且overflow的位置必须是不会影响其他页面的
+
+6、height 1334 和 width 750

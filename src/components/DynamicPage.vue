@@ -1,6 +1,6 @@
 <template>
-    <list @loadmore="fetch" loadmoreoffset="10" scroll>
-        <cell v-for="(num, i) in lists" :key="i">
+    <list class="list" @loadmore="fetch" @onloadmore="fetch"  loadmoreoffset="10">
+        <cell class="cell" v-for="num in lists">
             <div class="panel">
                 <text class="text">{{num}}</text>
             </div>
@@ -48,8 +48,12 @@
         background-color: rgba(162, 217, 192, 0.2);
     }
     .text {
-        font-size: 100px;
+        font-size: 50px;
         text-align: center;
         color: #41B883;
+    }
+
+    .list{
+        height: 1334px;
     }
 </style>

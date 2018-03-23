@@ -4,7 +4,7 @@
              title-type="iconFont"
              @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
         <div class="item-container" :style="contentStyle">
-            <dynamic-page/>
+            <dynamic-page></dynamic-page>
         </div>
         <div class="item-container" :style="contentStyle">
             <div style="align-items: center;justify-content: center;">
@@ -46,17 +46,16 @@
         components: {DynamicPage, EventItem, TabBar},
         data: () => ({
             tabTitles: Config.tabIconFontTitles,
-            tabStyles: Config.tabIconFontStyles
+            tabStyles: Config.tabIconFontStyles,
         }),
         created() {
-            //setTitle('TabBar');
             const tabPageHeight = Utils.env.getPageHeight();
             const {tabStyles} = this;
             this.contentStyle = {height: (tabPageHeight - tabStyles.height) + 'px'};
 
             dom.addRule('fontFace', {
                 'fontFamily': "wxcIconFont",
-                'src': `url('../../static/font/iconfont.ttf')`
+                'src': `url('../static/font/iconfont.ttf')`
             });
         },
         methods: {
