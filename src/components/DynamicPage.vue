@@ -1,5 +1,5 @@
 <template>
-    <list @loadmore="fetch" loadmoreoffset="10">
+    <list @loadmore="fetch" loadmoreoffset="10" scroll>
         <cell v-for="(num, i) in lists" :key="i">
             <div class="panel">
                 <text class="text">{{num}}</text>
