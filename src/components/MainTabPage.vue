@@ -4,7 +4,7 @@
              title-type="iconFont"
              @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
         <div class="item-container" :style="contentStyle">
-            <dynamic-page></dynamic-page>
+            <dynamic-page :listItemName="'EventItem'"></dynamic-page>
         </div>
         <div class="item-container" :style="contentStyle">
             <div style="align-items: center;justify-content: center;">

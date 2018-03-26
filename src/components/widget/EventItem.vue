@@ -1,35 +1,34 @@
 <template recyclable>
-    <div class="card-wrapper"  @click="onItemClick(itemIndex)">
+    <div class="card-wrapper" @click="onCardClick">
         <div class="card-user-wrapper" style="flex-direction: row">
-            <image :src="actionUserPic" class="user-icon"></image>
-            <text class="name-text" style="flex: 1; margin-left: 20px">{{actionUser}}</text>
-            <text class="des-text">{{actionTime}}</text>
+            <image :src="itemValue.ex.avatar_url" class="user-icon"></image>
+            <text class="name-text" style="flex: 1; margin-left: 20px">{{itemValue.ex.display_login}}</text>
+            <text class="des-text">{{itemValue.ex.created_at | resolveTime}}</text>
         </div>
-        <text class="content-text" style="flex: 1; margin-bottom: 20px;">{{actionTarget}}</text>
-        <text class="des-text">{{des}}</text>
+        <text class="content-text" style="flex: 1; margin-bottom: 20px;">{{itemValue.ex.actionStr}}</text>
+        <text class="des-text">{{itemValue.ex.des}}</text>
     </div>
 </template>
 
 <script>
     export default {
         props: {
-            actionTime: {type: String, default: ""},
+            itemValue: {
+                type: Object, default: () => {
+                    return {ex:{}}
+                }
+            },
             itemIndex: {type: Number, default: -1},
-            actionUser: {type: String, default: ""},
-            actionUserPic: {type: String, default: ""},
-            actionTarget: {type: String, default: ""},
-            des: {type: String, default: ""},
+            onItemClick:{type:Function}
         },
         components: {},
         methods: {
-            onItemClick(index) {
-                this.$emit('onItemClick', { index });
+            onCardClick() {
+                this.onItemClick && this.onItemClick(this.itemIndex);
             }
         },
         data() {
-            return {
-
-            }
+            return {}
         },
     }
 </script>
@@ -61,7 +60,7 @@
         font-size: 28px;
         display: -webkit-box;
         overflow: hidden;
-        white-space: normal!important;
+        white-space: normal !important;
         text-overflow: ellipsis;
         word-wrap: break-word;
         -webkit-line-clamp: 3;

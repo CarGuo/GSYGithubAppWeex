@@ -19,11 +19,15 @@ const actions = {
             if (res && res.result) {
                 res.data.forEach((item) => {
                     let newItem = getActionAndDes(item);
-                    console.log("gggggggggg", item.actor.display_login)
-                    item.actionStr = newItem.actionStr;
-                    item.des = newItem.des;
+                    let ex = {
+                        actionStr: newItem.actionStr,
+                        des: newItem.des,
+                        created_at: item.created_at,
+                        display_login: item.actor.display_login,
+                        avatar_url: item.actor.avatar_url,
+                    }
+                    item.ex = ex
                 });
-                console.log("Ffffffffffff", page, res.data)
                 if (page <= 1) {
                     commit('storeEventReceived', res.data);
                 } else {
