@@ -1,47 +1,28 @@
 <template>
-    <list class="list" @loadmore="loadMore" @onloadmore="loadMore" loadmoreoffset="30">
-        <refresh class="refresh" @refresh="onRefresh"
-                 :display="refreshing ? 'show' : 'hide'">
-            <text class="indicator-text">Refreshing ...</text>
-            <loading-indicator class="indicator"></loading-indicator>
-        </refresh>
-        <cell class="cell" v-for="(rowData, index) in dataList">
-            <div class="panel">
-                <event-item
-                        :actionTime="rowData.created_at | resolveTime"
-                        :actionUser="rowData.actor.display_login"
-                        :actionUserPic="rowData.actor.avatar_url"
-                        :actionTarget="rowData.actionStr"
-                        :des="rowData.des"
-                        @onItemClick="itemClick"
-                        :itemIndex="index"></event-item>
-            </div>
-        </cell>
-        <cell class="loading" :display="loadinging ? 'show' : 'hide'">
-            <text class="indicator-text">Loading ...</text>
-            <loading-indicator class="indicator-loadmore"></loading-indicator>
-        </cell>
-    </list>
+    <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList"
+              :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
 </template>
 
 <script>
     const modal = weex.requireModule('modal')
 
-    import EventItem from './widget/EventItem'
+    import * as Constant from '../core/common/constant'
+    import RLList from './widget/RLList'
+
 
     export default {
-        components: {EventItem},
+        components: {RLList},
         data() {
             return {
                 currentPage: 1,
-                refreshing: false,
-                loadinging: false,
             }
         },
         created: function () {
             this.$store.dispatch('getEventReceived', {
                 page: this.currentPage, callback: (res) => {
-                    console.info("getEventReceived", res)
+                    if (Constant.DEBUG) {
+                        console.info("getEventReceived", res)
+                    }
                 },
                 userInfo: this.getUserInfo()
             })
@@ -49,101 +30,56 @@
         computed: {
             dataList() {
                 return this.$store.state.event.received_events_data_list;
-            }
+            },
         },
         methods: {
-            loadMore() {
-                if (this.refreshing || this.loadinging) {
-                    return
-                }
-                this.loadinging = true;
-                setTimeout(() => {
-                    this.currentPage++;
-                    this.$store.dispatch('getEventReceived', {
-                        page: this.currentPage, callback: (res) => {
-                            console.info("getEventReceived", res)
-                            this.loadinging = false;
-                        },
-                        userInfo: this.getUserInfo()
-                    })
-                }, 300)
-            },
-            itemClick(event) {
-                console.log("click index ", event.index);
-                modal.toast({message: "click index " + event.index})
+            onLoadMore() {
+                this.currentPage++;
+                this.$store.dispatch('getEventReceived', {
+                    page: this.currentPage, callback: (res) => {
+                        if (Constant.DEBUG) {
+                            console.info("loadMore ", res)
+                        }
+                        if (this.$refs.dylist) {
+                            this.$refs.dylist.stopLoadMore();
+                        }
+                        if (!res.data || res.data.length < Constant.PAGE_SIZE) {
+                            this.$refs.dylist.setNotNeedLoadMore();
+                        } else {
+                            this.$refs.dylist.setNeedLoadMore();
+                        }
+                    },
+                    userInfo: this.getUserInfo()
+                })
             },
             onRefresh() {
-                if (this.refreshing || this.loadinging) {
-                    return
-                }
-                this.refreshing = true;
                 setTimeout(() => {
                     this.currentPage = 1;
                     this.$store.dispatch('getEventReceived', {
                         page: this.currentPage, callback: (res) => {
-                            console.info("getEventReceived", res)
-                            this.refreshing = false
+                            if (Constant.DEBUG) {
+                                console.info("onRefresh ", res)
+                            }
+                            if (this.$refs.dylist) {
+                                this.$refs.dylist.stopRefresh();
+                            }
+                            if (!res.data || res.data.length < Constant.PAGE_SIZE) {
+                                this.$refs.dylist.setNotNeedLoadMore();
+                            } else {
+                                this.$refs.dylist.setNeedLoadMore();
+                            }
                         },
                         userInfo: this.getUserInfo()
                     })
                 }, 300)
+            },
+            itemClick(index) {
+                console.log("click index ", index);
+                modal.toast({message: "click index " + index})
             },
         }
     }
 </script>
 
 <style scoped>
-    .loading {
-        width: 750px;
-        display: -ms-flex;
-        display: -webkit-flex;
-        display: flex;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        -webkit-box-align: center;
-        align-items: center;
-    }
-
-    .refresh {
-        width: 750px;
-        display: -ms-flex;
-        display: -webkit-flex;
-        display: flex;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        -webkit-box-align: center;
-        align-items: center;
-    }
-
-    .indicator-text {
-        color: #888888;
-        font-size: 42px;
-        text-align: center;
-    }
-
-    .indicator {
-        margin-top: 16px;
-        height: 40px;
-        width: 40px;
-        color: blue;
-    }
-
-
-    .indicator-loadmore {
-        margin-top: 16px;
-        height: 40px;
-        width: 40px;
-        color: blue;
-    }
-
-    .panel {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-top: 30px;
-    }
-
-    .list {
-        height: 1334px;
-    }
 </style>
