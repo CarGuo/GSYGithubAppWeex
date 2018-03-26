@@ -38,3 +38,5 @@
 6、height 1334 和 width 750
 
 7、list的loadmore，必须给list设置高度样式，才能在web中正常触发
+
+8、text的</text>结束标签换行导致样式有问题

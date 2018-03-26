@@ -1,31 +1,40 @@
 <template>
-    <tab-bar :tab-titles="tabTitles"
-             :tab-styles="tabStyles"
-             title-type="iconFont"
-             @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
-        <div class="item-container" :style="contentStyle">
-            <dynamic-page :listItemName="'EventItem'"></dynamic-page>
-        </div>
-        <div class="item-container" :style="contentStyle">
-            <div style="align-items: center;justify-content: center;">
-                <event-item
-                        actionTime="10分钟后"
-                        actionUser="CarGuo"
-                        actionUserPic="https://avatars2.githubusercontent.com/u/10770362?s=400&u=d3d1be0401171c6a45ecfe50f63e73f0cdc6bd1a&v=4"
-                        actionTarget="star XXXXX/CCCCCC"
-                        des="新空间发了啥空间发了束带结发凉快圣诞节"
-                        @onItemClick="itemClick"
-                        :itemIndex=0></event-item>
+    <div style="flex: 1">
+        <navigation-bar :title="'GSYGithubApp'" :onLeftButtonClick="()=>{}" :onRightButtonClick="minibarRightButtonClick"
+                        :rightIcon="'\ue61c'" :leftIcon="''"></navigation-bar>
+        <tab-bar :tab-titles="tabTitles"
+                 :tab-styles="tabStyles"
+                 title-type="iconFont"
+                 @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
+            <div class="item-container" :style="contentStyle">
+                <dynamic-page :listItemName="'EventItem'"></dynamic-page>
             </div>
-        </div>
-        <div class="item-container" :style="contentStyle">
-            <text>{{"我的主页\n测试图标"}}</text>
-            <text :style="{fontFamily: 'wxcIconFont',fontSize: '40px', color:'red'}">{{"\ue661"}}</text>
-        </div>
-    </tab-bar>
+            <div class="item-container" :style="contentStyle">
+                <div style="align-items: center;justify-content: center;">
+                    <event-item
+                            actionTime="10分钟后"
+                            actionUser="CarGuo"
+                            actionUserPic="https://avatars2.githubusercontent.com/u/10770362?s=400&u=d3d1be0401171c6a45ecfe50f63e73f0cdc6bd1a&v=4"
+                            actionTarget="star XXXXX/CCCCCC"
+                            des="新空间发了啥空间发了束带结发凉快圣诞节"
+                            @onItemClick="itemClick"
+                            :itemIndex=0></event-item>
+                </div>
+            </div>
+            <div class="item-container" :style="contentStyle">
+                <text>{{"我的主页\n测试图标"}}</text>
+                <text :style="{fontFamily: 'wxcIconFont',fontSize: '40px', color:'red'}">{{"\ue661"}}</text>
+            </div>
+        </tab-bar>
+    </div>
 </template>
 
 <style scoped>
+    .title {
+        width: 750px;
+        align-items: flex-start;
+    }
+
     .item-container {
         width: 750px;
         background-color: #f2f3f4;
@@ -33,17 +42,18 @@
     }
 </style>
 <script>
-    import {Utils} from 'weex-ui';
+    import {Utils, WxcMinibar} from 'weex-ui';
     import Config from './config/MainTabConfig'
     import TabBar from './widget/TabBar'
     import EventItem from './widget/EventItem'
+    import NavigationBar from './widget/NavigationBar'
     import DynamicPage from './DynamicPage'
 
     const dom = weex.requireModule('dom');
     const modal = weex.requireModule('modal');
 
     export default {
-        components: {DynamicPage, EventItem, TabBar},
+        components: {DynamicPage, EventItem, TabBar, WxcMinibar, NavigationBar},
         data: () => ({
             tabTitles: Config.tabIconFontTitles,
             tabStyles: Config.tabIconFontStyles,
@@ -63,9 +73,15 @@
                 const index = e.page;
                 // console.log(index);
             },
+            minibarLeftButtonClick() {
+                console.log("FFFFFF")
+            },
+            minibarRightButtonClick() {
+                console.log("GGGGGG")
+            },
             itemClick(event) {
                 console.log("click index ", event.index);
-                modal.toast({message:"click index " +  event.index})
+                modal.toast({message: "click index " + event.index})
             }
         }
     };
