@@ -7,8 +7,7 @@ import * as Config from '../common/constant'
 let host = "https://api.github.com/";
 export const hostWeb = "https://github.com/";
 export const downloadUrl = 'https://www.pgyer.com/GSYGithubApp';
-export const graphicHost= 'https://ghchart.rshah.org/';
-
+export const graphicHost = 'https://ghchart.rshah.org/';
 
 
 const AddressLocal = {
@@ -134,7 +133,7 @@ const AddressLocal = {
     /**
      * 仓Contributors get
      */
-    getReposContributors: (reposOwner, reposName)=>{
+    getReposContributors: (reposOwner, reposName) => {
         return `${host}repos/${reposOwner}/${reposName}/contributors`
     },
     /**
@@ -324,13 +323,13 @@ const AddressLocal = {
     /**
      * 组织成员
      */
-    getMember:(orgs)=>{
+    getMember: (orgs) => {
         return `${host}orgs/${orgs}/members`;
     },
     /**
      * 获取用户组织
      */
-    getUserOrgs:(userName)=>{
+    getUserOrgs: (userName) => {
         return `${host}users/${userName}/orgs`;
     },
     /**
@@ -368,7 +367,10 @@ const AddressLocal = {
         if (languageType) {
             return `https://github.com/trending/${languageType}?since=${since}`
         }
-        return `https://github.com/trending?since=${since}`
+        if (since)
+            return `https://github.com/trending?since=${since}`
+
+        return `https://github.com/trending`
     },
     /**
      * 处理分页参数
