@@ -5,7 +5,7 @@
                   @click="onLeftButtonClick">{{leftIcon}}</text>
             <text slot="middle" :style="{fontFamily: 'wxcIconFont', fontSize: '40px', color:'#FFFFFF'}">{{title}}</text>
             <text slot="right" :style="{fontFamily: 'wxcIconFont', fontSize: '30px', color:'#FFFFFF'}"
-                  @click="onRightButtonClick" >{{rightIcon}}</text>
+                  @click="onRightButtonClick">{{'    ' + rightIcon}}</text>
         </wxc-minibar>
     </div>
 </template>

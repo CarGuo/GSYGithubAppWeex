@@ -5,7 +5,7 @@ export default {
     tabIconFontTitles: [
         {
             title: '动态',
-            codePoint: '\ue672'
+            codePoint: '\ue684'
         },
         {
             title: '推荐',
