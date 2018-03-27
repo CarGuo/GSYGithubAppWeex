@@ -31,6 +31,7 @@
   "license": "MIT",
   "dependencies": {
     "buffer": "^5.1.0",
+    "jsonp": "^0.2.1",
     "moment": "^2.21.0",
     "phantom-limb": "0.0.1",
     "vue": "^2.5.11",
