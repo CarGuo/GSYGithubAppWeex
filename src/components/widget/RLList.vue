@@ -5,6 +5,10 @@
             <text class="indicator-text">Refreshing ...</text>
             <loading-indicator class="indicator"></loading-indicator>
         </refresh>
+        <cell :v-if="headerComponent" class="header">
+            <component v-bind:is="headerComponent"
+                       :itemValue="headerData"></component>
+        </cell>
         <cell class="cell" v-for="(rowData, index) in dataList">
             <div class="panel">
                 <component v-bind:is="listItemName"
@@ -32,6 +36,8 @@
             forLoadMore: {type: Function},
             itemClick: {type: Function},
             listData: {type: Array},
+            headerComponent: {type: String},
+            headerData: {type: Object},
         },
         data() {
             return {
@@ -148,6 +154,12 @@
         height: 40px;
         width: 40px;
         color: blue;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .panel {
