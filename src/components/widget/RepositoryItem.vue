@@ -9,8 +9,8 @@
             </div>
             <text class="type-text">{{itemValue.ex.type}}</text>
         </div>
-        <text class="content-text" style="flex: 1; margin-bottom: 20px;">{{itemValue.ex.content}}</text>
-        <div style="flex-direction: row;width: 750px">
+        <div class="content-text" style="flex: 1; margin-bottom: 20px;" v-html="itemValue.ex.content"></div>
+        <div style="flex-direction: row;width: 960px;overflow: hidden">
             <text class="icon-text">{{icon1 + itemValue.ex.icon1t}}</text>
             <text class="icon-text">{{icon2 + itemValue.ex.icon2t}}</text>
             <text class="icon-text">{{icon3 + itemValue.ex.icon3t}}</text>
