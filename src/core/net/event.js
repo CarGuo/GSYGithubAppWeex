@@ -4,6 +4,7 @@ import Api from './api'
 import Address from './address'
 import * as Constant from '../common/constant'
 import {getCache, setCache} from '../common/storageUtils'
+import {getActionAndDes} from '../common/eventUtils'
 
 const getEventReceived = async(page = 0, userInfo) => {
     if (!userInfo || !userInfo.login) {
@@ -17,6 +18,32 @@ const getEventReceived = async(page = 0, userInfo) => {
     };
 };
 
+const getEvent = async (page = 0, userName) => {
+    let url = Address.getEvent(userName) + Address.getPageParams("?", page);
+    let res = await Api.netFetch(url);
+    if (res && res.result) {
+        res.data.forEach((item) => {
+            let newItem = getActionAndDes(item);
+            let ex = {
+                actionStr: newItem.actionStr,
+                des: newItem.des,
+                created_at: item.created_at,
+                display_login: item.actor.display_login,
+                avatar_url: item.actor.avatar_url,
+            }
+            item.ex = ex
+        });
+    }
+    return {
+        data: res.data,
+        result: res.result
+    };
+
+};
+
+
+
 export default {
-    getEventReceived
+    getEventReceived,
+    getEvent
 }
