@@ -18,6 +18,9 @@
             }
         },
         created: function () {
+            if (this.$refs.dylist) {
+                this.$refs.dylist.showRefresh();
+            }
             this.loadData(0)
         },
         computed: {
@@ -30,7 +33,7 @@
                 this.$store.dispatch('getEventReceived', {
                     page: this.currentPage, callback: (res) => {
                         if (Constant.DEBUG) {
-                            console.info("loadData ", res)
+                            console.info("dy loadData ", res)
                         }
                         if (type === 1) {
                             if (this.$refs.dylist) {
