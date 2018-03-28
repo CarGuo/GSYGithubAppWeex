@@ -23,6 +23,10 @@
                 <loading-indicator class="indicator-loadmore"></loading-indicator>
             </div>
         </cell>
+        <cell :style="{height:'200px'}">
+            <div :style="{height:'200px'}">
+            </div>
+        </cell>
     </list>
 </template>
 
@@ -88,6 +92,9 @@
                 setTimeout(() => {
                     this.forRefresh && this.forRefresh();
                 }, 300)
+            },
+            showRefresh() {
+                this.refreshing = true;
             },
             stopLoadMore() {
                 this.loadinging = false;

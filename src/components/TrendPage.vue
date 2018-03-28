@@ -4,16 +4,16 @@
             <div :style="{flex:'1'}">
                 <wxc-button :text="time"
                             type="white"
-                            :textStyle="{color: '#3c3f41', fontSize: '10px'}"
-                            :btn-style="{flex:'1',width:'325px', borderRadius: 0, backgroundColor:'white' }"
+                            :textStyle="{color: '#3c3f41', fontSize: '30px'}"
+                            :btn-style="{flex:'1',width:'325px', height:'75px', borderRadius: 0, backgroundColor:'white' }"
                             @wxcButtonClicked="onDailyClick"></wxc-button>
             </div>
             <div :style="{ width: '3px', backgroundColor: '#3c3f41', height:'50px', opacity: 0.4}"></div>
             <div :style="{flex:'1'}">
                 <wxc-button :text="language"
                             type="white"
-                            :textStyle="{color: '#3c3f41', fontSize: '10px'}"
-                            :btn-style="{flex:'1',width:'325px', borderRadius: 0, backgroundColor:'white'}"
+                            :textStyle="{color: '#3c3f41', fontSize: '30px'}"
+                            :btn-style="{flex:'1',width:'325px', height:'75px', borderRadius: 0, backgroundColor:'white'}"
                             @wxcButtonClicked="onLanguageClick"></wxc-button>
             </div>
             <wxc-popover ref="wxc-popover1"
@@ -54,13 +54,16 @@
                 languageType:null,
                 btns1:TrendTime,
                 btns2:TrendType,
-                popoverPosition1: {  x: -400, y: 200  },
+                popoverPosition1: {  x: -400, y: 180  },
                 popoverArrowPosition1: {pos: 'top', x: -100},
-                popoverPosition2: {  x: -4, y: 200  },
+                popoverPosition2: {  x: -4, y: 180  },
                 popoverArrowPosition2: {pos: 'top', x: -100},
             }
         },
         created: function () {
+            if (this.$refs.dylist) {
+                this.$refs.dylist.showRefresh();
+            }
             this.loadData(0);
         },
         computed: {
@@ -77,7 +80,7 @@
                     languageType: this.languageType,
                     callback: (res) => {
                         if (Constant.DEBUG) {
-                            console.info("loadData ", res)
+                            console.info("trend loadData ", res)
                         }
                         if (type === 1) {
                             if (this.$refs.dylist) {
@@ -132,7 +135,7 @@
         right: 0;
         flex-direction: row;
         width: 750px;
-        height: 100px;
+        height: 80px;
         padding: 10px 20px;
         Align-items: center;
         justify-content: center;
@@ -143,6 +146,6 @@
         border-bottom-right-radius: 10px;
     }
     .list-container {
-        margin-top: 100px;
+        margin-top: 80px;
     }
 </style>

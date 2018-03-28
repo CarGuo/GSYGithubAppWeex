@@ -21,6 +21,9 @@
             }
         },
         created: function () {
+            if (this.$refs.dylist) {
+                this.$refs.dylist.showRefresh();
+            }
             this.loadData(0)
         },
         computed: {
@@ -62,7 +65,7 @@
                             this.eventList = this.eventList.concat(res.data);
                         }
                         if (Constant.DEBUG) {
-                            console.info("loadData ", res)
+                            console.info("person loadData ", res)
                         }
                         if(type === 1) {
                             if (this.$refs.dylist) {
