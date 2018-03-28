@@ -15,7 +15,7 @@ export default class GitHubTrending {
         }
         GitHubTrending.instance = this;
     }
-    fetchTrending(since, language) {
+    fetchTrending(nativeUrl, since, language) {
         return new Promise((resolve, reject) => {
             const timeoutId = setTimeout(() => {
                 resolve({
@@ -25,13 +25,17 @@ export default class GitHubTrending {
                 })
             }, 15000);
             let url = 'trend'
-            if(since) {
-                url = url + `?since=${since}`
-                if (language) {
-                    url = url + `&language=${language}`
+            if (WXEnvironment.platform !== 'Web') {
+                url = nativeUrl
+            } else {
+                if (since) {
+                    url = url + `?since=${since}`
+                    if (language) {
+                        url = url + `&language=${language}`
+                    }
+                } else if (language) {
+                    url = url + `?language=${language}`
                 }
-            } else if (language) {
-                url = url + `?language=${language}`
             }
             console.log("trend url", url)
             fetch(url)
