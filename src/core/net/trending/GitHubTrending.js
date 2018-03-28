@@ -15,7 +15,7 @@ export default class GitHubTrending {
         }
         GitHubTrending.instance = this;
     }
-    fetchTrending(url) {
+    fetchTrending(since, language) {
         return new Promise((resolve, reject) => {
             const timeoutId = setTimeout(() => {
                 resolve({
@@ -24,7 +24,17 @@ export default class GitHubTrending {
                     message: '超时'
                 })
             }, 15000);
-            fetch("/trend")
+            let url = 'trend'
+            if(since) {
+                url = url + `?since=${since}`
+                if (language) {
+                    url = url + `&language=${language}`
+                }
+            } else if (language) {
+                url = url + `?language=${language}`
+            }
+            console.log("trend url", url)
+            fetch(url)
                     .then((response) => {
                         clearTimeout(timeoutId);
                         return response.text()
