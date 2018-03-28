@@ -8,7 +8,7 @@
                  @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
 
             <div class="item-container" :style="contentStyle">
-                <user-head-item></user-head-item>
+                <person-page></person-page>
             </div>
             <div class="item-container" :style="contentStyle">
                 <dynamic-page></dynamic-page>
@@ -32,15 +32,15 @@
     import Config from './config/MainTabConfig'
     import TabBar from './widget/TabBar'
     import NavigationBar from './widget/NavigationBar'
-    import UserHeadItem from './widget/UserHeadItem'
     import DynamicPage from './DynamicPage'
     import TrendPage from './TrendPage'
+    import PersonPage from './PersonPage'
 
     const dom = weex.requireModule('dom');
     const modal = weex.requireModule('modal');
 
     export default {
-        components: {DynamicPage, TrendPage, TabBar, WxcMinibar, NavigationBar, UserHeadItem},
+        components: {DynamicPage, TrendPage, TabBar, WxcMinibar, NavigationBar, PersonPage},
         data: () => ({
             tabTitles: Config.tabIconFontTitles,
             tabStyles: Config.tabIconFontStyles,
