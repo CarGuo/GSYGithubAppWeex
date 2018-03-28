@@ -64,7 +64,8 @@
             },
             itemClick(index) {
                 console.log("click index ", index);
-                modal.toast({message: "click index " + index})
+                this.jump("/repository/detail")
+                //modal.toast({message: "click index " + index})
             },
         }
     }
