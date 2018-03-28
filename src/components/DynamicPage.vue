@@ -64,7 +64,8 @@
             },
             itemClick(index) {
                 console.log("click index ", index);
-                this.jump("/repository/detail")
+                //this.jump("/repository/detail")
+                this.jumpWithParams("RepositoryDetailPage", {userName:'CarGuo',reposName:'GSYGithubApp',title:'GSYGithubApp'})
                 //modal.toast({message: "click index " + index})
             },
         }

@@ -1,6 +1,8 @@
 <template>
-    <div class="wrapper" v-html="'<text>TTTTTTT</text>'">
-    </div>
+    <scroller :style="{height:'1334px'}">
+        <div class="wrapper" v-html="source">
+        </div>
+    </scroller>
 </template>
 
 <style scoped>
@@ -12,14 +14,17 @@
 
 <script>
     module.exports = {
-        data: {
+        props: {
+            source: {type: String, default:" "},
+        },
+        data: () => ({
             pagestart: '',
             pagefinish: '',
             title: '',
             error: '',
             canGoBack: false,
             canGoForward: false,
-        },
+        }),
         methods: {
             goBack: function() {
                 var webview = weex.requireModule('webview');

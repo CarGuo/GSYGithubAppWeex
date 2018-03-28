@@ -26,11 +26,11 @@ class HttpManager {
         };
     };
 
-    async getFetch(url, header) {
-        return this.netFetch(url, 'GET', null, null, header)
+    async getFetch(url, header, type) {
+        return this.netFetch(url, 'GET', null, null, header, type)
     }
 
-    async netFetch(url, method = 'GET', params, json, header) {
+    async netFetch(url, method = 'GET', params, json, header, type) {
         //let isConnected = await NetInfo.isConnected.fetch().done;
         let isConnected = true;
         if (!isConnected) {
@@ -68,7 +68,7 @@ class HttpManager {
             requestParams = this.formParams(method, params, headers)
         }
 
-        let response = await this.requestWithTimeout(this.optionParams.timeoutMs, this.fetch(url, requestParams));
+        let response = await this.requestWithTimeout(this.optionParams.timeoutMs, this.fetch(url, requestParams, type));
 
         if (DEBUG) {
             console.info('请求url: ', url);
@@ -194,14 +194,14 @@ class HttpManager {
         })
     }
 
-    fetch(path, requestParams) {
+    fetch(path, requestParams, type = 'json') {
         const stream = weex.requireModule('stream');
         return new Promise((resolve, reject) => {
             stream.fetch({
                 method: requestParams.method,
                 url: path,
                 headers: requestParams.headers,
-                type: "json",
+                type: type,
                 body: requestParams.body
             }, (response) => {
                 if (response.status == 200) {

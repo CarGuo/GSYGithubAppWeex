@@ -7,7 +7,7 @@
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
             <div class="item-container" :style="contentStyle">
-                <web-component></web-component>
+                <web-component :source="readme"></web-component>
             </div>
             <div class="item-container" :style="contentStyle"><text>特别推荐</text></div>
             <div class="item-container" :style="contentStyle"><text>消息中心</text></div>
@@ -25,15 +25,14 @@
     import repository from '../core/net/repository'
 
     export default {
-        props: {
-            title: {type: String, default: ' '},
-            userName: {type: String, default: ' '},
-            reposName: {type: String, default: ' '},
-        },
         components: {TopTabBar, NavigationBar, WebComponent},
         data: () => ({
             tabTitles: Config.tabTitles,
-            tabStyles: Config.tabStyles
+            tabStyles: Config.tabStyles,
+            title: "",
+            userName: "CarGuo",
+            reposName: "GSYGithubApp",
+            readme: " ",
         }),
         created () {
             const tabPageHeight = Utils.env.getPageHeight();
@@ -44,11 +43,16 @@
         methods: {
             wxcTabBarCurrentTabSelected (e) {
                 const index = e.page;
-                // console.log(index);
             },
             loadReadme() {
-                repository.getRepositoryDetailReadmeHtmlDao(this.username, this.repoName)
+                this.title= this.$route.params.title
+                this.userName= this.$route.params.userName
+                this.reposName= this.$route.params.reposName
+                repository.getRepositoryDetailReadmeHtmlDao(this.userName, this.reposName)
                     .then((res)=>{
+                        if(res && res.data) {
+                            this.readme = res.data;
+                        }
                         console.info("FFFFFFF", res)
                     })
             },
