@@ -14,7 +14,7 @@ const getters = {};
 // actions
 const actions = {
     getTrend({commit, state}, params) {
-        repository.getTrendDao().then((res) => {
+        repository.getTrendDao(0, params.since, params.languageType).then((res) => {
             if (res && res.result) {
                 res.data.forEach((item) => {
                     let ex = {

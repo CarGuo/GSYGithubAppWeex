@@ -7,7 +7,7 @@ import {getCache, setCache} from '../common/storageUtils'
 const getTrendDao = async (page = 0, since, languageType) => {
     let localLanguage = (languageType) ? languageType : "*";
     let url = Address.trending(since, languageType);
-    let res = await new GitHubTrending().fetchTrending(url);
+    let res = await new GitHubTrending().fetchTrending(since, languageType);
     return {
         data: res.data,
         result: res.result

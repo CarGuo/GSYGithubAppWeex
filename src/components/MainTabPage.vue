@@ -8,13 +8,13 @@
                  @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
 
             <div class="item-container" :style="contentStyle">
-                <person-page></person-page>
+                <trend-page></trend-page>
             </div>
             <div class="item-container" :style="contentStyle">
                 <dynamic-page></dynamic-page>
             </div>
             <div class="item-container" :style="contentStyle">
-                <trend-page></trend-page>
+                <person-page></person-page>
             </div>
         </tab-bar>
     </div>
