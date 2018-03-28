@@ -10,19 +10,28 @@
     import * as Constant from '../core/common/constant'
     import RLList from './widget/RLList'
     import resolveLongToTime from '../core/common/timeUtils'
+    import event from '../core/net/event'
 
     export default {
         components: {RLList},
         data() {
             return {
                 currentPage: 1,
+                eventList:[]
             }
         },
         created: function () {
+            let userInfo = this.getUserInfo();
+            event.getEvent(this.currentPage, userInfo.login)
+                .then((res) => {
+                    if (res && res.result) {
+                        this.eventList = res.data;
+                    }
+                })
         },
         computed: {
             dataList() {
-                return this.$store.state.event.received_events_data_list;
+                return this.eventList;
             },
             userInfo() {
                 let userInfo = this.getUserInfo();
@@ -52,8 +61,46 @@
         },
         methods: {
             onLoadMore() {
+                this.currentPage++;
+                let userInfo = this.getUserInfo();
+                event.getEvent(this.currentPage, userInfo.login)
+                    .then((res) => {
+                        if (res && res.result) {
+                            this.eventList = this.eventList.concat(res.data);
+                        }
+                        if (Constant.DEBUG) {
+                            console.info("loadMore ", res)
+                        }
+                        if (this.$refs.dylist) {
+                            this.$refs.dylist.stopLoadMore();
+                        }
+                        if (!res.data || res.data.length < Constant.PAGE_SIZE) {
+                            this.$refs.dylist.setNotNeedLoadMore();
+                        } else {
+                            this.$refs.dylist.setNeedLoadMore();
+                        }
+                    })
             },
             onRefresh() {
+                this.currentPage =1;
+                let userInfo = this.getUserInfo();
+                event.getEvent(this.currentPage, userInfo.login)
+                    .then((res) => {
+                        if (res && res.result) {
+                            this.eventList = res.data;
+                        }
+                        if (Constant.DEBUG) {
+                            console.info("onRefresh ", res)
+                        }
+                        if (this.$refs.dylist) {
+                            this.$refs.dylist.stopRefresh();
+                        }
+                        if (!res.data || res.data.length < Constant.PAGE_SIZE) {
+                            this.$refs.dylist.setNotNeedLoadMore();
+                        } else {
+                            this.$refs.dylist.setNeedLoadMore();
+                        }
+                    })
             },
             itemClick(index) {
                 console.log("click index ", index);
