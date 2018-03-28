@@ -43,5 +43,7 @@
     .title {
         width: 750px;
         align-items: center;
+        background-color:#3c3f41;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.80);
     }
 </style>

@@ -6,26 +6,21 @@
                  :tab-styles="tabStyles"
                  title-type="iconFont"
                  @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
+
+            <div class="item-container" :style="contentStyle">
+                <user-head-item></user-head-item>
+            </div>
             <div class="item-container" :style="contentStyle">
                 <dynamic-page></dynamic-page>
             </div>
             <div class="item-container" :style="contentStyle">
                 <trend-page></trend-page>
             </div>
-            <div class="item-container" :style="contentStyle">
-                <text>{{"我的主页\n测试图标"}}</text>
-                <text :style="{fontFamily: 'wxcIconFont',fontSize: '40px', color:'red'}">{{"\ue661"}}</text>
-            </div>
         </tab-bar>
     </div>
 </template>
 
 <style scoped>
-    .title {
-        width: 750px;
-        align-items: flex-start;
-    }
-
     .item-container {
         width: 750px;
         background-color: #f2f3f4;
@@ -37,6 +32,7 @@
     import Config from './config/MainTabConfig'
     import TabBar from './widget/TabBar'
     import NavigationBar from './widget/NavigationBar'
+    import UserHeadItem from './widget/UserHeadItem'
     import DynamicPage from './DynamicPage'
     import TrendPage from './TrendPage'
 
@@ -44,7 +40,7 @@
     const modal = weex.requireModule('modal');
 
     export default {
-        components: {DynamicPage, TrendPage, TabBar, WxcMinibar, NavigationBar},
+        components: {DynamicPage, TrendPage, TabBar, WxcMinibar, NavigationBar, UserHeadItem},
         data: () => ({
             tabTitles: Config.tabIconFontTitles,
             tabStyles: Config.tabIconFontStyles,
