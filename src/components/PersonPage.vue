@@ -21,13 +21,7 @@
             }
         },
         created: function () {
-            let userInfo = this.getUserInfo();
-            event.getEvent(this.currentPage, userInfo.login)
-                .then((res) => {
-                    if (res && res.result) {
-                        this.eventList = res.data;
-                    }
-                })
+            this.loadData(0)
         },
         computed: {
             dataList() {
@@ -60,8 +54,7 @@
             },
         },
         methods: {
-            onLoadMore() {
-                this.currentPage++;
+            loadData(type) {
                 let userInfo = this.getUserInfo();
                 event.getEvent(this.currentPage, userInfo.login)
                     .then((res) => {
@@ -69,38 +62,33 @@
                             this.eventList = this.eventList.concat(res.data);
                         }
                         if (Constant.DEBUG) {
-                            console.info("loadMore ", res)
+                            console.info("loadData ", res)
+                        }
+                        if(type === 1) {
+                            if (this.$refs.dylist) {
+                                this.$refs.dylist.stopRefresh();
+                            }
+                        } else if(type === 2) {
+                            if (this.$refs.dylist) {
+                                this.$refs.dylist.stopLoadMore();
+                            }
                         }
                         if (this.$refs.dylist) {
-                            this.$refs.dylist.stopLoadMore();
-                        }
-                        if (!res.data || res.data.length < Constant.PAGE_SIZE) {
-                            this.$refs.dylist.setNotNeedLoadMore();
-                        } else {
-                            this.$refs.dylist.setNeedLoadMore();
+                            if (!res.data || res.data.length < Constant.PAGE_SIZE) {
+                                this.$refs.dylist.setNotNeedLoadMore();
+                            } else {
+                                this.$refs.dylist.setNeedLoadMore();
+                            }
                         }
                     })
             },
+            onLoadMore() {
+                this.currentPage++;
+                this.loadData(2)
+            },
             onRefresh() {
                 this.currentPage =1;
-                let userInfo = this.getUserInfo();
-                event.getEvent(this.currentPage, userInfo.login)
-                    .then((res) => {
-                        if (res && res.result) {
-                            this.eventList = res.data;
-                        }
-                        if (Constant.DEBUG) {
-                            console.info("onRefresh ", res)
-                        }
-                        if (this.$refs.dylist) {
-                            this.$refs.dylist.stopRefresh();
-                        }
-                        if (!res.data || res.data.length < Constant.PAGE_SIZE) {
-                            this.$refs.dylist.setNotNeedLoadMore();
-                        } else {
-                            this.$refs.dylist.setNeedLoadMore();
-                        }
-                    })
+                this.loadData(1)
             },
             itemClick(index) {
                 console.log("click index ", index);

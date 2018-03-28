@@ -18,14 +18,7 @@
             }
         },
         created: function () {
-            this.$store.dispatch('getEventReceived', {
-                page: this.currentPage, callback: (res) => {
-                    if (Constant.DEBUG) {
-                        console.info("getEventReceived", res)
-                    }
-                },
-                userInfo: this.getUserInfo()
-            })
+            this.loadData(0)
         },
         computed: {
             dataList() {
@@ -33,45 +26,38 @@
             },
         },
         methods: {
-            onLoadMore() {
-                this.currentPage++;
+            loadData(type) {
                 this.$store.dispatch('getEventReceived', {
                     page: this.currentPage, callback: (res) => {
                         if (Constant.DEBUG) {
-                            console.info("loadMore ", res)
+                            console.info("loadData ", res)
                         }
-                        if (this.$refs.dylist) {
-                            this.$refs.dylist.stopLoadMore();
-                        }
-                        if (!res.data || res.data.length < Constant.PAGE_SIZE) {
-                            this.$refs.dylist.setNotNeedLoadMore();
-                        } else {
-                            this.$refs.dylist.setNeedLoadMore();
-                        }
-                    },
-                    userInfo: this.getUserInfo()
-                })
-            },
-            onRefresh() {
-                setTimeout(() => {
-                    this.currentPage = 1;
-                    this.$store.dispatch('getEventReceived', {
-                        page: this.currentPage, callback: (res) => {
-                            if (Constant.DEBUG) {
-                                console.info("onRefresh ", res)
-                            }
+                        if (type === 1) {
                             if (this.$refs.dylist) {
                                 this.$refs.dylist.stopRefresh();
                             }
+                        } else if (type === 2) {
+                            if (this.$refs.dylist) {
+                                this.$refs.dylist.stopLoadMore();
+                            }
+                        }
+                        if (this.$refs.dylist) {
                             if (!res.data || res.data.length < Constant.PAGE_SIZE) {
                                 this.$refs.dylist.setNotNeedLoadMore();
                             } else {
                                 this.$refs.dylist.setNeedLoadMore();
                             }
-                        },
-                        userInfo: this.getUserInfo()
-                    })
-                }, 300)
+                        }
+                    },
+                    userInfo: this.getUserInfo()
+                })
+            },
+            onLoadMore() {
+                this.currentPage++;
+                this.loadData(2)
+            },
+            onRefresh() {
+                this.loadData(1)
             },
             itemClick(index) {
                 console.log("click index ", index);

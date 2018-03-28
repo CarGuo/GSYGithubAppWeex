@@ -18,17 +18,7 @@
             }
         },
         created: function () {
-            this.$store.dispatch('getTrend', {
-                page: this.currentPage,
-                callback: (res) => {
-                    if (Constant.DEBUG) {
-                        console.info("onRefresh ", res)
-                    }
-                    if (this.$refs.dylist) {
-                        this.$refs.dylist.setNotNeedLoadMore();
-                    }
-                },
-            })
+            this.loadData(0);
         },
         computed: {
             dataList() {
@@ -36,27 +26,32 @@
             },
         },
         methods: {
+            loadData(type) {
+                this.currentPage = 1;
+                this.$store.dispatch('getTrend', {
+                    page: this.currentPage,
+                    callback: (res) => {
+                        if (Constant.DEBUG) {
+                            console.info("loadData ", res)
+                        }
+                        if(type === 1) {
+                            if (this.$refs.dylist) {
+                                this.$refs.dylist.stopRefresh();
+                            }
+                        }
+                        if (this.$refs.dylist) {
+                            this.$refs.dylist.setNotNeedLoadMore();
+                        }
+                    },
+                })
+            },
             onLoadMore() {
                 if (this.$refs.dylist) {
                     this.$refs.dylist.setNotNeedLoadMore();
                 }
             },
             onRefresh() {
-                setTimeout(() => {
-                    this.currentPage = 1;
-                    this.$store.dispatch('getTrend', {
-                        page: this.currentPage,
-                        callback: (res) => {
-                            if (Constant.DEBUG) {
-                                console.info("onRefresh ", res)
-                            }
-                            if (this.$refs.dylist) {
-                                this.$refs.dylist.stopRefresh();
-                                this.$refs.dylist.setNotNeedLoadMore();
-                            }
-                        },
-                    })
-                }, 300)
+                this.loadData(1);
             },
             itemClick(index) {
                 console.log("click index ", index);
