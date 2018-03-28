@@ -23,7 +23,7 @@ const getRepositoryDetailReadmeHtmlDao = async (userName, reposName, branch) => 
     let fullName = userName + "/" + reposName;
     let curBranch = (branch) ? branch : "master";
     let url = Address.readmeFile(userName + '/' + reposName, branch);
-    let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html'});
+    let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html'}, 'text');
     if (res && res.result && res.data.length > 0) {
         let curData = generateHtml(res.data);
         return {
