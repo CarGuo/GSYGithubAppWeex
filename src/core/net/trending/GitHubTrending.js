@@ -5,7 +5,6 @@
  * @flow
  */
 import TrendingUtil from './TrendingUtil';
-import jsonp from 'jsonp';
 import {NETWORK_TIMEOUT} from '../api';
 import Api from '../api';
 

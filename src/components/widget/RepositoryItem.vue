@@ -1,8 +1,8 @@
 <template>
     <div class="card-wrapper" @click="onCardClick">
         <div class="card-user-wrapper" style="flex-direction: row">
-            <image :src="itemValue.ex.userPic" class="user-icon"></image>
-            <div style="flex: 1; margin-left: 20px">
+            <image v-if="itemValue.ex.userPic" :src="itemValue.ex.userPic" class="user-icon"></image>
+            <div style="flex: 1;">
                 <text class="repo-text">{{itemValue.ex.repoName}}</text>
                 <text class="user-text" :style="{flex: 1,fontFamily: 'wxcIconFont', fontSize: '10px', }">
                     {{'\ue63e ' + itemValue.ex.userName}}</text>
@@ -11,9 +11,9 @@
         </div>
         <text class="content-text" style="flex: 1; margin-bottom: 20px;">{{itemValue.ex.content}}</text>
         <div style="flex-direction: row;width: 750px">
-            <text class="icon-text">{{'\ue643 ' + itemValue.ex.icon1t}}</text>
-            <text class="icon-text">{{'\ue67e ' + itemValue.ex.icon2t}}</text>
-            <text class="icon-text">{{'\ue661 ' + itemValue.ex.icon3t}}</text>
+            <text class="icon-text">{{icon1 + itemValue.ex.icon1t}}</text>
+            <text class="icon-text">{{icon2 + itemValue.ex.icon2t}}</text>
+            <text class="icon-text">{{icon3 + itemValue.ex.icon3t}}</text>
         </div>
     </div>
 </template>
@@ -23,6 +23,9 @@
     export default {
         name: "repository-item",
         props: {
+            defaultIcon1: {type: String, default: '\ue643 '},
+            defaultIcon2: {type: String, default: '\ue67e '},
+            defaultIcon3: {type: String, default: '\ue661 '},
             itemValue: {
                 type: Object, default: () => {
                     return {ex:{}}
@@ -30,6 +33,18 @@
             },
             itemIndex: {type: Number, default: -1},
             onItemClick:{type:Function}
+        },
+
+        computed: {
+            icon1() {
+                return (this.itemValue.ex.icon1) ? this.itemValue.ex.icon1 : this.defaultIcon1
+            },
+            icon2() {
+                return (this.itemValue.ex.icon2) ? this.itemValue.ex.icon2 : this.defaultIcon2
+            },
+            icon3() {
+                return (this.itemValue.ex.icon3) ? this.itemValue.ex.icon3 : this.defaultIcon3
+            },
         },
         components: {},
         methods: {
@@ -53,6 +68,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 35px;
+        margin-right: 20px;
     }
 
     .card-wrapper {
@@ -65,7 +81,7 @@
 
     .card-user-wrapper {
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     .type-text {
@@ -114,10 +130,16 @@
 
     .icon-text {
         color: rgba(97, 97, 97, 0.6);
-        font-size: 30px;
+        font-size: 28px;
         flex: 1;
-        -webkit-line-clamp: 1;
         font-family: 'wxcIconFont';
+        display: -webkit-box;
+        overflow: hidden;
+        white-space: normal !important;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 
 </style>

@@ -26,6 +26,7 @@ const actions = {
                         icon1t: item.starCount,
                         icon2t: item.forkCount,
                         icon3t: item.meta,
+                        icon3: ' ',
                     }
                     item.ex = ex
                 });
