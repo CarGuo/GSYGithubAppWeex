@@ -1,7 +1,7 @@
 <template recyclable>
     <div class="card-wrapper" @click="onCardClick">
         <div class="card-user-wrapper" style="flex-direction: row">
-            <image :src="itemValue.ex.avatar_url" class="user-icon"></image>
+            <image :src="itemValue.ex.avatar_url" class="user-icon" @click="imageClick"></image>
             <text class="name-text" style="flex: 1; margin-left: 20px">{{itemValue.ex.display_login}}</text>
             <text class="des-text">{{itemValue.ex.created_at | resolveTime}}</text>
         </div>
@@ -25,6 +25,12 @@
         methods: {
             onCardClick() {
                 this.onItemClick && this.onItemClick(this.itemIndex);
+            },
+            imageClick() {
+                if(!this.itemValue.ex.display_login) {
+                    return
+                }
+                this.jumpWithParams("UserInfoPage", {userName: this.itemValue.ex.display_login})
             }
         },
         data() {

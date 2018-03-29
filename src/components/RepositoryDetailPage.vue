@@ -1,5 +1,5 @@
 <template>
-    <div style="flex: 1">
+    <div style="flex: 1;background-color: white">
         <navigation-bar :title="title"
                         :rightIcon="' '"></navigation-bar>
         <top-tab-bar :tab-titles="tabTitles"
@@ -7,7 +7,7 @@
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
             <div class="item-container" :style="contentStyle">
-                <web-component :source="readme" :webStyle="{height:'1200px', width: '750px', paddingBottom:'150px' }"></web-component>
+                <web-component :source="readme" :webStyle="{height:'1260px', width: '750px', paddingBottom:'80px' }"></web-component>
             </div>
             <div class="item-container" :style="contentStyle"><text>特别推荐</text></div>
             <div class="item-container" :style="contentStyle"><text>消息中心</text></div>
@@ -46,9 +46,12 @@
                 const index = e.page;
             },
             loadReadme() {
-                this.title= this.$route.params.title
-                this.userName= this.$route.params.userName
-                this.reposName= this.$route.params.reposName
+                this.title = this.$route.params.title
+                this.userName = this.$route.params.userName
+                this.reposName = this.$route.params.reposName
+                if (!this.title || !this.userName || !this.reposName) {
+                    return
+                }
                 repository.getRepositoryDetailReadmeHtmlDao(this.userName, this.reposName)
                     .then((res)=>{
                         if(res && res.data) {

@@ -129,6 +129,7 @@
     }
     .link-text {
         font-family: 'wxcIconFont';
+        font-size: 23px;
         color: rgba(0, 111, 255, 0.6);
         flex: 1;
         margin-top: 20px;

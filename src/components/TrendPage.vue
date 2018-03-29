@@ -102,8 +102,12 @@
                 this.loadData(1);
             },
             itemClick(index) {
-                console.log("click index ", index);
-                modal.toast({message: "click index " + index})
+                let data = this.dataList[index]
+                this.jumpWithParams("RepositoryDetailPage", {
+                    userName: data.name,
+                    reposName: data.reposName,
+                    title: data.reposName
+                })
             },
             onDailyClick() {
                 this.$refs['wxc-popover2'].wxcOverlayBodyClicked()
