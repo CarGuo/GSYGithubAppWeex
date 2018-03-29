@@ -62,7 +62,7 @@ export const generateHtml = (mdData, backgroundColor = "#FFFFFF", userBR = true)
  * style for mdHTml
  */
 const generateCodeHtml = (mdHTML, wrap, backgroundColor = Constant.white, actionColor = Constant.actionBlue, userBR = true) => {
-    return "<html>\n" +
+    let doc = "<html>\n" +
         "<head>\n" +
         "<meta charset=\"utf-8\" />\n" +
         "<title></title>\n" +
@@ -104,4 +104,5 @@ const generateCodeHtml = (mdHTML, wrap, backgroundColor = Constant.white, action
         mdHTML +
         "</body>\n" +
         "</html>";
+    return doc;
 };

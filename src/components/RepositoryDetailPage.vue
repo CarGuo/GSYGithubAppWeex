@@ -7,7 +7,7 @@
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
             <div class="item-container" :style="contentStyle">
-                <web-component :source="readme"></web-component>
+                <web-component :source="readme" :webStyle="{height:'1200px', width: '750px', paddingBottom:'150px' }"></web-component>
             </div>
             <div class="item-container" :style="contentStyle"><text>特别推荐</text></div>
             <div class="item-container" :style="contentStyle"><text>消息中心</text></div>
@@ -23,6 +23,7 @@
     import TopTabBar from './widget/TopTabBar'
     import WebComponent from './widget/WebComponent'
     import repository from '../core/net/repository'
+    import * as Constant from '../core/common/constant'
 
     export default {
         components: {TopTabBar, NavigationBar, WebComponent},
@@ -53,7 +54,9 @@
                         if(res && res.data) {
                             this.readme = res.data;
                         }
-                        console.info("FFFFFFF", res)
+                        if (Constant.DEBUG) {
+                            console.info("repository detail readme", res)
+                        }
                     })
             },
         }
