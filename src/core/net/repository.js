@@ -4,6 +4,8 @@ import Address from './address'
 import {generateHtml} from '../common/htmlUtils'
 import {getCache, setCache} from '../common/storageUtils'
 
+import resolveLongToTime from '../common/timeUtils'
+
 const getTrendDao = async (page = 0, since, languageType) => {
     let localLanguage = (languageType) ? languageType : "*";
     let url = Address.trending(since, languageType);
@@ -39,7 +41,81 @@ const getRepositoryDetailReadmeHtmlDao = async (userName, reposName, branch) => 
 
 };
 
+
+/**
+ * 仓库的详情数据
+ */
+const getRepositoryDetailDao = async (userName, reposName) => {
+    let url = Address.getReposDetail(userName, reposName);
+    let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.mercy-preview+json'});
+    if (res && res.result && res.data) {
+        let created_at = resolveLongToTime(res.data.created_at);
+        let push_at = resolveLongToTime(res.data.pushed_at);
+        let createStr = (res.data.fork === true) ?  "forked from " + reposName + '\n'
+            : "创建于 "  + created_at + " ";
+        let updateStr = "最后提交于 "+ push_at;
+        let infoText = createStr + ((push_at) ? updateStr : '');
+        res.data.infoText = infoText
+        res.data.userName = userName
+        res.data.reposName = reposName
+
+        let issueRes = await getRepositoryIssueStatusDao(userName, reposName);
+        let netData = res.data;
+        try {
+            if (issueRes && issueRes.result && issueRes.data) {
+                netData.all_issues_count = parseInt(issueRes.data);
+                netData.closed_issues_count = netData.all_issues_count - netData.open_issues_count;
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    return {
+        data: res.data,
+        result: res.result
+    };
+
+};
+
+
+/**
+ * 获取issue总数
+ */
+const getRepositoryIssueStatusDao = async (userName, repository) => {
+    let url = Address.getReposIssue(userName, repository) + "&per_page=1";
+    let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html,application/vnd.github.VERSION.raw'});
+    if (res && res.result && res.headers && res.headers.link) {
+        try {
+            let link = res.headers.link;
+            if (link && (typeof link) === 'string') {
+                let indexStart = link.lastIndexOf("page=") + 5;
+                let indexEnd = link.lastIndexOf(">");
+                if (indexStart >= 0 && indexEnd >= 0) {
+                    let count = link.substring(indexStart, indexEnd);
+                    return {
+                        result: true,
+                        data: count
+                    }
+                }
+            }
+            return {
+                result: true,
+            }
+        } catch (e) {
+            console.log(e)
+        }
+        return {
+            result: false,
+        }
+    } else {
+        return {
+            result: false,
+        }
+    }
+};
+
 export default {
     getTrendDao,
-    getRepositoryDetailReadmeHtmlDao
+    getRepositoryDetailReadmeHtmlDao,
+    getRepositoryDetailDao
 }

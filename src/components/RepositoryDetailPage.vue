@@ -7,9 +7,11 @@
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
             <div class="item-container" :style="contentStyle">
+                <repository-detail-info-page :userName="userName" :reposName="reposName"></repository-detail-info-page>
+            </div>
+            <div class="item-container" :style="contentStyle">
                 <web-component :source="readme" :webStyle="{height:'1260px', width: '750px', paddingBottom:'80px' }"></web-component>
             </div>
-            <div class="item-container" :style="contentStyle"><text>特别推荐</text></div>
             <div class="item-container" :style="contentStyle"><text>消息中心</text></div>
             <div class="item-container" :style="contentStyle"><text>我的主页</text></div>
         </top-tab-bar>
@@ -22,17 +24,18 @@
     import NavigationBar from './widget/NavigationBar'
     import TopTabBar from './widget/TopTabBar'
     import WebComponent from './widget/WebComponent'
+    import RepositoryDetailInfoPage from './RepositoryDetailInfoPage'
     import repository from '../core/net/repository'
     import * as Constant from '../core/common/constant'
 
     export default {
-        components: {TopTabBar, NavigationBar, WebComponent},
+        components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage},
         data: () => ({
             tabTitles: Config.tabTitles,
             tabStyles: Config.tabStyles,
             title: "",
-            userName: "CarGuo",
-            reposName: "GSYGithubApp",
+            userName: "",
+            reposName: "",
             readme: " ",
         }),
         created () {
