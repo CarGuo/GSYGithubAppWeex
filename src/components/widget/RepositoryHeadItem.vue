@@ -30,6 +30,11 @@
             </div>
         </div>
 
+        <div class="control-container">
+            <text @click="()=>{onControlClick(1)}" class="control-text" :style="{color:(selectIndex ===1) ? '#FFFFFF' : '#AAAAAA'}">{{"动态"}}</text>
+            <text @click="()=>{onControlClick(2)}" class="control-text" :style="{color:(selectIndex ===2) ? '#FFFFFF' : '#AAAAAA'}">{{"提交"}}</text>
+            <text @click="()=>{onControlClick(3)}" class="control-text" :style="{color:(selectIndex ===3) ? '#FFFFFF' : '#AAAAAA'}">{{"Pulse"}}</text>
+        </div>
 
     </div>
 </template>
@@ -56,10 +61,15 @@
                     return
                 }
                 this.jumpWithParams("UserInfoPage", {userName: this.itemValue.ex.display_login})
+            },
+            onControlClick(index) {
+                this.selectIndex = index;
             }
         },
         data() {
-            return {}
+            return {
+                selectIndex:1
+            }
         },
         created() {
             dom.addRule('fontFace', {
@@ -87,7 +97,7 @@
 
     .bottom-container {
         flex-direction: row;
-        width: 720px;
+        width: 700px;
         margin-top: 20px;
         border-top-width: 1px;
         border-color: rgba(255, 255, 255, 0.7);
@@ -136,7 +146,7 @@
     }
 
     .card-wrapper {
-        width: 750px;
+        width: 710px;
         background-color: #3c3f41;
         padding: 20px;
         border-bottom-left-radius: 15px;
@@ -152,5 +162,23 @@
         color: rgba(255, 255, 255, 0.9);
         font-size: 34px;
         font-weight: bold;
+    }
+
+    .control-container {
+        width: 710px;
+        flex-direction: row;
+        margin-top: 50px;
+        margin-bottom: 50px
+    }
+
+    .control-text {
+        background-color: #3c3f41;
+        padding: 20px;
+        flex:1;
+        border-radius: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 26px;
+        font-family: 'wxcIconFont';
     }
 </style>
