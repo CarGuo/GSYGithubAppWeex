@@ -2,6 +2,7 @@
     <div :style="{flex:1}">
         <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList"
                   headerComponent="RepositoryHeadItem" :headerData="reposInfo"
+                  :headerClick="headerClick"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="()=>{}"></r-l-list>
     </div>
 </template>
@@ -69,6 +70,9 @@
                 console.log("click index ", index);
                 modal.toast({message: "click index " + index})
             },
+            headerClick(type, index) {
+                console.log("header click index ", index);
+            }
         }
     }
 </script>

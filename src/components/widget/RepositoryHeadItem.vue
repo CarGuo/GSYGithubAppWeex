@@ -1,39 +1,45 @@
 <template>
-    <div class="card-wrapper">
-        <div class="card-user-wrapper" style="flex-direction: row">
-            <text class="name-text">{{itemValue.userName}}</text>
-            <text class="name-text">{{" / "}}</text>
-            <text class="name-text">{{itemValue.reposName}}</text>
-        </div>
-        <div style="flex-direction: row;margin-top: 20px">
-            <text class="repo-text">{{itemValue.language}}</text>
-            <text class="repo-text">{{(itemValue.size / 1024).toFixed(2) + "M"}}</text>
-            <text class="repo-text">{{itemValue.license ? itemValue.license.name : ""}}</text>
-        </div>
-
-        <text class="content-text" style="flex: 1; margin-top: 20px;">{{itemValue.description}}</text>
-
-        <text class="time-text" style="flex: 1; margin-top: 20px;margin-bottom: 20px;">{{itemValue.infoText}}</text>
-
-        <div class="bottom-container">
-            <div class="bottom-item bottom-item-line">
-                <text class="bottom-item-text">{{"\ue643  " + itemValue.watchers_count}}</text>
+    <div>
+        <div class="card-wrapper">
+            <div class="card-user-wrapper" style="flex-direction: row">
+                <text class="name-text">{{itemValue.userName}}</text>
+                <text class="name-text">{{" / "}}</text>
+                <text class="name-text">{{itemValue.reposName}}</text>
             </div>
-            <div class="bottom-item bottom-item-line">
-                <text class="bottom-item-text">{{"\ue67e  " + itemValue.forks_count}}</text>
+            <div style="flex-direction: row;margin-top: 20px">
+                <text class="repo-text">{{itemValue.language}}</text>
+                <text class="repo-text">{{(itemValue.size / 1024).toFixed(2) + "M"}}</text>
+                <text class="repo-text">{{itemValue.license ? itemValue.license.name : ""}}</text>
             </div>
-            <div class="bottom-item bottom-item-line">
-                <text class="bottom-item-text">{{"\ue681  " + itemValue.subscribers_count}}</text>
-            </div>
-            <div class="bottom-item">
-                <text class="bottom-item-text">{{"\ue661  " + itemValue.open_issues_count}}</text>
+
+            <text class="content-text" style="flex: 1; margin-top: 20px;">{{itemValue.description}}</text>
+
+            <text class="time-text" style="flex: 1; margin-top: 20px;margin-bottom: 20px;">{{itemValue.infoText}}</text>
+
+            <div class="bottom-container">
+                <div class="bottom-item bottom-item-line">
+                    <text class="bottom-item-text">{{"\ue643 " + itemValue.watchers_count}}</text>
+                </div>
+                <div class="bottom-item bottom-item-line">
+                    <text class="bottom-item-text">{{"\ue67e " + itemValue.forks_count}}</text>
+                </div>
+                <div class="bottom-item bottom-item-line">
+                    <text class="bottom-item-text">{{"\ue681 " + itemValue.subscribers_count}}</text>
+                </div>
+                <div class="bottom-item">
+                    <text class="bottom-item-text">{{"\ue661 " + itemValue.open_issues_count}}</text>
+                </div>
             </div>
         </div>
 
         <div class="control-container">
-            <text @click="()=>{onControlClick(1)}" class="control-text" :style="{color:(selectIndex ===1) ? '#FFFFFF' : '#AAAAAA'}">{{"动态"}}</text>
-            <text @click="()=>{onControlClick(2)}" class="control-text" :style="{color:(selectIndex ===2) ? '#FFFFFF' : '#AAAAAA'}">{{"提交"}}</text>
-            <text @click="()=>{onControlClick(3)}" class="control-text" :style="{color:(selectIndex ===3) ? '#FFFFFF' : '#AAAAAA'}">{{"Pulse"}}</text>
+            <text class="control-text" @click="()=>{onControlClick(1)}"
+                  :style="{color:(selectIndex ===1) ? '#FFFFFF' : '#AAAAAA'}">{{' 动态 '}}
+            </text>
+
+            <text class="control-text" @click="()=>{onControlClick(2)}"
+                  :style="{color:(selectIndex ===2) ? '#FFFFFF' : '#AAAAAA'}">{{' 提交 '}}
+            </text>
         </div>
 
     </div>
@@ -49,7 +55,7 @@
                 }
             },
             itemIndex: {type: Number, default: -1},
-            onItemClick:{type:Function}
+            onItemClick: {type: Function}
         },
         components: {},
         methods: {
@@ -57,18 +63,19 @@
                 this.onItemClick && this.onItemClick(this.itemIndex);
             },
             imageClick() {
-                if(!this.itemValue.ex.display_login) {
+                if (!this.itemValue.ex.display_login) {
                     return
                 }
                 this.jumpWithParams("UserInfoPage", {userName: this.itemValue.ex.display_login})
             },
             onControlClick(index) {
                 this.selectIndex = index;
+                this.onItemClick && this.onItemClick(0, index)
             }
         },
         data() {
             return {
-                selectIndex:1
+                selectIndex: 1
             }
         },
         created() {
@@ -134,10 +141,9 @@
     .time-text {
         color: rgba(227, 227, 227, 0.5);
         font-size: 25px;
-        flex:1;
+        flex: 1;
         text-align: end;
     }
-
 
     .content-text {
         color: rgba(227, 227, 227, 0.7);
@@ -149,8 +155,8 @@
         width: 710px;
         background-color: #3c3f41;
         padding: 20px;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
+        margin-top: 20px;
+        border-radius: 15px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
     }
 
@@ -165,20 +171,25 @@
     }
 
     .control-container {
+        background-color: #3c3f41;
         width: 710px;
         flex-direction: row;
-        margin-top: 50px;
-        margin-bottom: 50px
+        margin-top: 30px;
+        margin-bottom: 30px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        padding: 10px 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
     }
 
     .control-text {
-        background-color: #3c3f41;
-        padding: 20px;
-        flex:1;
-        border-radius: 15px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
+        flex: 1;
+        text-align: center;
         color: rgba(255, 255, 255, 0.9);
         font-size: 26px;
-        font-family: 'wxcIconFont';
+        display: -webkit-box;
+        white-space: normal !important;
+        -webkit-box-orient: vertical;
     }
 </style>

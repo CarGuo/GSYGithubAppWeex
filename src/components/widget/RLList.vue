@@ -7,6 +7,7 @@
         </refresh>
         <cell :v-if="headerComponent" class="header">
             <component v-bind:is="headerComponent"
+                       :onItemClick="headerClick"
                        :itemValue="headerData"></component>
         </cell>
         <cell class="cell" v-for="(rowData, index) in dataList">
@@ -39,6 +40,7 @@
             forRefresh: {type: Function},
             forLoadMore: {type: Function},
             itemClick: {type: Function},
+            headerClick: {type: Function},
             listData: {type: Array},
             headerComponent: {type: String},
             headerData: {type: Object},
