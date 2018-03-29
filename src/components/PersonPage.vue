@@ -1,7 +1,11 @@
 <template>
-    <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList"
-              headerComponent="UserHeadItem" :headerData="userInfo"
-              :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
+    <div :style="{flex:1}">
+        <navigation-bar v-if="needTitle" :title="userName"
+                        :rightIcon="' '"></navigation-bar>
+        <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList"
+                  headerComponent="UserHeadItem" :headerData="userInfo"
+                  :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
+    </div>
 </template>
 
 <script>
@@ -11,13 +15,22 @@
     import RLList from './widget/RLList'
     import resolveLongToTime from '../core/common/timeUtils'
     import event from '../core/net/event'
+    import user from '../core/net/user'
+    import NavigationBar from './widget/NavigationBar'
 
     export default {
-        components: {RLList},
+        props: {
+            needTitle: {type: Boolean, default: false},
+            userType: {type: Number, default: 1},
+            isMe: {type: Boolean, default: true},
+            userName: {type: String, default: ''},
+        },
+        components: {RLList, NavigationBar},
         data() {
             return {
                 currentPage: 1,
-                eventList:[]
+                eventList: [],
+                userData: {}
             }
         },
         created: function () {
@@ -25,21 +38,24 @@
                 this.$refs.dylist.showRefresh();
             }
             this.loadData(0)
+            if (this.isMe === false) {
+                this.loadUserInfo()
+            }
         },
         computed: {
             dataList() {
                 return this.eventList;
             },
             userInfo() {
-                let userInfo = this.getUserInfo();
+                let userInfo = this.currentUserInfo();
                 if (!userInfo) {
-                    return {ex:{}}
+                    return {ex: {}}
                 }
                 let time = resolveLongToTime(userInfo.created_at)
                 let ex = {
                     userPic: userInfo.avatar_url,
                     user: userInfo.login,
-                    name:userInfo.name ? userInfo.name : '---',
+                    name: userInfo.name ? userInfo.name : '---',
                     org: userInfo.company ? userInfo.company : '---',
                     location: userInfo.location ? userInfo.location : "---",
                     link: userInfo.blog ? userInfo.blog : "---",
@@ -53,13 +69,34 @@
                 let user = {
                     ex: ex
                 };
-                return  user;
+                return user;
             },
         },
         methods: {
+            currentUserInfo() {
+                if (this.isMe === true) {
+                    return this.getUserInfo();
+                } else {
+                    return this.userData;
+                }
+            },
+            loadUserInfo() {
+                if (!this.userName || this.userName.length < 1) {
+                    return
+                }
+                user.getUserInfoDao(this.userName).then((res) => {
+                    if (res && res.result) {
+                        this.userData = res.data
+                    }
+                });
+            },
             loadData(type) {
-                let userInfo = this.getUserInfo();
-                event.getEvent(this.currentPage, userInfo.login)
+                let userInfo = this.currentUserInfo();
+                let userName = (userInfo && userInfo.login) ?  userInfo.login : this.userName
+                if (!userName || userName.length < 1) {
+                    return
+                }
+                event.getEvent(this.currentPage, userName)
                     .then((res) => {
                         if (res && res.result) {
                             this.eventList = this.eventList.concat(res.data);
@@ -67,11 +104,11 @@
                         if (Constant.DEBUG) {
                             console.info("person loadData ", res)
                         }
-                        if(type === 1) {
+                        if (type === 1) {
                             if (this.$refs.dylist) {
                                 this.$refs.dylist.stopRefresh();
                             }
-                        } else if(type === 2) {
+                        } else if (type === 2) {
                             if (this.$refs.dylist) {
                                 this.$refs.dylist.stopLoadMore();
                             }
@@ -90,7 +127,7 @@
                 this.loadData(2)
             },
             onRefresh() {
-                this.currentPage =1;
+                this.currentPage = 1;
                 this.loadData(1)
             },
             itemClick(index) {

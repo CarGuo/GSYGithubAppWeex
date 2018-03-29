@@ -127,4 +127,76 @@ export const getActionAndDes = (event) => {
 };
 
 
+export const ActionUtils = (event, target, currentRepository) => {
+    if (!event.repo) {
+        //Actions.PersonPage({currentUser: event.actor.login})
+        return;
+    }
+    let owner = event.repo.name.split("/")[0];
+    let repositoryName = event.repo.name.split("/")[1];
+    let fullName = owner + '/' + repositoryName;
+    switch (event.type) {
+        case 'ForkEvent':
+            let forkName =  event.actor.login + "/" + repositoryName;
+            if (forkName === currentRepository) {
+                return
+            }
+            target.jumpWithParams("RepositoryDetailPage", {
+                userName: event.actor.login,
+                reposName: repositoryName,
+                title: repositoryName
+            })
+            break;
+        case 'PushEvent':
+            if (!event.payload.commits) {
+                if (fullName === currentRepository) {
+                    return
+                }
+                target.jumpWithParams("RepositoryDetailPage", {
+                    userName: owner,
+                    reposName: repositoryName,
+                    title: repositoryName
+                })
+            } else if (event.payload.commits.length === 1) {
+                //goToPush(repositoryName, owner, event.payload.commits[0].sha)
+            } else {
+                //Actions.OptionModal({dataList: getOptionItem(repositoryName, owner, event.payload.commits)});
+            }
+            break;
+        case 'ReleaseEvent':
+            let url = event.payload.release.html_url;
+            //launchUrl(url);
+            break;
+        case 'IssueCommentEvent':
+        case 'IssuesEvent':
+            // 去issue
+            /*Actions.IssueDetail({
+                issue: event.payload.issue,
+                title: fullName,
+                repositoryName: repositoryName,
+                userName: owner,
+                needRightBtn: true,
+                iconType:1,
+                rightBtn: 'home',
+                rightBtnPress: () => {
+                    Actions.RepositoryDetail({
+                        repositoryName: repositoryName, ownerName: owner
+                        , title: repositoryName
+                    });
+                }
+            });*/
+            break;
+        default:
+            if (fullName === currentRepository) {
+                return
+            }
+            target.jumpWithParams("RepositoryDetailPage", {
+                userName: owner,
+                reposName: repositoryName,
+                title: repositoryName
+            })
+            break;
+    }
+}
+
 

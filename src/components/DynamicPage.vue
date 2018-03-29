@@ -7,6 +7,7 @@
     const modal = weex.requireModule('modal')
 
     import * as Constant from '../core/common/constant'
+    import {ActionUtils} from '../core/common/eventUtils'
     import RLList from './widget/RLList'
 
 
@@ -30,6 +31,10 @@
         },
         methods: {
             loadData(type) {
+                let userInfo = this.getUserInfo();
+                if(!userInfo || !userInfo.login) {
+                    return
+                }
                 this.$store.dispatch('getEventReceived', {
                     page: this.currentPage, callback: (res) => {
                         if (Constant.DEBUG) {
@@ -52,7 +57,7 @@
                             }
                         }
                     },
-                    userInfo: this.getUserInfo()
+                    userInfo: userInfo
                 })
             },
             onLoadMore() {
@@ -63,10 +68,9 @@
                 this.loadData(1)
             },
             itemClick(index) {
-                console.log("click index ", index);
-                //this.jump("/repository/detail")
-                this.jumpWithParams("RepositoryDetailPage", {userName:'CarGuo',reposName:'GSYGithubApp',title:'GSYGithubApp'})
-                //modal.toast({message: "click index " + index})
+                let data = this.dataList[index];
+                ActionUtils(data, this)
+                //this.jumpWithParams("RepositoryDetailPage", {userName:'CarGuo',reposName:'GSYGithubApp',title:'GSYGithubApp'})
             },
         }
     }

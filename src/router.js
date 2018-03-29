@@ -4,6 +4,7 @@ import LoginPage from '@/components/LoginPage'
 import WelcomePage from '@/components/WelcomePage'
 import MainTabPage from '@/components/MainTabPage'
 import RepositoryDetailPage from '@/components/RepositoryDetailPage'
+import UserInfoPage from '@/components/UserInfoPage'
 import EventItem from '@/components/widget/EventItem'
 import RepositoryItem from '@/components/widget/RepositoryItem'
 import UserHeadItem from '@/components/widget/UserHeadItem'
@@ -35,6 +36,13 @@ module.exports = new Router({
             path: '/repository/detail',
             name: 'RepositoryDetailPage',
             component: RepositoryDetailPage
+        },
+        {
+            path: '/userInfo',
+            name: 'UserInfoPage',
+            component: UserInfoPage
         }
+
+
     ]
 })

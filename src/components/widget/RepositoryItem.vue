@@ -1,7 +1,7 @@
 <template>
     <div class="card-wrapper" @click="onCardClick">
         <div class="card-user-wrapper" style="flex-direction: row">
-            <image v-if="itemValue.ex.userPic" :src="itemValue.ex.userPic" class="user-icon"></image>
+            <image v-if="itemValue.ex.userPic" :src="itemValue.ex.userPic" class="user-icon" @click="imageClick"></image>
             <div style="flex: 1;">
                 <text class="repo-text">{{itemValue.ex.repoName}}</text>
                 <text class="user-text" :style="{flex: 1,fontFamily: 'wxcIconFont', fontSize: '10px', }">
@@ -50,6 +50,12 @@
         methods: {
             onCardClick() {
                 this.onItemClick && this.onItemClick(this.itemIndex);
+            },
+            imageClick() {
+                if(!this.itemValue.ex.userName) {
+                    return
+                }
+                this.jumpWithParams("UserInfoPage", {userName: this.itemValue.ex.userName})
             }
         },
         created() {

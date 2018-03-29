@@ -18,9 +18,10 @@
     export default {
         components: {WxcMinibar},
         props: {
-            onLeftButtonClick: {type: Function, default:()=>{
-                    Navigator.pop({}, e => {
-                    });
+            onLeftButtonClick: {type: Function, default:function(){
+                    /*Navigator.pop({}, e => {
+                    });*/
+                    this.$router.back()
                 }},
             onRightButtonClick: {type: Function, default:()=>{
 
@@ -42,6 +43,7 @@
 <style scoped>
     .title {
         width: 750px;
+        height:100px;
         align-items: center;
         background-color:#3c3f41;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.80);
