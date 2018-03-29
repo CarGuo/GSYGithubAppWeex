@@ -1,60 +1,27 @@
 <template>
-    <scroller :style="{height:'1334px'}">
-        <div class="wrapper" v-html="source">
-        </div>
-    </scroller>
+    <web :srcdoc="htmlData" :style="webStyle"></web>
 </template>
 
 <style scoped>
-    .wrapper {
-        flex-direction: column;
-        padding: 10px;
-    }
 </style>
 
 <script>
-    module.exports = {
-        props: {
-            source: {type: String, default:" "},
+    export default {
+        data: () => {
+            return {}
         },
-        data: () => ({
-            pagestart: '',
-            pagefinish: '',
-            title: '',
-            error: '',
-            canGoBack: false,
-            canGoForward: false,
-        }),
-        methods: {
-            goBack: function() {
-                var webview = weex.requireModule('webview');
-                webview.goBack(this.$refs.webview);
-            },
-            goForward: function() {
-                var webview = weex.requireModule('webview');
-                webview.goForward(this.$refs.webview);
-            },
-            reload: function() {
-                var webview = weex.requireModule('webview');
-                webview.reload(this.$refs.webview);
-            },
-            onPageStart: function(e) {
-                this.pagestart = e.url;
-            },
-            onPageFinish: function(e) {
-                this.pagefinish = e.url;
-                this.canGoBack = e.canGoBack;
-                this.canGoForward = e.canGoForward;
-                if (e.title) {
-                    this.title = e.title;
-                }
-            },
-            onError: function(e) {
-                this.error = url;
-            },
-            onReceivedTitle: function(e) {
-                this.title = e.title;
+        props: {
+            source: {type: String},
+            webStyle: {type: Object, default: {height:'1334px', width: '750px'}},
+        },
+        computed: {
+            htmlData() {
+                return this.source;
             }
-        }
+        },
+        components: {},
+        methods: {},
+        created() {
+        },
     }
 </script>

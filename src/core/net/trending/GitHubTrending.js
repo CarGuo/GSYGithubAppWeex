@@ -38,12 +38,11 @@ export default class GitHubTrending {
                 }
             }
             console.log("trend url", url)
-            fetch(url)
+            this.fetch(url)
                     .then((response) => {
                         clearTimeout(timeoutId);
-                        return response.text()
-                    })
-                    .catch((error) => {
+                        return response.data
+                    }).catch((error) => {
                         clearTimeout(timeoutId);
                         reject({result: false, data: error});
                         console.log(error);
@@ -58,15 +57,13 @@ export default class GitHubTrending {
         });
     }
 
-    fetch(path, requestParams) {
+    fetch(path) {
         const stream = weex.requireModule('stream');
         return new Promise((resolve, reject) => {
             stream.fetch({
                 method: 'GET',
                 url: path,
                 headers: {},
-                type: "json",
-                body: requestParams.body
             }, (response) => {
                 if (response.status == 200) {
                     resolve(response)
