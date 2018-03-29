@@ -10,7 +10,7 @@
                 <repository-detail-info-page :userName="userName" :reposName="reposName"></repository-detail-info-page>
             </div>
             <div class="item-container" :style="contentStyle">
-                <web-component :source="readme" :webStyle="{height:'1260px', width: '750px', paddingBottom:'80px' }"></web-component>
+                <web-component :source="readme" :webStyle="{height:'1154px', width: '750px', paddingBottom:'80px' }"></web-component>
             </div>
             <div class="item-container" :style="contentStyle"><text>消息中心</text></div>
             <div class="item-container" :style="contentStyle"><text>我的主页</text></div>
