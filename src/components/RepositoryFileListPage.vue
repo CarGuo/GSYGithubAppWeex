@@ -15,7 +15,7 @@
 
             </div>
         </scroller>
-        <r-l-list ref="dylist" listItemName="FileItem" :listData="dataList"
+        <r-l-list ref="dylist" listItemName="FileItem" :listData="list"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
 </template>
@@ -31,12 +31,12 @@
 
     export default {
         props: {
-            userName: {type: String, default: ""},
-            reposName: {type: String, default: ""},
         },
         components: {RLList},
         data() {
             return {
+                userName: "",
+                reposName: "",
                 headerList: ["."],
                 list: [],
                 path: "",
@@ -45,22 +45,36 @@
             }
         },
         created: function () {
-        },
-        activated: function () {
             this.init()
         },
-        computed: {
-            dataList() {
-                return this.list;
-            },
+        activated: function () {
+            //keep alive
+            this.init()
+        },
+        deactivated: function () {
+            console.log("55555555555555555555555555444")
         },
         methods: {
             init() {
-                this.loadData(0)
+                if(this.$route.params.title) {
+                    this.title = this.$route.params.title
+                }
+                this.list = []
+                if(this.$route.params.title) {
+                    this.userName = this.$route.params.userName
+                }
+                if(this.$route.params.reposName) {
+                    this.reposName = this.$route.params.reposName
+                }
+                this.onRefresh()
             },
             resolveResult(res, type) {
                 if (res && res.result) {
-                    this.list = this.list.concat(res.data);
+                    if(type === 1) {
+                        this.list = res.data;
+                    } else {
+                        this.list = this.list.concat(res.data);
+                    }
                 }
                 if (Constant.DEBUG) {
                     console.info("person loadData ", res)

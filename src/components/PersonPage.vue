@@ -34,10 +34,13 @@
             }
         },
         created: function () {
-            if (this.$refs.dylist) {
-                this.$refs.dylist.showRefresh();
+            this.onRefresh()
+            if (this.isMe === false) {
+                this.loadUserInfo()
             }
-            this.loadData(0)
+        },
+        activated: function () {
+            this.onRefresh()
             if (this.isMe === false) {
                 this.loadUserInfo()
             }
@@ -99,7 +102,11 @@
                 event.getEvent(this.currentPage, userName)
                     .then((res) => {
                         if (res && res.result) {
-                            this.eventList = this.eventList.concat(res.data);
+                            if(type === 1) {
+                                this.eventList = res.data;
+                            } else {
+                                this.eventList = this.eventList.concat(res.data);
+                            }
                         }
                         if (Constant.DEBUG) {
                             console.info("person loadData ", res)

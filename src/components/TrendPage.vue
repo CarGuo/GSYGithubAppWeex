@@ -61,10 +61,11 @@
             }
         },
         created: function () {
-            if (this.$refs.dylist) {
-                this.$refs.dylist.showRefresh();
-            }
-            this.loadData(0);
+            this.onRefresh();
+        },
+        activated: function () {
+            //keep alive
+            this.onRefresh();
         },
         computed: {
             dataList() {

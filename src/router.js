@@ -50,7 +50,6 @@ module.exports = new Router({
             component: RepositoryDetailPage,
             meta: {
                 keepAlive: true,
-                refreshIn: true
             }
         },
         {
