@@ -18,8 +18,8 @@ Object.keys(filters).forEach(key => {
 // register global mixins.
 Vue.mixin(mixins)
 
-router.beforeEach((to, from, next) => {
-    /*if (to.name == 'Login') {
+/*router.beforeEach((to, from, next) => {
+    if (to.name == 'Login') {
         next();
         return;
     }
@@ -35,9 +35,9 @@ router.beforeEach((to, from, next) => {
         if(to.path=='/chat')
             store.commit("updateMsgList", []);
         next();
-    }*/
+    }
     next();
-});
+});*/
 
 
 /* eslint-disable no-new */

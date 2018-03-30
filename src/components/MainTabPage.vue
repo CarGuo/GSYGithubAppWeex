@@ -60,10 +60,10 @@
                 // console.log(index);
             },
             minibarLeftButtonClick() {
-                console.log("FFFFFF")
+                //console.log("FFFFFF")
             },
             minibarRightButtonClick() {
-                console.log("GGGGGG")
+                //console.log("GGGGGG")
             },
             itemClick(event) {
                 console.log("click index ", event.index);

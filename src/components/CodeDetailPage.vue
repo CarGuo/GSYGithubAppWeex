@@ -46,13 +46,10 @@
                         if (res && res.result) {
                             let startTag = `class="announce instapaper_body `;
                             let startLang = res.data.indexOf(startTag);
-                            console.log(startLang)
                             let endLang = res.data.indexOf(`" data-path="`);
-                            console.log(endLang)
                             let lang;
                             if (startLang >= 0 && endLang >= 0) {
                                 let tmpLang = res.data.substring(startLang + startTag.length, endLang);
-                                console.log(tmpLang)
                                 if (tmpLang) {
                                     lang = formName(tmpLang.toLowerCase());
                                 }
@@ -60,7 +57,6 @@
                             if (!lang) {
                                 lang = 'java'
                             }
-                            console.log(lang)
                             if ('markdown' === lang) {
                                 this.codeData = generateHtml(res.data)
                             } else {

@@ -1,6 +1,6 @@
 <template>
     <div :style="{flex:1}">
-        <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList"
+        <r-l-list ref="dylist" listItemName="EventItem" :listData="eventList"
                   headerComponent="RepositoryHeadItem" :headerData="reposInfo"
                   :headerClick="headerClick"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
@@ -17,12 +17,12 @@
 
     export default {
         props: {
-            userName: {type: String, default: ""},
-            reposName: {type: String, default: ""},
         },
         components: {RLList},
         data() {
             return {
+                userName: "",
+                reposName: "",
                 currentPage: 1,
                 listType: 1,
                 eventList: [],
@@ -30,19 +30,21 @@
             }
         },
         created: function () {
+            this.init()
         },
         activated: function () {
+            //keep alive
             this.init();
-        },
-        computed: {
-            dataList() {
-                return this.eventList;
-            },
         },
         methods: {
             init() {
+                this.eventList = []
+                this.reposInfo = {}
+                this.title = this.$route.params.title
+                this.userName = this.$route.params.userName
+                this.reposName = this.$route.params.reposName
                 this.loadDetail();
-                this.loadData(0)
+                this.onRefresh()
             },
             loadDetail() {
                 if (this.isPreparing()) {
@@ -75,7 +77,11 @@
             },
             resolveResult(res, type) {
                 if (res && res.result) {
-                    this.eventList = this.eventList.concat(res.data);
+                    if(type === 1) {
+                        this.eventList = res.data;
+                    } else {
+                        this.eventList = this.eventList.concat(res.data);
+                    }
                 }
                 if (Constant.DEBUG) {
                     console.info("person loadData ", res)

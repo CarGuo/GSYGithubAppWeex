@@ -23,7 +23,7 @@
             </text>
         </div>
 
-        <r-l-list ref="dylist" listItemName="IssueItem" :listData="dataList" :bottomEmpty="'350px'"
+        <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="'350px'"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
 </template>
@@ -39,12 +39,12 @@
 
     export default {
         props: {
-            userName: {type: String, default: ""},
-            reposName: {type: String, default: ""},
         },
         components: {RLList, WxcSearchbar},
         data() {
             return {
+                userName: "",
+                reposName: "",
                 filter : null,
                 currentPage: 1,
                 listType: 1,
@@ -55,19 +55,19 @@
             }
         },
         created: function () {
-            //this.loadData(0)
-        },
-        activated: function () {
             this.init()
         },
-        computed: {
-            dataList() {
-                return this.list;
-            },
+        activated: function () {
+            //keep alive
+            this.init()
         },
         methods: {
             init() {
-                this.loadData(0)
+                this.list = []
+                this.title = this.$route.params.title
+                this.userName = this.$route.params.userName
+                this.reposName = this.$route.params.reposName
+                this.onRefresh()
             },
             loadDataState(type) {
                 if (this.isPreparing()) {
@@ -89,7 +89,11 @@
             },
             resolveResult(res, type) {
                 if (res && res.result) {
-                    this.list = this.list.concat(res.data);
+                    if(type === 1) {
+                        this.list = res.data;
+                    } else {
+                        this.list = this.list.concat(res.data);
+                    }
                 }
                 if (Constant.DEBUG) {
                     console.info("person loadData ", res)
