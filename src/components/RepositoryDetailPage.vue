@@ -12,7 +12,9 @@
             <div class="item-container" :style="contentStyle">
                 <repository-detail-info-page :userName="userName" :reposName="reposName"></repository-detail-info-page>
             </div>
-            <div class="item-container" :style="contentStyle"><text>消息中心</text></div>
+            <div class="item-container" :style="contentStyle">
+                <repository-issue-list-page :userName="userName" :reposName="reposName"></repository-issue-list-page>
+            </div>
             <div class="item-container" :style="contentStyle"><text>我的主页</text></div>
         </top-tab-bar>
     </div>
@@ -25,11 +27,12 @@
     import TopTabBar from './widget/TopTabBar'
     import WebComponent from './widget/WebComponent'
     import RepositoryDetailInfoPage from './RepositoryDetailInfoPage'
+    import RepositoryIssueListPage from './RepositoryIssueListPage'
     import repository from '../core/net/repository'
     import * as Constant from '../core/common/constant'
 
     export default {
-        components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage},
+        components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage, RepositoryIssueListPage},
         data: () => ({
             tabTitles: Config.tabTitles,
             tabStyles: Config.tabStyles,

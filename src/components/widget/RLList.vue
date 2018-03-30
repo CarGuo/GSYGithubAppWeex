@@ -24,8 +24,8 @@
                 <loading-indicator class="indicator-loadmore"></loading-indicator>
             </div>
         </cell>
-        <cell :style="{height:'200px'}">
-            <div :style="{height:'200px'}">
+        <cell :style="{height: bottomEmpty}">
+            <div :style="{height: bottomEmpty}">
             </div>
         </cell>
     </list>
@@ -44,6 +44,7 @@
             listData: {type: Array},
             headerComponent: {type: String},
             headerData: {type: Object},
+            bottomEmpty: {type: String, default:' 200px'},
         },
         data() {
             return {
