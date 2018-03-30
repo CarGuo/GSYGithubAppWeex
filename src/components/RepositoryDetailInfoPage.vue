@@ -30,11 +30,9 @@
             }
         },
         created: function () {
-            if (this.$refs.dylist) {
-                this.$refs.dylist.showRefresh();
-            }
-            this.loadDetail();
-            this.loadData(0)
+        },
+        activated: function () {
+            this.init();
         },
         computed: {
             dataList() {
@@ -42,6 +40,10 @@
             },
         },
         methods: {
+            init() {
+                this.loadDetail();
+                this.loadData(0)
+            },
             loadDetail() {
                 if (this.isPreparing()) {
                     return

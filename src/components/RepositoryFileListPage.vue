@@ -27,6 +27,7 @@
     import RLList from './widget/RLList'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
+    import {isImageEnd} from '../core/common/htmlUtils'
 
     export default {
         props: {
@@ -44,10 +45,9 @@
             }
         },
         created: function () {
-            if (this.$refs.dylist) {
-                this.$refs.dylist.showRefresh();
-            }
-            this.loadData(0)
+        },
+        activated: function () {
+            this.init()
         },
         computed: {
             dataList() {
@@ -55,6 +55,9 @@
             },
         },
         methods: {
+            init() {
+                this.loadData(0)
+            },
             resolveResult(res, type) {
                 if (res && res.result) {
                     this.list = this.list.concat(res.data);
@@ -92,13 +95,24 @@
                     return
                 }
                 let data = this.list[index];
+                let headerList = this.headerList;
                 if(data.type === 'file') {
-
+                    if (isImageEnd(data.name)) {
+                        //let urlLink = hostWeb + ownerName + "/" + repositoryName + "/" + "raw/" + curBranch + "/" + path;
+                        //TODO OPEN PIC
+                    } else {
+                        this.jumpWithParams("CodeDetailPage", {
+                            userName:  this.userName,
+                            reposName: this.reposName,
+                            path: headerList.slice(1, headerList.length).join("/") + "/" + data.name,
+                            curBranch:  this.curBranch ? this.curBranch : 'master',
+                            title:  data.name,
+                            codeData: "",})
+                    }
                 } else {
                     if (this.loading) {
                         return
                     }
-                    let headerList = this.headerList;
                     headerList.push(data.name);
                     let path = headerList.slice(1, headerList.length).join("/");
                     this.path = path;

@@ -21,6 +21,28 @@ Object.keys(filters).forEach(key => {
 // register global mixins.
 Vue.mixin(mixins)
 
+router.beforeEach((to, from, next) => {
+    /*if (to.name == 'Login') {
+        next();
+        return;
+    }
+    var name = store.state.user.name;
+    if (name == '未登录') {
+        if (to.meta.requireAuth || to.name == null) {
+            next({path: '/', query: {redirect: to.path}})
+        } else {
+            next();
+        }
+    } else {
+        initMenu(router, store);
+        if(to.path=='/chat')
+            store.commit("updateMsgList", []);
+        next();
+    }*/
+    next();
+});
+
+
 /* eslint-disable no-new */
 new Vue(Vue.util.extend({el: '#root', router, store}, App))
 router.push('/')

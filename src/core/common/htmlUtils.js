@@ -106,3 +106,58 @@ const generateCodeHtml = (mdHTML, wrap, backgroundColor = Constant.white, action
         "</html>";
     return doc;
 };
+
+export const generateCode2HTml = (mdData, backgroundColor = Constant.white, lang = 'java', userBR = true) => {
+    let currentData = (mdData && mdData.indexOf("<code>") === -1) ?
+        "<body>\n" +
+        "<pre class=\"pre\">\n" +
+        `<code lang='${lang}'>\n` +
+        mdData +
+        "</code>\n" +
+        "</pre>\n" +
+        "</body>\n" :
+
+        "<body>\n" +
+        "<pre class=\"pre\">\n" +
+        mdData +
+        "</pre>\n" +
+        "</body>\n";
+    return generateHtml(currentData, backgroundColor, userBR)
+};
+
+
+export const formName = (name) => {
+    switch (name) {
+        case 'sh':
+            return 'shell';
+        case 'js':
+            return 'javascript';
+        case 'kt':
+            return 'kotlin';
+        case 'c':
+        case 'cpp':
+            return 'cpp';
+        case 'md':
+            return 'markdown';
+        case 'html':
+            return 'xml';
+
+
+    }
+    return name
+};
+
+
+export const isImageEnd = (path) => {
+    let image = false;
+    IMAGE_END.forEach((item) => {
+        if (path.indexOf(item) + item.length === path.length) {
+            image = true;
+        }
+    });
+    return image
+
+};
+
+const IMAGE_END = [".png", ".jpg", ".jpeg", ".gif", ".svg"];
+
