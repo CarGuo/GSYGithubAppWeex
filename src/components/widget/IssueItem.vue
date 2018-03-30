@@ -12,7 +12,7 @@
         <div style="flex-direction: row;width: 650px;overflow: hidden;align-items: center;">
             <text class="state-text" :style="itemValue.ex.state === 'open' ? { 'color':'green'}  :  {'color':'red'}">{{'\ue661 '}}</text>
             <text class="number-text">{{'  #' + itemValue.ex.number}}</text>
-            <text class="comment-text">{{'\ue6c4 '  + itemValue.ex.count}}</text>
+            <text class="comment-text">{{'\ue6ba '  + itemValue.ex.count}}</text>
         </div>
     </div>
 </template>
@@ -31,7 +31,7 @@
         },
         components: {},
         methods: {
-            onCardClick() {
+            onCardClick(itemIndex) {
                 this.onItemClick && this.onItemClick(this.itemIndex);
             },
             imageClick() {
