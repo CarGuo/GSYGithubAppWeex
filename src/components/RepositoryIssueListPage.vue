@@ -1,5 +1,5 @@
 <template>
-    <div :style="{flex:1}">
+    <div :style="{flex:1,alignItems: 'center'}">
         <div class="demo">
             <wxc-searchbar ref="wxc-searchbar"
                            @wxcSearchbarCancelClicked="wxcSearchbarCancelClicked"
@@ -9,6 +9,20 @@
                            @wxcSearchbarInputOnFocus="wxcSearchbarInputOnFocus"
                            @wxcSearchbarInputOnBlur="wxcSearchbarInputOnBlur"></wxc-searchbar>
         </div>
+
+        <div class="control-container">
+            <text class="control-text" @click="()=>{onControlClick(1)}"
+                  :style="{color:(selectIndex ===1) ? '#FFFFFF' : '#AAAAAA'}">{{' 全部 '}}
+            </text>
+
+            <text class="control-text" @click="()=>{onControlClick(2)}"
+                  :style="{color:(selectIndex ===2) ? '#FFFFFF' : '#AAAAAA'}">{{' 打开 '}}
+            </text>
+            <text class="control-text" @click="()=>{onControlClick(3)}"
+                  :style="{color:(selectIndex ===3) ? '#FFFFFF' : '#AAAAAA'}">{{' 关闭 '}}
+            </text>
+        </div>
+
         <r-l-list ref="dylist" listItemName="IssueItem" :listData="dataList" :bottomEmpty="'350px'"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
@@ -36,6 +50,7 @@
                 listType: 1,
                 list: [],
                 dataState: 1,
+                selectIndex: 1,
                 searchValue:""
             }
         },
@@ -128,7 +143,7 @@
                 this.searchValue = e.value;
             },
             wxcSearchbarCancelClicked (e) {
-                this.$refs['wxc-searchbar'].setValue('');
+                //this.$refs['wxc-searchbar'].setValue('');
             },
             wxcSearchbarInputDisabledClicked (e) {
                 console.log("wxcSearchbarInputDisabledClicked", e)
@@ -138,10 +153,43 @@
             },
             wxcSearchbarInputReturned (e) {
                 console.log("wxcSearchbarDepChooseClicked", e)
+            },
+            onControlClick(index) {
+                this.selectIndex = index;
+                if(index === 1) {
+                    this.filter = null;
+                } else if(index === 2) {
+                    this.filter = "open"
+                } else {
+                    this.filter = "closed"
+                }
+                this.onRefresh();
             }
         }
     }
 </script>
 
 <style scoped>
+    .control-container {
+        background-color: #3c3f41;
+        width: 710px;
+        flex-direction: row;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        padding: 10px 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
+    }
+
+    .control-text {
+        flex: 1;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 26px;
+        display: -webkit-box;
+        white-space: normal !important;
+        -webkit-box-orient: vertical;
+    }
 </style>
