@@ -168,10 +168,48 @@ const getRepositoryIssueDao = async(page = 0, userName, repository, state, sort,
 };
 
 
+/**
+ * 搜索仓库issue
+ * @param q 搜索关键字
+ * @param name 用户名
+ * @param reposName 仓库名
+ * @param page
+ * @param state 问题状态，all open closed
+ * @returns {Promise.<{result, data}>}
+ */
+const searchRepositoryIssueDao = async (q, name, reposName, page = 1, state) => {
+    let qu;
+    if (!state || state === 'all') {
+        qu = q + `+repo%3A${name}%2F${reposName}`;
+    } else {
+        qu = q + `+repo%3A${name}%2F${reposName}+state%3A${state}`;
+    }
+    let url = Address.repositoryIssueSearch(qu) + Address.getPageParams("&", page);
+    let res = await Api.netFetch(url);
+    let data = res.data ? res.data.items : res.data;
+    data.forEach((item) => {
+        let ex = {
+            userPic: item.user.avatar_url,
+            userName: item.user.login,
+            content: reposName + "- " + item.title,
+            time: item.created_at,
+            state: item.state,
+            number: item.number,
+            count: item.comments + "",
+        }
+        item.ex = ex
+    });
+    return {
+        data: data,
+        result: res.result
+    };
+};
+
 export default {
     getTrendDao,
     getRepositoryDetailReadmeHtmlDao,
     getRepositoryDetailDao,
     getReposCommitsDao,
-    getRepositoryIssueDao
+    getRepositoryIssueDao,
+    searchRepositoryIssueDao
 }
