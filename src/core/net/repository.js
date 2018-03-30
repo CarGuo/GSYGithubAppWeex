@@ -135,9 +135,43 @@ const getReposCommitsDao = async (userName, reposName, page) => {
 };
 
 
+/**
+ * 获取仓库issue
+ * @param page
+ * @param userName
+ * @param repository
+ * @param state issue状态
+ * @param sort 排序类型 created updated等
+ * @param direction 正序或者倒序
+ * @returns {Promise.<void>}
+ */
+const getRepositoryIssueDao = async(page = 0, userName, repository, state, sort, direction) => {
+
+    let url = Address.getReposIssue(userName, repository, state, sort, direction) + Address.getPageParams("&", page);
+    let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html,application/vnd.github.VERSION.raw'});
+    res.data.forEach((item) => {
+        let ex = {
+            userPic: item.user.avatar_url,
+            userName: item.user.login,
+            content: repository + "- " + item.title,
+            time: item.created_at,
+            state: item.state,
+            number: item.number,
+            count: item.comments + "",
+        }
+        item.ex = ex
+    });
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+
 export default {
     getTrendDao,
     getRepositoryDetailReadmeHtmlDao,
     getRepositoryDetailDao,
-    getReposCommitsDao
+    getReposCommitsDao,
+    getRepositoryIssueDao
 }

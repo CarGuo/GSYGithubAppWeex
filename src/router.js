@@ -8,6 +8,7 @@ import UserInfoPage from '@/components/UserInfoPage'
 import EventItem from '@/components/widget/EventItem'
 import RepositoryItem from '@/components/widget/RepositoryItem'
 import UserHeadItem from '@/components/widget/UserHeadItem'
+import IssueItem from '@/components/widget/IssueItem'
 import RepositoryHeadItem from '@/components/widget/RepositoryHeadItem'
 
 Vue.use(Router)
@@ -16,6 +17,7 @@ Vue.component('EventItem', EventItem)
 Vue.component('RepositoryItem', RepositoryItem)
 Vue.component('UserHeadItem', UserHeadItem)
 Vue.component('RepositoryHeadItem', RepositoryHeadItem)
+Vue.component('IssueItem', IssueItem)
 
 module.exports = new Router({
     routes: [
