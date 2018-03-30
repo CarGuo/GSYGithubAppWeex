@@ -8,7 +8,7 @@
             </div>
             <div style="flex-direction: row;margin-top: 20px">
                 <text class="repo-text">{{itemValue.language}}</text>
-                <text class="repo-text">{{(itemValue.size / 1024).toFixed(2) + "M"}}</text>
+                <text class="repo-text">{{itemValue.size ? ((itemValue.size / 1024).toFixed(2) + "M") : ' '}}</text>
                 <text class="repo-text">{{itemValue.license ? itemValue.license.name : ""}}</text>
             </div>
 
@@ -18,16 +18,16 @@
 
             <div class="bottom-container">
                 <div class="bottom-item bottom-item-line">
-                    <text class="bottom-item-text">{{"\ue643 " + itemValue.watchers_count}}</text>
+                    <text class="bottom-item-text">{{"\ue643 " + (itemValue.watchers_count? itemValue.watchers_count : '---')}}</text>
                 </div>
                 <div class="bottom-item bottom-item-line">
-                    <text class="bottom-item-text">{{"\ue67e " + itemValue.forks_count}}</text>
+                    <text class="bottom-item-text">{{"\ue67e " + (itemValue.forks_count? itemValue.forks_count : '---')}}</text>
                 </div>
                 <div class="bottom-item bottom-item-line">
-                    <text class="bottom-item-text">{{"\ue681 " + itemValue.subscribers_count}}</text>
+                    <text class="bottom-item-text">{{"\ue681 " + (itemValue.subscribers_count? itemValue.subscribers_count : '---')}}</text>
                 </div>
                 <div class="bottom-item">
-                    <text class="bottom-item-text">{{"\ue661 " + itemValue.open_issues_count}}</text>
+                    <text class="bottom-item-text">{{"\ue661 " + (itemValue.open_issues_count? itemValue.open_issues_count : '---')}}</text>
                 </div>
             </div>
         </div>

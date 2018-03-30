@@ -1,8 +1,8 @@
 <template recyclable>
     <div class="card-wrapper" @click="onCardClick">
         <div class="card-user-wrapper" style="flex-direction: row">
-            <image :src="itemValue.ex.avatar_url" class="user-icon" @click="imageClick"></image>
-            <text class="name-text" style="flex: 1; margin-left: 20px">{{itemValue.ex.display_login}}</text>
+            <image v-if="itemValue.ex.avatar_url" :src="itemValue.ex.avatar_url" class="user-icon" @click="imageClick"></image>
+            <text class="name-text" style="flex: 1;">{{itemValue.ex.display_login}}</text>
             <text class="des-text">{{itemValue.ex.created_at | resolveTime}}</text>
         </div>
         <text class="content-text" style="flex: 1; margin-bottom: 20px;">{{itemValue.ex.actionStr}}</text>
@@ -41,6 +41,7 @@
 
 <style scoped>
     .user-icon {
+        margin-right: 20px;
         width: 50px;
         height: 50px;
         align-items: center;

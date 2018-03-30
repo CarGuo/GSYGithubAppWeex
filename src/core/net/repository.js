@@ -7,7 +7,6 @@ import {getCache, setCache} from '../common/storageUtils'
 import resolveLongToTime from '../common/timeUtils'
 
 const getTrendDao = async (page = 0, since, languageType) => {
-    let localLanguage = (languageType) ? languageType : "*";
     let url = Address.trending(since, languageType);
     let res = await new GitHubTrending().fetchTrending(url, since, languageType);
     return {
@@ -22,8 +21,6 @@ const getTrendDao = async (page = 0, since, languageType) => {
  * 详情的remde数据Html模式数据
  */
 const getRepositoryDetailReadmeHtmlDao = async (userName, reposName, branch) => {
-    let fullName = userName + "/" + reposName;
-    let curBranch = (branch) ? branch : "master";
     let url = Address.readmeFile(userName + '/' + reposName, branch);
     let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html'}, 'text');
     if (res && res.result && res.data.length > 0) {
@@ -51,9 +48,9 @@ const getRepositoryDetailDao = async (userName, reposName) => {
     if (res && res.result && res.data) {
         let created_at = resolveLongToTime(res.data.created_at);
         let push_at = resolveLongToTime(res.data.pushed_at);
-        let createStr = (res.data.fork === true) ?  "forked from " + reposName + '\n'
-            : "创建于 "  + created_at + " ";
-        let updateStr = "最后提交于 "+ push_at;
+        let createStr = (res.data.fork === true) ? "forked from " + reposName + '\n'
+            : "创建于 " + created_at + " ";
+        let updateStr = "最后提交于 " + push_at;
         let infoText = createStr + ((push_at) ? updateStr : '');
         res.data.infoText = infoText
         res.data.userName = userName
@@ -114,8 +111,33 @@ const getRepositoryIssueStatusDao = async (userName, repository) => {
     }
 };
 
+/**
+ * 获取仓库的提交列表
+ */
+const getReposCommitsDao = async (userName, reposName, page) => {
+    let url = Address.getReposCommits(userName, reposName) + Address.getPageParams("?", page);
+    let res = await Api.netFetch(url);
+    res.data.forEach((item) => {
+        let ex = {
+            actionStr: item.commit.message,
+            des: "sha:" + item.sha,
+            created_at: item.commit.committer.date,
+            display_login: item.commit.committer.name,
+        }
+        item.ex = ex
+    });
+    return {
+        data: res.data,
+        result: res.result
+    };
+
+
+};
+
+
 export default {
     getTrendDao,
     getRepositoryDetailReadmeHtmlDao,
-    getRepositoryDetailDao
+    getRepositoryDetailDao,
+    getReposCommitsDao
 }

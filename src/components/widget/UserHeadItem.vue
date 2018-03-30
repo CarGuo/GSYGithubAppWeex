@@ -5,32 +5,32 @@
             <div style="flex: 1;">
                 <text class="user-text">{{itemValue.ex.user}}</text>
                 <text class="name-text">{{itemValue.ex.name}}</text>
-                <text class="org-text">{{'\ue63e ' + itemValue.ex.org}}</text>
-                <text class="location-text">{{'\ue7e6 ' + itemValue.ex.location}}</text>
+                <text class="org-text">{{'\ue63e ' + (itemValue.ex.org ? itemValue.ex.org : ' ')}}</text>
+                <text class="location-text">{{'\ue7e6 ' + (itemValue.ex.location ? itemValue.ex.location : ' ')}}</text>
             </div>
         </div>
-        <text class="link-text">{{'\ue670 ' + itemValue.ex.link}}</text>
+        <text class="link-text">{{'\ue670 ' + (itemValue.ex.link ? itemValue.ex.link : ' ')}}</text>
         <text class="des-text">{{itemValue.ex.des}}</text>
         <div class="bottom-container">
             <div class="bottom-item bottom-item-line">
                 <text class="bottom-item-text">{{"仓库"}}</text>
-                <text class="bottom-item-value">{{itemValue.ex.repos}}</text>
+                <text class="bottom-item-value">{{itemValue.ex.repos ? itemValue.ex.repos : '---'}}</text>
             </div>
             <div class="bottom-item bottom-item-line">
                 <text class="bottom-item-text">{{"粉丝"}}</text>
-                <text class="bottom-item-value">{{itemValue.ex.follower}}</text>
+                <text class="bottom-item-value">{{itemValue.ex.follower ? itemValue.ex.follower: '---'}}</text>
             </div>
             <div class="bottom-item bottom-item-line">
                 <text class="bottom-item-text">{{"关注"}}</text>
-                <text class="bottom-item-value">{{itemValue.ex.followed}}</text>
+                <text class="bottom-item-value">{{itemValue.ex.followed ? itemValue.ex.followed: '---'}}</text>
             </div>
             <div class="bottom-item bottom-item-line">
                 <text class="bottom-item-text">{{"星标"}}</text>
-                <text class="bottom-item-value">{{itemValue.ex.star}}</text>
+                <text class="bottom-item-value">{{itemValue.ex.star ? itemValue.ex.star: '---'}}</text>
             </div>
             <div class="bottom-item">
                 <text class="bottom-item-text">{{"荣耀"}}</text>
-                <text class="bottom-item-value">{{itemValue.ex.stared}}</text>
+                <text class="bottom-item-value">{{itemValue.ex.stared ? itemValue.ex.stared: '---'}}</text>
             </div>
         </div>
     </div>

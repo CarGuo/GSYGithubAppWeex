@@ -128,6 +128,7 @@
             },
             onRefresh() {
                 this.currentPage = 1;
+                this.eventList = [];
                 this.loadData(1)
             },
             itemClick(index) {
