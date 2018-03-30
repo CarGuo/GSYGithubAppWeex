@@ -19,9 +19,9 @@
         components: {WxcMinibar},
         props: {
             onLeftButtonClick: {type: Function, default:function(){
-                    /*Navigator.pop({}, e => {
-                    });*/
-                    this.$router.back()
+                    Navigator.pop({}, e => {
+                    });
+                    //this.$router.back()
                 }},
             onRightButtonClick: {type: Function, default:()=>{
 

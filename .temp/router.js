@@ -5,6 +5,7 @@ import LoginPage from '@/components/LoginPage'
 import WelcomePage from '@/components/WelcomePage'
 import MainTabPage from '@/components/MainTabPage'
 import RepositoryDetailPage from '@/components/RepositoryDetailPage'
+import CodeDetailPage from '@/components/CodeDetailPage'
 import UserInfoPage from '@/components/UserInfoPage'
 import EventItem from '@/components/widget/EventItem'
 import RepositoryItem from '@/components/widget/RepositoryItem'
@@ -22,6 +23,8 @@ Vue.component('RepositoryHeadItem', RepositoryHeadItem)
 Vue.component('IssueItem', IssueItem)
 Vue.component('FileItem', FileItem)
 
+
+
 module.exports = new Router({
     routes: [
         {
@@ -37,17 +40,29 @@ module.exports = new Router({
         {
             path: '/main',
             name: 'MainTabPage',
-            component: MainTabPage
+            component: MainTabPage,
+            meta: {
+                keepAlive: true,
+            }
         },
         {
             path: '/repository/detail',
             name: 'RepositoryDetailPage',
-            component: RepositoryDetailPage
+            component: RepositoryDetailPage,
+            meta: {
+                keepAlive: true,
+                refreshIn: true
+            }
         },
         {
             path: '/userInfo',
             name: 'UserInfoPage',
             component: UserInfoPage
+        },
+        {
+            path: '/code',
+            name: 'CodeDetailPage',
+            component: CodeDetailPage,
         }
 
 

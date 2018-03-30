@@ -6,17 +6,17 @@
                      :tab-styles="tabStyles"
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
-            <div class="item-container" :style="contentStyle">
+            <div class="item-container"  :style="contentStyle">
                 <web-component :source="readme" :webStyle="{height:'1154px', width: '750px', paddingBottom:'80px' }"></web-component>
             </div>
-            <div class="item-container" :style="contentStyle">
-                <repository-detail-info-page :userName="userName" :reposName="reposName"></repository-detail-info-page>
+            <div class="item-container":style="contentStyle">
+                <repository-detail-info-page  ref="a"  :userName="userName" :reposName="reposName"></repository-detail-info-page>
             </div>
-            <div class="item-container" :style="contentStyle">
-                <repository-file-list-page :userName="userName" :reposName="reposName"></repository-file-list-page>
+            <div class="item-container"  :style="contentStyle">
+                <repository-file-list-page ref="b" :userName="userName" :reposName="reposName"></repository-file-list-page>
             </div>
-            <div class="item-container" :style="contentStyle">
-                <repository-issue-list-page :userName="userName" :reposName="reposName"></repository-issue-list-page>
+            <div class="item-container"  :style="contentStyle">
+                <repository-issue-list-page ref="c" :userName="userName" :reposName="reposName"></repository-issue-list-page>
             </div>
         </top-tab-bar>
     </div>
@@ -48,9 +48,19 @@
             const tabPageHeight = Utils.env.getPageHeight();
             const { tabStyles } = this;
             this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' };
+        },
+        activated: function () {
             this.loadReadme()
+            console.log("ffff",this.$refs.a)
+            if(this.$refs.a)
+            this.$refs.a.init();
+            if(this.$refs.b)
+            this.$refs.b.init();
+            if(this.$refs.c)
+            this.$refs.c.init();
         },
         methods: {
+
             wxcTabBarCurrentTabSelected (e) {
                 const index = e.page;
             },

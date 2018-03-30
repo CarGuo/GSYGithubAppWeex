@@ -55,10 +55,10 @@
             }
         },
         created: function () {
-            if (this.$refs.dylist) {
-                this.$refs.dylist.showRefresh();
-            }
-            this.loadData(0)
+            //this.loadData(0)
+        },
+        activated: function () {
+            this.init()
         },
         computed: {
             dataList() {
@@ -66,6 +66,9 @@
             },
         },
         methods: {
+            init() {
+                this.loadData(0)
+            },
             loadDataState(type) {
                 if (this.isPreparing()) {
                     return

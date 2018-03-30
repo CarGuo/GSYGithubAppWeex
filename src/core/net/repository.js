@@ -208,11 +208,11 @@ const searchRepositoryIssueDao = async (q, name, reposName, page = 1, state) => 
 /***
  * 获取仓库的文件列表
  */
-const getReposFileDirDao = async (userName, reposName, path = '', branch) => {
+const getReposFileDirDao = async (userName, reposName, path = '', branch, type = 'json') => {
     let url = Address.reposDataDir(userName, reposName, path, branch);
-    let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html'});
+    let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html'}, type);
 
-    if (res && res.result) {
+    if (res && res.result && (res.data && (typeof res.data ) === 'array')) {
         let dir = [];
         let file = [];
         res.data.forEach((item) => {
