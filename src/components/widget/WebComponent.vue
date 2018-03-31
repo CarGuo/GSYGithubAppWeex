@@ -1,5 +1,8 @@
 <template>
-    <web :srcdoc="htmlData" :style="webStyle"></web>
+    <div>
+        <web v-if="isIos" :srcdoc="htmlData" :style="webStyle"></web>
+        <gsyWeb v-if="isNotIos" :srcdoc="htmlData" :style="webStyle"></gsyWeb>
+    </div>
 </template>
 
 <style scoped>
@@ -7,6 +10,8 @@
 
 <script>
     export default {
+        components:{
+        },
         data: () => {
             return {}
         },
@@ -17,9 +22,14 @@
         computed: {
             htmlData() {
                 return this.source;
+            },
+            isIos() {
+                return WXEnvironment.platform === 'ios';
+            },
+            isNotIos() {
+                return WXEnvironment.platform !== 'ios';
             }
         },
-        components: {},
         methods: {},
         created() {
         },
