@@ -1,5 +1,6 @@
 <template>
     <div style="flex: 1;background-color: white">
+        <router-view></router-view>
         <navigation-bar :title="title"
                         :rightIcon="' '"></navigation-bar>
         <top-tab-bar :tab-titles="tabTitles"
