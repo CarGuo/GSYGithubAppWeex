@@ -58,9 +58,15 @@
         methods: {
             init() {
                 this.readme = ''
-                this.title = this.$route.params.title
-                this.userName = this.$route.params.userName
-                this.reposName = this.$route.params.reposName
+                if(this.$route.params.title) {
+                    this.title = this.$route.params.title
+                }
+                if(this.$route.params.userName) {
+                    this.userName = this.$route.params.userName
+                }
+                if(this.$route.params.reposName) {
+                    this.reposName = this.$route.params.reposName
+                }
                 this.loadReadme();
             },
             wxcTabBarCurrentTabSelected (e) {

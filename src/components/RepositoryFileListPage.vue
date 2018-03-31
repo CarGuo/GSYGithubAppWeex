@@ -52,13 +52,9 @@
             this.init()
         },
         deactivated: function () {
-            console.log("55555555555555555555555555444")
         },
         methods: {
             init() {
-                if(this.$route.params.title) {
-                    this.title = this.$route.params.title
-                }
                 this.list = []
                 if(this.$route.params.title) {
                     this.userName = this.$route.params.userName
