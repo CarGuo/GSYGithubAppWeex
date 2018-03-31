@@ -40,3 +40,7 @@
 7、list的loadmore，必须给list设置高度样式，才能在web中正常触发
 
 8、text的</text>结束标签换行导致样式有问题
+
+9、生命周期在web中与android等不同，比如activated等
+
+10、()=> {}对于this可能获取存在的不同，尽量用function(){}

@@ -1,6 +1,6 @@
 <template>
     <div :style="{flex:1}">
-        <navigation-bar :title="title"
+        <navigation-bar :title="title" :onLeftButtonClick="function(){$router.back()}"
                         :rightIcon="' '"></navigation-bar>
         <web-component :source="codeData" :webStyle="{height:'1244px', width: '750px'}"></web-component>
     </div>

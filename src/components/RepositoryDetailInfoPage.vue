@@ -1,5 +1,5 @@
 <template>
-    <div :style="{flex:1}">
+    <div :style="{flex:1, width:'750px'}">
         <r-l-list ref="dylist" listItemName="EventItem" :listData="eventList"
                   headerComponent="RepositoryHeadItem" :headerData="reposInfo"
                   :headerClick="headerClick"

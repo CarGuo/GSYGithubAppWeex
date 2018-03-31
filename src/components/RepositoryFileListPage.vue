@@ -1,5 +1,5 @@
 <template>
-    <div :style="{flex:1}">
+    <div :style="{flex:1, width:'750px'}">
         <scroller class="tab-title-list"
                   ref="tab-title-list"
                   :show-scrollbar="false"
@@ -56,7 +56,7 @@
         methods: {
             init() {
                 this.list = []
-                if(this.$route.params.title) {
+                if(this.$route.params.userName) {
                     this.userName = this.$route.params.userName
                 }
                 if(this.$route.params.reposName) {

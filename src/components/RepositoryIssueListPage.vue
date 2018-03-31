@@ -1,6 +1,6 @@
 <template>
-    <div :style="{flex:1,alignItems: 'center'}">
-        <div class="demo">
+    <div :style="{flex:1, width:'750px',alignItems: 'center'}">
+        <div>
             <wxc-searchbar ref="wxc-searchbar"
                            @wxcSearchbarCancelClicked="wxcSearchbarCancelClicked"
                            @wxcSearchbarInputReturned="wxcSearchbarInputReturned"
@@ -11,20 +11,15 @@
         </div>
 
         <div class="control-container">
-            <text class="control-text" @click="()=>{onControlClick(1)}"
-                  :style="{color:(selectIndex ===1) ? '#FFFFFF' : '#AAAAAA'}">{{' 全部 '}}
-            </text>
-
-            <text class="control-text" @click="()=>{onControlClick(2)}"
-                  :style="{color:(selectIndex ===2) ? '#FFFFFF' : '#AAAAAA'}">{{' 打开 '}}
-            </text>
-            <text class="control-text" @click="()=>{onControlClick(3)}"
-                  :style="{color:(selectIndex ===3) ? '#FFFFFF' : '#AAAAAA'}">{{' 关闭 '}}
-            </text>
+            <text class="control-text" @click="()=>{onControlClick(1)}" :style="{color:(selectIndex ===1) ? '#FFFFFF' : '#AAAAAA'}">{{' 全部 '}}</text>
+            <text class="control-text" @click="()=>{onControlClick(2)}" :style="{color:(selectIndex ===2) ? '#FFFFFF' : '#AAAAAA'}">{{' 打开 '}}</text>
+            <text class="control-text" @click="()=>{onControlClick(3)}" :style="{color:(selectIndex ===3) ? '#FFFFFF' : '#AAAAAA'}">{{' 关闭 '}}</text>
         </div>
 
-        <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="'350px'"
-                  :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
+        <div style="flex:1;width:750px;">
+            <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="'350px'"
+                      :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
+        </div>
     </div>
 </template>
 
@@ -35,23 +30,22 @@
     import RLList from './widget/RLList'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
-    import {WxcSearchbar}  from 'weex-ui';
+    import {WxcSearchbar} from 'weex-ui';
 
     export default {
-        props: {
-        },
+        props: {},
         components: {RLList, WxcSearchbar},
         data() {
             return {
                 userName: "",
                 reposName: "",
-                filter : null,
+                filter: null,
                 currentPage: 1,
                 listType: 1,
                 list: [],
                 dataState: 1,
                 selectIndex: 1,
-                searchValue:""
+                searchValue: ""
             }
         },
         created: function () {
@@ -64,10 +58,10 @@
         methods: {
             init() {
                 this.list = []
-                if(this.$route.params.userName) {
+                if (this.$route.params.userName) {
                     this.userName = this.$route.params.userName
                 }
-                if(this.$route.params.reposName) {
+                if (this.$route.params.reposName) {
                     this.reposName = this.$route.params.reposName
                 }
                 this.onRefresh()
@@ -76,8 +70,8 @@
                 if (this.isPreparing()) {
                     return
                 }
-                repository.getRepositoryIssueDao( this.currentPage, this.userName, this.reposName, this.filter)
-                    .then((res)=>{
+                repository.getRepositoryIssueDao(this.currentPage, this.userName, this.reposName, this.filter)
+                    .then((res) => {
                         this.resolveResult(res, type)
                     })
             },
@@ -86,13 +80,13 @@
                     return
                 }
                 repository.searchRepositoryIssueDao(this.searchValue, this.userName, this.reposName, this.currentPage, this.filter)
-                    .then((res)=>{
+                    .then((res) => {
                         this.resolveResult(res, type)
                     })
             },
             resolveResult(res, type) {
                 if (res && res.result) {
-                    if(type === 1) {
+                    if (type === 1) {
                         this.list = res.data;
                     } else {
                         this.list = this.list.concat(res.data);
@@ -141,34 +135,34 @@
             isPreparing() {
                 return (!this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1)
             },
-            wxcSearchbarInputOnFocus () {
+            wxcSearchbarInputOnFocus() {
             },
-            wxcSearchbarInputOnBlur () {
+            wxcSearchbarInputOnBlur() {
                 this.onRefresh();
             },
-            wxcSearchbarCloseClicked () {
+            wxcSearchbarCloseClicked() {
                 this.$refs['wxc-searchbar'].setValue('');
             },
-            wxcSearchbarInputOnInput (e) {
+            wxcSearchbarInputOnInput(e) {
                 this.searchValue = e.value;
             },
-            wxcSearchbarCancelClicked (e) {
+            wxcSearchbarCancelClicked(e) {
                 //this.$refs['wxc-searchbar'].setValue('');
             },
-            wxcSearchbarInputDisabledClicked (e) {
+            wxcSearchbarInputDisabledClicked(e) {
                 console.log("wxcSearchbarInputDisabledClicked", e)
             },
-            wxcSearchbarDepChooseClicked (e) {
+            wxcSearchbarDepChooseClicked(e) {
                 console.log("wxcSearchbarDepChooseClicked", e)
             },
-            wxcSearchbarInputReturned (e) {
+            wxcSearchbarInputReturned(e) {
                 console.log("wxcSearchbarDepChooseClicked", e)
             },
             onControlClick(index) {
                 this.selectIndex = index;
-                if(index === 1) {
+                if (index === 1) {
                     this.filter = null;
-                } else if(index === 2) {
+                } else if (index === 2) {
                     this.filter = "open"
                 } else {
                     this.filter = "closed"

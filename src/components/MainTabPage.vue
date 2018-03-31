@@ -1,5 +1,5 @@
 <template>
-    <div style="flex: 1">
+    <div style="height:1334px;width: 750px">
         <navigation-bar :title="'GSYGithubApp'" :onLeftButtonClick="()=>{}" :onRightButtonClick="minibarRightButtonClick"
                         :rightIcon="'\ue61c'" :leftIcon="''"></navigation-bar>
         <tab-bar :tab-titles="tabTitles"

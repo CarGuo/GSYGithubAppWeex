@@ -1,14 +1,14 @@
 <template>
-    <div style="flex: 1;background-color: white">
-        <router-view></router-view>
-        <navigation-bar :title="title"
+    <div style="height:1334px;width: 750px;background-color: white">
+        <!--<router-view></router-view>-->
+        <navigation-bar :title="title" :onLeftButtonClick="function(){$router.back()}"
                         :rightIcon="' '"></navigation-bar>
         <top-tab-bar :tab-titles="tabTitles"
                      :tab-styles="tabStyles"
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
             <div class="item-container"  :style="contentStyle">
-                <web-component :source="readme" :webStyle="{height:'1154px', width: '750px', paddingBottom:'80px' }"></web-component>
+                <web-component :source="readme" :webStyle="{height:'1154px', width: '750px', paddingBottom:'80px', backgroundColor:'#F00' }"></web-component>
             </div>
             <div class="item-container" :style="contentStyle">
                 <repository-detail-info-page ref="a"></repository-detail-info-page>
