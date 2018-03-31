@@ -1,15 +1,14 @@
 <template>
     <div>
-        <!--<keep-alive>
-          <router-view v-if="$route.meta.keepAlive">
-            &lt;!&ndash; 这里是会被缓存的视图组件，比如 page1,page2 &ndash;&gt;
+        <keep-alive>
+          <router-view v-if="$route.meta.keepAlive" @androidback="function() {$router.back()}">
+            <!-- 这里是会被缓存的视图组件，比如 page1,page2 -->
           </router-view>
-        </keep-alive>-->
+        </keep-alive>
 
-        <!--<router-view v-if="!$route.meta.keepAlive">
-          &lt;!&ndash; 这里是不被缓存的视图组件，比如 page3 &ndash;&gt;
-        </router-view>-->
-        <router-view @androidback="function() {$router.back()}"></router-view>
+        <router-view v-if="!$route.meta.keepAlive" @androidback="function() {$router.back()}">
+          <!-- 这里是不被缓存的视图组件，比如 page3 -->
+        </router-view>
     </div>
 </template>
 

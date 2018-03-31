@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper" style="background-color: #f2f3f4">
         <person-page :needTitle="true" :userType="userType"
                      :isMe="false" :userName="getUserName"></person-page>
     </div>
