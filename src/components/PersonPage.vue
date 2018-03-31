@@ -63,9 +63,9 @@
                     location: userInfo.location ? userInfo.location : "---",
                     link: userInfo.blog ? userInfo.blog : "---",
                     des: (userInfo.bio ? (userInfo.bio + "\n") : "") + "创建于" + time,
-                    repos: userInfo.public_repos + "",
-                    follower: userInfo.followers + "",
-                    followed: userInfo.following + "",
+                    repos: (userInfo.public_repos) ? userInfo.public_repos : '---',
+                    follower: (userInfo.followers) ? userInfo.followers : '---',
+                    followed: (userInfo.following) ? userInfo.following : '---',
                     star: (userInfo.starred) ? userInfo.starred : "---",
                     stared: "---",
                 };
