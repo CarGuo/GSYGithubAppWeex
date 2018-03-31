@@ -1,6 +1,6 @@
 <template>
     <div :style="{flex:1}">
-        <navigation-bar v-if="needTitle" :title="userName"
+        <navigation-bar v-if="needTitle" :title="userName" :onLeftButtonClick="function(){$router.back()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList"
                   headerComponent="UserHeadItem" :headerData="userInfo"

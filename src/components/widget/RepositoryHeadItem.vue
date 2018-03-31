@@ -33,13 +33,9 @@
         </div>
 
         <div class="control-container">
-            <text class="control-text" @click="()=>{onControlClick(1)}"
-                  :style="{color:(selectIndex ===1) ? '#FFFFFF' : '#AAAAAA'}">{{' 动态 '}}
-            </text>
+            <text class="control-text" @click="()=>{onControlClick(1)}" :style="{color:(selectIndex ===1) ? '#FFFFFF' : '#AAAAAA'}">{{' 动态 '}}</text>
 
-            <text class="control-text" @click="()=>{onControlClick(2)}"
-                  :style="{color:(selectIndex ===2) ? '#FFFFFF' : '#AAAAAA'}">{{' 提交 '}}
-            </text>
+            <text class="control-text" @click="()=>{onControlClick(2)}" :style="{color:(selectIndex ===2) ? '#FFFFFF' : '#AAAAAA'}">{{' 提交 '}}</text>
         </div>
 
     </div>
@@ -185,6 +181,8 @@
 
     .control-text {
         flex: 1;
+        align-items: center;
+        justify-content: center;
         text-align: center;
         color: rgba(255, 255, 255, 0.9);
         font-size: 26px;

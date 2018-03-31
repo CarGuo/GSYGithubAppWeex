@@ -48,18 +48,23 @@ module.exports = new Router({
             path: '/user/:userName/repository/:reposName',
             name: 'RepositoryDetailPage',
             component: RepositoryDetailPage,
-            children: [
+            /*children: [
                 {
                     path: 'code',
                     name: 'CodeDetailPage',
                     component: CodeDetailPage
                 },
-            ]
+            ]*/
         },
         {
             path: '/user/:userName',
             name: 'UserInfoPage',
             component: UserInfoPage
+        },
+        {
+            path: 'code',
+            name: 'CodeDetailPage',
+            component: CodeDetailPage
         },
 
 
