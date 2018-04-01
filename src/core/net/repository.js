@@ -211,8 +211,7 @@ const searchRepositoryIssueDao = async (q, name, reposName, page = 1, state) => 
 const getReposFileDirDao = async (userName, reposName, path = '', branch, type = 'json') => {
     let url = Address.reposDataDir(userName, reposName, path, branch);
     let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html'}, type);
-
-    if (res && res.result && (res.data && (typeof res.data ) === 'array')) {
+    if (res && res.result && (res.data && (typeof res.data ) === 'object')) {
         let dir = [];
         let file = [];
         res.data.forEach((item) => {
