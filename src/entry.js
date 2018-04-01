@@ -45,5 +45,4 @@ Vue.mixin(mixins)
 /* eslint-disable no-new */
 new Vue(Vue.util.extend({el: '#root', router, store}, App))
 new Vue(Vue.util.extend({el: '#root', router, store}, RepositoryDetailPage))
-new Vue(Vue.util.extend({el: '#root', router, store}, UserInfoPage))
 router.push('/')

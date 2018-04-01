@@ -41,11 +41,11 @@
                 this.eventList = []
                 this.reposInfo = {}
 
-                if(this.$route.params.userName) {
-                    this.userName = this.$route.params.userName
+                if(this.getQuery().userName) {
+                    this.userName = this.getQuery().userName
                 }
-                if(this.$route.params.reposName) {
-                    this.reposName = this.$route.params.reposName
+                if(this.getQuery().reposName) {
+                    this.reposName = this.getQuery().reposName
                 }
                 this.loadDetail();
                 this.onRefresh()
