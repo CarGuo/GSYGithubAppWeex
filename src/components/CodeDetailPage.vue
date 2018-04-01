@@ -33,11 +33,11 @@
         },
         methods: {
             loadData() {
-                this.userName = this.$route.params.userName
-                this.reposName = this.$route.params.reposName
-                this.path = this.$route.params.path
-                this.curBranch = this.$route.params.curBranch
-                this.title = this.$route.params.title
+                this.userName = this.getQuery().userName
+                this.reposName = this.getQuery().reposName
+                this.path = this.getQuery().path
+                this.curBranch = this.getQuery().curBranch
+                this.title = this.getQuery().title
                 if(this.isPreparing()) {
                     return
                 }

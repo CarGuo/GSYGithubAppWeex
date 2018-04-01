@@ -16,7 +16,7 @@
         components: {PersonPage},
         computed: {
             getUserName() {
-                return 'CarGuo'
+                return this.getQuery().userName
             }
         },
 

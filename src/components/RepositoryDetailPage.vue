@@ -59,14 +59,14 @@
         methods: {
             init() {
                 this.readme = ''
-                if(this.$route.params.title) {
-                    this.title = this.$route.params.title
+                if(this.getQuery().title) {
+                    this.title = this.getQuery().title
                 }
-                if(this.$route.params.userName) {
-                    this.userName = this.$route.params.userName
+                if(this.getQuery().userName) {
+                    this.userName = this.getQuery().userName
                 }
-                if(this.$route.params.reposName) {
-                    this.reposName = this.$route.params.reposName
+                if(this.getQuery().reposName) {
+                    this.reposName = this.getQuery().reposName
                 }
                 this.loadReadme();
             },

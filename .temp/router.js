@@ -7,6 +7,7 @@ import MainTabPage from '@/components/MainTabPage.vue'
 import RepositoryDetailPage from '@/components/RepositoryDetailPage.vue'
 import CodeDetailPage from '@/components/CodeDetailPage.vue'
 import UserInfoPage from '@/components/UserInfoPage.vue'
+
 import EventItem from '@/components/widget/EventItem.vue'
 import RepositoryItem from '@/components/widget/RepositoryItem.vue'
 import UserHeadItem from '@/components/widget/UserHeadItem.vue'

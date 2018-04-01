@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 481);
+/******/ 	return __webpack_require__(__webpack_require__.s = 487);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -52635,31 +52635,29 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 481 */
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _index = __webpack_require__(482);
-
-var _index2 = _interopRequireDefault(_index);
-
 var _store = __webpack_require__(164);
 
 var _store2 = _interopRequireDefault(_store);
 
-var _index3 = __webpack_require__(178);
+var _index = __webpack_require__(178);
 
-var _index4 = _interopRequireDefault(_index3);
+var _index2 = _interopRequireDefault(_index);
 
 var _filter = __webpack_require__(179);
 
 var filters = _interopRequireWildcard(_filter);
-
-var _RepositoryDetailPage = __webpack_require__(161);
-
-var _RepositoryDetailPage2 = _interopRequireDefault(_RepositoryDetailPage);
 
 var _UserInfoPage = __webpack_require__(162);
 
@@ -52668,10 +52666,6 @@ var _UserInfoPage2 = _interopRequireDefault(_UserInfoPage);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* global Vue */
-
-/* weex initialized here, please do not move this line */
 
 var router = __webpack_require__(449);
 
@@ -52682,143 +52676,11 @@ Object.keys(filters).forEach(function (key) {
 });
 
 // register global mixins.
-Vue.mixin(_index4.default);
-
-/*router.beforeEach((to, from, next) => {
-    if (to.name == 'Login') {
-        next();
-        return;
-    }
-    var name = store.state.user.name;
-    if (name == '未登录') {
-        if (to.meta.requireAuth || to.name == null) {
-            next({path: '/', query: {redirect: to.path}})
-        } else {
-            next();
-        }
-    } else {
-        initMenu(router, store);
-        if(to.path=='/chat')
-            store.commit("updateMsgList", []);
-        next();
-    }
-    next();
-});*/
+Vue.mixin(_index2.default);
 
 /* eslint-disable no-new */
-new Vue(Vue.util.extend({ el: '#root', router: router, store: _store2.default }, _index2.default));
-new Vue(Vue.util.extend({ el: '#root', router: router, store: _store2.default }, _RepositoryDetailPage2.default));
+new Vue(Vue.util.extend({ el: '#root', router: router, store: _store2.default }, _UserInfoPage2.default));
 router.push('/');
-
-/***/ }),
-/* 482 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var __vue_exports__, __vue_options__
-var __vue_styles__ = []
-
-/* styles */
-__vue_styles__.push(__webpack_require__(483)
-)
-
-/* script */
-__vue_exports__ = __webpack_require__(484)
-
-/* template */
-var __vue_template__ = __webpack_require__(485)
-__vue_options__ = __vue_exports__ = __vue_exports__ || {}
-if (
-  typeof __vue_exports__.default === "object" ||
-  typeof __vue_exports__.default === "function"
-) {
-if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
-__vue_options__ = __vue_exports__ = __vue_exports__.default
-}
-if (typeof __vue_options__ === "function") {
-  __vue_options__ = __vue_options__.options
-}
-__vue_options__.__file = "/Users/guoshuyu/workspace/weex/GSYGithubApp-Weex/src/index.vue"
-__vue_options__.render = __vue_template__.render
-__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
-__vue_options__._scopeId = "data-v-98cd33e6"
-__vue_options__.style = __vue_options__.style || {}
-__vue_styles__.forEach(function (module) {
-  for (var name in module) {
-    __vue_options__.style[name] = module[name]
-  }
-})
-if (typeof __register_static_styles__ === "function") {
-  __register_static_styles__(__vue_options__._scopeId, __vue_styles__)
-}
-
-module.exports = __vue_exports__
-
-
-/***/ }),
-/* 483 */
-/***/ (function(module, exports) {
-
-module.exports = {
-  "wrapper": {
-    "justifyContent": "center",
-    "alignItems": "center"
-  }
-}
-
-/***/ }),
-/* 484 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-    name: 'App',
-    data: function data() {
-        return {
-            logo: 'https://gw.alicdn.com/tfs/TB1yopEdgoQMeJjy1XaXXcSsFXa-640-302.png'
-        };
-    }
-};
-
-/***/ }),
-/* 485 */
-/***/ (function(module, exports) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('keep-alive', [(_vm.$route.meta.keepAlive) ? _c('router-view', {
-    on: {
-      "androidback": function() {
-        _vm.$router.back()
-      }
-    }
-  }) : _vm._e()], 1), (!_vm.$route.meta.keepAlive) ? _c('router-view', {
-    on: {
-      "androidback": function() {
-        _vm.$router.back()
-      }
-    }
-  }) : _vm._e()], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
 
 /***/ })
 /******/ ]);
