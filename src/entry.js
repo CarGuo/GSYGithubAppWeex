@@ -6,6 +6,8 @@ import App from '@/index.vue'
 import store from './store'
 import mixins from '@/mixins/index'
 import * as filters from '@/filter/filter'
+import RepositoryDetailPage from '@/components/RepositoryDetailPage.vue'
+import UserInfoPage from '@/components/UserInfoPage.vue'
 
 const router = require('./router')
 
@@ -42,4 +44,6 @@ Vue.mixin(mixins)
 
 /* eslint-disable no-new */
 new Vue(Vue.util.extend({el: '#root', router, store}, App))
+new Vue(Vue.util.extend({el: '#root', router, store}, RepositoryDetailPage))
+new Vue(Vue.util.extend({el: '#root', router, store}, UserInfoPage))
 router.push('/')

@@ -8,7 +8,7 @@
 
 </style>
 <script>
-    import PersonPage from './PersonPage'
+    import PersonPage from './PersonPage.vue'
     export default {
         props: {
             userType: {type: Number, default: 1},
@@ -16,7 +16,7 @@
         components: {PersonPage},
         computed: {
             getUserName() {
-                return this.$route.params.userName
+                return 'CarGuo'
             }
         },
 

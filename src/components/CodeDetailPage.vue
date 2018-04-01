@@ -10,9 +10,9 @@
     const modal = weex.requireModule('modal')
 
     import * as Constant from '../core/common/constant'
-    import WebComponent from './widget/WebComponent'
+    import WebComponent from './widget/WebComponent.vue'
     import repository from '../core/net/repository'
-    import NavigationBar from './widget/NavigationBar'
+    import NavigationBar from './widget/NavigationBar.vue'
     import {formName, generateHtml, generateCode2HTml} from '../core/common/htmlUtils'
 
     export default {

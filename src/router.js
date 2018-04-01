@@ -1,17 +1,17 @@
 /* global Vue */
 import Router from 'vue-router'
-import LoginPage from '@/components/LoginPage'
-import WelcomePage from '@/components/WelcomePage'
-import MainTabPage from '@/components/MainTabPage'
-import RepositoryDetailPage from '@/components/RepositoryDetailPage'
-import CodeDetailPage from '@/components/CodeDetailPage'
-import UserInfoPage from '@/components/UserInfoPage'
-import EventItem from '@/components/widget/EventItem'
-import RepositoryItem from '@/components/widget/RepositoryItem'
-import UserHeadItem from '@/components/widget/UserHeadItem'
-import IssueItem from '@/components/widget/IssueItem'
-import FileItem from '@/components/widget/FileItem'
-import RepositoryHeadItem from '@/components/widget/RepositoryHeadItem'
+import LoginPage from '@/components/LoginPage.vue'
+import WelcomePage from '@/components/WelcomePage.vue'
+import MainTabPage from '@/components/MainTabPage.vue'
+import RepositoryDetailPage from '@/components/RepositoryDetailPage.vue'
+import CodeDetailPage from '@/components/CodeDetailPage.vue'
+import UserInfoPage from '@/components/UserInfoPage.vue'
+import EventItem from '@/components/widget/EventItem.vue'
+import RepositoryItem from '@/components/widget/RepositoryItem.vue'
+import UserHeadItem from '@/components/widget/UserHeadItem.vue'
+import IssueItem from '@/components/widget/IssueItem.vue'
+import FileItem from '@/components/widget/FileItem.vue'
+import RepositoryHeadItem from '@/components/widget/RepositoryHeadItem.vue'
 
 Vue.use(Router)
 
@@ -21,7 +21,6 @@ Vue.component('UserHeadItem', UserHeadItem)
 Vue.component('RepositoryHeadItem', RepositoryHeadItem)
 Vue.component('IssueItem', IssueItem)
 Vue.component('FileItem', FileItem)
-
 
 
 module.exports = new Router({

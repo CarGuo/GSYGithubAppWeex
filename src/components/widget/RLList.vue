@@ -33,6 +33,19 @@
 
 <script>
     import * as Constant from '../../core/common/constant'
+    import EventItem from './EventItem.vue'
+    import RepositoryItem from './RepositoryItem.vue'
+    import RepositoryHeadItem from './RepositoryHeadItem.vue'
+    import IssueItem from './IssueItem.vue'
+    import UserHeadItem from './UserHeadItem.vue'
+    import FileItem from './FileItem.vue'
+
+    Vue.component('EventItem', EventItem)
+    Vue.component('RepositoryItem', RepositoryItem)
+    Vue.component('UserHeadItem', UserHeadItem)
+    Vue.component('RepositoryHeadItem', RepositoryHeadItem)
+    Vue.component('IssueItem', IssueItem)
+    Vue.component('FileItem', FileItem)
 
     export default {
         props: {

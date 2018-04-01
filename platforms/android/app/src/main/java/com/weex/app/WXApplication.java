@@ -1,6 +1,8 @@
 package com.weex.app;
 
 import android.app.Application;
+import android.os.Build;
+import android.os.StrictMode;
 
 import com.weex.app.extend.ImageAdapter;
 import com.weex.app.extend.WXEventModule;
@@ -29,5 +31,11 @@ public class WXApplication extends Application {
     }
     AppConfig.init(this);
     WeexPluginContainer.loadAll(this);
+
+    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+    StrictMode.setVmPolicy(builder.build());
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+      builder.detectFileUriExposure();
+    }
   }
 }
