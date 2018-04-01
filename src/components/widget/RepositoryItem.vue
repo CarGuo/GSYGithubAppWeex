@@ -4,22 +4,21 @@
             <image v-if="itemValue.ex.userPic" :src="itemValue.ex.userPic" class="user-icon" @click="imageClick"></image>
             <div style="flex: 1;">
                 <text class="repo-text">{{itemValue.ex.repoName}}</text>
-                <text class="user-text" :style="{flex: 1,fontFamily: 'wxcIconFont', fontSize: '10px', }">
-                    {{'\ue63e ' + itemValue.ex.userName}}</text>
+                <text class="user-text" :style="{flex: 1,fontFamily: 'wxcIconFont', fontSize: '12px', }">{{'\ue63e ' + itemValue.ex.userName}}</text>
             </div>
             <text class="type-text">{{itemValue.ex.type}}</text>
         </div>
-        <div class="content-text" style="flex: 1; margin-bottom: 20px;" v-html="itemValue.ex.content"></div>
+        <div class="content-text" style="flex: 1; margin-bottom: 23px;">{{itemValue.ex.content}}</div>
         <div style="flex-direction: row;width: 690px;overflow: hidden">
-            <text class="icon-text">{{icon1 + itemValue.ex.icon1t}}</text>
-            <text class="icon-text">{{icon2 + itemValue.ex.icon2t}}</text>
-            <text class="icon-text">{{icon3 + itemValue.ex.icon3t}}</text>
+            <text class="icon-text" :style="{fontFamily: 'wxcIconFont'}">{{icon1 + itemValue.ex.icon1t}}</text>
+            <text class="icon-text" :style="{fontFamily: 'wxcIconFont'}">{{icon2 + itemValue.ex.icon2t}}</text>
+            <text class="icon-text" :style="{fontFamily: 'wxcIconFont'}">{{icon3 + itemValue.ex.icon3t}}</text>
         </div>
     </div>
 </template>
 
 <script>
-    const dom = weex.requireModule('dom');
+    import {addIconFontSupport} from '../../config/IconConfig'
     export default {
         name: "repository-item",
         props: {
@@ -59,10 +58,8 @@
             }
         },
         created() {
-            dom.addRule('fontFace', {
-                'fontFamily': "wxcIconFont",
-                'src': `url('../../static/font/iconfont.ttf')`
-            });
+            const dom = weex.requireModule('dom');
+            addIconFontSupport(dom, "../../")
         },
     }
 </script>
@@ -116,7 +113,7 @@
     }
 
     .content-text {
-        color: rgba(13, 13, 13, 0.6);
+        color: rgba(13, 13, 13, 0.5);
         font-size: 28px;
         font-weight: bold;
         display: -webkit-box;
@@ -130,7 +127,8 @@
 
     .repo-text {
         color: rgba(13, 13, 13, 0.6);
-        font-size: 30px;
+        margin-bottom: 5px;
+        font-size: 32px;
         font-weight: bold;
     }
 

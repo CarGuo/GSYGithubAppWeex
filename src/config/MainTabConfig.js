@@ -1,3 +1,5 @@
+import {getIonFontPath} from './IconConfig'
+
 
 export default {
 
@@ -32,6 +34,6 @@ export default {
         iconFontMarginBottom: 8,
         iconFontColor: '#AAAAAA',
         activeIconFontColor: 'black',
-        iconFontUrl: '../../../static/font/iconfont.ttf'
+        iconFontUrl: getIonFontPath("../")
     }
 }

@@ -1,12 +1,13 @@
 <template>
     <div class="card-wrapper" :style="itemValue.type !== 'file' ? {} : fileStyle"  @click="onCardClick">
-        <text class="icon-text" :style="itemValue.type !== 'file' ? {color: '#3c3f41'} : {}">{{itemValue.type !== 'file' ? '\ue793' : '\uea77'}}</text>
-        <text class="content-text">{{itemValue.name}}</text>
-        <text v-if="itemValue.type !== 'file'" class="arrow-text">{{'\ue610'}}</text>
+        <text class="icon-text" :style="{color: '#3c3f41', fontFamily: 'wxcIconFont'}">{{itemValue.type !== 'file' ? '\ue793' : '\uea77'}}</text>
+        <text class="content-text" >{{itemValue.name}}</text>
+        <text v-if="itemValue.type !== 'file'" class="arrow-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue610'}}</text>
     </div>
 </template>
 <script>
     const dom = weex.requireModule('dom');
+    import {addIconFontSupport} from '../../config/IconConfig'
     export default {
         props: {
             itemValue: {
@@ -34,10 +35,7 @@
             },
         },
         created() {
-            dom.addRule('fontFace', {
-                'fontFamily': "wxcIconFont",
-                'src': `url('../../static/font/iconfont.ttf')`
-            });
+            addIconFontSupport(dom, "../../")
         },
     }
 </script>

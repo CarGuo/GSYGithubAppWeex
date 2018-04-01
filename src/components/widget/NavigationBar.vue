@@ -13,7 +13,7 @@
 <script>
 
     import {WxcMinibar} from 'weex-ui';
-    const Navigator = weex.requireModule('navigator');
+    import {addIconFontSupport} from '../../config/IconConfig'
     const dom = weex.requireModule('dom');
     export default {
         components: {WxcMinibar},
@@ -31,11 +31,7 @@
             leftIcon: {type: String, default: "\ue78a"},
         },
         created() {
-
-            dom.addRule('fontFace', {
-                'fontFamily': "wxcIconFont",
-                'src': `url('../../static/font/iconfont.ttf')`
-            });
+            addIconFontSupport(dom, "../../")
         },
     }
 </script>

@@ -18,16 +18,16 @@
 
             <div class="bottom-container">
                 <div class="bottom-item bottom-item-line">
-                    <text class="bottom-item-text">{{"\ue643 " + (itemValue.watchers_count? itemValue.watchers_count : '---')}}</text>
+                    <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue643 " + (itemValue.watchers_count? itemValue.watchers_count : '---')}}</text>
                 </div>
                 <div class="bottom-item bottom-item-line">
-                    <text class="bottom-item-text">{{"\ue67e " + (itemValue.forks_count? itemValue.forks_count : '---')}}</text>
+                    <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue67e " + (itemValue.forks_count? itemValue.forks_count : '---')}}</text>
                 </div>
                 <div class="bottom-item bottom-item-line">
-                    <text class="bottom-item-text">{{"\ue681 " + (itemValue.subscribers_count? itemValue.subscribers_count : '---')}}</text>
+                    <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue681 " + (itemValue.subscribers_count? itemValue.subscribers_count : '---')}}</text>
                 </div>
                 <div class="bottom-item">
-                    <text class="bottom-item-text">{{"\ue661 " + (itemValue.open_issues_count? itemValue.open_issues_count : '---')}}</text>
+                    <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue661 " + (itemValue.open_issues_count? itemValue.open_issues_count : '---')}}</text>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-    const dom = weex.requireModule('dom');
+    import {addIconFontSupport} from '../../config/IconConfig'
     export default {
         props: {
             itemValue: {
@@ -67,7 +67,7 @@
             onControlClick(index) {
                 this.selectIndex = index;
                 this.onItemClick && this.onItemClick(0, index)
-            }
+            },
         },
         data() {
             return {
@@ -75,10 +75,8 @@
             }
         },
         created() {
-            dom.addRule('fontFace', {
-                'fontFamily': "wxcIconFont",
-                'src': `url('../../static/font/iconfont.ttf')`
-            });
+            const dom = weex.requireModule('dom');
+            addIconFontSupport(dom, "../../")
         },
     }
 </script>
