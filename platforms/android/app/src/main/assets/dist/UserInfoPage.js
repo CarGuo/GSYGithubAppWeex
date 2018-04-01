@@ -5119,7 +5119,6 @@ function getIonFontPath(abs) {
     if (WXEnvironment.platform === 'web') {
         return abs + webIconFontPath;
     } else if (WXEnvironment.platform === 'android') {
-        console.log("tttttttttttttttttttttt", androidIconFontPath);
         return androidIconFontPath;
     } else {
         return iosIconFontPath;
@@ -5147,6 +5146,8 @@ Object.defineProperty(exports, "__esModule", {
 var _regenerator = __webpack_require__(9);
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _api = __webpack_require__(10);
 
@@ -5585,8 +5586,7 @@ var getReposFileDirDao = function () {
                     case 3:
                         res = _context8.sent;
 
-
-                        if (res && res.result && res.data && typeof res.data === 'array') {
+                        if (res && res.result && res.data && _typeof(res.data) === 'object') {
                             dir = [];
                             file = [];
 
@@ -29394,7 +29394,7 @@ exports.default = {
                     url: 'file://assets/dist/' + to + '.js',
                     animated: "true"
                 }, function (event) {
-                    modal.toast({ message: 'callback: ' + event });
+                    //modal.toast({ message: 'callback: ' + event })
                 });
             }
         },
@@ -29409,7 +29409,7 @@ exports.default = {
                     url: 'file://assets/dist/' + to + '.js' + q,
                     animated: "true"
                 }, function (event) {
-                    modal.toast({ message: 'callback: ' + event });
+                    //modal.toast({ message: 'callback: ' + event })
                 });
             }
         },

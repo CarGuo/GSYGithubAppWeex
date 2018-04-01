@@ -22,7 +22,7 @@ export default {
                     url: 'file://assets/dist/' + to + '.js',
                     animated: "true"
                 }, event => {
-                    modal.toast({ message: 'callback: ' + event })
+                    //modal.toast({ message: 'callback: ' + event })
                 })
             }
         },
@@ -37,7 +37,7 @@ export default {
                     url: 'file://assets/dist/' + to + '.js' + q,
                     animated: "true"
                 }, event => {
-                    modal.toast({ message: 'callback: ' + event })
+                    //modal.toast({ message: 'callback: ' + event })
                 })
             }
         },

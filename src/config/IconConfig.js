@@ -6,7 +6,6 @@ export function getIonFontPath(abs) {
     if (WXEnvironment.platform === 'web') {
         return abs + webIconFontPath
     } else if (WXEnvironment.platform === 'android') {
-        console.log("tttttttttttttttttttttt", androidIconFontPath)
         return androidIconFontPath
     } else {
         return iosIconFontPath
