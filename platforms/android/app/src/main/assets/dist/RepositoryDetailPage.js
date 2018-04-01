@@ -29377,6 +29377,13 @@ exports.default = {
         getNavigator: function getNavigator() {
             return weex.requireModule('navigator');
         },
+        toBack: function toBack() {
+            if (WXEnvironment.platform === 'web') {
+                this.$router.back();
+            } else {
+                this.getNavigator().pop({ animated: "true" });
+            }
+        },
         jump: function jump(to) {
             if (WXEnvironment.platform === 'web') {
                 if (this.$router) {
@@ -47988,7 +47995,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "title": _vm.title,
       "onLeftButtonClick": function() {
-        _vm.$router.back()
+        _vm.toBack()
       },
       "rightIcon": ' '
     }
@@ -48279,7 +48286,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "title": _vm.userName,
       "onLeftButtonClick": function() {
-        _vm.$router.back()
+        _vm.toBack()
       },
       "rightIcon": ' '
     }
@@ -52678,7 +52685,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "title": _vm.title,
       "onLeftButtonClick": function() {
-        _vm.$router.back()
+        _vm.toBack()
       },
       "rightIcon": ' '
     }

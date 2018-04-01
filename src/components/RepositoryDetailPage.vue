@@ -1,7 +1,7 @@
 <template>
     <div style="height:1334px;width: 750px;background-color: white">
         <!--<router-view></router-view>-->
-        <navigation-bar :title="title" :onLeftButtonClick="function(){$router.back()}"
+        <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <top-tab-bar :tab-titles="tabTitles"
                      :tab-styles="tabStyles"

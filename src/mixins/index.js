@@ -5,6 +5,13 @@ export default {
         getNavigator() {
             return weex.requireModule('navigator')
         },
+        toBack() {
+            if(WXEnvironment.platform === 'web') {
+                this.$router.back()
+            }  else {
+                this.getNavigator().pop({animated: "true"})
+            }
+        },
         jump(to) {
             if(WXEnvironment.platform === 'web') {
                 if (this.$router) {
