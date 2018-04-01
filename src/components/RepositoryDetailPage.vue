@@ -26,12 +26,12 @@
 <script>
     import {Utils, WxcMinibar }  from 'weex-ui';
     import Config from './config/RepositoryTabConfig'
-    import NavigationBar from './widget/NavigationBar'
-    import TopTabBar from './widget/TopTabBar'
-    import WebComponent from './widget/WebComponent'
-    import RepositoryDetailInfoPage from './RepositoryDetailInfoPage'
-    import RepositoryIssueListPage from './RepositoryIssueListPage'
-    import RepositoryFileListPage from './RepositoryFileListPage'
+    import NavigationBar from './widget/NavigationBar.vue'
+    import TopTabBar from './widget/TopTabBar.vue'
+    import WebComponent from './widget/WebComponent.vue'
+    import RepositoryDetailInfoPage from './RepositoryDetailInfoPage.vue'
+    import RepositoryIssueListPage from './RepositoryIssueListPage.vue'
+    import RepositoryFileListPage from './RepositoryFileListPage.vue'
     import repository from '../core/net/repository'
     import * as Constant from '../core/common/constant'
 

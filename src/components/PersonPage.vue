@@ -12,11 +12,11 @@
     const modal = weex.requireModule('modal')
 
     import * as Constant from '../core/common/constant'
-    import RLList from './widget/RLList'
+    import RLList from './widget/RLList.vue'
     import resolveLongToTime from '../core/common/timeUtils'
     import event from '../core/net/event'
     import user from '../core/net/user'
-    import NavigationBar from './widget/NavigationBar'
+    import NavigationBar from './widget/NavigationBar.vue'
 
     export default {
         props: {

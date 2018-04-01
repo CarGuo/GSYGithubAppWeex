@@ -27,7 +27,7 @@
     const modal = weex.requireModule('modal')
 
     import * as Constant from '../core/common/constant'
-    import RLList from './widget/RLList'
+    import RLList from './widget/RLList.vue'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {WxcSearchbar} from 'weex-ui';

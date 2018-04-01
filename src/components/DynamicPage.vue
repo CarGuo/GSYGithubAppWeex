@@ -8,7 +8,7 @@
 
     import * as Constant from '../core/common/constant'
     import {ActionUtils} from '../core/common/eventUtils'
-    import RLList from './widget/RLList'
+    import RLList from './widget/RLList.vue'
 
 
     export default {

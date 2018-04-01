@@ -29,11 +29,11 @@
 <script>
     import {Utils, WxcMinibar} from 'weex-ui';
     import Config from './config/MainTabConfig'
-    import TabBar from './widget/TabBar'
-    import NavigationBar from './widget/NavigationBar'
-    import DynamicPage from './DynamicPage'
-    import TrendPage from './TrendPage'
-    import PersonPage from './PersonPage'
+    import TabBar from './widget/TabBar.vue'
+    import NavigationBar from './widget/NavigationBar.vue'
+    import DynamicPage from './DynamicPage.vue'
+    import TrendPage from './TrendPage.vue'
+    import PersonPage from './PersonPage.vue'
 
     const dom = weex.requireModule('dom');
     const modal = weex.requireModule('modal');

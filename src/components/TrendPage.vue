@@ -40,7 +40,7 @@
     import {WxcButton, WxcPopover} from 'weex-ui'
     import * as Constant from '../core/common/constant'
     import {TrendTime, TrendType} from '../core/common/filterUtils'
-    import RLList from './widget/RLList'
+    import RLList from './widget/RLList.vue'
 
 
     export default {

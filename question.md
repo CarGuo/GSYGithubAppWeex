@@ -44,3 +44,37 @@
 9、生命周期在web中与android等不同，比如activated等
 
 10、()=> {}对于this可能获取存在的不同，尽量用function(){}
+
+11、多页面打开失败之
+```
+android.os.FileUriExposedException
+在你的Application中添加：
+if (Build.VERSION.SDK_INT>=18) {
+StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+StrictMode.setVmPolicy(builder.build());
+builder.detectFileUriExposure();
+}
+```
+```
+ActivityNotFoundException
+ <activity
+                android:name=".xxxxxx"
+                android:label="@string/app_name"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.taobao.android.intent.action.WEEX"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.taobao.android.intent.category.WEEX"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:scheme="file"/>
+                <data android:scheme="wxpage" />
+            </intent-filter>
+        </activity>
+```
+
+12、多页面生成js是，需要指定.vue后缀的import
