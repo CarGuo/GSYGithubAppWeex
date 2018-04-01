@@ -19,7 +19,6 @@ export default {
                 })
             }
         },
-
         jumpWithParams(to, params) {
             if(WXEnvironment.platform === 'web') {
                 if (this.$router) {
@@ -75,8 +74,7 @@ export default {
             } else {
                 return this.getQueryData(weex.config.bundleUrl);
             }
-        }
-        ,
+        },
         getUserInfo() {
             return this.$store.state.user.userInfo
         },

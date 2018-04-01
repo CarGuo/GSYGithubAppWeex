@@ -3,22 +3,22 @@
         <div class="card-user-wrapper" style="flex-direction: row">
             <image v-if="itemValue.ex.userPic" :src="itemValue.ex.userPic" class="user-icon" @click="imageClick"></image>
             <div style="flex: 1;">
-                <text class="user-text" >
-                    {{itemValue.ex.userName}}</text>
+                <text class="user-text" >{{itemValue.ex.userName}}</text>
                 <text class="content-text">{{itemValue.ex.content}}</text>
             </div>
             <text class="time-text">{{itemValue.ex.time | resolveTime}}</text>
         </div>
         <div style="flex-direction: row;width: 650px;overflow: hidden;align-items: center;">
-            <text class="state-text" :style="itemValue.ex.state === 'open' ? { 'color':'green'}  :  {'color':'red'}">{{'\ue661 '}}</text>
+            <text class="state-text" :style="itemValue.ex.state === 'open' ? {fontFamily: 'wxcIconFont',  'color':'green'}  :  {fontFamily: 'wxcIconFont', 'color':'red'}">{{'\ue661 '}}</text>
             <text class="number-text">{{'  #' + itemValue.ex.number}}</text>
-            <text class="comment-text">{{'\ue6ba '  + itemValue.ex.count}}</text>
+            <text class="comment-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue6ba '  + itemValue.ex.count}}</text>
         </div>
     </div>
 </template>
 
 <script>
     const dom = weex.requireModule('dom');
+    import {addIconFontSupport} from '../../config/IconConfig'
     export default {
         props: {
             itemValue: {
@@ -42,10 +42,7 @@
             }
         },
         created() {
-            dom.addRule('fontFace', {
-                'fontFamily': "wxcIconFont",
-                'src': `url('../../static/font/iconfont.ttf')`
-            });
+            addIconFontSupport(dom, "../../")
         },
     }
 </script>

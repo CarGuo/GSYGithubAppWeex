@@ -25,7 +25,7 @@
 
 <script>
     import {Utils, WxcMinibar }  from 'weex-ui';
-    import Config from './config/RepositoryTabConfig'
+    import Config from '../config/RepositoryTabConfig'
     import NavigationBar from './widget/NavigationBar.vue'
     import TopTabBar from './widget/TopTabBar.vue'
     import WebComponent from './widget/WebComponent.vue'

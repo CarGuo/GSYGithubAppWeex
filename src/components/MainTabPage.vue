@@ -28,12 +28,13 @@
 </style>
 <script>
     import {Utils, WxcMinibar} from 'weex-ui';
-    import Config from './config/MainTabConfig'
+    import Config from '../config/MainTabConfig'
     import TabBar from './widget/TabBar.vue'
     import NavigationBar from './widget/NavigationBar.vue'
     import DynamicPage from './DynamicPage.vue'
     import TrendPage from './TrendPage.vue'
     import PersonPage from './PersonPage.vue'
+    import {getIonFontPath} from '../config/IconConfig'
 
     const dom = weex.requireModule('dom');
     const modal = weex.requireModule('modal');
@@ -48,11 +49,6 @@
             const tabPageHeight = Utils.env.getPageHeight();
             const {tabStyles} = this;
             this.contentStyle = {height: (tabPageHeight - tabStyles.height) + 'px'};
-
-            dom.addRule('fontFace', {
-                'fontFamily': "wxcIconFont",
-                'src': `url('../../static/font/iconfont.ttf')`
-            });
         },
         methods: {
             wxcTabBarCurrentTabSelected(e) {

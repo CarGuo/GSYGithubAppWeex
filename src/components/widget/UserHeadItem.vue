@@ -5,11 +5,11 @@
             <div style="flex: 1;">
                 <text class="user-text">{{itemValue.ex.user}}</text>
                 <text class="name-text">{{itemValue.ex.name}}</text>
-                <text class="org-text">{{'\ue63e ' + (itemValue.ex.org ? itemValue.ex.org : ' ')}}</text>
-                <text class="location-text">{{'\ue7e6 ' + (itemValue.ex.location ? itemValue.ex.location : ' ')}}</text>
+                <text class="org-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue63e ' + (itemValue.ex.org ? itemValue.ex.org : ' ')}}</text>
+                <text class="location-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue7e6 ' + (itemValue.ex.location ? itemValue.ex.location : ' ')}}</text>
             </div>
         </div>
-        <text class="link-text">{{'\ue670 ' + (itemValue.ex.link ? itemValue.ex.link : ' ')}}</text>
+        <text class="link-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue670 ' + (itemValue.ex.link ? itemValue.ex.link : ' ')}}</text>
         <text class="des-text">{{itemValue.ex.des}}</text>
         <div class="bottom-container">
             <div class="bottom-item bottom-item-line">
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+    import {addIconFontSupport} from '../../config/IconConfig'
+
     const dom = weex.requireModule('dom');
     export default {
         name: "repository-item",
@@ -51,10 +53,7 @@
         methods: {
         },
         created() {
-            dom.addRule('fontFace', {
-                'fontFamily': "wxcIconFont",
-                'src': `url('../../static/font/iconfont.ttf')`
-            });
+            addIconFontSupport(dom, "../../")
         },
     }
 </script>

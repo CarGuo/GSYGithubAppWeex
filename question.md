@@ -78,3 +78,5 @@ ActivityNotFoundException
 ```
 
 12、多页面生成js是，需要指定.vue后缀的import
+
+13、多个entry文件生成多页面
