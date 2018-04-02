@@ -256,6 +256,21 @@ const getReposFileDirDao = async (userName, reposName, path = '', branch, type =
     };
 };
 
+
+
+/**
+ * issue的详请
+ */
+const getIssueInfoDao = async (userName, repository, number) => {
+    let url = Address.getIssueInfo(userName, repository, number);
+    let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html,application/vnd.github.VERSION.raw'});
+    return {
+        data: res.data,
+        result: res.result
+    };
+
+};
+
 export default {
     getTrendDao,
     getRepositoryDetailReadmeHtmlDao,
@@ -263,5 +278,6 @@ export default {
     getReposCommitsDao,
     getRepositoryIssueDao,
     searchRepositoryIssueDao,
-    getReposFileDirDao
+    getReposFileDirDao,
+    getIssueInfoDao
 }

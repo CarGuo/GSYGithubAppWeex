@@ -35,6 +35,7 @@
     import EventItem from './EventItem.vue'
     import RepositoryItem from './RepositoryItem.vue'
     import RepositoryHeadItem from './RepositoryHeadItem.vue'
+    import IssueHeadItem from './IssueHeadItem.vue'
     import IssueItem from './IssueItem.vue'
     import UserHeadItem from './UserHeadItem.vue'
     import FileItem from './FileItem.vue'
@@ -46,6 +47,7 @@
         Vue.component('RepositoryHeadItem', RepositoryHeadItem)
         Vue.component('IssueItem', IssueItem)
         Vue.component('FileItem', FileItem)
+        Vue.component('IssueHeadItem', IssueHeadItem)
     }
 
     export default {

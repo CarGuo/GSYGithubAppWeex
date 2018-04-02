@@ -185,6 +185,12 @@ export const ActionUtils = (event, target, currentRepository) => {
                     });
                 }
             });*/
+            target.jumpWithParams("IssueDetailPage", {
+                userName: owner,
+                reposName: repositoryName,
+                title: fullName,
+                issueNum: event.payload.issue.number,
+            })
             break;
         default:
             if (fullName === currentRepository) {
