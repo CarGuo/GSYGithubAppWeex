@@ -81,8 +81,8 @@ const getRepositoryDetailDao = async (userName, reposName) => {
 const getRepositoryIssueStatusDao = async (userName, repository) => {
     let url = Address.getReposIssue(userName, repository) + "&per_page=1";
     let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html,application/vnd.github.VERSION.raw'});
-    if (res && res.result && res.headers && res.headers.link) {
-        try {
+    if (res && res.result && res.headers && (res.headers.link || res.headers.Link)) {
+        function doWeb() {
             let link = res.headers.link;
             if (link && (typeof link) === 'string') {
                 let indexStart = link.lastIndexOf("page=") + 5;
@@ -97,6 +97,30 @@ const getRepositoryIssueStatusDao = async (userName, repository) => {
             }
             return {
                 result: true,
+            }
+        }
+        function doNative() {
+            let link = res.headers.Link;
+            if (link && (typeof link) === 'string') {
+                let indexStart = link.lastIndexOf("page=") + 5;
+                let indexEnd = link.lastIndexOf(">");
+                if (indexStart >= 0 && indexEnd >= 0) {
+                    let count = link.substring(indexStart, indexEnd);
+                    return {
+                        result: true,
+                        data: count
+                    }
+                }
+            }
+            return {
+                result: true,
+            }
+        }
+        try {
+            if (WXEnvironment.platform === 'Web') {
+                return doWeb()
+            } else {
+                return doNative()
             }
         } catch (e) {
             console.log(e)
