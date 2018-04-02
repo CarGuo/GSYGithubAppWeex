@@ -73,7 +73,7 @@
                     }
                 }
                 if (Constant.DEBUG) {
-                    console.info("person loadData ", res)
+                    console.info("repo file loadData ", res)
                 }
                 if (this.$refs.dylist) {
                     this.$refs.dylist.stopRefresh();

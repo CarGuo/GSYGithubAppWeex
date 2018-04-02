@@ -88,7 +88,7 @@
                     }
                 }
                 if (Constant.DEBUG) {
-                    console.info("person loadData ", res)
+                    console.info("repos detail info loadData ", res)
                 }
                 if (type === 1) {
                     if (this.$refs.dylist) {

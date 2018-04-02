@@ -89,6 +89,9 @@
                 }
                 user.getUserInfoDao(this.userName).then((res) => {
                     if (res && res.result) {
+                        if (Constant.DEBUG) {
+                            console.info("userInfo loadData ", res.data)
+                        }
                         this.userData = res.data
                     }
                 });

@@ -40,12 +40,14 @@
     import UserHeadItem from './UserHeadItem.vue'
     import FileItem from './FileItem.vue'
 
-    Vue.component('EventItem', EventItem)
-    Vue.component('RepositoryItem', RepositoryItem)
-    Vue.component('UserHeadItem', UserHeadItem)
-    Vue.component('RepositoryHeadItem', RepositoryHeadItem)
-    Vue.component('IssueItem', IssueItem)
-    Vue.component('FileItem', FileItem)
+    if(WXEnvironment.platform !== 'Web') {
+        Vue.component('EventItem', EventItem)
+        Vue.component('RepositoryItem', RepositoryItem)
+        Vue.component('UserHeadItem', UserHeadItem)
+        Vue.component('RepositoryHeadItem', RepositoryHeadItem)
+        Vue.component('IssueItem', IssueItem)
+        Vue.component('FileItem', FileItem)
+    }
 
     export default {
         props: {
