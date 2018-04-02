@@ -15,13 +15,15 @@
                 <text class="title-text">{{itemValue.title}}</text>
             </div>
         </div>
-        <div style="width: 700px;">{{itemValue.body_html ? itemValue.body_html : ""}}</div>
+        <wxc-rich-text class="special-rich"
+                       :config-list="itemValue.rich_list"></wxc-rich-text>
     </div>
 </template>
 
 <script>
     const dom = weex.requireModule('dom');
     import {addIconFontSupport} from '../../config/IconConfig'
+    import { WxcRichText} from 'weex-ui';
     export default {
         props: {
             itemValue: {
@@ -32,7 +34,7 @@
             itemIndex: {type: Number, default: -1},
             onItemClick:{type:Function}
         },
-        components: {},
+        components: {WxcRichText},
         methods: {
             onCardClick(itemIndex) {
                 this.onItemClick && this.onItemClick(this.itemIndex);
@@ -42,6 +44,9 @@
                     return
                 }
                 this.jumpWithParams("UserInfoPage", {userName: this.itemValue.ex.userName})
+            },
+            isAndroid() {
+                return WXEnvironment.platform === 'android' && itemValue.body_html
             }
         },
         created() {
