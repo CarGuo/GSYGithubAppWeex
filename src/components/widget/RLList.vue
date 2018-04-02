@@ -38,6 +38,7 @@
     import IssueHeadItem from './IssueHeadItem.vue'
     import IssueItem from './IssueItem.vue'
     import UserHeadItem from './UserHeadItem.vue'
+    import IssueCommentItem from './IssueCommentItem.vue'
     import FileItem from './FileItem.vue'
 
     if(WXEnvironment.platform !== 'Web') {
@@ -48,6 +49,7 @@
         Vue.component('IssueItem', IssueItem)
         Vue.component('FileItem', FileItem)
         Vue.component('IssueHeadItem', IssueHeadItem)
+        Vue.component('IssueCommentItem', IssueCommentItem)
     }
 
     export default {
