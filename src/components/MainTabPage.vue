@@ -1,5 +1,5 @@
 <template>
-    <div style="height:1334px;width: 750px">
+    <div :style="{height: mainHeight, width: '750px'}">
         <navigation-bar :title="'GSYGithubApp'" :onLeftButtonClick="()=>{}" :onRightButtonClick="minibarRightButtonClick"
                         :rightIcon="'\ue61c'" :leftIcon="''"></navigation-bar>
         <tab-bar :tab-titles="tabTitles"
@@ -44,6 +44,7 @@
         data: () => ({
             tabTitles: Config.tabIconFontTitles,
             tabStyles: Config.tabIconFontStyles,
+            mainHeight: Utils.env.getScreenHeight() - 32,
         }),
         created() {
             const tabPageHeight = Utils.env.getPageHeight();

@@ -71,8 +71,8 @@
     .card-wrapper {
         width: 750px;
         background-color: #3c3f41;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
         padding: 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.80);
     }
@@ -136,12 +136,14 @@
 
     .location-text {
         font-size: 23px;
+        margin-top: 5px;
         font-family: 'wxcIconFont';
         color: rgba(255, 255, 255, 0.9);
     }
 
     .org-text {
         font-size: 23px;
+        margin-top: 5px;
         font-family: 'wxcIconFont';
         color: rgba(255, 255, 255, 0.9);
     }

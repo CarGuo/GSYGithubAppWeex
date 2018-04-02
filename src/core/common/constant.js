@@ -17,7 +17,7 @@ export const actionBlue = '#267aff';
 
 export const lineColor = '#42464b';
 
-export const primaryColor = '#24292e';
+export const primaryColor = '#3c3f41';
 export const primaryDarkColor = '#121917';
 export const primaryLightColor = '#42464b';
 

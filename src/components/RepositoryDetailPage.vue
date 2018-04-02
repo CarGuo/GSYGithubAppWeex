@@ -8,7 +8,7 @@
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
             <div class="item-container"  :style="contentStyle">
-                <web-component :source="readme" :webStyle="{height:'1154px', width: '750px', paddingBottom:'80px', backgroundColor:'#F00' }"></web-component>
+                <web-component :source="readme" :webStyle="{height:'1154px', width: '750px', paddingBottom:'30px', }"></web-component>
             </div>
             <div class="item-container" :style="contentStyle">
                 <repository-detail-info-page ref="a"></repository-detail-info-page>

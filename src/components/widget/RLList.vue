@@ -21,7 +21,6 @@
         <cell class="loading">
             <div :style="loadingDisplay">
                 <text class="indicator-text">Loading ...</text>
-                <loading-indicator class="indicator-loadmore"></loading-indicator>
             </div>
         </cell>
         <cell :style="{height: bottomEmpty}">
@@ -80,8 +79,10 @@
             loadingDisplay() {
                 let display = (this.loadinging === true && this.needLoadMore === true) ? {
                     height: '200px',
-                    overflow: 'hidden'
-                } : {height: '1px', overflow: 'hidden'};
+                    overflow: 'hidden',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                } : {height: '1px', overflow: 'hidden', flexDirection: 'row', alignItems: 'center',};
                 return display
             }
         },
@@ -169,16 +170,16 @@
 
     .indicator {
         margin-top: 16px;
-        height: 40px;
-        width: 40px;
-        color: blue;
+        height: 80px;
+        width: 80px;
+        color: #121917;
     }
 
     .indicator-loadmore {
-        margin-top: 16px;
-        height: 40px;
-        width: 40px;
-        color: blue;
+        margin-right: 20px;
+        height: 80px;
+        width: 80px;
+        color: #121917;
     }
 
     .header {
