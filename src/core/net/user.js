@@ -98,22 +98,50 @@ const getUserInfoDao = async (userName) => {
  */
 const getUserStaredCountNet = async (userName) => {
     let res = await Api.netFetch(Address.userStar(userName) + "&per_page=1");
-    if (res && res.result && res.headers && res.headers.link) {
+    if (res && res.result && res.headers && (res.headers.link || res.headers.Link)) {
         try {
-            let link = res.headers.link;
-            if (link && (typeof link) === 'string') {
-                let indexStart = link.lastIndexOf("page=") + 5;
-                let indexEnd = link.lastIndexOf(">");
-                if (indexStart >= 0 && indexEnd >= 0) {
-                    let count = link.substring(indexStart, indexEnd);
-                    return {
-                        result: true,
-                        data: count
+            function doWeb() {
+                let link = res.headers.link;
+                if (link && (typeof link) === 'string') {
+                    let indexStart = link.lastIndexOf("page=") + 5;
+                    let indexEnd = link.lastIndexOf(">");
+                    if (indexStart >= 0 && indexEnd >= 0) {
+                        let count = link.substring(indexStart, indexEnd);
+                        return {
+                            result: true,
+                            data: count
+                        }
                     }
                 }
+                return {
+                    result: true,
+                }
             }
-            return {
-                result: true,
+            function doNative() {
+                let link = res.headers.Link;
+                if (link && (typeof link) === 'string') {
+                    let indexStart = link.lastIndexOf("page=") + 5;
+                    let indexEnd = link.lastIndexOf(">");
+                    if (indexStart >= 0 && indexEnd >= 0) {
+                        let count = link.substring(indexStart, indexEnd);
+                        return {
+                            result: true,
+                            data: count
+                        }
+                    }
+                }
+                return {
+                    result: true,
+                }
+            }
+            try {
+                if (WXEnvironment.platform === 'Web') {
+                    return doWeb()
+                } else {
+                    return doNative()
+                }
+            } catch (e) {
+                console.log(e)
             }
         } catch (e) {
             console.log(e)
