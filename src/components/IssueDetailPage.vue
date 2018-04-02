@@ -66,6 +66,7 @@
                     .then((res) => {
                         if (res && res.result) {
                             this.issueInfo = res.data;
+                            console.log("yyyyyyyyyyyyyyy",  this.issueInfo)
                         }
                     })
             },
@@ -83,7 +84,7 @@
                     }
                 }
                 if (Constant.DEBUG) {
-                    console.info("repos detail info loadData ", res)
+                    console.info("issue detail info loadData ", res)
                 }
                 if (type === 1) {
                     if (this.$refs.dylist) {

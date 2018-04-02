@@ -161,3 +161,25 @@ export const isImageEnd = (path) => {
 
 const IMAGE_END = [".png", ".jpg", ".jpeg", ".gif", ".svg"];
 
+export const issueJsonToRichJson = (jsonData) => {
+    function getItemText(item, type) {
+        let text = ""
+        if (item.type !== 'text') {
+            if(item.children) {
+                item.children.forEach((cItem) => {
+                    text = text + getItemText(cItem)
+                })
+            }
+            return text
+        } else {
+            return item.content
+        }
+    }
+    let dataList = [];
+    jsonData.forEach((item)=>{
+        let result = getItemText(item);
+        dataList.push({value:result, type:"text"})
+    })
+    return dataList;
+    console.log("44444444", dataList)
+}

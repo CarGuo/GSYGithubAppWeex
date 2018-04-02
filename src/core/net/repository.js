@@ -257,6 +257,8 @@ const getReposFileDirDao = async (userName, reposName, path = '', branch, type =
 };
 
 
+import {parse} from 'himalaya'
+import {issueJsonToRichJson} from '../common/htmlUtils'
 
 /**
  * issue的详请
@@ -264,6 +266,11 @@ const getReposFileDirDao = async (userName, reposName, path = '', branch, type =
 const getIssueInfoDao = async (userName, repository, number) => {
     let url = Address.getIssueInfo(userName, repository, number);
     let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html,application/vnd.github.VERSION.raw'});
+    if(res && res.result) {
+        const json = parse(res.data.body_html)
+        console.log("6666",json)
+        res.data.rich_list = issueJsonToRichJson(json)
+    }
     return {
         data: res.data,
         result: res.result
