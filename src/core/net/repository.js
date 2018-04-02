@@ -3,6 +3,8 @@ import GitHubTrending from './trending/GitHubTrending'
 import Address from './address'
 import {generateHtml} from '../common/htmlUtils'
 import {getCache, setCache} from '../common/storageUtils'
+import {parse} from 'himalaya'
+import {issueJsonToRichJson} from '../common/htmlUtils'
 
 import resolveLongToTime from '../common/timeUtils'
 
@@ -257,8 +259,6 @@ const getReposFileDirDao = async (userName, reposName, path = '', branch, type =
 };
 
 
-import {parse} from 'himalaya'
-import {issueJsonToRichJson} from '../common/htmlUtils'
 
 /**
  * issue的详请
@@ -268,7 +268,7 @@ const getIssueInfoDao = async (userName, repository, number) => {
     let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html,application/vnd.github.VERSION.raw'});
     if(res && res.result) {
         const json = parse(res.data.body_html)
-        console.log("6666",json)
+        console.log("getIssueInfoDao",json)
         res.data.rich_list = issueJsonToRichJson(json)
     }
     return {
@@ -276,6 +276,26 @@ const getIssueInfoDao = async (userName, repository, number) => {
         result: res.result
     };
 
+};
+
+
+/**
+ * issue的回复列表
+ */
+const getIssueCommentDao = async (page = 0, userName, repository, number) => {
+    let url = Address.getIssueComment(userName, repository, number) + Address.getPageParams("?", page);
+    let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html,application/vnd.github.VERSION.raw'});
+    if(res && res.result && res.data.length > 0) {
+        res.data.forEach((item)=>{
+            const json = parse(item.body_html)
+            console.log("getIssueCommentDao",json)
+            item.rich_list = issueJsonToRichJson(json, "#3c3f41")
+        })
+    }
+    return {
+        data: res.data,
+        result: res.result
+    };
 };
 
 export default {
@@ -286,5 +306,6 @@ export default {
     getRepositoryIssueDao,
     searchRepositoryIssueDao,
     getReposFileDirDao,
-    getIssueInfoDao
+    getIssueInfoDao,
+    getIssueCommentDao
 }

@@ -16,6 +16,7 @@ import IssueItem from '@/components/widget/IssueItem.vue'
 import FileItem from '@/components/widget/FileItem.vue'
 import RepositoryHeadItem from '@/components/widget/RepositoryHeadItem.vue'
 import IssueHeadItem from '@/components/widget/IssueHeadItem.vue'
+import IssueCommentItem from '@/components/widget/IssueCommentItem.vue'
 
 Vue.use(Router)
 
@@ -26,6 +27,7 @@ Vue.component('RepositoryHeadItem', RepositoryHeadItem)
 Vue.component('IssueItem', IssueItem)
 Vue.component('FileItem', FileItem)
 Vue.component('IssueHeadItem', IssueHeadItem)
+Vue.component('IssueCommentItem', IssueCommentItem)
 
 
 module.exports = new Router({

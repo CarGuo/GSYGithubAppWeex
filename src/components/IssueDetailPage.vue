@@ -2,7 +2,7 @@
     <div style="height:1334px;width: 750px;background-color: white">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
-        <r-l-list ref="dylist" listItemName="IssueItem" :listData="list"
+        <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list"
                   headerComponent="IssueHeadItem" :headerData="issueInfo"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
@@ -66,7 +66,6 @@
                     .then((res) => {
                         if (res && res.result) {
                             this.issueInfo = res.data;
-                            console.log("yyyyyyyyyyyyyyy",  this.issueInfo)
                         }
                     })
             },
@@ -74,6 +73,10 @@
                 if (this.isPreparing()) {
                     return
                 }
+                repository.getIssueCommentDao(this.currentPage, this.userName, this.reposName, this.issueNum)
+                    .then((res) =>{
+                        this.resolveResult(res, type)
+                    })
             },
             resolveResult(res, type) {
                 if (res && res.result) {
