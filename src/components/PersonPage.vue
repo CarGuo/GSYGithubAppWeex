@@ -17,6 +17,7 @@
     import event from '../core/net/event'
     import user from '../core/net/user'
     import NavigationBar from './widget/NavigationBar.vue'
+    import {ActionUtils} from '../core/common/eventUtils'
 
     export default {
         props: {
@@ -142,8 +143,8 @@
                 this.loadData(1)
             },
             itemClick(index) {
-                console.log("click index ", index);
-                modal.toast({message: "click index " + index})
+                let data = this.dataList[index];
+                ActionUtils(data, this)
             },
         }
     }

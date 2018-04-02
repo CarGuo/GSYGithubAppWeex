@@ -9,8 +9,8 @@
             <text class="time-text">{{itemValue.ex.time | resolveTime}}</text>
         </div>
         <div style="flex-direction: row;width: 650px;overflow: hidden;align-items: center;">
-            <text class="state-text" :style="itemValue.ex.state === 'open' ? {fontFamily: 'wxcIconFont',  'color':'green'}  :  {fontFamily: 'wxcIconFont', 'color':'red'}">{{'\ue661 '}}</text>
-            <text class="number-text">{{'  #' + itemValue.ex.number}}</text>
+            <text class="state-text" :style="itemValue.ex.state === 'open' ? {fontFamily: 'wxcIconFont',  'color':'green'}  :  {fontFamily: 'wxcIconFont', 'color':'red'}">{{'\ue661'}}</text>
+            <text class="number-text">{{' #' + itemValue.ex.number}}</text>
             <text class="comment-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue6ba '  + itemValue.ex.count}}</text>
         </div>
     </div>
@@ -125,7 +125,6 @@
         text-align: end;
         color: rgba(97, 97, 97, 0.6);
         font-size: 24px;
-        flex: 1;
         font-family: 'wxcIconFont';
         display: -webkit-box;
         overflow: hidden;
@@ -144,6 +143,7 @@
         display: -webkit-box;
         margin-left: 10px;
         overflow: hidden;
+        flex:1;
         white-space: normal !important;
         text-overflow: ellipsis;
         word-wrap: break-word;

@@ -4,7 +4,7 @@
             <image v-if="itemValue.ex.userPic" :src="itemValue.ex.userPic" class="user-icon" @click="imageClick"></image>
             <div style="flex: 1;">
                 <text class="repo-text">{{itemValue.ex.repoName}}</text>
-                <text class="user-text" :style="{flex: 1,fontFamily: 'wxcIconFont', fontSize: '12px', }">{{'\ue63e ' + itemValue.ex.userName}}</text>
+                <text class="user-text" :style="{flex: 1,fontFamily: 'wxcIconFont', fontSize: '18px', }">{{'\ue63e ' + itemValue.ex.userName}}</text>
             </div>
             <text class="type-text">{{itemValue.ex.type}}</text>
         </div>
@@ -113,8 +113,8 @@
     }
 
     .content-text {
-        color: rgba(13, 13, 13, 0.5);
-        font-size: 28px;
+        color: rgba(97, 97, 97, 0.6);
+        font-size: 30px;
         font-weight: bold;
         display: -webkit-box;
         overflow: hidden;
