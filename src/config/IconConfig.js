@@ -13,8 +13,10 @@ export function getIonFontPath(abs) {
 }
 
 export function addIconFontSupport(dom, abs) {
-    dom.addRule('fontFace', {
-        'fontFamily': "wxcIconFont",
-        'src': `url('${getIonFontPath(abs)}')`
-    });
+    if(dom) {
+        dom.addRule('fontFace', {
+            'fontFamily': "wxcIconFont",
+            'src': `url('${getIonFontPath(abs)}')`
+        });
+    }
 }

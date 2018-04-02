@@ -24,7 +24,7 @@
                 return this.source;
             },
             isIos() {
-                return WXEnvironment.platform === 'ios';
+                return WXEnvironment.platform === 'ios' ||  WXEnvironment.platform === 'Web';
             },
             isNotIos() {
                 return WXEnvironment.platform !== 'ios';
