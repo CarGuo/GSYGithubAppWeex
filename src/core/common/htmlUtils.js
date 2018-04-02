@@ -161,11 +161,11 @@ export const isImageEnd = (path) => {
 
 const IMAGE_END = [".png", ".jpg", ".jpeg", ".gif", ".svg"];
 
-export const issueJsonToRichJson = (jsonData) => {
-    function getItemText(item, type) {
+export const issueJsonToRichJson = (jsonData, textColor = 'white') => {
+    function getItemText(item) {
         let text = ""
         if (item.type !== 'text') {
-            if(item.children) {
+            if (item.children) {
                 item.children.forEach((cItem) => {
                     text = text + getItemText(cItem)
                 })
@@ -175,11 +175,35 @@ export const issueJsonToRichJson = (jsonData) => {
             return item.content
         }
     }
+
+    function getItemStyle(item) {
+
+        switch (item.tagName) {
+            case 'pre':
+                return {backgroundColor: '#AAAAAA', borderRadius: '5px', padding: '5px', color: "#3c3f41"}
+            case 'h1':
+                return {fontSize: '40px', color: textColor};
+            case 'h2':
+                return {fontSize: '35px', color: textColor};
+            case 'h3':
+                return {fontSize: '30px', color: textColor};
+            case 'h4':
+                return {fontSize: '25px', color: textColor};
+            case 'h5':
+                return {fontSize: '20px', color: textColor};
+            case 'p':
+                return {fontSize: '20px', color: textColor};
+            case 'br':
+            default:
+                return {color: textColor};
+        }
+
+    }
+
     let dataList = [];
-    jsonData.forEach((item)=>{
+    jsonData.forEach((item) => {
         let result = getItemText(item);
-        dataList.push({value:result, type:"text"})
+        dataList.push({value: result, type: item.tagName, style: getItemStyle(item)})
     })
     return dataList;
-    console.log("44444444", dataList)
 }

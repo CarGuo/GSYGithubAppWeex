@@ -15,15 +15,15 @@
                 <text class="title-text">{{itemValue.title}}</text>
             </div>
         </div>
-        <wxc-rich-text class="special-rich"
-                       :config-list="itemValue.rich_list"></wxc-rich-text>
+        <issue-rich-text class="special-rich"
+                       :config-list="itemValue.rich_list"></issue-rich-text>
     </div>
 </template>
 
 <script>
     const dom = weex.requireModule('dom');
     import {addIconFontSupport} from '../../config/IconConfig'
-    import { WxcRichText} from 'weex-ui';
+    import IssueRichText from './IssueRichText.vue'
     export default {
         props: {
             itemValue: {
@@ -34,7 +34,7 @@
             itemIndex: {type: Number, default: -1},
             onItemClick:{type:Function}
         },
-        components: {WxcRichText},
+        components: {IssueRichText},
         methods: {
             onCardClick(itemIndex) {
                 this.onItemClick && this.onItemClick(this.itemIndex);
@@ -65,6 +65,7 @@
 
     .card-wrapper {
         width: 700px;
+        margin-top: 20px;
         background-color: #3c3f41;
         border-radius: 10px;
         padding: 20px;
