@@ -129,8 +129,13 @@
                 this.loadData(1)
             },
             itemClick(index) {
-                console.log("click index ", index);
-                modal.toast({message: "click index " + index})
+                let data = this.list[index];
+                this.jumpWithParams("IssueDetailPage", {
+                    userName: this.userName,
+                    reposName: this.reposName,
+                    title: '',
+                    issueNum: data.number,
+                })
             },
             isPreparing() {
                 return (!this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1)
