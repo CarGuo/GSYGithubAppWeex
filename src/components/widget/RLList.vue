@@ -50,6 +50,7 @@
         Vue.component('FileItem', FileItem)
         Vue.component('IssueHeadItem', IssueHeadItem)
         Vue.component('IssueCommentItem', IssueCommentItem)
+        Vue.component('UserItem', UserItem)
     }
 
     export default {

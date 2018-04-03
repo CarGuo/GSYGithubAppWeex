@@ -41,7 +41,6 @@
 
     const dom = weex.requireModule('dom');
     export default {
-        name: "repository-item",
         props: {
             itemValue: {
                 type: Object, default: () => {
@@ -60,13 +59,29 @@
                 })
             },
             followerClick() {
-
+                this.jumpWithParams("CommonListPage", {
+                    userName: this.itemValue.ex.user,
+                    reposName: this.itemValue.ex.name,
+                    title: this.itemValue.ex.user + '的仓库',
+                    dataType: 'userFollower',
+                })
             },
-            followedClick() {
 
+            followedClick() {
+                this.jumpWithParams("CommonListPage", {
+                    userName: this.itemValue.ex.user,
+                    reposName: this.itemValue.ex.name,
+                    title: this.itemValue.ex.user + '的仓库',
+                    dataType: 'userFollowed',
+                })
             },
             staredClick() {
-
+                this.jumpWithParams("CommonListPage", {
+                    userName: this.itemValue.ex.user,
+                    reposName: this.itemValue.ex.name,
+                    title: this.itemValue.ex.user + '的Star',
+                    dataType: 'userStar',
+                })
             },
             honorClick() {
 

@@ -12,6 +12,7 @@
     import RLList from './widget/RLList.vue'
     import NavigationBar from './widget/NavigationBar.vue'
     import repository from '../core/net/repository'
+    import user from '../core/net/user'
 
     export default {
         props: {
@@ -97,23 +98,19 @@
                 let data =  this.list[index]
                 switch (this.dataType) {
                     case "userRepos":
+                    case "userStar":
                         this.jumpWithParams("RepositoryDetailPage", {
                             userName: this.userName,
                             reposName:  data.name,
                             title: this.userName + "/" +  data.name
                         })
                         break
-                    case "userStar":
-                        break
                     case "userFollower":
-                        break
                     case "userFollowed":
-                        break
                     case "reposStarer":
-                        break
                     case "reposForker":
-                        break
                     case "reposWatcher":
+                        this.jumpWithParams("UserInfoPage", {userName:  data.login})
                         break
                 }
             },
@@ -126,7 +123,7 @@
                         this.itemClass = 'RepositoryItem'
                         break
                     case "userStar":
-                        this.itemClass = 'UserItem'
+                        this.itemClass = 'RepositoryItem'
                         break
                     case "userFollower":
                         this.itemClass = 'UserItem'
@@ -154,10 +151,22 @@
                             })
                         break
                     case "userStar":
+                        repository.getStarRepositoryDao(this.userName, this.currentPage)
+                            .then((res) => {
+                                this.resolveResult(res, type)
+                            })
                         break
                     case "userFollower":
+                        user.getFollowerListDao(this.userName, this.currentPage)
+                            .then((res) => {
+                                this.resolveResult(res, type)
+                            })
                         break
                     case "userFollowed":
+                        user.getFollowedListDao(this.userName, this.currentPage)
+                            .then((res) => {
+                                this.resolveResult(res, type)
+                            })
                         break
                     case "reposStarer":
                         break

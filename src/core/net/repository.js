@@ -326,6 +326,33 @@ const getUserRepositoryDao = async (userName, page, sort = 'pushed') => {
     };
 };
 
+/**
+ * 获取当前用户所有star仓库
+ */
+const getStarRepositoryDao = async (userName, page, sort = "created") => {
+    let url = Address.userStar(userName, sort) + Address.getPageParams("&", page);
+    let res = await await Api.netFetch(url);
+    if (res && res.result) {
+        res.data.forEach((item) => {
+            let ex = {
+                repoName: item.name,
+                userPic: item.owner.avatar_url,
+                userName: item.owner.login,
+                type: item.language,
+                content: item.description,
+                icon1t: item.watchers_count,
+                icon2t: item.forks_count,
+                icon3t: item.open_issues,
+            }
+            item.ex = ex
+        });
+    }
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
 
 export default {
     getTrendDao,
@@ -337,5 +364,6 @@ export default {
     getReposFileDirDao,
     getIssueInfoDao,
     getIssueCommentDao,
-    getUserRepositoryDao
+    getUserRepositoryDao,
+    getStarRepositoryDao,
 }
