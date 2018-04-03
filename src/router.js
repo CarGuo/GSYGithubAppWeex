@@ -17,6 +17,7 @@ import FileItem from '@/components/widget/FileItem.vue'
 import RepositoryHeadItem from '@/components/widget/RepositoryHeadItem.vue'
 import IssueHeadItem from '@/components/widget/IssueHeadItem.vue'
 import IssueCommentItem from '@/components/widget/IssueCommentItem.vue'
+import UserItem from '@/components/widget/UserItem.vue'
 
 Vue.use(Router)
 
@@ -28,6 +29,7 @@ Vue.component('IssueItem', IssueItem)
 Vue.component('FileItem', FileItem)
 Vue.component('IssueHeadItem', IssueHeadItem)
 Vue.component('IssueCommentItem', IssueCommentItem)
+Vue.component('UserItem', UserItem)
 
 
 module.exports = new Router({

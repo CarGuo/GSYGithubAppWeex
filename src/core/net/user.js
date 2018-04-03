@@ -1,5 +1,3 @@
-
-
 import {Buffer} from 'buffer'
 import Api from './api'
 import Address from './address'
@@ -54,7 +52,7 @@ const doLogin = async (userName, password) => {
     };
     Api.clearAuthorization();
     let res = await Api.netFetch(Address.getAuthorization(), 'POST', requestParams, true);
-    if(res && res.result) {
+    if (res && res.result) {
         setCache(Constant.PW_KEY, password);
     }
     return res;
@@ -117,6 +115,7 @@ const getUserStaredCountNet = async (userName) => {
                     result: true,
                 }
             }
+
             function doNative() {
                 let link = res.headers.Link;
                 if (link && (typeof link) === 'string') {
@@ -134,6 +133,7 @@ const getUserStaredCountNet = async (userName) => {
                     result: true,
                 }
             }
+
             try {
                 if (WXEnvironment.platform === 'Web') {
                     return doWeb()
@@ -157,9 +157,55 @@ const getUserStaredCountNet = async (userName) => {
 };
 
 
+/**
+ * 获取用户粉丝列表
+ */
+const getFollowerListDao = async (userName, page) => {
+
+    let url = Address.getUserFollower(userName) + Address.getPageParams("?", page);
+    let res = await await Api.netFetch(url);
+    if (res && res.result) {
+        res.data.forEach((item) => {
+            let ex = {
+                userPic: item.avatar_url,
+                user: item.login,
+            }
+            item.ex = ex
+        });
+    }
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+/**
+ * 获取用户关注列表
+ */
+const getFollowedListDao = async (userName, page) => {
+    let url = Address.getUserFollow(userName) + Address.getPageParams("?", page);
+    let res = await await Api.netFetch(url);
+    if (res && res.result) {
+        res.data.forEach((item) => {
+            let ex = {
+                userPic: item.avatar_url,
+                user: item.login,
+            }
+            item.ex = ex
+        });
+    }
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+
 export default {
     doLogin,
     getUserInfoDao,
     initUserInfo,
     getUserInfoLocal,
+    getFollowerListDao,
+    getFollowedListDao,
 }
