@@ -20,3 +20,14 @@ export function addIconFontSupport(dom, abs) {
         });
     }
 }
+
+
+export function getImagePath(name) {
+    if (WXEnvironment.platform === 'Web') {
+        return `../../static/img/${name}`
+    } else if (WXEnvironment.platform === 'android') {
+        return `local:///${name}`;
+    } else {
+        return `url('local:///url(${name}')`;
+    }
+}
