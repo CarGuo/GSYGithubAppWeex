@@ -298,6 +298,35 @@ const getIssueCommentDao = async (page = 0, userName, repository, number) => {
     };
 };
 
+
+/**
+ * 用户的仓库
+ */
+const getUserRepositoryDao = async (userName, page, sort = 'pushed') => {
+    let url = Address.userRepos(userName, sort) + Address.getPageParams("&", page);
+    let res = await Api.netFetch(url);
+    if(res && res.result) {
+        res.data.forEach((item) => {
+            let ex = {
+                repoName: item.name,
+                userPic: item.owner.avatar_url,
+                userName: item.owner.login,
+                type: item.language,
+                content: item.description,
+                icon1t: item.watchers_count,
+                icon2t: item.forks_count,
+                icon3t: item.open_issues,
+            }
+            item.ex = ex
+        });
+    }
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+
 export default {
     getTrendDao,
     getRepositoryDetailReadmeHtmlDao,
@@ -307,5 +336,6 @@ export default {
     searchRepositoryIssueDao,
     getReposFileDirDao,
     getIssueInfoDao,
-    getIssueCommentDao
+    getIssueCommentDao,
+    getUserRepositoryDao
 }

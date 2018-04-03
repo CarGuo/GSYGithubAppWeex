@@ -12,24 +12,24 @@
         <text class="link-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue670 ' + (itemValue.ex.link ? itemValue.ex.link : ' ')}}</text>
         <text class="des-text">{{itemValue.ex.des}}</text>
         <div class="bottom-container">
-            <div class="bottom-item bottom-item-line">
+            <div class="bottom-item bottom-item-line" @click="reposClick">
                 <text class="bottom-item-text">{{"仓库"}}</text>
                 <text class="bottom-item-value">{{itemValue.ex.repos ? itemValue.ex.repos : '---'}}</text>
             </div>
-            <div class="bottom-item bottom-item-line">
+            <div class="bottom-item bottom-item-line" @click="followerClick">
                 <text class="bottom-item-text">{{"粉丝"}}</text>
                 <text class="bottom-item-value">{{itemValue.ex.follower ? itemValue.ex.follower: '---'}}</text>
             </div>
-            <div class="bottom-item bottom-item-line">
+            <div class="bottom-item bottom-item-line" @click="followedClick">
                 <text class="bottom-item-text">{{"关注"}}</text>
                 <text class="bottom-item-value">{{itemValue.ex.followed ? itemValue.ex.followed: '---'}}</text>
             </div>
-            <div class="bottom-item bottom-item-line">
+            <div class="bottom-item bottom-item-line" @click="staredClick">
                 <text class="bottom-item-text">{{"星标"}}</text>
                 <text class="bottom-item-value">{{itemValue.ex.star ? itemValue.ex.star: '---'}}</text>
             </div>
             <div class="bottom-item">
-                <text class="bottom-item-text">{{"荣耀"}}</text>
+                <text class="bottom-item-text" @click="honorClick">{{"荣耀"}}</text>
                 <text class="bottom-item-value">{{itemValue.ex.stared ? itemValue.ex.stared: '---'}}</text>
             </div>
         </div>
@@ -51,6 +51,26 @@
         },
         components: {},
         methods: {
+            reposClick() {
+                this.jumpWithParams("CommonListPage", {
+                    userName: this.itemValue.ex.user,
+                    reposName: this.itemValue.ex.name,
+                    title: this.itemValue.ex.user + '的仓库',
+                    dataType: 'userRepos',
+                })
+            },
+            followerClick() {
+
+            },
+            followedClick() {
+
+            },
+            staredClick() {
+
+            },
+            honorClick() {
+
+            }
         },
         created() {
             addIconFontSupport(dom, "../../")

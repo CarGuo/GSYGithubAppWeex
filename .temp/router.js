@@ -8,6 +8,7 @@ import RepositoryDetailPage from '@/components/RepositoryDetailPage.vue'
 import CodeDetailPage from '@/components/CodeDetailPage.vue'
 import UserInfoPage from '@/components/UserInfoPage.vue'
 import IssueDetailPage from '@/components/IssueDetailPage.vue'
+import CommonListPage from '@/components/CommonListPage.vue'
 
 import EventItem from '@/components/widget/EventItem.vue'
 import RepositoryItem from '@/components/widget/RepositoryItem.vue'
@@ -76,6 +77,11 @@ module.exports = new Router({
             path:  '/user/:userName/repository/:reposName/issueNum/:issueNum',
             name: 'IssueDetailPage',
             component: IssueDetailPage
+        },
+        {
+            path:  '/common',
+            name: 'CommonListPage',
+            component: CommonListPage
         },
     ]
 })

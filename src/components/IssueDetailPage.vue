@@ -1,5 +1,5 @@
 <template>
-    <div style="height:1334px;width: 750px;background-color: white">
+    <div style="height:1334px;width: 750px;background-color: #f2f3f4">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list"
