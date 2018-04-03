@@ -40,6 +40,7 @@
     import UserHeadItem from './UserHeadItem.vue'
     import IssueCommentItem from './IssueCommentItem.vue'
     import FileItem from './FileItem.vue'
+    import UserItem from './UserItem.vue'
 
     if(WXEnvironment.platform !== 'Web') {
         Vue.component('EventItem', EventItem)
