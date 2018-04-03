@@ -354,6 +354,78 @@ const getStarRepositoryDao = async (userName, page, sort = "created") => {
 };
 
 
+/**
+ * 获取仓库的fork分支
+ */
+const getRepositoryForksDao = async (userName, reposName, page) => {
+    let url = Address.getReposForks(userName, reposName) + Address.getPageParams("?", page);
+    let res = await Api.netFetch(url);
+    if (res && res.result) {
+        res.data.forEach((item) => {
+            let ex = {
+                repoName: item.name,
+                userPic: item.owner.avatar_url,
+                userName: item.owner.login,
+                type: item.language,
+                content: item.description,
+                icon1t: item.watchers_count,
+                icon2t: item.forks_count,
+                icon3t: item.open_issues,
+            }
+            item.ex = ex
+        });
+    }
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+
+/**
+ * 获取当前仓库所有star用户
+ */
+const getRepositoryStarDao = async (userName, reposName, page) => {
+    let url = Address.getReposStar(userName, reposName) + Address.getPageParams("?", page);
+    let res = await Api.netFetch(url);
+    if (res && res.result) {
+        res.data.forEach((item) => {
+            let ex = {
+                userPic: item.avatar_url,
+                user: item.login,
+            }
+            item.ex = ex
+        });
+    }
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+/**
+ * 获取当前仓库所有订阅用户
+ */
+const getRepositoryWatcherDao = async (userName, reposName, page) => {
+    let url = Address.getReposWatcher(userName, reposName) + Address.getPageParams("?", page);
+    let res = await Api.netFetch(url);
+    if (res && res.result) {
+        res.data.forEach((item) => {
+            let ex = {
+                userPic: item.avatar_url,
+                user: item.login,
+            }
+            item.ex = ex
+        });
+    }
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+
+
 export default {
     getTrendDao,
     getRepositoryDetailReadmeHtmlDao,
@@ -366,4 +438,7 @@ export default {
     getIssueCommentDao,
     getUserRepositoryDao,
     getStarRepositoryDao,
+    getRepositoryForksDao,
+    getRepositoryStarDao,
+    getRepositoryWatcherDao,
 }
