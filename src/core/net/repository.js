@@ -101,6 +101,7 @@ const getRepositoryIssueStatusDao = async (userName, repository) => {
                 result: true,
             }
         }
+
         function doNative() {
             let link = res.headers.Link;
             if (link && (typeof link) === 'string') {
@@ -118,6 +119,7 @@ const getRepositoryIssueStatusDao = async (userName, repository) => {
                 result: true,
             }
         }
+
         try {
             if (WXEnvironment.platform === 'Web') {
                 return doWeb()
@@ -171,7 +173,7 @@ const getReposCommitsDao = async (userName, reposName, page) => {
  * @param direction 正序或者倒序
  * @returns {Promise.<void>}
  */
-const getRepositoryIssueDao = async(page = 0, userName, repository, state, sort, direction) => {
+const getRepositoryIssueDao = async (page = 0, userName, repository, state, sort, direction) => {
 
     let url = Address.getReposIssue(userName, repository, state, sort, direction) + Address.getPageParams("&", page);
     let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html,application/vnd.github.VERSION.raw'});
@@ -237,7 +239,7 @@ const searchRepositoryIssueDao = async (q, name, reposName, page = 1, state) => 
 const getReposFileDirDao = async (userName, reposName, path = '', branch, type = 'json') => {
     let url = Address.reposDataDir(userName, reposName, path, branch);
     let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html'}, type);
-    if (res && res.result && (res.data && (typeof res.data ) === 'object')) {
+    if (res && res.result && (res.data && (typeof res.data) === 'object')) {
         let dir = [];
         let file = [];
         res.data.forEach((item) => {
@@ -259,16 +261,15 @@ const getReposFileDirDao = async (userName, reposName, path = '', branch, type =
 };
 
 
-
 /**
  * issue的详请
  */
 const getIssueInfoDao = async (userName, repository, number) => {
     let url = Address.getIssueInfo(userName, repository, number);
     let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html,application/vnd.github.VERSION.raw'});
-    if(res && res.result) {
+    if (res && res.result) {
         const json = parse(res.data.body_html)
-        console.log("getIssueInfoDao",json)
+        console.log("getIssueInfoDao", json)
         res.data.rich_list = issueJsonToRichJson(json)
     }
     return {
@@ -285,10 +286,10 @@ const getIssueInfoDao = async (userName, repository, number) => {
 const getIssueCommentDao = async (page = 0, userName, repository, number) => {
     let url = Address.getIssueComment(userName, repository, number) + Address.getPageParams("?", page);
     let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.html,application/vnd.github.VERSION.raw'});
-    if(res && res.result && res.data.length > 0) {
-        res.data.forEach((item)=>{
+    if (res && res.result && res.data.length > 0) {
+        res.data.forEach((item) => {
             const json = parse(item.body_html)
-            console.log("getIssueCommentDao",json)
+            console.log("getIssueCommentDao", json)
             item.rich_list = issueJsonToRichJson(json, "#3c3f41")
         })
     }
@@ -305,7 +306,7 @@ const getIssueCommentDao = async (page = 0, userName, repository, number) => {
 const getUserRepositoryDao = async (userName, page, sort = 'pushed') => {
     let url = Address.userRepos(userName, sort) + Address.getPageParams("&", page);
     let res = await Api.netFetch(url);
-    if(res && res.result) {
+    if (res && res.result) {
         res.data.forEach((item) => {
             let ex = {
                 repoName: item.name,
@@ -425,6 +426,53 @@ const getRepositoryWatcherDao = async (userName, reposName, page) => {
 };
 
 
+/**
+ * 搜索仓库
+ * @param q 搜索关键字
+ * @param language 语言
+ * @param sort 分类排序，beat match、most star等
+ * @param order 倒序或者正序
+ * @param type 搜索类型，人或者仓库
+ * @param page
+ * @param pageSize
+ * @returns {Promise.<{result, data}>}
+ */
+const searchRepositoryDao = async (q, language, sort, order, type, page, pageSize) => {
+    if (language) {
+        q = q + `%2Blanguage%3A${language}`;
+    }
+    let url = Address.search(q, sort, order, type, page, pageSize);
+    let res = await Api.netFetch(url);
+    if (res && res.result && res.data) {
+        if (type === 'user') {
+            res.data.items.forEach((item) => {
+                let ex = {
+                    userPic: item.avatar_url,
+                    user: item.login,
+                }
+                item.ex = ex
+            })
+        } else {
+            res.data.items.forEach((item) => {
+                let ex = {
+                    repoName: item.name,
+                    userPic: item.owner.avatar_url,
+                    userName: item.owner.login,
+                    type: item.language,
+                    content: item.description,
+                    icon1t: item.watchers_count,
+                    icon2t: item.forks_count,
+                    icon3t: item.open_issues,
+                }
+                item.ex = ex
+            });
+        }
+    }
+    return {
+        data: res.data ? res.data.items : res.data,
+        result: res.result
+    };
+};
 
 export default {
     getTrendDao,
@@ -441,4 +489,5 @@ export default {
     getRepositoryForksDao,
     getRepositoryStarDao,
     getRepositoryWatcherDao,
+    searchRepositoryDao,
 }

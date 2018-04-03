@@ -61,7 +61,7 @@
                 //console.log("FFFFFF")
             },
             minibarRightButtonClick() {
-                //console.log("GGGGGG")
+                this.jumpWithParams("SearchPage",{})
             },
             itemClick(event) {
                 console.log("click index ", event.index);
