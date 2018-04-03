@@ -8,6 +8,7 @@ import CodeDetailPage from '@/components/CodeDetailPage.vue'
 import UserInfoPage from '@/components/UserInfoPage.vue'
 import IssueDetailPage from '@/components/IssueDetailPage.vue'
 import CommonListPage from '@/components/CommonListPage.vue'
+import SearchPage from '@/components/SearchPage.vue'
 
 import EventItem from '@/components/widget/EventItem.vue'
 import RepositoryItem from '@/components/widget/RepositoryItem.vue'
@@ -84,5 +85,11 @@ module.exports = new Router({
             name: 'CommonListPage',
             component: CommonListPage
         },
+        {
+            path:  '/search',
+            name: 'SearchPage',
+            component: SearchPage
+        },
+
     ]
 })

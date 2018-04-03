@@ -1,0 +1,181 @@
+<template>
+    <div :style="{flex:1, width:'750px',alignItems: 'center',backgroundColor: '#f2f3f4'}">
+        <navigation-bar :title="'搜索'" :onLeftButtonClick="function(){toBack()}"
+                        :rightIcon="' '"></navigation-bar>
+        <div>
+            <wxc-searchbar ref="wxc-searchbar"
+                           @wxcSearchbarCancelClicked="wxcSearchbarCancelClicked"
+                           @wxcSearchbarInputReturned="wxcSearchbarInputReturned"
+                           @wxcSearchbarInputOnInput="wxcSearchbarInputOnInput"
+                           @wxcSearchbarCloseClicked="wxcSearchbarCloseClicked"
+                           @wxcSearchbarInputOnFocus="wxcSearchbarInputOnFocus"
+                           @wxcSearchbarInputOnBlur="wxcSearchbarInputOnBlur"></wxc-searchbar>
+        </div>
+
+        <div class="control-container">
+            <text class="control-text" @click="()=>{onControlClick(1)}" :style="{color:(this.listType === 1) ? '#FFFFFF' : '#AAAAAA'}">{{' 仓库 '}}</text>
+            <text class="control-text" @click="()=>{onControlClick(2)}" :style="{color:(this.listType === 2) ? '#FFFFFF' : '#AAAAAA'}">{{' 用户 '}}</text>
+        </div>
+
+        <div style="flex:1;width:750px;">
+            <r-l-list ref="dylist" :listItemName="itemClass" :listData="list" :bottomEmpty="'350px'"
+                      :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
+        </div>
+    </div>
+</template>
+
+<script>
+
+    import * as Constant from '../core/common/constant'
+    import RLList from './widget/RLList.vue'
+    import NavigationBar from './widget/NavigationBar.vue'
+    import event from '../core/net/event'
+    import repository from '../core/net/repository'
+    import {WxcSearchbar} from 'weex-ui';
+
+    export default {
+        props: {},
+        components: {RLList, WxcSearchbar, NavigationBar},
+        data() {
+            return {
+                filter: null,
+                currentPage: 1,
+                listType: 1,
+                searchData: '',
+                itemClass: 'RepositoryItem',
+                list: [],
+                selectTypeData: null,
+                selectSortData: null,
+                selectLanguageData: null,
+            }
+        },
+        created: function () {
+            this.init()
+        },
+        activated: function () {
+            //keep alive
+            this.init()
+        },
+        methods: {
+            init() {},
+            searchRepos(type) {
+                if (!this.searchData || this.searchData.length < 1) {
+                    return
+                }
+                let searchType = (this.listType === 1) ? null : 'user';
+                repository.searchRepositoryDao(this.searchData, this.selectLanguageData, this.selectTypeData, this.selectSortData, searchType, this.currentPage)
+                    .then((res) => {
+                        this.resolveResult(res, type)
+                    })
+            },
+            resolveResult(res, type) {
+                if (res && res.result) {
+                    if (type === 1) {
+                        this.list = res.data;
+                    } else {
+                        this.list = this.list.concat(res.data);
+                    }
+                }
+                if (Constant.DEBUG) {
+                    console.info("repos issue list loadData ", res)
+                }
+                if (type === 1) {
+                    if (this.$refs.dylist) {
+                        this.$refs.dylist.stopRefresh();
+                    }
+                } else if (type === 2) {
+                    if (this.$refs.dylist) {
+                        this.$refs.dylist.stopLoadMore();
+                    }
+                }
+                if (this.$refs.dylist) {
+                    if (!res.data || res.data.length < Constant.PAGE_SIZE) {
+                        this.$refs.dylist.setNotNeedLoadMore();
+                    } else {
+                        this.$refs.dylist.setNeedLoadMore();
+                    }
+                }
+            },
+            loadData(type) {
+                this.searchRepos(type)
+            },
+            onLoadMore() {
+                this.currentPage++;
+                this.loadData(2)
+            },
+            onRefresh() {
+                this.currentPage = 1;
+                this.list = [];
+                this.loadData(1)
+            },
+            itemClick(index) {
+                let data = this.list[index];
+                if (this.listType === 1) {
+                    this.jumpWithParams("RepositoryDetailPage", {
+                        userName: data.owner.login,
+                        reposName:  data.name,
+                        title: data.owner.login + "/" +  data.name
+                    })
+                } else {
+                    this.jumpWithParams("UserInfoPage", {userName: data.login})
+                }
+            },
+            wxcSearchbarInputOnFocus() {
+            },
+            wxcSearchbarInputOnBlur() {
+                this.onRefresh();
+            },
+            wxcSearchbarCloseClicked() {
+                this.$refs['wxc-searchbar'].setValue('');
+            },
+            wxcSearchbarInputOnInput(e) {
+                this.searchData = e.value;
+            },
+            wxcSearchbarCancelClicked(e) {
+                //this.$refs['wxc-searchbar'].setValue('');
+            },
+            wxcSearchbarInputDisabledClicked(e) {
+            },
+            wxcSearchbarDepChooseClicked(e) {
+                console.log("wxcSearchbarDepChooseClicked", e)
+            },
+            wxcSearchbarInputReturned(e) {
+                console.log("wxcSearchbarDepChooseClicked", e)
+            },
+            onControlClick(index) {
+                this.listType = index
+                if (index === 1) {
+                    this.itemClass = "RepositoryItem"
+                } else {
+                    this.itemClass = "UserItem"
+                }
+                this.onRefresh();
+            }
+        }
+    }
+</script>
+
+<style scoped>
+    .control-container {
+        background-color: #3c3f41;
+        width: 710px;
+        flex-direction: row;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        padding: 10px 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
+    }
+
+    .control-text {
+        flex: 1;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 26px;
+        display: -webkit-box;
+        white-space: normal !important;
+        -webkit-box-orient: vertical;
+    }
+</style>
