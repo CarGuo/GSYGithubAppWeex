@@ -17,16 +17,16 @@
             <text class="time-text" style="flex: 1; margin-top: 20px;margin-bottom: 20px;">{{itemValue.infoText}}</text>
 
             <div class="bottom-container">
-                <div class="bottom-item bottom-item-line">
+                <div class="bottom-item bottom-item-line" @click="reposStarClick">
                     <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue643 " + (itemValue.watchers_count? itemValue.watchers_count : '---')}}</text>
                 </div>
-                <div class="bottom-item bottom-item-line">
+                <div class="bottom-item bottom-item-line" @click="reposForkerClick">
                     <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue67e " + (itemValue.forks_count? itemValue.forks_count : '---')}}</text>
                 </div>
-                <div class="bottom-item bottom-item-line">
+                <div class="bottom-item bottom-item-line" @click="reposWatcherClick">
                     <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue681 " + (itemValue.subscribers_count? itemValue.subscribers_count : '---')}}</text>
                 </div>
-                <div class="bottom-item">
+                <div class="bottom-item" @click="reposIssueClick">
                     <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue661 " + (itemValue.open_issues_count? itemValue.open_issues_count : '---')}}</text>
                 </div>
             </div>
@@ -68,6 +68,35 @@
                 this.selectIndex = index;
                 this.onItemClick && this.onItemClick(0, index)
             },
+            reposStarClick() {
+                this.jumpWithParams("CommonListPage", {
+                    userName: this.itemValue.userName,
+                    reposName: this.itemValue.reposName,
+                    title: 'Starer',
+                    dataType: 'reposStarer',
+                })
+            },
+            reposWatcherClick() {
+                this.jumpWithParams("CommonListPage", {
+                    userName: this.itemValue.userName,
+                    reposName: this.itemValue.reposName,
+                    title: 'Watcher',
+                    dataType: 'reposWatcher',
+                })
+
+            },
+            reposForkerClick() {
+                this.jumpWithParams("CommonListPage", {
+                    userName: this.itemValue.userName,
+                    reposName: this.itemValue.reposName,
+                    title: 'Forker',
+                    dataType: 'reposForker',
+                })
+
+            },
+            reposIssueClick() {
+
+            }
         },
         data() {
             return {

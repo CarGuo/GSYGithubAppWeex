@@ -120,23 +120,13 @@
             initItemClass() {
                 switch (this.dataType) {
                     case "userRepos":
-                        this.itemClass = 'RepositoryItem'
-                        break
                     case "userStar":
+                    case "reposForker":
                         this.itemClass = 'RepositoryItem'
                         break
                     case "userFollower":
-                        this.itemClass = 'UserItem'
-                        break
                     case "userFollowed":
-                        this.itemClass = 'UserItem'
-                        break
                     case "reposStarer":
-                        this.itemClass = 'UserItem'
-                        break
-                    case "reposForker":
-                        this.itemClass = 'UserItem'
-                        break
                     case "reposWatcher":
                         this.itemClass = 'UserItem'
                         break
@@ -169,10 +159,22 @@
                             })
                         break
                     case "reposStarer":
+                        repository.getRepositoryStarDao(this.userName, this.reposName, this.currentPage)
+                            .then((res) => {
+                                this.resolveResult(res, type)
+                            })
                         break
                     case "reposForker":
+                        repository.getRepositoryForksDao(this.userName, this.reposName, this.currentPage)
+                            .then((res) => {
+                                this.resolveResult(res, type)
+                            })
                         break
                     case "reposWatcher":
+                        repository.getRepositoryWatcherDao(this.userName, this.reposName, this.currentPage)
+                            .then((res) => {
+                                this.resolveResult(res, type)
+                            })
                         break
                 }
             }
