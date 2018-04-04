@@ -8,7 +8,7 @@
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
             <div class="item-container"  :style="contentStyle">
-                <web-component :source="readme" :webStyle="{height:'1154px', width: '750px', paddingBottom:'30px', }"></web-component>
+                <web-component :source="readme" :webStyle="{height:'1154px', width: '750px', paddingBottom:'30px', }" :gsygithubLink="gsygithubLink"></web-component>
             </div>
             <div class="item-container" :style="contentStyle">
                 <repository-detail-info-page ref="a"></repository-detail-info-page>
@@ -34,6 +34,7 @@
     import RepositoryFileListPage from './RepositoryFileListPage.vue'
     import repository from '../core/net/repository'
     import * as Constant from '../core/common/constant'
+    import  {launchUrl} from "../core/common/htmlUtils"
 
     export default {
         components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage, RepositoryIssueListPage, RepositoryFileListPage},
@@ -44,6 +45,7 @@
             userName: "",
             reposName: "",
             readme: " ",
+            curBranch: null,
         }),
         created () {
             const tabPageHeight = Utils.env.getPageHeight();
@@ -87,6 +89,16 @@
                         }
                     })
             },
+            gsygithubLink(url) {
+                if (url) {
+                    let owner = userName;
+                    let repo = reposName;
+                    let branch = this.curBranch ? this.curBranch : "master";
+                    let currentPath = url.replace("gsygithub://.", "").replace("gsygithub://", "/");
+                    let fixedUrl = "https://github.com/" + owner + "/" + repo + "/blob/" + branch + currentPath;
+                    launchUrl(fixedUrl, this);
+                }
+            }
         }
     }
 </script>

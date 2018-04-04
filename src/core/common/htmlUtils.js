@@ -1,4 +1,5 @@
 import * as Constant from './constant'
+import URL from 'url-parse';
 
 export const generateHtml = (mdData, backgroundColor = "#FFFFFF", userBR = true) => {
     if (!mdData) {
@@ -207,4 +208,50 @@ export const issueJsonToRichJson = (jsonData, textColor = 'white') => {
         dataList.push({value: result, type: item.tagName, style: getItemStyle(item)})
     })
     return dataList;
+}
+
+
+
+export function launchUrl(url, target) {
+    if (!url && url.length === 0) return;
+    let parseUrl = URL(url);
+    let image = false;
+    IMAGE_END.forEach((item) => {
+        if (url.indexOf(item) + item.length === url.length) {
+            image = true;
+            if (url.indexOf('https://github.com/') === 0) {
+                url = url.replace(new RegExp("/blob/", "gm"), "/raw/");
+            }
+            //Actions.PhotoPage({uri: url});
+        }
+    });
+
+    if (image) {
+        return
+    }
+
+    if (parseUrl && parseUrl.hostname === "github.com" && parseUrl.pathname.length > 0) {
+        let pathnames = parseUrl.pathname.split("/");
+        if (pathnames.length === 2) {
+            //解析人
+            let userName = pathnames[1];
+            target.jumpWithParams("UserInfoPage", {userName: userName})
+        } else if (pathnames.length >= 3) {
+            let userName = pathnames[1];
+            let repoName = pathnames[2];
+            let fullName = userName + "/" + repoName;
+            //解析仓库
+            if (pathnames.length === 3) {
+                target.jumpWithParams("RepositoryDetailPage", {
+                    userName: userName,
+                    reposName: repoName,
+                    title: fullName
+                })
+            } else {
+                target.jumpWithParams("WebPage", {url: url})
+            }
+        }
+    } else {
+        target.jumpWithParams("WebPage", {url: url})
+    }
 }

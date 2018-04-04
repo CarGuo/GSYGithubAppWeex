@@ -156,13 +156,6 @@ public class GSYWXWebView implements IGSYWebView {
         wv.setWebViewClient(new WebViewClient() {
 
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                WXLogUtils.v("tag", "onPageOverride " + url);
-                return true;
-            }
-
-            @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
                 WXLogUtils.v("tag", "onPageStarted " + url);
@@ -203,6 +196,14 @@ public class GSYWXWebView implements IGSYWebView {
                 if (mOnErrorListener != null) {
                     mOnErrorListener.onError("error", "ssl error");
                 }
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (mOnPageListener != null) {
+                  mOnPageListener.shouldOverrideUrlLoading(url);
+                }
+                return true;
             }
 
         });

@@ -1,6 +1,7 @@
 package com.weex.app.ui.view;
 
 import android.view.View;
+import android.webkit.WebView;
 
 public interface IGSYWebView {
     public View getView();
@@ -22,5 +23,6 @@ public interface IGSYWebView {
         public void onReceivedTitle(String title);
         public void onPageStart(String url);
         public void onPageFinish(String url, boolean canGoBack, boolean canGoForward);
+        public void shouldOverrideUrlLoading(String url);
     }
 }
