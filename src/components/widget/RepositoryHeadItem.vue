@@ -55,9 +55,6 @@
         },
         components: {},
         methods: {
-            onCardClick() {
-                this.onItemClick && this.onItemClick(this.itemIndex);
-            },
             imageClick() {
                 if (!this.itemValue.ex.display_login) {
                     return
@@ -95,7 +92,7 @@
 
             },
             reposIssueClick() {
-
+                this.onItemClick && this.onItemClick(2, 0)
             },
             userNameClick() {
                 this.jumpWithParams("UserInfoPage", {userName:  this.itemValue.userName})

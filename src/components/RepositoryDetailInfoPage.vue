@@ -127,9 +127,11 @@
                 ActionUtils(data, this, this.userName + "/" + this.reposName)
             },
             headerClick(type, index) {
-                this.listType = index;
-                this.onRefresh();
-                console.log("header click index ", index);
+                if (type === 2) {
+                } else {
+                    this.listType = index;
+                    this.onRefresh();
+                }
             },
             isPreparing() {
                 return (!this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1)
