@@ -20,6 +20,20 @@
                 <repository-issue-list-page ref="c"></repository-issue-list-page>
             </div>
         </top-tab-bar>
+        <div v-if="reposStatus != null" style="background-color: white;flex-direction: row;width: 750px;padding-top: 15px;padding-bottom: 15px">
+            <div class="bottom-item bottom-item-line" @click="reposStarClick">
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{starIcon + "   " +  starText}}</text>
+            </div>
+            <div class="bottom-item bottom-item-line" @click="reposForkerClick">
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{watcherIcon + "   " + watcherText}}</text>
+            </div>
+            <div class="bottom-item bottom-item-line" @click="reposWatcherClick">
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue67e "  + ('Fork')}}</text>
+            </div>
+            <div class="bottom-item" @click="reposIssueClick">
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue61a "  + ('master')}}</text>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -45,7 +59,12 @@
             userName: "",
             reposName: "",
             readme: " ",
-            curBranch: null,
+            curBranch: 'master',
+            starIcon: null,
+            watcherIcon: null,
+            starText: null,
+            watcherText: null,
+            reposStatus: null,
         }),
         created () {
             const tabPageHeight = Utils.env.getPageHeight();
@@ -71,9 +90,23 @@
                     this.reposName = this.getQuery().reposName
                 }
                 this.loadReadme();
+                this.loadStatus();
             },
             wxcTabBarCurrentTabSelected (e) {
                 const index = e.page;
+            },
+            loadStatus() {
+                repository.getRepositoryStatusDao(this.userName, this.reposName)
+                    .then((res) => {
+                        if(res && res.result) {
+                            console.log("repos statu", res)
+                            this.reposStatus = res.data
+                            this.starIcon = (res.data.star) ? '\ue698' : '\ue630'
+                            this.watcherIcon = (res.data.watch) ? '\ue629' : '\ue681'
+                            this.starText = (res.data.star) ? 'UnStar' : 'Star'
+                            this.watcherText = (res.data.watch) ? 'UnWatcher' : 'Watcher'
+                        }
+                    })
             },
             loadReadme() {
                 if (!this.title || !this.userName || !this.reposName) {
@@ -109,6 +142,32 @@
         background-color: #f2f3f4;
         align-items: center;
         justify-content: center;
+    }
+
+    .bottom-item {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bottom-item-line {
+        border-color: rgba(60, 63, 65, 0.7);
+        border-right-width: 1px;
+    }
+
+    .bottom-item-text {
+        font-size: 23px;
+        font-family: 'wxcIconFont';
+        color: rgba(60, 63, 65, 0.7);
+        display: -webkit-box;
+        overflow: hidden;
+        white-space: normal !important;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
     }
 
 </style>
