@@ -21,8 +21,6 @@
 </template>
 
 <script>
-    const modal = weex.requireModule('modal')
-
     import * as Constant from '../core/common/constant'
     import RLList from './widget/RLList.vue'
     import event from '../core/net/event'
@@ -31,6 +29,7 @@
 
     export default {
         props: {
+            curBranch: {type: String, default: "master"},
         },
         components: {RLList},
         data() {
@@ -40,7 +39,6 @@
                 headerList: ["."],
                 list: [],
                 path: "",
-                curBranch: "master",
                 loading:false,
             }
         },
