@@ -183,12 +183,12 @@
         background-color: #3c3f41;
         width: 710px;
         flex-direction: row;
-        margin-top: 10px;
+        margin-top: 20px;
         margin-bottom: 10px;
         align-items: center;
         justify-content: center;
         border-radius: 15px;
-        padding: 10px 20px;
+        padding: 20px 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
     }
 
