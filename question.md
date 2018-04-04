@@ -80,3 +80,5 @@ ActivityNotFoundException
 12、多页面生成js是，需要指定.vue后缀的import
 
 13、多个entry文件生成多页面
+
+14、如果是webstorm，记得对.temp dist node_modules platforms几个文件夹设置excluded，避免一直indexing和硬盘资源消耗

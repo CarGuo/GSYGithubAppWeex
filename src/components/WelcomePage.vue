@@ -30,12 +30,11 @@
         methods: {
         },
         created: function () {
-            this.imagePath = getImagePath('welcome');
-            console.log("fffffffffffffffff",  this.imagePath)
+            this.imagePath = getImagePath('welcome', '.png');
             setTimeout(() => {
                 this.$store.dispatch('initUserInfo', (res) => {
                     if (res && res.result) {
-                        this.reset("/main")
+                        this.reset("/login")
                     } else {
                         this.reset("/login")
                     }

@@ -22,12 +22,12 @@ export function addIconFontSupport(dom, abs) {
 }
 
 
-export function getImagePath(name) {
+export function getImagePath(name, type = '', abs = '../../') {
     if (WXEnvironment.platform === 'Web') {
-        return `../../static/img/${name}`
+        return `${abs}static/img/${name}${type}`
     } else if (WXEnvironment.platform === 'android') {
         return `local:///${name}`;
     } else {
-        return `url('local:///url(${name}')`;
+        return `local:///${name}`;
     }
 }
