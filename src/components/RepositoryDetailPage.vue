@@ -1,5 +1,5 @@
 <template>
-    <div style="height:1334px;width: 750px;background-color: white">
+    <div  :style="{height: mainHeight, width: '750px',backgroundColor: 'white'}">
         <!--<router-view></router-view>-->
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
@@ -8,7 +8,7 @@
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
             <div class="item-container"  :style="contentStyle">
-                <web-component :source="readme" :webStyle="{height:'1154px', width: '750px', paddingBottom:'30px', }" :gsygithubLink="gsygithubLink"></web-component>
+                <web-component :source="readme" :webStyle="{height:'1074px', width: '750px', paddingBottom:'30px', }" :gsygithubLink="gsygithubLink"></web-component>
             </div>
             <div class="item-container" :style="contentStyle">
                 <repository-detail-info-page ref="a"></repository-detail-info-page>
@@ -86,6 +86,7 @@
             watcherText: null,
             reposStatus: null,
             isLoading: false,
+            mainHeight: '1334px',
             branch: [],
             popoverPosition: {  x: -50, y: 1134  },
             popoverArrowPosition: {pos: 'bottom', x: -50},
@@ -94,6 +95,7 @@
             const tabPageHeight = Utils.env.getPageHeight();
             const { tabStyles } = this;
             this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' };
+            this.mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : Utils.env.getScreenHeight() - 32
             this.init()
 
         },
