@@ -198,11 +198,11 @@
         width: 710px;
         flex-direction: row;
         margin-top: 30px;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         align-items: center;
         justify-content: center;
         border-radius: 15px;
-        padding: 10px 20px;
+        padding: 20px 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
     }
 

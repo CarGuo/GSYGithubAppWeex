@@ -120,7 +120,7 @@
             },
             itemClick(index) {
                 console.log("click index ", index);
-                modal.toast({message: "click index " + index})
+                //modal.toast({message: "click index " + index})
             },
             isPreparing() {
                 return (!this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1)

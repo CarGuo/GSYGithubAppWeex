@@ -113,7 +113,7 @@
     }
 
     .content-text {
-        color: rgba(97, 97, 97, 0.6);
+        color: rgba(13, 13, 13, 0.6);
         font-size: 30px;
         font-weight: bold;
         display: -webkit-box;
@@ -134,7 +134,7 @@
 
     .icon-text {
         color: rgba(97, 97, 97, 0.6);
-        font-size: 28px;
+        font-size: 26px;
         flex: 1;
         font-family: 'wxcIconFont';
         display: -webkit-box;

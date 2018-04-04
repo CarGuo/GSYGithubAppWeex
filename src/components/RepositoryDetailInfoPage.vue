@@ -8,12 +8,11 @@
 </template>
 
 <script>
-    const modal = weex.requireModule('modal')
-
     import * as Constant from '../core/common/constant'
     import RLList from './widget/RLList.vue'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
+    import {ActionUtils} from '../core/common/eventUtils'
 
     export default {
         props: {
@@ -124,8 +123,8 @@
                 this.loadData(1)
             },
             itemClick(index) {
-                console.log("click index ", index);
-                modal.toast({message: "click index " + index})
+                let data = this.eventList[index];
+                ActionUtils(data, this, this.userName + "/" + this.reposName)
             },
             headerClick(type, index) {
                 this.listType = index;
