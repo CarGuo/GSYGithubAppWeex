@@ -90,7 +90,7 @@ class HttpManager {
                 setCache(TOKEN_KEY, this.optionParams.authorizationCode);
             }
 
-            if (response.status === 200 || response.status === 201 || response.status === 204) {
+            if (response.status === 200 || response.status === 201 || response.status === 204 ||  response.status === 202) {
                 return {
                     result: true,
                     code: SUCCESS,
@@ -204,7 +204,7 @@ class HttpManager {
                 type: type,
                 body: requestParams.body
             }, (response) => {
-                if (response.status == 200 || response.status === 201 ||response.status === 204) {
+                if (response.status == 200 || response.status === 201 || response.status === 204 ||response.status === 202) {
                     resolve(response)
                 } else {
                     reject(response)

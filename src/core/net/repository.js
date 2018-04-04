@@ -516,6 +516,19 @@ const doRepositoryWatchDao = async (userName, reposName, watch) => {
     };
 };
 
+/**
+ * 创建仓库的fork分支
+ */
+const createForkDao = async (userName, reposName) => {
+    let url = Address.createFork(userName, reposName);
+    let res = await Api.netFetch(url, 'POST');
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+
 export default {
     getTrendDao,
     getRepositoryDetailReadmeHtmlDao,
@@ -535,4 +548,5 @@ export default {
     getRepositoryStatusDao,
     doRepositoryStarDao,
     doRepositoryWatchDao,
+    createForkDao,
 }
