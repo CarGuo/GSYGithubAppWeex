@@ -138,7 +138,7 @@ public class WXPageActivity extends AbsWeexActivity implements
   }
 
   protected void preRenderPage() {
-    mProgressBar.setVisibility(View.VISIBLE);
+    //mProgressBar.setVisibility(View.VISIBLE);
   }
 
   @Override
