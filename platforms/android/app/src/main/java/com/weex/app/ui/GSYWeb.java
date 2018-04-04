@@ -80,6 +80,15 @@ public class GSYWeb extends WXComponent {
                     fireEvent(Constants.Event.PAGEFINISH, params);
                 }
             }
+
+            @Override
+            public void shouldOverrideUrlLoading(String url) {
+                if ( getDomObject().getEvents().contains("overrideUrl")) {
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("url", url);
+                    fireEvent("overrideUrl", params);
+                }
+            }
         });
         return mWebView.getView();
     }

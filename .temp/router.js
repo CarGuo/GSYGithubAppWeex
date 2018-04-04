@@ -10,6 +10,7 @@ import UserInfoPage from '@/components/UserInfoPage.vue'
 import IssueDetailPage from '@/components/IssueDetailPage.vue'
 import CommonListPage from '@/components/CommonListPage.vue'
 import SearchPage from '@/components/SearchPage.vue'
+import WebPage from '@/components/WebPage.vue'
 
 import EventItem from '@/components/widget/EventItem.vue'
 import RepositoryItem from '@/components/widget/RepositoryItem.vue'
@@ -90,6 +91,11 @@ module.exports = new Router({
             path:  '/search',
             name: 'SearchPage',
             component: SearchPage
+        },
+        {
+            path:  '/web',
+            name: 'WebPage',
+            component: WebPage
         },
 
     ]
