@@ -14,7 +14,7 @@
                 <repository-detail-info-page ref="a"></repository-detail-info-page>
             </div>
             <div class="item-container" :style="contentStyle">
-                <repository-file-list-page ref="b"></repository-file-list-page>
+                <repository-file-list-page ref="b" :curBranch="curBranch"></repository-file-list-page>
             </div>
             <div class="item-container" :style="contentStyle">
                 <repository-issue-list-page ref="c"></repository-issue-list-page>
@@ -31,7 +31,7 @@
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue67e "  + ('Fork')}}</text>
             </div>
             <div class="bottom-item" @click="reposBranchClick">
-                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue61a "  + ('master')}}</text>
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue61a "  +  curBranch}}</text>
             </div>
         </div>
         <popover-component ref="wxc-popover"
@@ -216,7 +216,8 @@
                 this.$refs['wxc-popover'].wxcPopoverShow();
             },
             popoverLanguageButtonClicked (obj) {
-
+                this.curBranch = this.branch[obj.index].text;
+                this.loadReadme()
             },
         }
     }
