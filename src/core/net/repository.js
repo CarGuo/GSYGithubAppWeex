@@ -48,9 +48,10 @@ const getRepositoryDetailDao = async (userName, reposName) => {
     let url = Address.getReposDetail(userName, reposName);
     let res = await Api.netFetch(url, 'GET', null, false, {Accept: 'application/vnd.github.mercy-preview+json'});
     if (res && res.result && res.data) {
+        let parent = res.data.parent;
         let created_at = resolveLongToTime(res.data.created_at);
         let push_at = resolveLongToTime(res.data.pushed_at);
-        let createStr = (res.data.fork === true) ? "forked from " + reposName + '\n'
+        let createStr = (res.data.fork === true) ? "forked from " + (parent ? parent.full_name : null) + '\n'
             : "创建于 " + created_at + " ";
         let updateStr = "最后提交于 " + push_at;
         let infoText = createStr + ((push_at) ? updateStr : '');

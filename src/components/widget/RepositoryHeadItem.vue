@@ -2,7 +2,7 @@
     <div>
         <div class="card-wrapper">
             <div class="card-user-wrapper" style="flex-direction: row">
-                <text class="name-text">{{itemValue.userName}}</text>
+                <text class="name-text" @click="userNameClick">{{itemValue.userName}}</text>
                 <text class="name-text">{{" / "}}</text>
                 <text class="name-text">{{itemValue.reposName}}</text>
             </div>
@@ -12,9 +12,9 @@
                 <text class="repo-text">{{itemValue.license ? itemValue.license.name : ""}}</text>
             </div>
 
-            <text class="content-text" style="flex: 1; margin-top: 20px;">{{itemValue.description}}</text>
+            <text class="content-text" style="flex: 1; margin-top: 20px;" >{{itemValue.description}}</text>
 
-            <text class="time-text" style="flex: 1; margin-top: 20px;margin-bottom: 20px;">{{itemValue.infoText}}</text>
+            <text class="time-text" style="flex: 1; margin-top: 20px;margin-bottom: 20px;"  @click="desClick">{{itemValue.infoText}}</text>
 
             <div class="bottom-container">
                 <div class="bottom-item bottom-item-line" @click="reposStarClick">
@@ -96,6 +96,19 @@
             },
             reposIssueClick() {
 
+            },
+            userNameClick() {
+                this.jumpWithParams("UserInfoPage", {userName:  this.itemValue.userName})
+            },
+            desClick() {
+                if(this.itemValue.fork && this.itemValue.parent && this.itemValue.parent.full_name) {
+                    let data = this.itemValue.parent.full_name.split("/");
+                    this.jumpWithParams("RepositoryDetailPage", {
+                        userName: data[0],
+                        reposName:   data[1],
+                        title:  this.itemValue.parent.full_name
+                    })
+                }
             }
         },
         data() {
