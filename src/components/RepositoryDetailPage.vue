@@ -34,6 +34,11 @@
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue61a "  + ('master')}}</text>
             </div>
         </div>
+        <popover-component ref="wxc-popover"
+                     :buttons="branch"
+                     :position="popoverPosition"
+                     :arrowPosition="popoverArrowPosition"
+                     @wxcPopoverButtonClicked="popoverLanguageButtonClicked"></popover-component>
         <loading-component height="1334"
                   width="750"
                   border-radius="0"
@@ -53,6 +58,7 @@
     import TopTabBar from './widget/TopTabBar.vue'
     import WebComponent from './widget/WebComponent.vue'
     import LoadingComponent from './widget/LoadingComponent.vue'
+    import PopoverComponent from './widget/PopoverComponent.vue'
     import RepositoryDetailInfoPage from './RepositoryDetailInfoPage.vue'
     import RepositoryIssueListPage from './RepositoryIssueListPage.vue'
     import RepositoryFileListPage from './RepositoryFileListPage.vue'
@@ -62,7 +68,8 @@
     const modal = weex.requireModule('modal')
 
     export default {
-        components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage, RepositoryIssueListPage, RepositoryFileListPage, LoadingComponent},
+        components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage,
+            RepositoryIssueListPage, RepositoryFileListPage, LoadingComponent, PopoverComponent},
         data: () => ({
             tabTitles: Config.tabTitles,
             tabStyles: Config.tabStyles,
@@ -79,6 +86,9 @@
             watcherText: null,
             reposStatus: null,
             isLoading: false,
+            branch: [],
+            popoverPosition: {  x: -50, y: 1134  },
+            popoverArrowPosition: {pos: 'bottom', x: -50},
         }),
         created () {
             const tabPageHeight = Utils.env.getPageHeight();
@@ -105,6 +115,7 @@
                 }
                 this.loadReadme();
                 this.loadStatus();
+                this.loadBranch();
             },
             wxcTabBarCurrentTabSelected (e) {
                 const index = e.page;
@@ -135,6 +146,24 @@
                         }
                         if (Constant.DEBUG) {
                             console.info("repository detail readme", res)
+                        }
+                    })
+            },
+            loadBranch() {
+                repository.getBranchesDao(this.userName, this.reposName)
+                    .then((res)=>{
+                        if(res && res.data) {
+                            this.branch.shift()
+                            let data = res.data;
+                            if (data && data.length > 0) {
+                                data.forEach((item) => {
+                                    let addData = {
+                                        key: item.name,
+                                        text: item.name,
+                                    };
+                                    this.branch.push(addData);
+                                })
+                            }
                         }
                     })
             },
@@ -181,6 +210,12 @@
                     })
             },
             reposBranchClick() {
+                if(!this.branch || this.branch.length < 1) {
+                    return
+                }
+                this.$refs['wxc-popover'].wxcPopoverShow();
+            },
+            popoverLanguageButtonClicked (obj) {
 
             },
         }

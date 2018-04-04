@@ -528,6 +528,18 @@ const createForkDao = async (userName, reposName) => {
     };
 };
 
+/**
+ * 获取当前仓库所有分支
+ */
+const getBranchesDao = async(userName, reposName) => {
+    let url = Address.getbranches(userName, reposName);
+    let res = await Api.netFetch(url);
+    return {
+        data: res.data,
+        result: res.result
+    };
+
+};
 
 export default {
     getTrendDao,
@@ -549,4 +561,5 @@ export default {
     doRepositoryStarDao,
     doRepositoryWatchDao,
     createForkDao,
+    getBranchesDao,
 }
