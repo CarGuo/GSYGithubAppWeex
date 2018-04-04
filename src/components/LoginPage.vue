@@ -39,7 +39,7 @@
 
     .input {
         font-size: 30px;
-        min-width: 460px;
+        width: 460px;
         border-radius: 12px;
         padding: 20px;
         color: #666666;
