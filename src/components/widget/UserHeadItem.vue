@@ -54,7 +54,7 @@
                 this.jumpWithParams("CommonListPage", {
                     userName: this.itemValue.ex.user,
                     reposName: this.itemValue.ex.name,
-                    title: this.itemValue.ex.user + '的仓库',
+                    title: this.itemValue.ex.user + '的粉丝',
                     dataType: 'userRepos',
                 })
             },
@@ -62,7 +62,7 @@
                 this.jumpWithParams("CommonListPage", {
                     userName: this.itemValue.ex.user,
                     reposName: this.itemValue.ex.name,
-                    title: this.itemValue.ex.user + '的仓库',
+                    title: this.itemValue.ex.user + '的关注',
                     dataType: 'userFollower',
                 })
             },
