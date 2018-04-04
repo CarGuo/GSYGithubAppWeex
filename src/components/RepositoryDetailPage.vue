@@ -24,25 +24,35 @@
             <div class="bottom-item bottom-item-line" @click="reposStarClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{starIcon + "   " +  starText}}</text>
             </div>
-            <div class="bottom-item bottom-item-line" @click="reposForkerClick">
+            <div class="bottom-item bottom-item-line" @click="reposWatcherClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{watcherIcon + "   " + watcherText}}</text>
             </div>
-            <div class="bottom-item bottom-item-line" @click="reposWatcherClick">
+            <div class="bottom-item bottom-item-line" @click="reposForkerClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue67e "  + ('Fork')}}</text>
             </div>
-            <div class="bottom-item" @click="reposIssueClick">
+            <div class="bottom-item" @click="reposBranchClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue61a "  + ('master')}}</text>
             </div>
         </div>
+        <loading-component height="1334"
+                  width="750"
+                  border-radius="0"
+                  duration="100"
+                  :has-overlay="true"
+                  :show-close="false"
+                  :show="isLoading"
+                  :has-animation="true">
+        </loading-component>
     </div>
 </template>
 
 <script>
-    import {Utils, WxcMinibar }  from 'weex-ui';
+    import {Utils, WxcMinibar}  from 'weex-ui';
     import Config from '../config/RepositoryTabConfig'
     import NavigationBar from './widget/NavigationBar.vue'
     import TopTabBar from './widget/TopTabBar.vue'
     import WebComponent from './widget/WebComponent.vue'
+    import LoadingComponent from './widget/LoadingComponent.vue'
     import RepositoryDetailInfoPage from './RepositoryDetailInfoPage.vue'
     import RepositoryIssueListPage from './RepositoryIssueListPage.vue'
     import RepositoryFileListPage from './RepositoryFileListPage.vue'
@@ -51,7 +61,7 @@
     import  {launchUrl} from "../core/common/htmlUtils"
 
     export default {
-        components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage, RepositoryIssueListPage, RepositoryFileListPage},
+        components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage, RepositoryIssueListPage, RepositoryFileListPage, LoadingComponent},
         data: () => ({
             tabTitles: Config.tabTitles,
             tabStyles: Config.tabStyles,
@@ -63,8 +73,11 @@
             starIcon: null,
             watcherIcon: null,
             starText: null,
+            star: false,
+            watch: false,
             watcherText: null,
             reposStatus: null,
+            isLoading: false,
         }),
         created () {
             const tabPageHeight = Utils.env.getPageHeight();
@@ -101,6 +114,8 @@
                         if(res && res.result) {
                             console.log("repos statu", res)
                             this.reposStatus = res.data
+                            this.star = res.data.star
+                            this.watch = res.data.watch
                             this.starIcon = (res.data.star) ? '\ue698' : '\ue630'
                             this.watcherIcon = (res.data.watch) ? '\ue629' : '\ue681'
                             this.starText = (res.data.star) ? 'UnStar' : 'Star'
@@ -131,7 +146,33 @@
                     let fixedUrl = "https://github.com/" + owner + "/" + repo + "/blob/" + branch + currentPath;
                     launchUrl(fixedUrl, this);
                 }
-            }
+            },
+            reposStarClick() {
+                this.isLoading = true
+                repository.doRepositoryStarDao(this.userName, this.reposName, this.star)
+                    .then((res)=>{
+                        if(res && res.result) {
+                            this.loadStatus()
+                        }
+                        this.isLoading = false
+                    })
+            },
+            reposWatcherClick() {
+                this.isLoading = true
+                repository.doRepositoryWatchDao(this.userName, this.reposName, this.watch)
+                    .then((res)=>{
+                        if(res && res.result) {
+                            this.loadStatus()
+                        }
+                        this.isLoading = false
+                    })
+            },
+            reposForkerClick() {
+
+            },
+            reposBranchClick() {
+
+            },
         }
     }
 </script>
