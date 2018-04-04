@@ -475,6 +475,23 @@ const searchRepositoryDao = async (q, language, sort, order, type, page, pageSiz
     };
 };
 
+
+/**
+ * 获取用户对当前仓库的star、watcher状态
+ */
+const getRepositoryStatusDao = async (userName, reposName) => {
+    let urls = Address.resolveStarRepos(userName, reposName);
+    let urlw = Address.resolveWatcherRepos(userName, reposName);
+    let ress = await await Api.netFetch(urls);
+    let resw = await await Api.netFetch(urlw);
+    return {
+        data: {star: ress.result, watch: resw.result},
+        result: true
+    };
+};
+
+
+
 export default {
     getTrendDao,
     getRepositoryDetailReadmeHtmlDao,
@@ -491,4 +508,5 @@ export default {
     getRepositoryStarDao,
     getRepositoryWatcherDao,
     searchRepositoryDao,
+    getRepositoryStatusDao,
 }

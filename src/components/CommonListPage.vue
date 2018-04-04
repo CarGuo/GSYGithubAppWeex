@@ -98,9 +98,14 @@
                 let data =  this.list[index]
                 switch (this.dataType) {
                     case "userRepos":
-                    case "userStar":
                         this.jumpWithParams("RepositoryDetailPage", {
                             userName: this.userName,
+                            reposName:  data.name,
+                            title: this.userName + "/" +  data.name
+                        })
+                    case "userStar":
+                        this.jumpWithParams("RepositoryDetailPage", {
+                            userName: data.owner.login,
                             reposName:  data.name,
                             title: this.userName + "/" +  data.name
                         })
