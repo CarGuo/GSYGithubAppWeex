@@ -13,9 +13,15 @@
             <wxc-button text="登录" type="red" :btn-style="{flex:'1',width:'550px',marginTop: '80px', marginBottom:'40px', backgroundColor: '#3c3f41'}"
                         @wxcButtonClicked="onLogin"></wxc-button>
         </div>
-        <wxc-loading :show="isLoading"
-                     :loading-text="loadingText"
-                     :interval="300"></wxc-loading>
+        <loading-component height="1334"
+                           width="750"
+                           border-radius="0"
+                           duration="100"
+                           :has-overlay="true"
+                           :show-close="false"
+                           :show="isLoading"
+                           :has-animation="true">
+        </loading-component>
     </div>
 </template>
 <style scoped>

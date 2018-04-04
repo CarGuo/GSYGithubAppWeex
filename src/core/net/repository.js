@@ -492,6 +492,30 @@ const getRepositoryStatusDao = async (userName, reposName) => {
 
 
 
+/**
+ * star仓库
+ */
+const doRepositoryStarDao = async (userName, reposName, star) => {
+    let url = Address.resolveStarRepos(userName, reposName);
+    let res = await await Api.netFetch(url, star === false ? 'PUT' : 'DELETE');
+    return {
+        data: res.result,
+        result: res.result
+    };
+};
+
+/**
+ * watcher仓库
+ */
+const doRepositoryWatchDao = async (userName, reposName, watch) => {
+    let url = Address.resolveWatcherRepos(userName, reposName);
+    let res = await await Api.netFetch(url, watch === false ? 'PUT' : 'DELETE');
+    return {
+        data: res.result,
+        result: res.result
+    };
+};
+
 export default {
     getTrendDao,
     getRepositoryDetailReadmeHtmlDao,
@@ -509,4 +533,6 @@ export default {
     getRepositoryWatcherDao,
     searchRepositoryDao,
     getRepositoryStatusDao,
+    doRepositoryStarDao,
+    doRepositoryWatchDao,
 }
