@@ -16,7 +16,7 @@ export default {
         {
             title: '我的',
             codePoint: '\ue6d0',
-            badge: 5
+            //badge: 5
         }
     ],
     tabIconFontStyles: {

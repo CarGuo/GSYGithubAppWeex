@@ -1,32 +1,45 @@
 <template>
     <div class="wrapper">
-        <image :src="logo" class="logo"/>
-        <input class="input" @input="onUserNameChange" ref="username" placeholder="用户名" :value="username"/>
-        <input class="input" @input="onPWChange" type="password" ref="password" placeholder="密码"
-               :value="password"/>
-        <wxc-button text="登录"
-                    type="red"
-                    :btn-style="{flex:'1',width:'620px',marginTop: '30px', marginBottom:'30px'}"
-                    @wxcButtonClicked="onLogin"></wxc-button>
-        <text>{{ "UserName: " + tipData}}</text>
-
+        <div class="input-container">
+            <image :src="logo" class="logo"></image>
+            <div style="flex-direction: row; margin-top: 50px">
+                <text class="icon-text" :style="{color: '#3c3f41', fontFamily: 'wxcIconFont'}">{{'\ue666'}}</text>
+                <input class="input" @input="onUserNameChange" ref="username" placeholder="用户名" :value="username"/>
+            </div>
+            <div style="flex-direction: row; margin-top: 50px">
+                <text class="icon-text" :style="{color: '#3c3f41', fontFamily: 'wxcIconFont'}">{{'\ue60e'}}</text>
+                <input class="input" @input="onPWChange" type="password" ref="password" placeholder="密码" :value="password"/>
+            </div>
+            <wxc-button text="登录" type="red" :btn-style="{flex:'1',width:'550px',marginTop: '80px', marginBottom:'40px', backgroundColor: '#3c3f41'}"
+                        @wxcButtonClicked="onLogin"></wxc-button>
+        </div>
         <wxc-loading :show="isLoading"
                      :loading-text="loadingText"
-                     :interval="100"></wxc-loading>
+                     :interval="300"></wxc-loading>
     </div>
 </template>
 <style scoped>
     .wrapper {
         align-items: center;
         justify-content: center;
+        width: 750px;
+        height: 1334px;
+        background-color: #3c3f41;
+    }
+
+    .input-container {
+        align-items: center;
+        justify-content: center;
+        width: 600px;
+        background-color: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 0 10px rgba(211, 210, 210, 0.50);
     }
 
     .input {
-        margin-left: 106px;
-        margin-right: 106px;
         font-size: 30px;
-        margin-top: 30px;
-        min-width: 600px;
+        min-width: 460px;
         border-radius: 12px;
         padding: 20px;
         color: #666666;
@@ -34,11 +47,29 @@
         justify-content: center;
         border-width: 2px;
         border-style: solid;
-        border-color: #41B883;
+        border-color: #3c3f41;
     }
 
+
+    .icon-text{
+        align-items: center;
+        justify-content: center;
+        font-size: 55px;
+        font-family: 'wxcIconFont';
+        display: -webkit-box;
+        margin-top: 10px;
+        margin-right: 25px;
+        overflow: hidden;
+        white-space: normal !important;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+
     .logo {
-        width: 424px;
+        width: 200px;
         height: 200px;
         align-items: center;
         justify-content: center;
@@ -51,27 +82,24 @@
     import * as Constant from '../core/common/constant'
     import {isEmptyString} from '../core/common/commonUtils'
     import * as ignoreConfig from '../core/common/ignoreConfig'
-    const modal = weex.requireModule('modal');
+    import {getImagePath, addIconFontSupport} from '../config/IconConfig'
+    const modal = weex.requireModule('modal')
+    const dom = weex.requireModule('dom');
 
     export default {
         components: {WxcButton, WxcLoading},
         data() {
             return {
-                logo: 'https://gw.alicdn.com/tfs/TB1yopEdgoQMeJjy1XaXXcSsFXa-640-302.png',
+                logo: '',
                 username: "",
                 password: "",
                 isLoading: false,
                 loadingText: "处理中···",
             }
         },
-        computed: {
-            tipData() {
-                let login = 'wait your login';
-                if (this.$store.state.user.userInfo.login) {
-                    login = this.$store.state.user.userInfo.login;
-                }
-                return login
-            }
+        created: function () {
+            this.logo = getImagePath('logo', '.png')
+            addIconFontSupport(dom, "../../")
         },
         methods: {
             onUserNameChange(event) {
