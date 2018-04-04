@@ -59,6 +59,7 @@
     import repository from '../core/net/repository'
     import * as Constant from '../core/common/constant'
     import  {launchUrl} from "../core/common/htmlUtils"
+    const modal = weex.requireModule('modal')
 
     export default {
         components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage, RepositoryIssueListPage, RepositoryFileListPage, LoadingComponent},
@@ -168,7 +169,16 @@
                     })
             },
             reposForkerClick() {
-
+                this.isLoading = true
+                repository.createForkDao(this.userName, this.reposName)
+                    .then((res) => {
+                        setTimeout(()=>{
+                            modal.toast({
+                                message:(res && res.result) ? 'fork 成功' : 'fork 异常'
+                            });
+                        }, 500);
+                        this.isLoading = false
+                    })
             },
             reposBranchClick() {
 
