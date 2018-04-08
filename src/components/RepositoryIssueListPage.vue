@@ -20,17 +20,20 @@
             <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="'350px'"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
+        <div class="float-btn-container">
+            <text class="float-btn-text" :style="{fontFamily: 'wxcIconFont'}" @click="addClick">{{'\ue67b'}}</text>
+        </div>
     </div>
 </template>
 
 <script>
-    const modal = weex.requireModule('modal')
-
     import * as Constant from '../core/common/constant'
     import RLList from './widget/RLList.vue'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {WxcSearchbar} from 'weex-ui';
+    import {addIconFontSupport} from '../config/IconConfig'
+    const dom = weex.requireModule('dom');
 
     export default {
         props: {},
@@ -50,6 +53,7 @@
         },
         created: function () {
             this.init()
+            addIconFontSupport(dom, "../../")
         },
         activated: function () {
             //keep alive
@@ -173,7 +177,19 @@
                     this.filter = "closed"
                 }
                 this.onRefresh();
-            }
+            },
+            /**
+             * 添加issue
+             * */
+            addClick() {
+                this.jumpWithParams('EditIssuePage', {
+                    needTitle: true,
+                    title: '提交Issue',
+                    type: 'createIssue',
+                    reposName: this.reposName,
+                    userName: this.userName
+                })
+            },
         }
     }
 </script>
@@ -200,5 +216,28 @@
         display: -webkit-box;
         white-space: normal !important;
         -webkit-box-orient: vertical;
+    }
+
+    .float-btn-container{
+        position:absolute;
+        height: 100px;
+        width: 100px;
+        top: 934px;
+        left: 640px;
+        background-color: rgba(255, 255, 255, 0.70);
+        border-radius: 50px;
+        align-items: center;
+        justify-content: center;
+        border: 1px #333333;
+    }
+
+    .float-btn-text{
+        flex: 1;
+        color: #333333;
+        align-items: center;
+        padding-top: 10px;
+        justify-content: center;
+        text-align: center;
+        font-size: 80px;
     }
 </style>
