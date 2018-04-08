@@ -11,6 +11,7 @@
 #import <WeexSDK/WeexSDK.h>
 #import <AVFoundation/AVFoundation.h>
 #import "WeexSDKManager.h"
+//#import "CustomWebComponent.h"
 
 @interface AppDelegate ()
 @end
@@ -28,6 +29,8 @@
     [self setStatusBarBackgroundColor:[UIColor colorWithRed:0.23 green:0.24 blue:0.25 alpha:1.0]];
     
     [WeexSDKManager setup];
+    
+    //[WXSDKEngine registerComponent:@"gsyWeb" withClass:[CustomWebComponent class]];
     
     [self.window makeKeyAndVisible];
     

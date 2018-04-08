@@ -1,6 +1,3 @@
-const basePath = 'http://192.168.21.75:8088/dist/views';
-const iosPath = 'local:///bundlejs/';
-const androidPath = 'file://assets/dist/';
 
 export default {
     methods: {
