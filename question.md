@@ -82,3 +82,5 @@ ActivityNotFoundException
 13、多个entry文件生成多页面
 
 14、如果是webstorm，记得对.temp dist node_modules platforms几个文件夹设置excluded，避免一直indexing和硬盘资源消耗
+
+15、@viewappear="onappear"  @viewdisappear ="ondisappear" 类似onPause和onResume
