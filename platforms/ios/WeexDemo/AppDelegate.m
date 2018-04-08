@@ -29,10 +29,23 @@
     
     [self.window makeKeyAndVisible];
     
+    [self redirectConsoleLog];
+    
     // Override point for customization after application launch.
     [self startSplashScreen];
     
     return YES;
+}
+
+-(void)redirectConsoleLog{
+#ifdef DEBUG
+    NSString *documentDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSLog(@"documentPath : %@",documentDir);
+    
+    //重定向NSLog
+    NSString* logPath = [documentDir stringByAppendingPathComponent:@"console.log"];
+    freopen([logPath fileSystemRepresentation], "a+", stderr);
+#endif
 }
 
 #pragma mark 
