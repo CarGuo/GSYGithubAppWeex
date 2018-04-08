@@ -35,7 +35,7 @@
                 if(!this.itemValue.ex.userName) {
                     return
                 }
-                this.jumpWithParams("UserInfoPage", {userName: this.itemValue.ex.userName})
+                this.jumpWithParams("UserInfoPage", {userName:  this.itemValue.user.login})
             }
         },
         created() {
