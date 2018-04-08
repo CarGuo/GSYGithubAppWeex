@@ -202,7 +202,7 @@ class HttpManager {
                 url: path,
                 headers: requestParams.headers,
                 type: type,
-                body: requestParams.body
+                body: requestParams.method === 'GET' ? "" : requestParams.body
             }, (response) => {
                 if (response.status == 200 || response.status === 201 || response.status === 204 ||response.status === 202) {
                     resolve(response)

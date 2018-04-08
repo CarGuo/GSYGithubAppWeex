@@ -84,3 +84,27 @@ ActivityNotFoundException
 14、如果是webstorm，记得对.temp dist node_modules platforms几个文件夹设置excluded，避免一直indexing和硬盘资源消耗
 
 15、@viewappear="onappear"  @viewdisappear ="ondisappear" 类似onPause和onResume
+
+
+16、ios看log，可以先增加
+
+```
+-(void)redirectConsoleLog{
+#ifdef DEBUG
+    NSString *documentDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSLog(@"documentPath : %@",documentDir);
+
+    //重定向NSLog
+    NSString* logPath = [documentDir stringByAppendingPathComponent:@"console.log"];
+    freopen([logPath fileSystemRepresentation], "a+", stderr);
+#endif
+}
+```
+```
+[self redirectConsoleLog];
+```
+然后在Devices下，找到对应的模拟器号码，在再Application下，搜索console.log
+```
+tail -f
+/Users/your name/Library/Developer/CoreSimulator/Devices/FDEACA11-D84E-4E8F-A6B8-26239559A928/data/Containers/Data/Application/9394D6CC-6B4A-4200-A13D-0CBE6F2BB67A/Documents/console.log
+```

@@ -28,6 +28,6 @@ export function getImagePath(name, type = '', abs = '../../') {
     } else if (WXEnvironment.platform === 'android') {
         return `local:///${name}`;
     } else {
-        return `local:///${name}`;
+        return `local:///${name}${type}`;
     }
 }

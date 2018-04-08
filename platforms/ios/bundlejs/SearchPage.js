@@ -4941,7 +4941,7 @@ function getImagePath(name) {
     } else if (WXEnvironment.platform === 'android') {
         return 'local:///' + name;
     } else {
-        return 'local:///' + name;
+        return 'local:///' + name + type;
     }
 }
 
@@ -12524,7 +12524,7 @@ var HttpManager = function () {
                     url: path,
                     headers: requestParams.headers,
                     type: type,
-                    body: requestParams.body
+                    body: requestParams.method === 'GET' ? "" : requestParams.body
                 }, function (response) {
                     if (response.status == 200 || response.status === 201 || response.status === 204 || response.status === 202) {
                         resolve(response);

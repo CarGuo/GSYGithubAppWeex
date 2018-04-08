@@ -4941,7 +4941,7 @@ function getImagePath(name) {
     } else if (WXEnvironment.platform === 'android') {
         return 'local:///' + name;
     } else {
-        return 'local:///' + name;
+        return 'local:///' + name + type;
     }
 }
 
@@ -12531,7 +12531,7 @@ var HttpManager = function () {
                     } else {
                         reject(response);
                     }
-                }, function () {});
+                });
             });
         }
     }]);
