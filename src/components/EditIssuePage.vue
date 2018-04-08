@@ -122,7 +122,15 @@
                 }
             },
             createIssue() {
-
+                repository.createIssueDao(this.userName, this.reposName, {title: this.editTitle, body: this.editValue})
+                    .then((res) => {
+                        setTimeout(() => {
+                            this.isLoading = false;
+                            if (res && res.result) {
+                                this.toBack()
+                            }
+                        }, 500);
+                    })
             },
             editIssue() {
                 repository.editIssueDao(this.userName, this.reposName, this.issueNum,
