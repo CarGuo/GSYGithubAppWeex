@@ -1,4 +1,6 @@
 const basePath = 'http://192.168.21.75:8088/dist/views';
+const iosPath = 'local:///bundlejs/';
+const androidPath = 'file://assets/dist/';
 
 export default {
     methods: {
@@ -12,14 +14,37 @@ export default {
                 this.getNavigator().pop({animated: "true"})
             }
         },
+        getBaseUrl() {
+            let bundleUrl = this.$getConfig().bundleUrl;
+            bundleUrl = String(bundleUrl);
+            let nativeBase;
+            let isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
+
+            let isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
+            if (isAndroidAssets) {
+                nativeBase = 'file://assets/dist/';
+            }
+            else if (isiOSAssets) {
+                nativeBase = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+            } else {
+                let host = 'localhost:8080';
+                let matches = /\/\/([^\/]+?)\//.exec(bundleUrl);
+                if (matches && matches.length >= 2) {
+                    host = matches[1];
+                }
+                nativeBase = 'http://' + host + '/index.html?page=./dist/';
+            }
+            return nativeBase;
+        },
         jump(to) {
             if(WXEnvironment.platform === 'Web') {
                 if (this.$router) {
                     this.$router.push(to)
                 }
             } else {
+                let path = this.getBaseUrl();
                 this.getNavigator().push({
-                    url: 'file://assets/dist/' + to + '.js',
+                    url: path + to + '.js',
                     animated: "true"
                 }, event => {
                     //modal.toast({ message: 'callback: ' + event })
@@ -32,9 +57,10 @@ export default {
                     this.$router.push({name: to, params: params})
                 }
             } else {
+                let path = this.getBaseUrl();
                 let q = this.createQuery(params)
                 this.getNavigator().push({
-                    url: 'file://assets/dist/' + to + '.js' + q,
+                    url: path + to + '.js' + q,
                     animated: "true"
                 }, event => {
                     //modal.toast({ message: 'callback: ' + event })

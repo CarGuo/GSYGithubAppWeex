@@ -71,6 +71,8 @@
         text-overflow: ellipsis;
         word-wrap: break-word;
         -webkit-line-clamp: 3;
+        lines: 3;
+        text-overflow: ellipsis;
         -webkit-box-orient: vertical;
     }
 
