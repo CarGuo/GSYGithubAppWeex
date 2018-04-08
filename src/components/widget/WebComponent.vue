@@ -1,7 +1,7 @@
 <template>
     <div>
-        <web v-if="isIos" :srcdoc="htmlData" :style="webStyle"></web>
-        <gsyWeb v-if="isNotIos" :srcdoc="htmlData" :style="webStyle" @overrideUrl="onOverrideUrl"></gsyWeb>
+        <web v-if="isWeb" :srcdoc="htmlData" :style="webStyle"></web>
+        <gsyWeb v-if="isNotWeb" :srcdoc="htmlData" :style="webStyle" @overrideUrl="onOverrideUrl"></gsyWeb>
     </div>
 </template>
 
@@ -25,11 +25,11 @@
             htmlData() {
                 return this.source;
             },
-            isIos() {
-                return WXEnvironment.platform === 'ios' ||  WXEnvironment.platform === 'Web';
+            isWeb() {
+                return WXEnvironment.platform === 'Web';
             },
-            isNotIos() {
-                return WXEnvironment.platform !== 'ios';
+            isNotWeb() {
+                return WXEnvironment.platform !== 'Web';
             }
         },
         methods: {

@@ -32177,10 +32177,6 @@ webpackContext.id = 199;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var basePath = 'http://192.168.21.75:8088/dist/views';
-var iosPath = 'local:///bundlejs/';
-var androidPath = 'file://assets/dist/';
-
 exports.default = {
     methods: {
         getNavigator: function getNavigator() {
@@ -54805,11 +54801,11 @@ exports.default = {
         htmlData: function htmlData() {
             return this.source;
         },
-        isIos: function isIos() {
-            return WXEnvironment.platform === 'ios' || WXEnvironment.platform === 'Web';
+        isWeb: function isWeb() {
+            return WXEnvironment.platform === 'Web';
         },
-        isNotIos: function isNotIos() {
-            return WXEnvironment.platform !== 'ios';
+        isNotWeb: function isNotWeb() {
+            return WXEnvironment.platform !== 'Web';
         }
     },
     methods: {
@@ -54847,12 +54843,12 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [(_vm.isIos) ? _c('web', {
+  return _c('div', [(_vm.isWeb) ? _c('web', {
     style: _vm.webStyle,
     attrs: {
       "srcdoc": _vm.htmlData
     }
-  }) : _vm._e(), (_vm.isNotIos) ? _c('gsyWeb', {
+  }) : _vm._e(), (_vm.isNotWeb) ? _c('gsyWeb', {
     style: _vm.webStyle,
     attrs: {
       "srcdoc": _vm.htmlData
