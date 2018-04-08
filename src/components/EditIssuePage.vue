@@ -3,8 +3,8 @@
         <div class="input-container">
             <text style="color: #3c3f41;font-weight: bold; font-size: 35px">{{title}}</text>
             <div style="margin-top: 50px">
-                <input v-show="needTitle" class="input-title" @input="onTitleChange" ref="editTitle" placeholder="请输入标题" :value="editTitle"/>
-                <input class="input" @input="onValueChange" ref="editValue" placeholder="请输入回复" :value="editValue"/>
+                <input v-if="needTitle === true" class="input-title" @input="onTitleChange" ref="editTitle" placeholder="请输入标题" :value="editTitle"/>
+                <textarea class="input" @input="onValueChange" ref="editValue" placeholder="请输入回复" :value="editValue"></textarea>
             </div>
             <div style="flex: 1;flex-direction: row;margin-top: 20px; width:600px;">
                 <text class="btn-text" @click="function(){toBack()}">取消</text>
@@ -43,6 +43,8 @@
                 needTitle: false,
                 title: "回复",
                 type: 1,
+                issueNum: "",
+                commentNum: "",
             }
         },
         created: function () {
@@ -61,6 +63,12 @@
             }
             if(this.getQuery().type) {
                 this.type = this.getQuery().type
+            }
+            if(this.getQuery().issueNum) {
+                this.issueNum = this.getQuery().issueNum
+            }
+            if(this.getQuery().commentNum) {
+                this.commentNum = this.getQuery().commentNum
             }
         },
         methods: {

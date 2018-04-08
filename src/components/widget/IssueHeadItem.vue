@@ -43,10 +43,10 @@
                 if(!this.itemValue.ex.userName) {
                     return
                 }
-                this.jumpWithParams("UserInfoPage", {userName: this.itemValue.ex.userName})
+                this.jumpWithParams("UserInfoPage", {userName: this.itemValue.user.login})
             },
             isAndroid() {
-                return WXEnvironment.platform === 'android' && itemValue.body_html
+                return WXEnvironment.platform === 'android' && this.itemValue.body_html
             }
         },
         created() {
