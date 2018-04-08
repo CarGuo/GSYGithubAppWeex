@@ -32178,6 +32178,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var basePath = 'http://192.168.21.75:8088/dist/views';
+var iosPath = 'local:///bundlejs/';
+var androidPath = 'file://assets/dist/';
 
 exports.default = {
     methods: {
@@ -32191,14 +32193,36 @@ exports.default = {
                 this.getNavigator().pop({ animated: "true" });
             }
         },
+        getBaseUrl: function getBaseUrl() {
+            var bundleUrl = this.$getConfig().bundleUrl;
+            bundleUrl = String(bundleUrl);
+            var nativeBase = void 0;
+            var isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
+
+            var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
+            if (isAndroidAssets) {
+                nativeBase = 'file://assets/dist/';
+            } else if (isiOSAssets) {
+                nativeBase = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+            } else {
+                var host = 'localhost:8080';
+                var matches = /\/\/([^\/]+?)\//.exec(bundleUrl);
+                if (matches && matches.length >= 2) {
+                    host = matches[1];
+                }
+                nativeBase = 'http://' + host + '/index.html?page=./dist/';
+            }
+            return nativeBase;
+        },
         jump: function jump(to) {
             if (WXEnvironment.platform === 'Web') {
                 if (this.$router) {
                     this.$router.push(to);
                 }
             } else {
+                var path = this.getBaseUrl();
                 this.getNavigator().push({
-                    url: 'file://assets/dist/' + to + '.js',
+                    url: path + to + '.js',
                     animated: "true"
                 }, function (event) {
                     //modal.toast({ message: 'callback: ' + event })
@@ -32211,9 +32235,10 @@ exports.default = {
                     this.$router.push({ name: to, params: params });
                 }
             } else {
+                var path = this.getBaseUrl();
                 var q = this.createQuery(params);
                 this.getNavigator().push({
-                    url: 'file://assets/dist/' + to + '.js' + q,
+                    url: path + to + '.js' + q,
                     animated: "true"
                 }, function (event) {
                     //modal.toast({ message: 'callback: ' + event })
@@ -51225,6 +51250,7 @@ module.exports = {
     "textOverflow": "ellipsis",
     "wordWrap": "break-word",
     "WebkitLineClamp": 3,
+    "lines": 3,
     "WebkitBoxOrient": "vertical"
   },
   "content-text": {
@@ -51458,6 +51484,7 @@ module.exports = {
     "textOverflow": "ellipsis",
     "wordWrap": "break-word",
     "WebkitLineClamp": 3,
+    "lines": 3,
     "WebkitBoxOrient": "vertical"
   },
   "repo-text": {

@@ -25,6 +25,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
+    [self setStatusBarBackgroundColor:[UIColor colorWithRed:0.23 green:0.24 blue:0.25 alpha:1.0]];
+    
     [WeexSDKManager setup];
     
     [self.window makeKeyAndVisible];
@@ -46,6 +48,14 @@
     NSString* logPath = [documentDir stringByAppendingPathComponent:@"console.log"];
     freopen([logPath fileSystemRepresentation], "a+", stderr);
 #endif
+}
+
+//设置状态栏颜色
+- (void)setStatusBarBackgroundColor:(UIColor *)color {
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+        statusBar.backgroundColor = color;
+    }
 }
 
 #pragma mark 
