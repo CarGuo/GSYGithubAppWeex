@@ -11,6 +11,7 @@ import IssueDetailPage from '@/components/IssueDetailPage.vue'
 import CommonListPage from '@/components/CommonListPage.vue'
 import SearchPage from '@/components/SearchPage.vue'
 import WebPage from '@/components/WebPage.vue'
+import EditIssuePage from '@/components/EditIssuePage.vue'
 
 import EventItem from '@/components/widget/EventItem.vue'
 import RepositoryItem from '@/components/widget/RepositoryItem.vue'
@@ -96,6 +97,11 @@ module.exports = new Router({
             path:  '/web',
             name: 'WebPage',
             component: WebPage
+        },
+        {
+            path:  '/edit',
+            name: 'EditIssuePage',
+            component: EditIssuePage
         },
 
     ]
