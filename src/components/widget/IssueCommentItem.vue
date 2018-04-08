@@ -32,7 +32,7 @@
                 this.onItemClick && this.onItemClick(this.itemIndex);
             },
             imageClick() {
-                if(!this.itemValue.ex.userName) {
+                if(!this.itemValue.user.login) {
                     return
                 }
                 this.jumpWithParams("UserInfoPage", {userName:  this.itemValue.user.login})

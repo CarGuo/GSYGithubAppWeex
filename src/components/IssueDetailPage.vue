@@ -1,22 +1,22 @@
 <template>
-    <div style="height:1334px;width: 750px;background-color: #f2f3f4">
+    <div style="height:1334px;width: 750px;background-color: #f2f3f4" @viewappear="onappear"  @viewdisappear ="ondisappear">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list"
                   headerComponent="IssueHeadItem" :headerData="issueInfo"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
-        <div class="bottom-container">
+        <div v-if="issueInfo.body" class="bottom-container">
             <div class="bottom-item bottom-item-line" @click="replyClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{'回复'}}</text>
             </div>
-            <div class="bottom-item bottom-item-line" @click="editClick">
+            <div class="bottom-item bottom-item-line" @click="editIssueClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{'编辑'}}</text>
             </div>
             <div class="bottom-item bottom-item-line" @click="closeClick">
-                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{'关闭'}}</text>
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{showCloseText}}</text>
             </div>
             <div class="bottom-item" @click="lockClick">
-                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{'锁定'}}</text>
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{lockText}}</text>
             </div>
         </div>
         <wxc-mask height="400"
@@ -53,23 +53,26 @@
     import NavigationBar from './widget/NavigationBar.vue'
     import repository from '../core/net/repository'
     import {WxcMask} from 'weex-ui'
+    import LoadingComponent from './widget/LoadingComponent.vue'
     const clipboard = weex.requireModule('clipboard')
     const modal = weex.requireModule('modal')
 
     export default {
         props: {
         },
-        components: {RLList, NavigationBar, WxcMask},
+        components: {RLList, NavigationBar, WxcMask, LoadingComponent},
         data() {
             return {
                 userName: "",
                 reposName: "",
                 issueNum: "",
+                closeText: "关闭",
                 itemClickIndex: -1,
                 title: "",
                 showMark: false,
                 isLoading: false,
                 currentPage: 1,
+                ondisappearStatus: false,
                 list: [],
                 issueInfo: {},
             }
@@ -80,6 +83,26 @@
         activated: function () {
             //keep alive
             this.init();
+        },
+        computed: {
+            showCloseText() {
+                if(this.issueInfo === null) {
+                    return this.closeText
+                }
+                if (this.issueInfo.state === "closed") {
+                    return '打开'
+                }
+                return '关闭'
+            },
+            lockText() {
+                if(this.issueInfo === null) {
+                    return '锁定'
+                }
+                if (this.issueInfo.locked == true) {
+                    return '解锁'
+                }
+                return '锁定'
+            }
         },
         methods: {
             init() {
@@ -163,8 +186,6 @@
             },
             itemClick(index) {
                 this.itemClickIndex = index;
-                //modal.toast({message: "click index " + index})
-                //this.jumpWithParams('EditIssuePage', {})
                 this.showMark = true;
             },
             isPreparing() {
@@ -173,35 +194,113 @@
             wxcMaskSetHidden () {
                 this.showMark = false;
             },
-            editClick () {
+            /**
+             * 删除评论
+             * */
+            deleteClick() {
                 this.showMark = false;
-                if(this.itemClickIndex < 0) {
+                if (this.itemClickIndex < 0) {
                     return
                 }
+                this.isLoading = true;
                 let data = this.list[this.itemClickIndex];
-                this.jumpWithParams('EditIssuePage', {needTitle: false, editValue: data.body, title: '编辑', type: 2})
+                repository.deleteCommentDao(this.userName, this.reposName, this.issueNum, data.id).then((res) => {
+                    setTimeout(() => {
+                        this.isLoading = false;
+                    }, 500);
+                    this.onRefresh();
+                })
             },
-            deleteClick () {
+            /**
+             * 复制评论
+             * */
+            copyClick() {
                 this.showMark = false;
-            },
-            copyClick () {
-                this.showMark = false;
-                if(this.itemClickIndex < 0) {
+                if (this.itemClickIndex < 0) {
                     return
                 }
                 let data = this.list[this.itemClickIndex];
                 clipboard.setString(data.body)
                 modal.toast({message: "已复制"});
             },
-            replyClick () {
+            /**
+             * 编辑评论
+             * */
+            editClick() {
+                this.showMark = false;
+                if (this.itemClickIndex < 0) {
+                    return
+                }
+                let data = this.list[this.itemClickIndex];
+                this.jumpWithParams('EditIssuePage', {
+                    needTitle: null, editValue: data.body, title: '编辑', type: 'editComment',
+                    issueNum: this.issueNum, commentNum: data.id, reposName: this.reposName, userName: this.userName
+                })
             },
-            editClick () {
+            /**
+             * 回复issue
+             * */
+            replyClick() {
+                this.jumpWithParams('EditIssuePage', {
+                    needTitle: null, title: '回复', type: 'commentIssue',
+                    issueNum: this.issueNum, reposName: this.reposName, userName: this.userName
+                })
             },
-            closeClick () {
+            /**
+             * 编译issue
+             * */
+            editIssueClick() {
+                this.jumpWithParams('EditIssuePage', {
+                    needTitle: true,
+                    editValue: this.issueInfo.body,
+                    editTitle: this.issueInfo.title,
+                    title: '编辑',
+                    type: 'editIssue',
+                    issueNum: this.issueNum,
+                    reposName: this.reposName,
+                    userName: this.userName
+                })
             },
-            lockClick () {
+            /**
+             * 关闭issue
+             * */
+            closeClick() {
+                this.isLoading = true;
+                repository.editIssueDao(this.userName, this.reposName, this.issueNum,
+                    {state: (this.issueInfo.state === "closed") ? 'open' : 'closed'}).then((res) => {
+                    setTimeout(() => {
+                        this.isLoading = false;
+                    }, 500);
+                    this.loadDetail();
+                })
             },
-
+            /**
+             * 锁定操作
+             * */
+            lockClick() {
+                this.isLoading = true;
+                repository.lockIssueDao(this.userName, this.reposName, this.issueNum, this.issueInfo.locked).then((res) => {
+                    setTimeout(() => {
+                        this.isLoading = false;
+                    }, 500);
+                    this.loadDetail();
+                })
+            },
+            /**
+             * 页面onResume
+             * */
+            onappear(event) {
+                if (this.ondisappearStatus === true) {
+                    this.loadDetail();
+                    this.onRefresh()
+                }
+            },
+            /**
+             * 页面onPause
+             * */
+            ondisappear(event) {
+                this.ondisappearStatus = true
+            }
         }
     }
 </script>
@@ -216,12 +315,16 @@
     }
     .content-text {
         flex: 1;
-        padding: 10px;
         color: #333333;
         width: 500px;
+        height: 60px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 30px;
         border-bottom-width: 2px;
         border-bottom-color: #969896;
-        font-size: 30px;
+        font-size: 35px;
     }
 
     .bottom-container {
@@ -250,7 +353,7 @@
     }
 
     .bottom-item-text {
-        font-size: 23px;
+        font-size: 26px;
         font-family: 'wxcIconFont';
         color: rgba(60, 63, 65, 0.7);
         display: -webkit-box;
