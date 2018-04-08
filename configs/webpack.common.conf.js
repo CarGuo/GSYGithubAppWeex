@@ -16,6 +16,7 @@ const weexEntry = {
   'CommonListPage': helper.root('entry/CommonListPage.js'),
   'SearchPage': helper.root('entry/SearchPage.js'),
   'WebPage': helper.root('entry/WebPage.js'),
+  'EditIssuePage': helper.root('entry/EditIssuePage.js'),
 }
 
 const getEntryFileContent = (source, routerpath) => {

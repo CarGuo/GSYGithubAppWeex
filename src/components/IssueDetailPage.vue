@@ -9,8 +9,6 @@
 </template>
 
 <script>
-    const modal = weex.requireModule('modal')
-
     import * as Constant from '../core/common/constant'
     import RLList from './widget/RLList.vue'
     import NavigationBar from './widget/NavigationBar.vue'
@@ -121,6 +119,7 @@
             itemClick(index) {
                 console.log("click index ", index);
                 //modal.toast({message: "click index " + index})
+                this.jumpWithParams('EditIssuePage', {})
             },
             isPreparing() {
                 return (!this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1)
