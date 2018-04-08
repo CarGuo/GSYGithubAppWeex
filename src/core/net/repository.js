@@ -541,6 +541,96 @@ const getBranchesDao = async(userName, reposName) => {
 
 };
 
+
+/**
+ * 增加issue的回复
+ */
+const addIssueCommentDao = async (userName, repository, number, comment) => {
+    let fullName = userName + "/" + repository;
+    let url = Address.addIssueComment(userName, repository, number);
+    let res = await Api.netFetch(url, 'POST', {body: comment}, true, {Accept: 'application/vnd.github.VERSION.full+json'});
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+
+/**
+ * 编辑issue
+ */
+const editIssueDao = async (userName, repository, number, issue) => {
+    let fullName = userName + "/" + repository;
+    let url = Address.editIssue(userName, repository, number);
+    let res = await Api.netFetch(url, 'PATCH', issue, true, {Accept: 'application/vnd.github.VERSION.full+json'});
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+/**
+ * 锁定issue
+ */
+const lockIssueDao = async (userName, repository, number, locked) => {
+    let fullName = userName + "/" + repository;
+    let url = Address.lockIssue(userName, repository, number);
+    let res = await Api.netFetch(url, locked ? "DELETE" : 'PUT', {}, true, {Accept: 'application/vnd.github.VERSION.full+json'});
+    let objectData = null;
+    if (res && res.result) {
+        objectData = {
+            locked: !locked
+        }
+    }
+    return {
+        data: objectData,
+        result: res.result
+    };
+};
+
+/**
+ * 创建issue
+ */
+const createIssueDao = async (userName, repository, issue) => {
+    let fullName = userName + "/" + repository;
+    let url = Address.createIssue(userName, repository);
+    let res = await Api.netFetch(url, 'POST', issue, true, {Accept: 'application/vnd.github.VERSION.full+json'});
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+
+/**
+ * 编辑issue回复
+ */
+const editCommentDao = async (userName, repository, number, commentId, comment) => {
+    let fullName = userName + "/" + repository;
+    let url = Address.editComment(userName, repository, commentId);
+    let res = await Api.netFetch(url, 'PATCH', comment, true, {Accept: 'application/vnd.github.VERSION.full+json'});
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+/**
+ * 删除issue回复
+ */
+const deleteCommentDao = async (userName, repository, number, commentId) => {
+    let fullName = userName + "/" + repository;
+    let url = Address.editComment(userName, repository, commentId);
+    let res = await Api.netFetch(url, 'DELETE', null, true, {Accept: 'application/vnd.github.VERSION.full+json'});
+    return {
+        data: res.data,
+        result: res.result
+    };
+};
+
+
+
+
 export default {
     getTrendDao,
     getRepositoryDetailReadmeHtmlDao,
@@ -562,4 +652,10 @@ export default {
     doRepositoryWatchDao,
     createForkDao,
     getBranchesDao,
+    lockIssueDao,
+    editIssueDao,
+    createIssueDao,
+    addIssueCommentDao,
+    editCommentDao,
+    deleteCommentDao,
 }

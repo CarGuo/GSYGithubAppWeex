@@ -3,8 +3,10 @@
         <div class="input-container">
             <text style="color: #3c3f41;font-weight: bold; font-size: 35px">{{title}}</text>
             <div style="margin-top: 50px">
-                <input v-if="needTitle === true" class="input-title" @input="onTitleChange" ref="editTitle" placeholder="请输入标题" :value="editTitle"/>
-                <textarea class="input" @input="onValueChange" ref="editValue" placeholder="请输入回复" :value="editValue"></textarea>
+                <input v-if="needTitle" class="input-title" @input="onTitleChange" ref="editTitle"
+                       placeholder="请输入标题" :value="editTitle"/>
+                <textarea class="input" @input="onValueChange" ref="editValue" placeholder="请输入回复"
+                          :value="editValue"></textarea>
             </div>
             <div style="flex: 1;flex-direction: row;margin-top: 20px; width:600px;">
                 <text class="btn-text" @click="function(){toBack()}">取消</text>
@@ -24,50 +26,60 @@
 </template>
 <script>
     import {WxcLoading} from 'weex-ui'
-    import user from '../core/net/user'
+    import repository from '../core/net/repository'
     import * as Constant from '../core/common/constant'
     import {isEmptyString} from '../core/common/commonUtils'
     import * as ignoreConfig from '../core/common/ignoreConfig'
     import {addIconFontSupport} from '../config/IconConfig'
+    import LoadingComponent from './widget/LoadingComponent.vue'
+
     const modal = weex.requireModule('modal')
     const dom = weex.requireModule('dom');
 
     export default {
-        components: {WxcLoading},
+        components: {WxcLoading, LoadingComponent},
         data() {
             return {
                 isLoading: false,
                 loadingText: "处理中···",
                 editValue: "",
                 editTitle: "",
-                needTitle: false,
+                needTitle: null,
                 title: "回复",
-                type: 1,
+                type: 'createIssue',
                 issueNum: "",
                 commentNum: "",
+                reposName: "",
+                userName: "",
             }
         },
         created: function () {
             addIconFontSupport(dom, "../../")
-            if(this.getQuery().needTitle) {
+            if (this.getQuery().needTitle) {
                 this.needTitle = this.getQuery().needTitle
             }
-            if(this.getQuery().editValue) {
+            if (this.getQuery().reposName) {
+                this.reposName = this.getQuery().reposName
+            }
+            if (this.getQuery().userName) {
+                this.userName = this.getQuery().userName
+            }
+            if (this.getQuery().editValue) {
                 this.editValue = this.getQuery().editValue
             }
-            if(this.getQuery().editTitle) {
+            if (this.getQuery().editTitle) {
                 this.editTitle = this.getQuery().editTitle
             }
-            if(this.getQuery().title) {
+            if (this.getQuery().title) {
                 this.title = this.getQuery().title
             }
-            if(this.getQuery().type) {
+            if (this.getQuery().type) {
                 this.type = this.getQuery().type
             }
-            if(this.getQuery().issueNum) {
+            if (this.getQuery().issueNum) {
                 this.issueNum = this.getQuery().issueNum
             }
-            if(this.getQuery().commentNum) {
+            if (this.getQuery().commentNum) {
                 this.commentNum = this.getQuery().commentNum
             }
         },
@@ -81,7 +93,7 @@
             confirmClick() {
                 let editValue = this.editValue;
                 let editTitle = this.editTitle;
-                if (this.needTitle && isEmptyString(editTitle)) {
+                if (this.needTitle === true && isEmptyString(editTitle)) {
                     modal.toast({
                         message: "标题内容不能为空"
                     });
@@ -94,7 +106,58 @@
                     return
                 }
                 this.isLoading = true;
-            }
+                switch (this.type) {
+                    case 'createIssue':
+                        this.createIssue()
+                        break
+                    case 'editIssue':
+                        this.editIssue()
+                        break
+                    case 'commentIssue':
+                        this.commentIssue()
+                        break
+                    case 'editComment':
+                        this.editComment()
+                        break
+                }
+            },
+            createIssue() {
+
+            },
+            editIssue() {
+                repository.editIssueDao(this.userName, this.reposName, this.issueNum,
+                    {title: this.editTitle, body: this.editValue})
+                    .then((res) => {
+                        setTimeout(() => {
+                            this.isLoading = false;
+                            if (res && res.result) {
+                                this.toBack()
+                            }
+                        }, 500);
+                    })
+            },
+            commentIssue() {
+                repository.addIssueCommentDao(this.userName, this.reposName, this.issueNum, this.editValue)
+                    .then((res) => {
+                        setTimeout(() => {
+                            this.isLoading = false;
+                            if (res && res.result) {
+                                this.toBack()
+                            }
+                        }, 500);
+                    });
+            },
+            editComment() {
+                repository.editCommentDao(this.userName, this.reposName, this.issueNum, this.commentNum,
+                    {body: this.editValue}).then((res) => {
+                    setTimeout(() => {
+                        this.isLoading = false;
+                        if (res && res.result) {
+                            this.toBack()
+                        }
+                    }, 500);
+                })
+            },
         }
     }
 </script>
@@ -133,7 +196,7 @@
         width: 560px;
         height: 560px;
         text-align: start;
-        align-items:flex-start;
+        align-items: flex-start;
         justify-content: flex-start;
         border-radius: 12px;
         padding: 20px;
@@ -150,6 +213,6 @@
         color: #969896;
         font-size: 35px;
         font-weight: bold;
-        flex:1
+        flex: 1
     }
 </style>
