@@ -4,18 +4,18 @@
                   ref="tab-title-list"
                   :show-scrollbar="false"
                   scroll-direction="horizontal"
-                  :style="{height: '80px'}">
+                  :style="{height: '80px', width: '750px'}">
             <div class="title-item"
                  v-for="(v, index) in headerList"
                  :key="index"
                  @click="tabClick(index)">
 
-                <text :style="{ fontSize: '23px', color: '#3c3f41', marginLeft: '15px'}"
+                <text :style="{ fontSize: '28px', color: '#3c3f41', marginLeft: '15px', height: '70px'}"
                         class="tab-text">{{v + ' >'}}</text>
 
             </div>
         </scroller>
-        <r-l-list ref="dylist" listItemName="FileItem" :listData="list"
+        <r-l-list ref="dylist" listItemName="FileItem" :listData="list" :bottomEmpty="400"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
 </template>
@@ -155,6 +155,8 @@
     .title-item {
         justify-content: center;
         align-items: center;
+        padding-top: 25px;
+        height: 80px;
     }
     .tab-title-list {
         flex-direction: row;

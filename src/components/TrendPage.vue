@@ -28,7 +28,7 @@
                          @wxcPopoverButtonClicked="popoverLanguageButtonClicked"></wxc-popover>
         </div>
         <div class="list-container">
-            <r-l-list ref="dylist" listItemName="RepositoryItem" :listData="dataList"
+            <r-l-list ref="dylist" listItemName="RepositoryItem" :listData="dataList" :bottomEmpty="400"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
     </div>
