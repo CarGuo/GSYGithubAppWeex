@@ -1,5 +1,5 @@
 <template>
-    <div style="height: 1334px;width: 750px">
+    <div :style="mainStyle">
         <navigation-bar :title="' '" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <web :src="url" :style="webStyle"></web>
@@ -17,7 +17,8 @@
         },
         data: () => {
             return {
-                url:""
+                url:"",
+                mainStyle: {}
             }
         },
         props: {
@@ -27,6 +28,8 @@
         },
         created() {
             this.url =  this.getQuery().url;
+            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
+            this.mainStyle = {height:'1334px',width: '750px', marginTop: mainMarginTop}
         },
     }
 </script>

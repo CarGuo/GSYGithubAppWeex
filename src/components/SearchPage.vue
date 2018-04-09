@@ -1,5 +1,5 @@
 <template>
-    <div :style="{flex:1, width:'750px',alignItems: 'center',backgroundColor: '#f2f3f4'}">
+    <div :style="mainStyle">
         <navigation-bar :title="'搜索'" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <div>
@@ -47,10 +47,13 @@
                 selectTypeData: null,
                 selectSortData: null,
                 selectLanguageData: null,
+                mainStyle:{}
             }
         },
         created: function () {
             this.init()
+            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
+            this.mainStyle = {flex:1, width:'750px',alignItems: 'center',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
         },
         activated: function () {
             //keep alive

@@ -1,5 +1,5 @@
 <template>
-    <div style="height:1334px;width: 750px;background-color: #f2f3f4" @viewappear="onappear"  @viewdisappear ="ondisappear">
+    <div :style="mainStyle" @viewappear="onappear"  @viewdisappear ="ondisappear">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list"
@@ -75,10 +75,15 @@
                 ondisappearStatus: false,
                 list: [],
                 issueInfo: {},
+                mainStyle:{},
             }
         },
         created: function () {
             this.init()
+            let mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : '1334px'
+            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
+            this.mainStyle = {height: mainHeight, width: '750px',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
+
         },
         activated: function () {
             //keep alive

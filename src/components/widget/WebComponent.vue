@@ -1,7 +1,8 @@
 <template>
     <div>
         <web v-if="isWeb" :srcdoc="htmlData" :style="webStyle"></web>
-        <gsyWeb v-if="isNotWeb" :srcdoc="htmlData" :style="webStyle" @overrideUrl="onOverrideUrl"></gsyWeb>
+        <web v-if="isIos" :source="htmlData" :style="webStyle"></web>
+        <gsyWeb v-if="isAndroid" :srcdoc="htmlData" :style="webStyle" @overrideUrl="onOverrideUrl"></gsyWeb>
     </div>
 </template>
 
@@ -28,8 +29,11 @@
             isWeb() {
                 return WXEnvironment.platform === 'Web';
             },
-            isNotWeb() {
-                return WXEnvironment.platform !== 'Web';
+            isIos() {
+                return WXEnvironment.platform.toLowerCase() === 'ios';
+            },
+            isAndroid() {
+                return WXEnvironment.platform.toLowerCase() !== 'android';
             }
         },
         methods: {
@@ -46,6 +50,8 @@
                         //Linking.openURL(event.url)
                         //this.jumpWithParams("WebPage", {url: event.url})
                     }
+                    //https://segmentfault.com/q/1010000009521040
+                    //https://github.com/apache/incubator-weex/pull/1047
                     return event.url === 'about:blank';
                 }
             }

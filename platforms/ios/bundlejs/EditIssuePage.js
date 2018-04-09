@@ -54131,8 +54131,10 @@ exports.default = {
             reposStatus: null,
             isLoading: false,
             mainHeight: '1334px',
+            mainMarginTop: '0px',
             branch: [],
             popoverPosition: { x: -50, y: 1134 },
+            mainStyle: {},
             popoverArrowPosition: { pos: 'bottom', x: -50 }
         };
     },
@@ -54141,7 +54143,9 @@ exports.default = {
         var tabStyles = this.tabStyles;
 
         this.contentStyle = { height: tabPageHeight - tabStyles.height + 'px' };
-        this.mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : _weexUi.Utils.env.getScreenHeight() - 32;
+        var mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : _weexUi.Utils.env.getScreenHeight() - 32;
+        var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
+        this.mainStyle = { height: mainHeight, width: '750px', backgroundColor: 'white', marginTop: mainMarginTop };
         this.init();
     },
 
@@ -54715,8 +54719,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         width: _vm.tabStyles.width + 'px',
         height: _vm.tabStyles.height + 'px',
         backgroundColor: _vm.currentPage == index ? _vm.tabStyles.activeBgColor : _vm.tabStyles.bgColor,
-        borderColor: _vm.tabStyles.activeTitleColor,
-        borderBottomWidth: _vm.currentPage == index ? '3px' : 0
+        borderColor: _vm.currentPage == index ? _vm.tabStyles.activeTitleColor : _vm.tabStyles.bgColor,
+        borderBottomWidth: _vm.currentPage == index ? '3px' : '0px'
       },
       attrs: {
         "accessible": true,
@@ -54804,8 +54808,11 @@ exports.default = {
         isWeb: function isWeb() {
             return WXEnvironment.platform === 'Web';
         },
-        isNotWeb: function isNotWeb() {
-            return WXEnvironment.platform !== 'Web';
+        isIos: function isIos() {
+            return WXEnvironment.platform.toLowerCase() === 'ios';
+        },
+        isAndroid: function isAndroid() {
+            return WXEnvironment.platform.toLowerCase() !== 'android';
         }
     },
     methods: {
@@ -54818,16 +54825,19 @@ exports.default = {
                 } else if (event.url && (event.url.indexOf('http') === 0 || event.url.indexOf('www') === 0)) {
                     //Actions.WebPage({uri: event.url});
                     this.jumpWithParams("WebPage", { url: event.url });
-                } else if (event.url !== 'about:blank') {
-                    //Linking.openURL(event.url)
-                    //this.jumpWithParams("WebPage", {url: event.url})
-                }
+                } else if (event.url !== 'about:blank') {}
+                //Linking.openURL(event.url)
+                //this.jumpWithParams("WebPage", {url: event.url})
+
+                //https://segmentfault.com/q/1010000009521040
+                //https://github.com/apache/incubator-weex/pull/1047
                 return event.url === 'about:blank';
             }
         }
     },
     created: function created() {}
 }; //
+//
 //
 //
 //
@@ -54848,7 +54858,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "srcdoc": _vm.htmlData
     }
-  }) : _vm._e(), (_vm.isNotWeb) ? _c('gsyWeb', {
+  }) : _vm._e(), (_vm.isIos) ? _c('web', {
+    style: _vm.webStyle,
+    attrs: {
+      "source": _vm.htmlData
+    }
+  }) : _vm._e(), (_vm.isAndroid) ? _c('gsyWeb', {
     style: _vm.webStyle,
     attrs: {
       "srcdoc": _vm.htmlData
@@ -56412,11 +56427,7 @@ module.exports.render._withStripped = true
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    style: {
-      height: _vm.mainHeight,
-      width: '750px',
-      backgroundColor: 'white'
-    }
+    style: _vm.mainStyle
   }, [_c('navigation-bar', {
     attrs: {
       "title": _vm.title,
@@ -56597,12 +56608,15 @@ exports.default = {
             path: "",
             curBranch: "master",
             codeData: "",
-            title: ""
+            title: "",
+            mainStyle: {}
         };
     },
 
     created: function created() {
         this.loadData();
+        var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
+        this.mainStyle = { flex: 1, width: '750px', marginTop: mainMarginTop };
     },
     methods: {
         loadData: function loadData() {
@@ -56653,9 +56667,7 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    style: {
-      flex: 1
-    }
+    style: _vm.mainStyle
   }, [_c('navigation-bar', {
     attrs: {
       "title": _vm.title,
@@ -56703,13 +56715,21 @@ exports.default = {
     props: {
         userType: { type: Number, default: 1 }
     },
+    data: function data() {
+        return {
+            mainStyle: {}
+        };
+    },
     components: { PersonPage: _PersonPage2.default },
     computed: {
         getUserName: function getUserName() {
             return this.getQuery().userName;
         }
+    },
+    created: function created() {
+        var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
+        this.mainStyle = { marginTop: mainMarginTop, backgroundColor: '#f2f3f4' };
     }
-
 }; //
 //
 //
@@ -56727,9 +56747,7 @@ exports.default = {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: ["wrapper"],
-    staticStyle: {
-      backgroundColor: "#f2f3f4"
-    }
+    style: _vm.mainStyle
   }, [_c('person-page', {
     attrs: {
       "needTitle": true,
@@ -56909,12 +56927,16 @@ exports.default = {
             currentPage: 1,
             ondisappearStatus: false,
             list: [],
-            issueInfo: {}
+            issueInfo: {},
+            mainStyle: {}
         };
     },
 
     created: function created() {
         this.init();
+        var mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : '1334px';
+        var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
+        this.mainStyle = { height: mainHeight, width: '750px', backgroundColor: '#f2f3f4', marginTop: mainMarginTop };
     },
     activated: function activated() {
         //keep alive
@@ -57162,11 +57184,7 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticStyle: {
-      height: "1334px",
-      width: "750px",
-      backgroundColor: "#f2f3f4"
-    },
+    style: _vm.mainStyle,
     on: {
       "viewappear": _vm.onappear,
       "viewdisappear": _vm.ondisappear
@@ -57331,12 +57349,15 @@ exports.default = {
             currentPage: 1,
             list: [],
             itemClass: 'EventItem',
-            dataType: ''
+            dataType: '',
+            mainStyle: {}
         };
     },
 
     created: function created() {
         this.init();
+        var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
+        this.mainStyle = { height: '1334px', width: '750px', backgroundColor: '#f2f3f4', marginTop: mainMarginTop };
     },
     activated: function activated() {
         //keep alive
@@ -57501,11 +57522,7 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticStyle: {
-      height: "1334px",
-      width: "750px",
-      backgroundColor: "#f2f3f4"
-    }
+    style: _vm.mainStyle
   }, [_c('navigation-bar', {
     attrs: {
       "title": _vm.title,
@@ -57636,12 +57653,15 @@ exports.default = {
             list: [],
             selectTypeData: null,
             selectSortData: null,
-            selectLanguageData: null
+            selectLanguageData: null,
+            mainStyle: {}
         };
     },
 
     created: function created() {
         this.init();
+        var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
+        this.mainStyle = { flex: 1, width: '750px', alignItems: 'center', backgroundColor: '#f2f3f4', marginTop: mainMarginTop };
     },
     activated: function activated() {
         //keep alive
@@ -57750,12 +57770,7 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    style: {
-      flex: 1,
-      width: '750px',
-      alignItems: 'center',
-      backgroundColor: '#f2f3f4'
-    }
+    style: _vm.mainStyle
   }, [_c('navigation-bar', {
     attrs: {
       "title": '搜索',
@@ -57844,7 +57859,8 @@ exports.default = {
     },
     data: function data() {
         return {
-            url: ""
+            url: "",
+            mainStyle: {}
         };
     },
     props: {
@@ -57853,6 +57869,8 @@ exports.default = {
     methods: {},
     created: function created() {
         this.url = this.getQuery().url;
+        var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
+        this.mainStyle = { height: '1334px', width: '750px', marginTop: mainMarginTop };
     }
 }; //
 //
@@ -57872,10 +57890,7 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticStyle: {
-      height: "1334px",
-      width: "750px"
-    }
+    style: _vm.mainStyle
   }, [_c('navigation-bar', {
     attrs: {
       "title": ' ',

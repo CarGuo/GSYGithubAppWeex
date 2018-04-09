@@ -8,7 +8,7 @@
                  :key="index"
                  :ref="'wxc-tab-title-'+index"
                  @click="setPage(index,v.url)"
-                 :style="{ width: tabStyles.width +'px', height: tabStyles.height +'px', backgroundColor: currentPage == index ? tabStyles.activeBgColor : tabStyles.bgColor, borderColor: tabStyles.activeTitleColor,borderBottomWidth: currentPage == index ? '3px' : 0 }"
+                 :style="{ width: tabStyles.width +'px', height: tabStyles.height +'px', backgroundColor: currentPage == index ? tabStyles.activeBgColor : tabStyles.bgColor, borderColor: currentPage == index ? tabStyles.activeTitleColor : tabStyles.bgColor, borderBottomWidth: currentPage == index ? '3px' : '0px' }"
                  :accessible="true"
                  :aria-label="`${v.title?v.title:'标签'+index}`">
 
