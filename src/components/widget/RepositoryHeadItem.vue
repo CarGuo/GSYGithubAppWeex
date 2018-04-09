@@ -115,7 +115,7 @@
         },
         created() {
             const dom = weex.requireModule('dom');
-            addIconFontSupport(dom, "../../")
+            //addIconFontSupport(dom, "../../")
         },
     }
 </script>

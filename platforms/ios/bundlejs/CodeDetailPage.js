@@ -50759,7 +50759,7 @@ exports.default = {
         leftIcon: { type: String, default: '\uE78A' }
     },
     created: function created() {
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        //addIconFontSupport(dom, "../../")
     }
 };
 
@@ -50909,7 +50909,9 @@ exports.default = {
     },
     activated: function activated() {
         //keep alive
-        this.onRefresh();
+        if (WXEnvironment.platform === 'Web') {
+            this.onRefresh();
+        }
     },
     computed: {
         dataList: function dataList() {
@@ -51558,7 +51560,7 @@ exports.default = {
     },
     created: function created() {
         var dom = weex.requireModule('dom');
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        //addIconFontSupport(dom, "../../")
     }
 }; //
 //
@@ -51837,7 +51839,7 @@ exports.default = {
     },
     created: function created() {
         var dom = weex.requireModule('dom');
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        //addIconFontSupport(dom, "../../")
     }
 }; //
 //
@@ -52170,7 +52172,7 @@ exports.default = {
         }
     },
     created: function created() {
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        //addIconFontSupport(dom, "../../")
     }
 };
 
@@ -52461,7 +52463,7 @@ exports.default = {
         }
     },
     created: function created() {
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        //addIconFontSupport(dom, "../../")
     }
 };
 
@@ -52547,7 +52549,7 @@ module.exports = {
     "paddingRight": "20",
     "paddingBottom": "20",
     "paddingLeft": "20",
-    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.80)"
+    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.60)"
   },
   "bottom-container": {
     "flexDirection": "row",
@@ -52726,7 +52728,7 @@ exports.default = {
         honorClick: function honorClick() {}
     },
     created: function created() {
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        //addIconFontSupport(dom, "../../")
     }
 };
 
@@ -53098,7 +53100,7 @@ exports.default = {
         }
     },
     created: function created() {
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        //addIconFontSupport(dom, "../../")
     }
 };
 
@@ -53152,7 +53154,7 @@ module.exports = {
     "paddingRight": "20",
     "paddingBottom": "20",
     "paddingLeft": "20",
-    "boxShadow": "0 0 5px rgba(0, 0, 0, 0.80)",
+    "boxShadow": "0 0 2px rgba(0, 0, 0, 0.90)",
     "flexDirection": "row"
   },
   "user-text": {
@@ -53484,7 +53486,9 @@ exports.default = {
     },
     activated: function activated() {
         //keep alive
-        this.onRefresh();
+        if (WXEnvironment.platform === 'Web') {
+            this.onRefresh();
+        }
     },
     computed: {
         dataList: function dataList() {
@@ -53777,9 +53781,11 @@ exports.default = {
         }
     },
     activated: function activated() {
-        this.onRefresh();
-        if (this.isMe === false) {
-            this.loadUserInfo();
+        if (WXEnvironment.platform === 'Web') {
+            this.onRefresh();
+            if (this.isMe === false) {
+                this.loadUserInfo();
+            }
         }
     },
     computed: {
@@ -54063,6 +54069,8 @@ var Constant = _interopRequireWildcard(_constant);
 
 var _htmlUtils = __webpack_require__(10);
 
+var _IconConfig = __webpack_require__(3);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -54121,6 +54129,8 @@ var modal = weex.requireModule('modal'); //
 //
 //
 
+var dom = weex.requireModule('dom');
+
 exports.default = {
     components: { TopTabBar: _TopTabBar2.default, NavigationBar: _NavigationBar2.default, WebComponent: _WebComponent2.default, RepositoryDetailInfoPage: _RepositoryDetailInfoPage2.default,
         RepositoryIssueListPage: _RepositoryIssueListPage2.default, RepositoryFileListPage: _RepositoryFileListPage2.default, LoadingComponent: _LoadingComponent2.default, PopoverComponent: _PopoverComponent2.default },
@@ -54158,11 +54168,14 @@ exports.default = {
         var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
         this.mainStyle = { height: mainHeight, width: '750px', backgroundColor: 'white', marginTop: mainMarginTop };
         this.init();
+        (0, _IconConfig.addIconFontSupport)(dom, "../../");
     },
 
     activated: function activated() {
         //keep alive
-        this.init();
+        if (WXEnvironment.platform === 'Web') {
+            this.init();
+        }
     },
     methods: {
         init: function init() {
@@ -55599,7 +55612,9 @@ exports.default = {
     },
     activated: function activated() {
         //keep alive
-        this.init();
+        if (WXEnvironment.platform === 'Web') {
+            this.init();
+        }
     },
     methods: {
         init: function init() {
@@ -55803,7 +55818,7 @@ module.exports = {
     "paddingRight": "20",
     "paddingBottom": "20",
     "paddingLeft": "20",
-    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.60)"
+    "boxShadow": "0 0 5px rgba(0, 0, 0, 0.60)"
   },
   "control-text": {
     "flex": 1,
@@ -55922,11 +55937,13 @@ exports.default = {
 
     created: function created() {
         this.init();
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        //addIconFontSupport(dom, "../../")
     },
     activated: function activated() {
         //keep alive
-        this.init();
+        if (WXEnvironment.platform === 'Web') {
+            this.init();
+        }
     },
     methods: {
         init: function init() {
@@ -56260,7 +56277,9 @@ exports.default = {
     },
     activated: function activated() {
         //keep alive
-        this.init();
+        if (WXEnvironment.platform === 'Web') {
+            this.init();
+        }
     },
     deactivated: function deactivated() {},
     methods: {
@@ -56594,6 +56613,8 @@ var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
 var _htmlUtils = __webpack_require__(10);
 
+var _IconConfig = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -56608,6 +56629,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 //
 
 var modal = weex.requireModule('modal');
+
+var dom = weex.requireModule('dom');
 
 exports.default = {
     components: { WebComponent: _WebComponent2.default, NavigationBar: _NavigationBar2.default },
@@ -56627,6 +56650,7 @@ exports.default = {
         this.loadData();
         var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
         this.mainStyle = { flex: 1, width: '750px', marginTop: mainMarginTop };
+        (0, _IconConfig.addIconFontSupport)(dom, "../../");
     },
     methods: {
         loadData: function loadData() {
@@ -56865,6 +56889,8 @@ var _LoadingComponent = __webpack_require__(25);
 
 var _LoadingComponent2 = _interopRequireDefault(_LoadingComponent);
 
+var _IconConfig = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -56922,6 +56948,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var clipboard = weex.requireModule('clipboard');
 var modal = weex.requireModule('modal');
 
+var dom = weex.requireModule('dom');
+
 exports.default = {
     props: {},
     components: { RLList: _RLList2.default, NavigationBar: _NavigationBar2.default, WxcMask: _weexUi.WxcMask, LoadingComponent: _LoadingComponent2.default },
@@ -56948,10 +56976,13 @@ exports.default = {
         var mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : '1334px';
         var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
         this.mainStyle = { height: mainHeight, width: '750px', backgroundColor: '#f2f3f4', marginTop: mainMarginTop };
+        (0, _IconConfig.addIconFontSupport)(dom, "../../");
     },
     activated: function activated() {
         //keep alive
-        this.init();
+        if (WXEnvironment.platform === 'Web') {
+            this.init();
+        }
     },
     computed: {
         showCloseText: function showCloseText() {
@@ -57345,9 +57376,23 @@ var _user = __webpack_require__(12);
 
 var _user2 = _interopRequireDefault(_user);
 
+var _IconConfig = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var dom = weex.requireModule('dom');
 
 exports.default = {
     props: {},
@@ -57369,10 +57414,13 @@ exports.default = {
         this.init();
         var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
         this.mainStyle = { height: '1334px', width: '750px', backgroundColor: '#f2f3f4', marginTop: mainMarginTop };
+        (0, _IconConfig.addIconFontSupport)(dom, "../../");
     },
     activated: function activated() {
         //keep alive
-        this.init();
+        if (WXEnvironment.platform === 'Web') {
+            this.init();
+        }
     },
     methods: {
         init: function init() {
@@ -57518,15 +57566,7 @@ exports.default = {
             }
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 523 */
@@ -57574,7 +57614,7 @@ module.exports = {
     "paddingRight": "20",
     "paddingBottom": "10",
     "paddingLeft": "20",
-    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.90)"
+    "boxShadow": "0 0 5px rgba(0, 0, 0, 0.60)"
   },
   "control-text": {
     "flex": 1,
@@ -57620,11 +57660,13 @@ var _repository2 = _interopRequireDefault(_repository);
 
 var _weexUi = __webpack_require__(4);
 
+var _IconConfig = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-//
+var dom = weex.requireModule('dom'); //
 //
 //
 //
@@ -57674,10 +57716,13 @@ exports.default = {
         this.init();
         var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
         this.mainStyle = { flex: 1, width: '750px', alignItems: 'center', backgroundColor: '#f2f3f4', marginTop: mainMarginTop };
+        (0, _IconConfig.addIconFontSupport)(dom, "../../");
     },
     activated: function activated() {
         //keep alive
-        this.init();
+        if (WXEnvironment.platform === 'Web') {
+            this.init();
+        }
     },
     methods: {
         init: function init() {},

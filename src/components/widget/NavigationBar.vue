@@ -31,7 +31,7 @@
             leftIcon: {type: String, default: "\ue78a"},
         },
         created() {
-            addIconFontSupport(dom, "../../")
+            //addIconFontSupport(dom, "../../")
         },
     }
 </script>

@@ -56,6 +56,9 @@
     import LoadingComponent from './widget/LoadingComponent.vue'
     const clipboard = weex.requireModule('clipboard')
     const modal = weex.requireModule('modal')
+    import {addIconFontSupport} from '../config/IconConfig'
+    const dom = weex.requireModule('dom');
+
 
     export default {
         props: {
@@ -83,11 +86,13 @@
             let mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : '1334px'
             let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
             this.mainStyle = {height: mainHeight, width: '750px',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
-
+            addIconFontSupport(dom, "../../")
         },
         activated: function () {
             //keep alive
-            this.init();
+            if(WXEnvironment.platform === 'Web') {
+                this.init();
+            }
         },
         computed: {
             showCloseText() {

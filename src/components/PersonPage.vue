@@ -41,9 +41,11 @@
             }
         },
         activated: function () {
-            this.onRefresh()
-            if (this.isMe === false) {
-                this.loadUserInfo()
+            if(WXEnvironment.platform === 'Web') {
+                this.onRefresh()
+                if (this.isMe === false) {
+                    this.loadUserInfo()
+                }
             }
         },
         computed: {

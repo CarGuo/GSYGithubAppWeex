@@ -42,7 +42,7 @@
             }
         },
         created() {
-            addIconFontSupport(dom, "../../")
+            //addIconFontSupport(dom, "../../")
         },
     }
 </script>
