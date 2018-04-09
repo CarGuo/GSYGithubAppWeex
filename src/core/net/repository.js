@@ -290,7 +290,6 @@ const getIssueCommentDao = async (page = 0, userName, repository, number) => {
     if (res && res.result && res.data.length > 0) {
         res.data.forEach((item) => {
             const json = parse(item.body_html)
-            console.log("getIssueCommentDao", json)
             item.rich_list = issueJsonToRichJson(json, "#3c3f41")
         })
     }

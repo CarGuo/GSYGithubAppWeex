@@ -5729,7 +5729,6 @@ var getIssueCommentDao = function () {
                         if (res && res.result && res.data.length > 0) {
                             res.data.forEach(function (item) {
                                 var json = (0, _himalaya.parse)(item.body_html);
-                                console.log("getIssueCommentDao", json);
                                 item.rich_list = (0, _htmlUtils.issueJsonToRichJson)(json, "#3c3f41");
                             });
                         }
@@ -7133,17 +7132,17 @@ var issueJsonToRichJson = exports.issueJsonToRichJson = function issueJsonToRich
             case 'pre':
                 return { backgroundColor: '#AAAAAA', borderRadius: '5px', padding: '5px', color: "#3c3f41" };
             case 'h1':
-                return { fontSize: '40px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
+                return { fontSize: '50px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
             case 'h2':
-                return { fontSize: '35px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
+                return { fontSize: '45px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
             case 'h3':
-                return { fontSize: '30px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
+                return { fontSize: '40px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
             case 'h4':
-                return { fontSize: '25px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
+                return { fontSize: '35px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
             case 'h5':
-                return { fontSize: '20px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
+                return { fontSize: '30px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
             case 'p':
-                return { fontSize: '20px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
+                return { fontSize: '30px', color: textColor, paddingTop: '5px', paddingBottom: '5px' };
             case 'br':
                 return { paddingTop: '5px', paddingBottom: '5px' };
             default:
@@ -50640,6 +50639,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: ["tab-title-list"],
     style: {
       backgroundColor: _vm.tabStyles.bgColor,
+      borderColor: _vm.tabStyles.titleColor,
+      borderTopWidth: '0.5px',
       height: (_vm.tabStyles.height + (_vm.isIPhoneX ? 78 : 0)) + 'px',
       paddingBottom: _vm.isIPhoneX ? '78px' : '0'
     }
@@ -50708,7 +50709,9 @@ module.exports = {
     "height": "100",
     "alignItems": "center",
     "backgroundColor": "#3c3f41",
-    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.80)"
+    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.80)",
+    "borderBottomColor": "#f2f3f4",
+    "borderBottomWidth": "0.5"
   }
 }
 
@@ -51103,7 +51106,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 //
 //
 //
-//
 
 if (WXEnvironment.platform !== 'Web') {
     Vue.component('EventItem', _EventItem2.default);
@@ -51152,7 +51154,7 @@ exports.default = {
                 overflow: 'hidden',
                 flexDirection: 'row',
                 alignItems: 'center'
-            } : { height: '1px', overflow: 'hidden', flexDirection: 'row', alignItems: 'center' };
+            } : { height: '0.1px', overflow: 'hidden', flexDirection: 'row', alignItems: 'center' };
             return display;
         }
     },
@@ -52539,8 +52541,8 @@ module.exports = {
   "card-wrapper": {
     "width": "750",
     "backgroundColor": "#3c3f41",
-    "borderBottomLeftRadius": "10",
-    "borderBottomRightRadius": "10",
+    "borderBottomLeftRadius": "15",
+    "borderBottomRightRadius": "15",
     "paddingTop": "20",
     "paddingRight": "20",
     "paddingBottom": "20",
@@ -53241,9 +53243,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "refresh": _vm.onRefresh
     }
-  }, [_c('text', {
-    staticClass: ["indicator-text"]
-  }, [_vm._v("Refreshing ...")]), _c('loading-indicator', {
+  }, [_c('loading-indicator', {
     staticClass: ["indicator"]
   })]), _c('cell', {
     staticClass: ["header"],
@@ -53993,6 +53993,14 @@ module.exports = {
     "wordWrap": "break-word",
     "WebkitLineClamp": 1,
     "WebkitBoxOrient": "vertical"
+  },
+  "bottom-item-container": {
+    "backgroundColor": "#FFFFFF",
+    "flexDirection": "row",
+    "width": "750",
+    "paddingTop": "15",
+    "paddingBottom": "15",
+    "borderTop": "1px #3c3f41"
   }
 }
 
@@ -55795,7 +55803,7 @@ module.exports = {
     "paddingRight": "20",
     "paddingBottom": "20",
     "paddingLeft": "20",
-    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.90)"
+    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.60)"
   },
   "control-text": {
     "flex": 1,
@@ -56485,13 +56493,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('repository-issue-list-page', {
     ref: "c"
   })], 1)]), (_vm.reposStatus != null) ? _c('div', {
-    staticStyle: {
-      backgroundColor: "white",
-      flexDirection: "row",
-      width: "750px",
-      paddingTop: "15px",
-      paddingBottom: "15px"
-    }
+    staticClass: ["bottom-item-container"]
   }, [_c('div', {
     staticClass: ["bottom-item", "bottom-item-line"],
     on: {
@@ -56802,7 +56804,8 @@ module.exports = {
     "flexDirection": "row",
     "width": "750",
     "paddingTop": "15",
-    "paddingBottom": "15"
+    "paddingBottom": "15",
+    "borderTop": "1px #3c3f41"
   },
   "bottom-item": {
     "paddingTop": "10",

@@ -20,7 +20,7 @@
                 <repository-issue-list-page ref="c"></repository-issue-list-page>
             </div>
         </top-tab-bar>
-        <div v-if="reposStatus != null" style="background-color: white;flex-direction: row;width: 750px;padding-top: 15px;padding-bottom: 15px">
+        <div v-if="reposStatus != null" class="bottom-item-container">
             <div class="bottom-item bottom-item-line" @click="reposStarClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{starIcon + "   " +  starText}}</text>
             </div>
@@ -261,6 +261,15 @@
         word-wrap: break-word;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
+    }
+
+    .bottom-item-container{
+        background-color: white;
+        flex-direction: row;
+        width: 750px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        border-top: 1px #3c3f41;
     }
 
 </style>

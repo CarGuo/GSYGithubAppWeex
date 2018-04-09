@@ -340,7 +340,8 @@
         flex-direction: row;
         width: 750px;
         padding-top: 15px;
-        padding-bottom: 15px
+        padding-bottom: 15px;
+        border-top: 1px #3c3f41;
     }
 
 
