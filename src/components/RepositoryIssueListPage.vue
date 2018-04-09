@@ -17,7 +17,7 @@
         </div>
 
         <div style="flex:1;width:750px;">
-            <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="'350px'"
+            <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="500"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
         <div class="float-btn-container">

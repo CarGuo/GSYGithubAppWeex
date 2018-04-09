@@ -5,7 +5,7 @@ const iosIconFontPath = 'local:///font/iconfont.ttf';
 export function getIonFontPath(abs) {
     if (WXEnvironment.platform === 'Web') {
         return abs + webIconFontPath
-    } else if (WXEnvironment.platform === 'android') {
+    } else if (WXEnvironment.platform.toLowerCase() === 'android') {
         return androidIconFontPath
     } else {
         return iosIconFontPath
