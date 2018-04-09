@@ -47,7 +47,9 @@
         },
         activated: function () {
             //keep alive
-            this.init()
+            if(WXEnvironment.platform === 'Web') {
+                this.init();
+            }
         },
         deactivated: function () {
         },

@@ -53,11 +53,13 @@
         },
         created: function () {
             this.init()
-            addIconFontSupport(dom, "../../")
+            //addIconFontSupport(dom, "../../")
         },
         activated: function () {
             //keep alive
-            this.init()
+            if(WXEnvironment.platform === 'Web') {
+                this.init()
+            }
         },
         methods: {
             init() {
@@ -205,7 +207,7 @@
         justify-content: center;
         border-radius: 15px;
         padding: 20px 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.60);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.60);
     }
 
     .control-text {

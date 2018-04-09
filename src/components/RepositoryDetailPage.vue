@@ -66,6 +66,8 @@
     import * as Constant from '../core/common/constant'
     import  {launchUrl} from "../core/common/htmlUtils"
     const modal = weex.requireModule('modal')
+    import {addIconFontSupport} from '../config/IconConfig'
+    const dom = weex.requireModule('dom');
 
     export default {
         components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage,
@@ -101,11 +103,14 @@
             let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
             this.mainStyle = {height: mainHeight, width: '750px',backgroundColor: 'white', marginTop: mainMarginTop}
             this.init()
+            addIconFontSupport(dom, "../../")
 
         },
         activated: function () {
             //keep alive
-            this.init()
+            if(WXEnvironment.platform === 'Web') {
+                this.init();
+            }
         },
         methods: {
             init() {

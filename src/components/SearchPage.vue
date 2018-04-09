@@ -33,6 +33,9 @@
     import repository from '../core/net/repository'
     import {WxcSearchbar} from 'weex-ui';
 
+    import {addIconFontSupport} from '../config/IconConfig'
+    const dom = weex.requireModule('dom');
+
     export default {
         props: {},
         components: {RLList, WxcSearchbar, NavigationBar},
@@ -54,10 +57,13 @@
             this.init()
             let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
             this.mainStyle = {flex:1, width:'750px',alignItems: 'center',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
+            addIconFontSupport(dom, "../../")
         },
         activated: function () {
             //keep alive
-            this.init()
+            if(WXEnvironment.platform === 'Web') {
+                this.init();
+            }
         },
         methods: {
             init() {},
@@ -169,7 +175,7 @@
         justify-content: center;
         border-radius: 15px;
         padding: 10px 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.60);
     }
 
     .control-text {

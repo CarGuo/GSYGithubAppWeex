@@ -14,6 +14,8 @@
     import repository from '../core/net/repository'
     import NavigationBar from './widget/NavigationBar.vue'
     import {formName, generateHtml, generateCode2HTml} from '../core/common/htmlUtils'
+    import {addIconFontSupport} from '../config/IconConfig'
+    const dom = weex.requireModule('dom');
 
     export default {
         components: {WebComponent, NavigationBar},
@@ -32,6 +34,7 @@
             this.loadData()
             let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
             this.mainStyle = {flex: 1, width: '750px', marginTop: mainMarginTop}
+            addIconFontSupport(dom, "../../")
 
         },
         methods: {

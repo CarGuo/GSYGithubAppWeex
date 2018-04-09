@@ -66,7 +66,9 @@
         },
         activated: function () {
             //keep alive
-            this.onRefresh();
+            if(WXEnvironment.platform === 'Web') {
+                this.onRefresh();
+            }
         },
         computed: {
             dataList() {

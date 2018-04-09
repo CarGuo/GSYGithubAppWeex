@@ -26,7 +26,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    [self setStatusBarBackgroundColor:[UIColor colorWithRed:0.23 green:0.24 blue:0.25 alpha:1.0]];
+    [self setStatusBarBackgroundColor:[UIColor colorWithRed:0.24 green:0.25 blue:0.25 alpha:1.0]];
     
     [WeexSDKManager setup];
     

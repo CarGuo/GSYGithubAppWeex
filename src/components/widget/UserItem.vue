@@ -43,7 +43,7 @@
         background-color: #FFFFFF;
         border-radius: 5px;
         padding: 20px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.80);
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.90);
         flex-direction: row;
     }
 
