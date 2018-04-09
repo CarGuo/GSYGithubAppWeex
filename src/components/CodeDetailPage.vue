@@ -1,5 +1,5 @@
 <template>
-    <div :style="{flex:1}">
+    <div :style="mainStyle">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <web-component :source="codeData" :webStyle="{height:'1244px', width: '750px'}"></web-component>
@@ -25,10 +25,13 @@
                 curBranch: "master",
                 codeData: "",
                 title: "",
+                mainStyle:{},
             }
         },
         created: function () {
             this.loadData()
+            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
+            this.mainStyle = {flex: 1, width: '750px', marginTop: mainMarginTop}
 
         },
         methods: {

@@ -1,5 +1,5 @@
 <template>
-    <div  :style="{height: mainHeight, width: '750px',backgroundColor: 'white'}">
+    <div :style="mainStyle">
         <!--<router-view></router-view>-->
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
@@ -87,15 +87,19 @@
             reposStatus: null,
             isLoading: false,
             mainHeight: '1334px',
+            mainMarginTop: '0px',
             branch: [],
             popoverPosition: {  x: -50, y: 1134  },
+            mainStyle:{},
             popoverArrowPosition: {pos: 'bottom', x: -50},
         }),
         created () {
             const tabPageHeight = Utils.env.getPageHeight();
             const { tabStyles } = this;
             this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' };
-            this.mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : Utils.env.getScreenHeight() - 32
+            let mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : Utils.env.getScreenHeight() - 32
+            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
+            this.mainStyle = {height: mainHeight, width: '750px',backgroundColor: 'white', marginTop: mainMarginTop}
             this.init()
 
         },

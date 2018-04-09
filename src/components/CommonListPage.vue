@@ -1,5 +1,5 @@
 <template>
-    <div style="height:1334px;width: 750px;background-color: #f2f3f4">
+    <div :style="mainStyle">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" :listItemName="itemClass" :listData="list"
@@ -27,10 +27,13 @@
                 list: [],
                 itemClass:  'EventItem',
                 dataType:   '',
+                mainStyle: {}
             }
         },
         created: function () {
             this.init()
+            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
+            this.mainStyle = {height:'1334px',width: '750px',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
         },
         activated: function () {
             //keep alive
