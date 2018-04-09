@@ -8,7 +8,7 @@
             </div>
             <text class="type-text">{{itemValue.ex.type}}</text>
         </div>
-        <div class="content-text" style="flex: 1; margin-bottom: 23px;">{{itemValue.ex.content}}</div>
+        <text class="content-text" style="flex: 1; margin-bottom: 23px;">{{itemValue.ex.content}}</text>
         <div style="flex-direction: row;width: 690px;overflow: hidden">
             <text class="icon-text" :style="{fontFamily: 'wxcIconFont'}">{{icon1 + itemValue.ex.icon1t}}</text>
             <text class="icon-text" :style="{fontFamily: 'wxcIconFont'}">{{icon2 + itemValue.ex.icon2t}}</text>

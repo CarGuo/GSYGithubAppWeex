@@ -106,6 +106,7 @@
                             reposName:  data.name,
                             title: this.userName + "/" +  data.name
                         })
+                        break;
                     case "userStar":
                         this.jumpWithParams("RepositoryDetailPage", {
                             userName: data.owner.login,
