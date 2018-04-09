@@ -22,6 +22,7 @@
                          :arrowPosition="popoverArrowPosition1"
                          @wxcPopoverButtonClicked="popoverDailyButtonClicked"></wxc-popover>
             <wxc-popover ref="wxc-popover2"
+
                          :buttons="btns2"
                          :position="popoverPosition2"
                          :arrowPosition="popoverArrowPosition2"
