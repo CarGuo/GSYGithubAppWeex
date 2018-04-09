@@ -113,9 +113,8 @@
     }
 
     .content-text {
-        color: rgba(13, 13, 13, 0.6);
-        font-size: 30px;
-        font-weight: bold;
+        color: rgba(97, 97, 97, 0.6);
+        font-size: 28px;
         display: -webkit-box;
         overflow: hidden;
         white-space: normal !important;

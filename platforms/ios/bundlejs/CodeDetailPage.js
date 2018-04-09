@@ -51127,7 +51127,7 @@ exports.default = {
         listData: { type: Array },
         headerComponent: { type: String },
         headerData: { type: Object },
-        bottomEmpty: { type: String, default: ' 200px' }
+        bottomEmpty: { type: String, default: ' 240px' }
     },
     data: function data() {
         return {
@@ -51471,9 +51471,8 @@ module.exports = {
     "WebkitBoxOrient": "vertical"
   },
   "content-text": {
-    "color": "rgba(13,13,13,0.6)",
-    "fontSize": "30",
-    "fontWeight": "bold",
+    "color": "rgba(97,97,97,0.6)",
+    "fontSize": "28",
     "display": "-webkit-box",
     "overflow": "hidden",
     "whiteSpace": "normal !important",
@@ -53288,7 +53287,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: ["indicator-text"]
   }, [_vm._v("Loading ...")])])]), _c('cell', {
     style: {
-      height: _vm.bottomEmpty
+      height: _vm.bottomEmpty,
+      width: '10px'
     },
     appendAsTree: true,
     attrs: {
@@ -53296,7 +53296,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     style: {
-      height: _vm.bottomEmpty
+      height: _vm.bottomEmpty,
+      width: '10px'
     }
   })])], 2)
 },staticRenderFns: []}
@@ -53683,6 +53684,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": "RepositoryItem",
       "listData": _vm.dataList,
+      "bottomEmpty": 400,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -54720,7 +54722,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         height: _vm.tabStyles.height + 'px',
         backgroundColor: _vm.currentPage == index ? _vm.tabStyles.activeBgColor : _vm.tabStyles.bgColor,
         borderColor: _vm.currentPage == index ? _vm.tabStyles.activeTitleColor : _vm.tabStyles.bgColor,
-        borderBottomWidth: _vm.currentPage == index ? '3px' : '0px'
+        borderBottomWidth: _vm.currentPage == index ? '3px' : '0.2px'
       },
       attrs: {
         "accessible": true,
@@ -56186,7 +56188,9 @@ module.exports = __vue_exports__
 module.exports = {
   "title-item": {
     "justifyContent": "center",
-    "alignItems": "center"
+    "alignItems": "center",
+    "paddingTop": "25",
+    "height": "80"
   },
   "tab-title-list": {
     "flexDirection": "row"
@@ -56385,7 +56389,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     ref: "tab-title-list",
     staticClass: ["tab-title-list"],
     style: {
-      height: '80px'
+      height: '80px',
+      width: '750px'
     },
     attrs: {
       "showScrollbar": false,
@@ -56403,9 +56408,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('text', {
       staticClass: ["tab-text"],
       style: {
-        fontSize: '23px',
+        fontSize: '28px',
         color: '#3c3f41',
-        marginLeft: '15px'
+        marginLeft: '15px',
+        height: '70px'
       }
     }, [_vm._v(_vm._s(v + ' >'))])])
   })), _c('r-l-list', {
@@ -56413,6 +56419,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": "FileItem",
       "listData": _vm.list,
+      "bottomEmpty": 400,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -57930,7 +57937,7 @@ module.exports = {
     "paddingRight": "25",
     "paddingBottom": "25",
     "paddingLeft": "25",
-    "boxShadow": "0 0 10px rgba(211, 210, 210, 0.50)"
+    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.70)"
   },
   "input-title": {
     "fontSize": "30",

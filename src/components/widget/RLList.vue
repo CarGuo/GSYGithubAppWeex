@@ -23,8 +23,8 @@
                 <text class="indicator-text">Loading ...</text>
             </div>
         </cell>
-        <cell :style="{height: bottomEmpty}">
-            <div :style="{height: bottomEmpty}">
+        <cell :style="{height: bottomEmpty, width: '10px'}">
+            <div :style="{height: bottomEmpty, width: '10px'}">
             </div>
         </cell>
     </list>
@@ -64,7 +64,7 @@
             listData: {type: Array},
             headerComponent: {type: String},
             headerData: {type: Object},
-            bottomEmpty: {type: String, default:' 200px'},
+            bottomEmpty: {type: String, default:' 240px'},
         },
         data() {
             return {

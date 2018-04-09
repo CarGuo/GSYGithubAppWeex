@@ -185,7 +185,7 @@
         background-color: white;
         border-radius: 10px;
         padding: 25px;
-        box-shadow: 0 0 10px rgba(211, 210, 210, 0.50);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.70);
     }
 
     .input-title {
