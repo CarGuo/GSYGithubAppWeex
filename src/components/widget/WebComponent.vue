@@ -33,7 +33,7 @@
                 return WXEnvironment.platform.toLowerCase() === 'ios';
             },
             isAndroid() {
-                return WXEnvironment.platform.toLowerCase() !== 'android';
+                return WXEnvironment.platform.toLowerCase() === 'android';
             }
         },
         methods: {
