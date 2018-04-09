@@ -86,7 +86,7 @@
             let mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : '1334px'
             let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
             this.mainStyle = {height: mainHeight, width: '750px',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
-            addIconFontSupport(dom, "../../")
+            //addIconFontSupport(dom, "../../")
         },
         activated: function () {
             //keep alive

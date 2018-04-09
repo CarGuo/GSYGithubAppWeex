@@ -35,6 +35,7 @@
     import TrendPage from './TrendPage.vue'
     import PersonPage from './PersonPage.vue'
     import {getIonFontPath} from '../config/IconConfig'
+    import {addIconFontSupport} from '../config/IconConfig'
 
     const dom = weex.requireModule('dom');
     const modal = weex.requireModule('modal');
@@ -51,6 +52,7 @@
             const {tabStyles} = this;
             this.contentStyle = {height: (tabPageHeight - tabStyles.height) + 'px'};
             this.mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : Utils.env.getScreenHeight() - 32
+            addIconFontSupport(dom, "../../")
         },
         methods: {
             wxcTabBarCurrentTabSelected(e) {

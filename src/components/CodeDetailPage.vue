@@ -34,7 +34,7 @@
             this.loadData()
             let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
             this.mainStyle = {flex: 1, width: '750px', marginTop: mainMarginTop}
-            addIconFontSupport(dom, "../../")
+            //addIconFontSupport(dom, "../../")
 
         },
         methods: {

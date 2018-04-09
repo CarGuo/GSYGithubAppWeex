@@ -50131,7 +50131,7 @@ var _IconConfig = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
+var dom = weex.requireModule('dom'); //
 //
 //
 //
@@ -50160,7 +50160,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 
-var dom = weex.requireModule('dom');
 var modal = weex.requireModule('modal');
 
 exports.default = {
@@ -50178,6 +50177,7 @@ exports.default = {
 
         this.contentStyle = { height: tabPageHeight - tabStyles.height + 'px' };
         this.mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : _weexUi.Utils.env.getScreenHeight() - 32;
+        (0, _IconConfig.addIconFontSupport)(dom, "../../");
     },
 
     methods: {
@@ -54168,7 +54168,7 @@ exports.default = {
         var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
         this.mainStyle = { height: mainHeight, width: '750px', backgroundColor: 'white', marginTop: mainMarginTop };
         this.init();
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        //addIconFontSupport(dom, "../../")
     },
 
     activated: function activated() {
@@ -56649,8 +56649,10 @@ exports.default = {
     created: function created() {
         this.loadData();
         var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
-        this.mainStyle = { flex: 1, width: '750px', marginTop: mainMarginTop };
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        this.mainStyle = { flex: 1, width: '750px', marginTop: mainMarginTop
+            //addIconFontSupport(dom, "../../")
+
+        };
     },
     methods: {
         loadData: function loadData() {
@@ -56975,8 +56977,9 @@ exports.default = {
         this.init();
         var mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : '1334px';
         var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
-        this.mainStyle = { height: mainHeight, width: '750px', backgroundColor: '#f2f3f4', marginTop: mainMarginTop };
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        this.mainStyle = { height: mainHeight, width: '750px', backgroundColor: '#f2f3f4', marginTop: mainMarginTop
+            //addIconFontSupport(dom, "../../")
+        };
     },
     activated: function activated() {
         //keep alive
@@ -57413,8 +57416,9 @@ exports.default = {
     created: function created() {
         this.init();
         var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
-        this.mainStyle = { height: '1334px', width: '750px', backgroundColor: '#f2f3f4', marginTop: mainMarginTop };
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        this.mainStyle = { height: '1334px', width: '750px', backgroundColor: '#f2f3f4', marginTop: mainMarginTop
+            //addIconFontSupport(dom, "../../")
+        };
     },
     activated: function activated() {
         //keep alive
@@ -57715,8 +57719,9 @@ exports.default = {
     created: function created() {
         this.init();
         var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
-        this.mainStyle = { flex: 1, width: '750px', alignItems: 'center', backgroundColor: '#f2f3f4', marginTop: mainMarginTop };
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        this.mainStyle = { flex: 1, width: '750px', alignItems: 'center', backgroundColor: '#f2f3f4', marginTop: mainMarginTop
+            //addIconFontSupport(dom, "../../")
+        };
     },
     activated: function activated() {
         //keep alive
@@ -58114,7 +58119,7 @@ exports.default = {
     },
 
     created: function created() {
-        (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        //addIconFontSupport(dom, "../../")
         if (this.getQuery().needTitle) {
             this.needTitle = this.getQuery().needTitle;
         }
