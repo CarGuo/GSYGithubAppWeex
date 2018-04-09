@@ -54,7 +54,7 @@
             }
         },
         created: function () {
-            addIconFontSupport(dom, "../../")
+            //addIconFontSupport(dom, "../../")
             if (this.getQuery().needTitle) {
                 this.needTitle = this.getQuery().needTitle
             }

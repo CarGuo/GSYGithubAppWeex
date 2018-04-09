@@ -37,7 +37,7 @@
             this.init()
             let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
             this.mainStyle = {height:'1334px',width: '750px',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
-            addIconFontSupport(dom, "../../")
+            //addIconFontSupport(dom, "../../")
         },
         activated: function () {
             //keep alive
