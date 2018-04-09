@@ -183,17 +183,17 @@ export const issueJsonToRichJson = (jsonData, textColor = 'white') => {
             case 'pre':
                 return {backgroundColor: '#AAAAAA', borderRadius: '5px', padding: '5px', color: "#3c3f41"}
             case 'h1':
-                return {fontSize: '40px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
+                return {fontSize: '50px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
             case 'h2':
-                return {fontSize: '35px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
+                return {fontSize: '45px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
             case 'h3':
-                return {fontSize: '30px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
+                return {fontSize: '40px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
             case 'h4':
-                return {fontSize: '25px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
+                return {fontSize: '35px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
             case 'h5':
-                return {fontSize: '20px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
+                return {fontSize: '30px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
             case 'p':
-                return {fontSize: '20px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
+                return {fontSize: '30px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
             case 'br':
                 return {paddingTop: '5px', paddingBottom:'5px'};
             default:

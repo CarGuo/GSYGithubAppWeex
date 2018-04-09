@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="tab-title-list"
-             :style="{ backgroundColor: tabStyles.bgColor, height: (tabStyles.height + (isIPhoneX ? 78 : 0))+'px',paddingBottom:isIPhoneX?'78px':'0'}">
+             :style="{ backgroundColor: tabStyles.bgColor, borderColor: tabStyles.titleColor, borderTopWidth: '0.5px',  height: (tabStyles.height + (isIPhoneX ? 78 : 0))+'px',paddingBottom:isIPhoneX?'78px':'0'}">
             <div class="title-item"
                  v-for="(v,index) in tabTitles"
                  :key="index"

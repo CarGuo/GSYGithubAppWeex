@@ -205,7 +205,7 @@
         justify-content: center;
         border-radius: 15px;
         padding: 20px 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.60);
     }
 
     .control-text {

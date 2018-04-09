@@ -106,10 +106,10 @@
     .card-wrapper {
         width: 750px;
         background-color: #3c3f41;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
         padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.80);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.60);
     }
 
     .bottom-container {

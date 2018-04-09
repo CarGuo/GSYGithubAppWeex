@@ -2,7 +2,6 @@
     <list class="list" @loadmore="loadMore" @onloadmore="loadMore" loadmoreoffset="30">
         <refresh class="refresh" @refresh="onRefresh"
                  :display="refreshDisplay">
-            <text class="indicator-text">Refreshing ...</text>
             <loading-indicator class="indicator"></loading-indicator>
         </refresh>
         <cell :v-if="headerComponent" class="header">
@@ -88,7 +87,7 @@
                     overflow: 'hidden',
                     flexDirection: 'row',
                     alignItems: 'center',
-                } : {height: '1px', overflow: 'hidden', flexDirection: 'row', alignItems: 'center',};
+                } : {height: '0.1px', overflow: 'hidden', flexDirection: 'row', alignItems: 'center', };
                 return display
             }
         },
