@@ -63,7 +63,7 @@
             listData: {type: Array},
             headerComponent: {type: String},
             headerData: {type: Object},
-            bottomEmpty: {type: String, default:' 240px'},
+            bottomEmpty: {type: [String, Number], default:' 240px'},
         },
         data() {
             return {
