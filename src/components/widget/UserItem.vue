@@ -27,7 +27,15 @@
     }
 </script>
 
-<style src='../../config/style.css' ></style>
+<style lang="scss" >
+    @import '../../config/styles.scss';
+    .user-text {
+        font-weight: bold;
+        font-size: 30px;
+        flex: 1;
+        color: $--theme-color;
+    }
+</style>
 <style scoped>
     .user-icon {
         width: 80px;
@@ -36,12 +44,5 @@
         justify-content: center;
         border-radius: 70px;
         margin-right: 20px;
-    }
-
-    .user-text {
-        font-weight: bold;
-        font-size: 30px;
-        flex: 1;
-        color: var(--theme-color);
     }
 </style>

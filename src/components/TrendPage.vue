@@ -137,8 +137,9 @@
 </script>
 
 
-<style src='../config/style.css' ></style>
-<style scoped>
+<style lang="scss" >
+    @import '../config/styles.scss';
+
     .title-container {
         position: absolute;
         left: 0;
@@ -151,10 +152,12 @@
         justify-content: center;
         background-color: white;
         z-index: 999;
-        box-shadow: var(--box-shadow-color);
+        box-shadow: $--box-shadow-color;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
+</style>
+<style scoped>
     .list-container {
         margin-top: 80px;
     }

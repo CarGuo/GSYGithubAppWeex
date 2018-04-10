@@ -38,8 +38,9 @@
         },
     }
 </script>
-<style src='../../config/style.css' ></style>
-<style scoped>
+<style lang="sass" > @import '../../config/styles.scss'</style>
+<style scoped >
+    @import '../../config/styles.scss';
     .user-icon {
         margin-right: 20px;
         width: 50px;

@@ -165,7 +165,12 @@ const webConfig = {
             
           })
         }]
-      }
+      },
+        {
+            test: /\.scss$/,
+            loader: "css!sass",//这样写样式和脚本会混在一个文件，也就是不分离样式，webpack有插件可以实现分离样式
+            exclude: /node_modules/
+        }
     ]
   },
   /*
@@ -211,7 +216,12 @@ const weexConfig = {
           loader: 'weex-loader',
           options: vueLoaderConfig({useVue: false})
         }]
-      }
+      },
+        {
+            test: /\.scss$/,
+            loader: "css!sass",//这样写样式和脚本会混在一个文件，也就是不分离样式，webpack有插件可以实现分离样式
+            exclude: /node_modules/
+        }
     ]
   },
   /*

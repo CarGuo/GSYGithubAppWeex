@@ -119,8 +119,21 @@
         },
     }
 </script>
-
-<style src='../../config/style.css' ></style>
+<style lang="scss" >
+    @import '../../config/styles.scss';
+    .control-container {
+        background-color: $--theme-color;
+        width: 710px;
+        flex-direction: row;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        padding: 20px 20px;
+        box-shadow: $--box-shadow-color;
+    }
+</style>
 <style scoped>
 
     .bottom-item-text {
@@ -173,19 +186,6 @@
 
     .name-text-repos {
         font-size: 34px;
-    }
-
-    .control-container {
-        background-color: var(--theme-color);
-        width: 710px;
-        flex-direction: row;
-        margin-top: 30px;
-        margin-bottom: 20px;
-        align-items: center;
-        justify-content: center;
-        border-radius: 15px;
-        padding: 20px 20px;
-        box-shadow: var(--box-shadow-color);
     }
 
     .control-text {

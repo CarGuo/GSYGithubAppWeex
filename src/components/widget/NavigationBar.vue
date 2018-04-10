@@ -1,6 +1,6 @@
 <template>
     <div class="title">
-        <wxc-minibar background-color="#FFFFFF00">
+        <wxc-minibar background-color="rgba(97, 97, 97, 0.0)">
             <text slot="left" :style="{fontFamily: 'wxcIconFont',fontSize: '30px', color:'#FFFFFF'}"
                   @click="onLeftButtonClick">{{leftIcon}}</text>
             <text slot="middle" :style="{fontSize: '36px', color:'#FFFFFF'}">{{title}}</text>
@@ -29,15 +29,16 @@
     }
 </script>
 
-<style src='../../config/style.css' ></style>
-<style scoped>
+<style lang="scss" >
+    @import '../../config/styles.scss';
     .title {
         width: 750px;
         height:100px;
         align-items: center;
-        background-color:var(--theme-color);;
+        background-color:$--theme-color;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.80);
-        border-bottom-color: #f2f3f4;
-        border-bottom-width: 0.5px;
+        border-bottom: 0.5px #f2f3f4;
     }
+</style>
+<style scoped>
 </style>
