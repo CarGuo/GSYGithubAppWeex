@@ -161,10 +161,11 @@
     }
 </script>
 
-<style src='../config/style.css' ></style>
-<style scoped>
+<style lang="scss" >
+    @import '../config/styles.scss';
+
     .control-container {
-        background-color: var(--theme-color);
+        background-color: $--theme-color;
         width: 710px;
         flex-direction: row;
         margin-top: 10px;
@@ -173,9 +174,11 @@
         justify-content: center;
         border-radius: 15px;
         padding: 10px 20px;
-        box-shadow: var(--box-shadow-color);
+        box-shadow: $--box-shadow-color;
     }
 
+</style>
+<style scoped>
     .control-text {
         flex: 1;
         text-align: center;

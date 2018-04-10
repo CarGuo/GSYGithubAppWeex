@@ -1,0 +1,113 @@
+/*https://blog.csdn.net/seafishyls/article/details/64444819*/
+
+$--box-shadow-color: 0 0 10px rgba(211, 210, 210, 0.50)!global;
+$--theme-color: #3c3f41!global;
+$--gray-color: rgba(97, 97, 97, 0.6)!global;
+$--container-color: #f2f3f4!global;
+
+.card-white-wrapper {
+  width: 700px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: $--box-shadow-color;
+}
+
+.card-black-full-wrapper {
+  width: 750px;
+  background-color: $--theme-color;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  padding: 20px;
+  box-shadow: $--box-shadow-color;
+}
+
+.card-black-wrapper {
+  width: 710px;
+  background-color: $--theme-color;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 15px;
+  box-shadow: $--box-shadow-color;
+}
+
+.text-line-three {
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  white-space: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  lines: 3;
+}
+
+.text-line-one {
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  white-space: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  lines: 1;
+}
+
+
+.content-text-black-bold {
+  color: $--theme-color;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.content-text-gray {
+  color: $--gray-color;
+  font-size: 28px;
+}
+
+.content-text-white {
+  color: white;
+  font-size: 28px;
+}
+
+.name-text {
+  color: $--gray-color;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.name-text-theme {
+  color: $--theme-color;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+
+.name-text-white {
+  display: -webkit-box;
+  white-space: normal !important;
+  word-wrap: break-word;
+  -webkit-line-clamp: 1;
+
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  lines: 1;
+}
+
+
+.user-text-theme {
+  color: $--theme-color;
+  font-size: 30px;
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal !important;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  -webkit-line-clamp: 1;
+  flex:1;
+  font-weight: bold;
+  -webkit-box-orient: vertical;
+}

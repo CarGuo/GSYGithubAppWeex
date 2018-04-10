@@ -30,11 +30,9 @@
     import * as Constant from '../core/common/constant'
     import {isEmptyString} from '../core/common/commonUtils'
     import * as ignoreConfig from '../core/common/ignoreConfig'
-    import {addIconFontSupport} from '../config/IconConfig'
     import LoadingComponent from './widget/LoadingComponent.vue'
 
     const modal = weex.requireModule('modal')
-    const dom = weex.requireModule('dom');
 
     export default {
         components: {WxcLoading, LoadingComponent},
@@ -54,7 +52,6 @@
             }
         },
         created: function () {
-            //addIconFontSupport(dom, "../../")
             if (this.getQuery().needTitle) {
                 this.needTitle = this.getQuery().needTitle
             }
@@ -170,21 +167,23 @@
     }
 </script>
 
-<style src='../config/style.css' ></style>
-<style scoped>
+<style lang="scss" >
+    @import '../config/styles.scss';
+
     .wrapper {
         align-items: center;
         justify-content: center;
         width: 750px;
         height: 1334px;
-        background-color: var(--theme-color);
+        background-color: $--theme-color;
     }
-
     .title{
-        color: var(--theme-color);;
+        color: $--theme-color;
         font-weight: bold;
         font-size: 35px
     }
+</style>
+<style scoped>
 
     .input-container {
         align-items: center;

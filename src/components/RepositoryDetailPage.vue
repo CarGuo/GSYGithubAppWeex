@@ -234,7 +234,27 @@
     }
 </script>
 
-<style src='../config/style.css' ></style>
+<style lang="scss" >
+    @import '../config/styles.scss';
+
+    .bottom-item-line {
+        border-color: $--theme-color;
+        border-right-width: 1px;
+    }
+
+    .bottom-item-text {
+        font-size: 23px;
+        color: $--theme-color;
+        display: -webkit-box;
+        overflow: hidden;
+        white-space: normal !important;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+</style>
 <style scoped>
     .item-container {
         width: 750px;
@@ -249,23 +269,6 @@
         flex: 1;
         align-items: center;
         justify-content: center;
-    }
-
-    .bottom-item-line {
-        border-color: var(--theme-color);
-        border-right-width: 1px;
-    }
-
-    .bottom-item-text {
-        font-size: 23px;
-        color: var(--theme-color);
-        display: -webkit-box;
-        overflow: hidden;
-        white-space: normal !important;
-        text-overflow: ellipsis;
-        word-wrap: break-word;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
     }
 
     .bottom-item-container{

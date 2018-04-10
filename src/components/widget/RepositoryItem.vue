@@ -61,7 +61,9 @@
     }
 </script>
 
+<style lang="sass" > @import '../../config/styles.scss'</style>
 <style scoped>
+    @import '../../config/styles.scss';
     .user-icon {
         width: 70px;
         height: 70px;

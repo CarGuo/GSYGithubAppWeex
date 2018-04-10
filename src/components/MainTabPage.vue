@@ -19,13 +19,15 @@
     </div>
 </template>
 
-<style src='../config/style.css' ></style>
-<style scoped>
+<style lang="scss" >
+    @import '../config/styles.scss';
     .item-container {
         width: 750px;
-        background-color: var(--container-color);
+        background-color: $--container-color;
         overflow: scroll;
     }
+</style>
+<style scoped>
 </style>
 <script>
     import {Utils, WxcMinibar} from 'weex-ui';

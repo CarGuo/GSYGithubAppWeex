@@ -25,16 +25,15 @@
     </div>
 </template>
 
-<style src='../config/style.css' ></style>
-<style scoped>
+<style lang="scss" >
+    @import '../config/styles.scss';
     .wrapper {
         align-items: center;
         justify-content: center;
         width: 750px;
         height: 1334px;
-        background-color: var(--theme-color);
+        background-color: $--theme-color;
     }
-
     .input-container {
         align-items: center;
         justify-content: center;
@@ -42,7 +41,7 @@
         background-color: white;
         border-radius: 10px;
         padding: 25px;
-        box-shadow: var(--box-shadow-color);
+        box-shadow: $--box-shadow-color;
     }
 
     .input {
@@ -53,10 +52,10 @@
         color: #666666;
         align-items: center;
         justify-content: center;
-        border: 2px solid var(--theme-color);
+        border: 2px solid $--theme-color;
     }
-
-
+</style>
+<style scoped>
     .icon-text{
         align-items: center;
         justify-content: center;

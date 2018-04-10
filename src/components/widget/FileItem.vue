@@ -6,7 +6,6 @@
     </div>
 </template>
 <script>
-    import {addIconFontSupport} from '../../config/IconConfig'
     export default {
         props: {
             itemValue: {
@@ -26,11 +25,22 @@
             },
         },
         created() {
-            //addIconFontSupport(dom, "../../")
         },
     }
 </script>
-<style src='../../config/style.css' ></style>
+<style lang="scss" >
+    @import '../../config/styles.scss';
+
+    .icon-text{
+        color: $--gray-color;
+        font-size: 30px;
+    }
+
+    .arrow-text{
+        color: $--theme-color;
+        font-size: 30px;
+    }
+</style>
 <style scoped>
 
     .card-wrapper-file {
@@ -42,16 +52,6 @@
     .content-text-file{
         margin-left: 20px;
         flex: 1;
-    }
-
-    .icon-text{
-        color: var(--gray-color);
-        font-size: 30px;
-    }
-
-    .arrow-text{
-        color: var(--theme-color);
-        font-size: 30px;
     }
 
 </style>
