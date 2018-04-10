@@ -19,6 +19,7 @@
 
         <div style="flex:1;width:750px;">
             <r-l-list ref="dylist" :listItemName="itemClass" :listData="list" :bottomEmpty="getListBottomEmpty"
+                      :listHeight="listHeight"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
     </div>
@@ -32,7 +33,7 @@
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {WxcSearchbar} from 'weex-ui';
-    import {getEntryPageStyle, getListBottomEmpty} from "../config/Config"
+    import {getEntryPageStyle, getListBottomEmpty, getListHeight, navigatorbBarHeight} from "../config/Config"
 
 
     export default {
@@ -49,7 +50,8 @@
                 selectTypeData: null,
                 selectSortData: null,
                 selectLanguageData: null,
-                mainStyle:{}
+                mainStyle:{},
+                listHeight:getListHeight(1300 - navigatorbBarHeight - 300)
             }
         },
         created: function () {
@@ -174,12 +176,13 @@
         box-shadow: $--box-shadow-color;
     }
 
-</style>
-<style scoped>
     .search-page-container {
         align-items: center;
         justify-content: center;
+        background-color: $--theme-color;
     }
+</style>
+<style scoped>
     .control-text {
         flex: 1;
         text-align: center;

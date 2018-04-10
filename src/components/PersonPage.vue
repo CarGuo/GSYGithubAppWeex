@@ -3,6 +3,7 @@
         <navigation-bar v-if="needTitle" :title="userName" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList"
+                  :bottomEmpty="getListBottomEmpty"
                   headerComponent="UserHeadItem" :headerData="userInfo" :listHeight="listHeight"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
@@ -18,7 +19,7 @@
     import user from '../core/net/user'
     import NavigationBar from './widget/NavigationBar.vue'
     import {ActionUtils} from '../core/common/eventUtils'
-    import {getListHeight, navigatorbBarHeight, mainTabBarHeight} from '../config/Config'
+    import {getListHeight, getListBottomEmpty, navigatorbBarHeight, mainTabBarHeight} from '../config/Config'
 
     export default {
         props: {
