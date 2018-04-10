@@ -30,6 +30,7 @@
         </div>
         <div class="list-container">
             <r-l-list ref="dylist" listItemName="RepositoryItem" :listData="dataList" :bottomEmpty="getListBottomEmpty"
+                      :listHeight="listHeight"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
     </div>
@@ -41,7 +42,7 @@
     import {WxcButton, WxcPopover} from 'weex-ui'
     import {TrendTime, TrendType} from '../core/common/filterUtils'
     import RLList from './widget/RLList.vue'
-    import {getListBottomEmpty} from '../config/Config'
+    import {getListBottomEmpty, getListHeight,navigatorbBarHeight, mainTabBarHeight} from '../config/Config'
     import * as Config from '../config/Config'
 
 
@@ -54,6 +55,7 @@
                 language: '全部',
                 since:null,
                 languageType:null,
+                listHeight: getListHeight(1334 - navigatorbBarHeight - mainTabBarHeight),
                 primaryColor:Config.primaryColor,
                 btns1:TrendTime,
                 btns2:TrendType,

@@ -1,5 +1,5 @@
 <template>
-    <list class="list" @loadmore="loadMore" @onloadmore="loadMore" loadmoreoffset="30">
+    <list class="list" :style="{height:listHeight}" @loadmore="loadMore" @onloadmore="loadMore" loadmoreoffset="30">
         <refresh class="refresh" @refresh="onRefresh"
                  :display="refreshDisplay">
             <loading-indicator class="indicator"></loading-indicator>
@@ -69,7 +69,8 @@
             listData: {type: Array},
             headerComponent: {type: String},
             headerData: {type: Object},
-            bottomEmpty: {type: [String, Number], default:' 240px'},
+            bottomEmpty: {type: [String, Number], default:'240px'},
+            listHeight: {type: [String, Number], default:'1234px'},
         },
         data() {
             return {
@@ -218,7 +219,7 @@
     }
 
     .list {
-        height: 1334px;
+        height: 1234px;
     }
     .empty-page {
         width: 750px;

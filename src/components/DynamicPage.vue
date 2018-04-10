@@ -1,5 +1,5 @@
 <template>
-    <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList"
+    <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList" :listHeight="listHeight"
               :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
 </template>
 
@@ -8,6 +8,7 @@
 
     import {ActionUtils} from '../core/common/eventUtils'
     import RLList from './widget/RLList.vue'
+    import {getListHeight, mainTabBarHeight, navigatorbBarHeight} from '../config/Config'
 
 
     export default {
@@ -15,6 +16,7 @@
         data() {
             return {
                 currentPage: 1,
+                listHeight: getListHeight(1334 - navigatorbBarHeight - mainTabBarHeight),
             }
         },
         created: function () {
