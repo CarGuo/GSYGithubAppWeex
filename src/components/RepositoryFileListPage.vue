@@ -16,7 +16,7 @@
             </div>
         </scroller>
         <r-l-list ref="dylist" listItemName="FileItem" :listData="list" :bottomEmpty="getListBottomEmpty"
-                  :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
+                  :listHeight="listHeight" :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
 </template>
 
@@ -25,7 +25,7 @@
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {isImageEnd} from '../core/common/htmlUtils'
-    import {getListBottomEmpty} from '../config/Config'
+    import {getListBottomEmpty, getListHeight, navigatorbBarHeight} from '../config/Config'
     import * as Config from '../config/Config'
 
     export default {
@@ -42,6 +42,7 @@
                 path: "",
                 loading:false,
                 primaryColor:Config.primaryColor,
+                listHeight: getListHeight(1334 - navigatorbBarHeight - 150),
             }
         },
         created: function () {

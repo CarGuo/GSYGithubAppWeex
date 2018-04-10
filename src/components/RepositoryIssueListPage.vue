@@ -18,6 +18,7 @@
 
         <div style="flex:1;width:750px;">
             <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="getListBottomEmpty"
+                      :listHeight="listHeight"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
         <div class="float-btn-container">
@@ -30,7 +31,7 @@
     import RLList from './widget/RLList.vue'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
-    import {getListBottomEmpty} from '../config/Config'
+    import {getListBottomEmpty, getListHeight, navigatorbBarHeight} from '../config/Config'
     import {WxcSearchbar} from 'weex-ui';
 
 
@@ -47,7 +48,8 @@
                 list: [],
                 dataState: 1,
                 selectIndex: 1,
-                searchValue: ""
+                searchValue: "",
+                listHeight: getListHeight(1300 - navigatorbBarHeight - 300),
             }
         },
         created: function () {

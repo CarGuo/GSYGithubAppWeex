@@ -7,8 +7,8 @@
                      :tab-styles="tabStyles"
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
-            <div class="item-container"  :style="contentStyle">
-                <web-component :source="readme" :webStyle="{height:'1074px', width: '750px', paddingBottom:'30px', }" :gsygithubLink="gsygithubLink"></web-component>
+            <div class="item-container item-color" :style="{height:'1034px', width: '750px'}">
+                <web-component :source="readme" :webStyle="{height:'1034px', width: '750px', paddingBottom:'30px', }" :gsygithubLink="gsygithubLink"></web-component>
             </div>
             <div class="item-container" :style="contentStyle">
                 <repository-detail-info-page ref="a"></repository-detail-info-page>
@@ -63,8 +63,8 @@
     import RepositoryIssueListPage from './RepositoryIssueListPage.vue'
     import RepositoryFileListPage from './RepositoryFileListPage.vue'
     import repository from '../core/net/repository'
-    import  {launchUrl} from "../core/common/htmlUtils"
-    import  {getEntryPageStyle,getContentStyle} from "../config/Config"
+    import {launchUrl} from "../core/common/htmlUtils"
+    import {getEntryPageStyle,getContentStyle} from "../config/Config"
     const modal = weex.requireModule('modal')
 
     export default {
@@ -146,6 +146,9 @@
                     .then((res)=>{
                         if(res && res.data) {
                             this.readme = res.data;
+                        }
+                        if (Constant.DEBUG) {
+                            console.info("repository detail readme", res)
                         }
                     })
             },
@@ -269,4 +272,7 @@
         padding-bottom: 15px;
     }
 
+    .item-color {
+        background-color: white;
+    }
 </style>

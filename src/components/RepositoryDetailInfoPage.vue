@@ -1,6 +1,6 @@
 <template>
     <div :style="{flex:1, width:'750px'}">
-        <r-l-list ref="dylist" listItemName="EventItem" :listData="eventList"
+        <r-l-list ref="dylist" listItemName="EventItem" :listData="eventList" :listHeight="listHeight"
                   headerComponent="RepositoryHeadItem" :headerData="reposInfo"
                   :headerClick="headerClick"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
@@ -12,6 +12,7 @@
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {ActionUtils} from '../core/common/eventUtils'
+    import {getListBottomEmpty, getListHeight, navigatorbBarHeight} from '../config/Config'
 
     export default {
         props: {
@@ -25,6 +26,7 @@
                 listType: 1,
                 eventList: [],
                 reposInfo: {},
+                listHeight: getListHeight(1300 - navigatorbBarHeight - 120),
             }
         },
         created: function () {

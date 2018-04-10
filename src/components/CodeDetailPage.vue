@@ -2,7 +2,7 @@
     <div :style="mainStyle">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
-        <web-component :source="codeData" :webStyle="{height:'1244px', width: '750px'}"></web-component>
+        <web-component :source="codeData" :webStyle="{height:'1212px', width: '750px'}"></web-component>
     </div>
 </template>
 

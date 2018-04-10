@@ -2,7 +2,7 @@
     <div  class="wrapper"  :style="mainStyle" @viewappear="onappear"  @viewdisappear ="ondisappear">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
-        <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list"
+        <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list" :listHeight="listHeight"
                   headerComponent="IssueHeadItem" :headerData="issueInfo" :bottomEmpty="getListBottomEmpty"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         <div v-if="issueInfo.body" class="bottom-container">
@@ -55,7 +55,7 @@
     import LoadingComponent from './widget/LoadingComponent.vue'
     const clipboard = weex.requireModule('clipboard')
     const modal = weex.requireModule('modal')
-    import {getEntryPageStyle} from "../config/Config"
+    import {getEntryPageStyle, getListHeight, navigatorbBarHeight} from "../config/Config"
 
     export default {
         props: {
@@ -76,6 +76,7 @@
                 list: [],
                 issueInfo: {},
                 mainStyle:{},
+                listHeight:getListHeight(1334 - navigatorbBarHeight - 80),
             }
         },
         created: function () {

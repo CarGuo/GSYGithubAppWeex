@@ -33,3 +33,10 @@ export function getContentStyle(pageHeight, tabHeight) {
 export function getListBottomEmpty() {
     return (WXEnvironment.platform.toLowerCase() === 'ios') ? '400px' : '200px'
 }
+
+export function getListHeight(height = 1234) {
+    if(WXEnvironment.platform === 'Web') {
+        return height
+    }
+    return height - 32;
+}
