@@ -170,7 +170,7 @@
         align-items: center;
         justify-content: center;
         border-radius: 15px;
-        padding: 10px 20px;
+        padding: 20px 20px;
         box-shadow: $--box-shadow-color;
     }
 

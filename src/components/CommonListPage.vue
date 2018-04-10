@@ -1,5 +1,5 @@
 <template>
-    <div :style="mainStyle">
+    <div class="wrapper"  :style="mainStyle">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" :listItemName="itemClass" :listData="list"
@@ -189,5 +189,11 @@
     }
 </script>
 
+<style lang="scss" >
+    @import '../config/styles.scss';
+    .wrapper {
+        background-color: $--container-color
+    }
+</style>
 <style scoped>
 </style>

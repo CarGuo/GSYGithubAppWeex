@@ -9,7 +9,7 @@
 <style lang="scss" >
     @import '../config/styles.scss';
     .wrapper {
-        backgroundColor: $--container-color
+        background-color: $--container-color
     }
 </style>
 <style scoped>

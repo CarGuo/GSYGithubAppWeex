@@ -37,7 +37,7 @@
     [self redirectConsoleLog];
     
     // Override point for customization after application launch.
-    [self startSplashScreen];
+    //[self startSplashScreen];
     
     return YES;
 }
