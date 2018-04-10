@@ -13,7 +13,7 @@
     import NavigationBar from './widget/NavigationBar.vue'
     import repository from '../core/net/repository'
     import user from '../core/net/user'
-
+    import  {getEntryPageStyle} from "../config/Config"
 
     export default {
         props: {
@@ -33,8 +33,7 @@
         },
         created: function () {
             this.init()
-            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
-            this.mainStyle = {height:'1334px',width: '750px',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
+            this.mainStyle = getEntryPageStyle(1334)
         },
         activated: function () {
             //keep alive

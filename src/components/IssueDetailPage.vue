@@ -56,7 +56,7 @@
     import LoadingComponent from './widget/LoadingComponent.vue'
     const clipboard = weex.requireModule('clipboard')
     const modal = weex.requireModule('modal')
-
+    import {getEntryPageStyle} from "../config/Config"
 
     export default {
         props: {
@@ -81,9 +81,7 @@
         },
         created: function () {
             this.init()
-            let mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : '1334px'
-            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
-            this.mainStyle = {height: mainHeight, width: '750px',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
+            this.mainStyle = getEntryPageStyle(1334)
         },
         activated: function () {
             //keep alive
@@ -312,7 +310,7 @@
     }
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
     @import '../config/styles.scss';
 
     .bottom-item-text {
@@ -325,6 +323,7 @@
         word-wrap: break-word;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
+        background-color: white;
     }
     .content-text {
         flex: 1;
@@ -335,11 +334,8 @@
         justify-content: center;
         text-align: center;
         margin-top: 30px;
-        border-bottom: 2px #969896;
         font-size: 35px;
     }
-</style>
-<style scoped>
 
     .content {
         flex: 1;
@@ -347,7 +343,6 @@
         justify-content: center;
         padding: 30px;
     }
-
 
     .bottom-container {
         position:absolute;
@@ -370,8 +365,7 @@
     }
 
     .bottom-item-line {
-        border-color: rgba(60, 63, 65, 0.7);
+        border-color: $--theme-color;
         border-right-width: 1px;
     }
-
 </style>

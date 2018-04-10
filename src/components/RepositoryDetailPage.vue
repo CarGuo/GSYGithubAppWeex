@@ -65,9 +65,8 @@
     import repository from '../core/net/repository'
     import * as Constant from '../core/common/constant'
     import  {launchUrl} from "../core/common/htmlUtils"
+    import  {getEntryPageStyle,getContentStyle} from "../config/Config"
     const modal = weex.requireModule('modal')
-    import {addIconFontSupport} from '../config/IconConfig'
-    const dom = weex.requireModule('dom');
 
     export default {
         components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage,
@@ -96,15 +95,9 @@
             popoverArrowPosition: {pos: 'bottom', x: -50},
         }),
         created () {
-            const tabPageHeight = Utils.env.getPageHeight();
-            const { tabStyles } = this;
-            this.contentStyle = { height: (tabPageHeight - tabStyles.height) + 'px' };
-            let mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : Utils.env.getScreenHeight() - 32
-            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
-            this.mainStyle = {height: mainHeight, width: '750px',backgroundColor: 'white', marginTop: mainMarginTop}
+            this.contentStyle = getContentStyle(Utils.env.getScreenHeight(), this.tabStyles.height)
+            this.mainStyle = getEntryPageStyle(Utils.env.getScreenHeight())
             this.init()
-            //addIconFontSupport(dom, "../../")
-
         },
         activated: function () {
             //keep alive
@@ -254,15 +247,15 @@
         -webkit-box-orient: vertical;
     }
 
-</style>
-<style scoped>
     .item-container {
         width: 750px;
-        background-color: #f2f3f4;
+        background-color: $--container-color;
         align-items: center;
         justify-content: center;
     }
 
+</style>
+<style scoped>
     .bottom-item {
         padding-top: 10px;
         padding-bottom: 10px;
@@ -275,6 +268,7 @@
         background-color: white;
         flex-direction: row;
         width: 750px;
+        height: 80px;
         padding-top: 15px;
         padding-bottom: 15px;
     }

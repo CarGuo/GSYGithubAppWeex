@@ -1,6 +1,17 @@
 
 export default {
     methods: {
+        reset(to) {
+            if(WXEnvironment.platform === 'Web') {
+                if (this.$router) {
+                    this.$router.replace(to)
+                }
+            } else {
+                if (this.$router) {
+                    this.$router.replace(to)
+                }
+            }
+        },
         getNavigator() {
             return weex.requireModule('navigator')
         },
@@ -33,21 +44,6 @@ export default {
             }
             return nativeBase;
         },
-        jump(to) {
-            if(WXEnvironment.platform === 'Web') {
-                if (this.$router) {
-                    this.$router.push(to)
-                }
-            } else {
-                let path = this.getBaseUrl();
-                this.getNavigator().push({
-                    url: path + to + '.js',
-                    animated: "true"
-                }, event => {
-                    //modal.toast({ message: 'callback: ' + event })
-                })
-            }
-        },
         jumpWithParams(to, params) {
             if(WXEnvironment.platform === 'Web') {
                 if (this.$router) {
@@ -62,17 +58,6 @@ export default {
                 }, event => {
                     //modal.toast({ message: 'callback: ' + event })
                 })
-            }
-        },
-        reset(to) {
-            if(WXEnvironment.platform === 'Web') {
-                if (this.$router) {
-                    this.$router.replace(to)
-                }
-            } else {
-                if (this.$router) {
-                    this.$router.replace(to)
-                }
             }
         },
         // object 转 URL 参数

@@ -1,5 +1,5 @@
 <template>
-    <div :style="mainStyle">
+    <div class="search-page-container" :style="mainStyle">
         <navigation-bar :title="'搜索'" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <div>
@@ -32,6 +32,7 @@
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {WxcSearchbar} from 'weex-ui';
+    import {getEntryPageStyle} from "../config/Config"
 
 
     export default {
@@ -53,8 +54,7 @@
         },
         created: function () {
             this.init()
-            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
-            this.mainStyle = {flex:1, width:'750px',alignItems: 'center',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
+            this.mainStyle = getEntryPageStyle(1334)
         },
         activated: function () {
             //keep alive
@@ -163,7 +163,6 @@
 
 <style lang="scss" >
     @import '../config/styles.scss';
-
     .control-container {
         background-color: $--theme-color;
         width: 710px;
@@ -179,6 +178,10 @@
 
 </style>
 <style scoped>
+    .search-page-container {
+        align-items: center;
+        justify-content: center;
+    }
     .control-text {
         flex: 1;
         text-align: center;

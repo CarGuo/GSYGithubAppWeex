@@ -15,6 +15,8 @@
     import NavigationBar from './widget/NavigationBar.vue'
     import {formName, generateHtml, generateCode2HTml} from '../core/common/htmlUtils'
     import {addIconFontSupport} from '../config/IconConfig'
+    import {getEntryPageStyle} from "../config/Config"
+
 
     export default {
         components: {WebComponent, NavigationBar},
@@ -31,8 +33,7 @@
         },
         created: function () {
             this.loadData()
-            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
-            this.mainStyle = {flex: 1, width: '750px', marginTop: mainMarginTop}
+            this.mainStyle = getEntryPageStyle(1334)
 
         },
         methods: {
