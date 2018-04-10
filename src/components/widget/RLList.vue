@@ -140,7 +140,23 @@
         }
     }
 </script>
+<style lang="scss" >
+    @import '../../config/styles.scss';
 
+    .indicator-text {
+        color: $--gray-color;
+        font-size: 42px;
+        text-align: center;
+    }
+
+    .indicator {
+        margin-top: 16px;
+        height: 80px;
+        width: 80px;
+        color: $--theme-color;
+    }
+
+</style>
 <style scoped>
     .loading {
         margin-top: 20px;
@@ -166,25 +182,7 @@
         align-items: center;
     }
 
-    .indicator-text {
-        color: #888888;
-        font-size: 42px;
-        text-align: center;
-    }
 
-    .indicator {
-        margin-top: 16px;
-        height: 80px;
-        width: 80px;
-        color: #121917;
-    }
-
-    .indicator-loadmore {
-        margin-right: 20px;
-        height: 80px;
-        width: 80px;
-        color: #121917;
-    }
 
     .header {
         flex-direction: column;
