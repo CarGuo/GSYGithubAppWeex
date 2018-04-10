@@ -23,13 +23,13 @@ export const webDraculaBackgroundColor = '#282a36';
 export function getEntryPageStyle(pageHeight) {
     let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
     let mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : ((pageHeight - 32)+ 'px');
-    return {height: mainHeight, width: '750px',backgroundColor: 'white', marginTop: mainMarginTop}
+    return {height: mainHeight, width: '750px', marginTop: mainMarginTop}
 }
 
 export function getContentStyle(pageHeight, tabHeight) {
     return { height: (pageHeight - tabHeight) + 'px' };
 }
 
-export function getListBottomEmtry() {
+export function getListBottomEmpty() {
     return (WXEnvironment.platform.toLowerCase() === 'ios') ? '400px' : '200px'
 }

@@ -18,7 +18,7 @@
         </div>
 
         <div style="flex:1;width:750px;">
-            <r-l-list ref="dylist" :listItemName="itemClass" :listData="list" :bottomEmpty="getListBottomEmtry"
+            <r-l-list ref="dylist" :listItemName="itemClass" :listData="list" :bottomEmpty="getListBottomEmpty"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
     </div>
@@ -32,7 +32,7 @@
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {WxcSearchbar} from 'weex-ui';
-    import {getEntryPageStyle, getListBottomEmtry} from "../config/Config"
+    import {getEntryPageStyle, getListBottomEmpty} from "../config/Config"
 
 
     export default {

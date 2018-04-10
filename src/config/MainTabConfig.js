@@ -21,10 +21,10 @@ export default {
         }
     ],
     tabIconFontStyles: {
-        bgColor: '#FFFFFF',
+        bgColor: '#fbfbfb',
         titleColor: '#666666',
         activeTitleColor: Config.primaryColor,
-        activeBgColor: '#FFFFFF',
+        activeBgColor: '#fbfbfb',
         isActiveTitleBold: true,
         width: 160,
         height: Config.mainTabBarHeight,

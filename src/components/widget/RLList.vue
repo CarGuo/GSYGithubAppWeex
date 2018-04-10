@@ -17,12 +17,18 @@
                            :itemIndex="index"></component>
             </div>
         </cell>
-        <cell class="loading">
+        <cell v-if="!isNotEmpty" class="empty-page">
+            <div class="empty-page">
+                <image :src="logo" class="logo"></image>
+                <text class="indicator-text">目前什么都没有</text>
+            </div>
+        </cell>
+        <cell v-if="showLoadMore" class="loading">
             <div :style="loadingDisplay">
                 <text class="indicator-text">Loading ...</text>
             </div>
         </cell>
-        <cell :style="{height: bottomEmpty, width: '10px'}">
+        <cell v-if="!showLoadMore"  :style="{height: bottomEmpty, width: '10px'}">
             <div :style="{height: bottomEmpty, width: '10px'}">
             </div>
         </cell>
@@ -39,6 +45,7 @@
     import IssueCommentItem from './IssueCommentItem.vue'
     import FileItem from './FileItem.vue'
     import UserItem from './UserItem.vue'
+    import {getImagePath} from '../../config/IconConfig'
 
     if(WXEnvironment.platform !== 'Web') {
         Vue.component('EventItem', EventItem)
@@ -70,11 +77,15 @@
                 loadinging: false,
                 needRefresh: true,
                 needLoadMore: true,
+                logo: getImagePath('logo', '.png')
             }
         },
         computed: {
             dataList() {
                 return this.listData;
+            },
+            isNotEmpty() {
+                return (this.listData && this.listData.length > 0);
             },
             refreshDisplay() {
                 let display = (this.refreshing === true && this.needRefresh === true) ? 'show' : 'hide';
@@ -86,8 +97,11 @@
                     overflow: 'hidden',
                     flexDirection: 'row',
                     alignItems: 'center',
-                } : {height: '0.1px', overflow: 'hidden', flexDirection: 'row', alignItems: 'center', };
+                } : {height: '0.01px', overflow: 'hidden', flexDirection: 'row', alignItems: 'center', };
                 return display
+            },
+            showLoadMore() {
+                return this.loadinging === true && this.needLoadMore === true
             }
         },
         methods: {
@@ -158,6 +172,12 @@
 
 </style>
 <style scoped>
+    .logo {
+        width: 150px;
+        height: 150px;
+        align-items: center;
+        justify-content: center;
+    }
     .loading {
         margin-top: 20px;
         width: 750px;
@@ -199,5 +219,11 @@
 
     .list {
         height: 1334px;
+    }
+    .empty-page {
+        width: 750px;
+        height: 1224px;
+        align-items: center;
+        justify-content: center;
     }
 </style>

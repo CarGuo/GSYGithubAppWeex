@@ -3,7 +3,7 @@
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list"
-                  headerComponent="IssueHeadItem" :headerData="issueInfo" :bottomEmpty="getListBottomEmtry"
+                  headerComponent="IssueHeadItem" :headerData="issueInfo" :bottomEmpty="getListBottomEmpty"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         <div v-if="issueInfo.body" class="bottom-container">
             <div class="bottom-item bottom-item-line" @click="replyClick">
