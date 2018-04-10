@@ -6556,6 +6556,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getEntryPageStyle = getEntryPageStyle;
 exports.getContentStyle = getContentStyle;
+exports.getListBottomEmtry = getListBottomEmtry;
 var navigatorbBarHeight = exports.navigatorbBarHeight = 100;
 
 var mainTabBarHeight = exports.mainTabBarHeight = 120;
@@ -6572,6 +6573,10 @@ function getEntryPageStyle(pageHeight) {
 
 function getContentStyle(pageHeight, tabHeight) {
     return { height: pageHeight - tabHeight + 'px' };
+}
+
+function getListBottomEmtry() {
+    return WXEnvironment.platform.toLowerCase() === 'ios' ? '400px' : '200px';
 }
 
 /***/ }),
@@ -54769,6 +54774,8 @@ var _RLList = __webpack_require__(5);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
+var _Config = __webpack_require__(7);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
@@ -55039,7 +55046,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": "RepositoryItem",
       "listData": _vm.dataList,
-      "bottomEmpty": 400,
+      "bottomEmpty": _vm.getListBottomEmtry,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -57004,11 +57011,42 @@ var _repository = __webpack_require__(4);
 
 var _repository2 = _interopRequireDefault(_repository);
 
+var _Config = __webpack_require__(7);
+
 var _weexUi = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {},
@@ -57170,34 +57208,7 @@ exports.default = {
             });
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 521 */
@@ -57262,7 +57273,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": "IssueItem",
       "listData": _vm.list,
-      "bottomEmpty": 500,
+      "bottomEmpty": _vm.getListBottomEmtry,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -57370,9 +57381,34 @@ var _repository2 = _interopRequireDefault(_repository);
 
 var _htmlUtils = __webpack_require__(11);
 
+var _Config = __webpack_require__(7);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {
@@ -57498,28 +57534,7 @@ exports.default = {
             return !this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1;
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 525 */
@@ -57565,7 +57580,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": "FileItem",
       "listData": _vm.list,
-      "bottomEmpty": 400,
+      "bottomEmpty": _vm.getListBottomEmtry,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -58181,6 +58196,7 @@ module.exports = {
     "paddingBottom": "10",
     "flex": 1,
     "alignItems": "center",
+    "backgroundColor": "#FFFFFF",
     "justifyContent": "center"
   },
   "bottom-item-line": {
@@ -58573,6 +58589,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "listData": _vm.list,
       "headerComponent": "IssueHeadItem",
       "headerData": _vm.issueInfo,
+      "bottomEmpty": _vm.getListBottomEmtry,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -59308,7 +59325,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": _vm.itemClass,
       "listData": _vm.list,
-      "bottomEmpty": '350px',
+      "bottomEmpty": _vm.getListBottomEmtry,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick

@@ -16,3 +16,7 @@ export function getEntryPageStyle(pageHeight) {
 export function getContentStyle(pageHeight, tabHeight) {
     return { height: (pageHeight - tabHeight) + 'px' };
 }
+
+export function getListBottomEmtry() {
+    return (WXEnvironment.platform.toLowerCase() === 'ios') ? '400px' : '200px'
+}

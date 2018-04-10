@@ -17,7 +17,7 @@
         </div>
 
         <div style="flex:1;width:750px;">
-            <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="500"
+            <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="getListBottomEmtry"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
         <div class="float-btn-container">
@@ -31,6 +31,7 @@
     import RLList from './widget/RLList.vue'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
+    import {getListBottomEmtry} from '../config/Config'
     import {WxcSearchbar} from 'weex-ui';
 
 
