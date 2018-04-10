@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <div class="input-container">
-            <text style="color: #3c3f41;font-weight: bold; font-size: 35px">{{title}}</text>
+            <text class="title">{{title}}</text>
             <div style="margin-top: 50px">
                 <input v-if="needTitle" class="input-title" @input="onTitleChange" ref="editTitle"
                        placeholder="请输入标题" :value="editTitle"/>
@@ -169,13 +169,21 @@
         }
     }
 </script>
+
+<style src='../config/style.css' ></style>
 <style scoped>
     .wrapper {
         align-items: center;
         justify-content: center;
         width: 750px;
         height: 1334px;
-        background-color: #3c3f41;
+        background-color: var(--theme-color);
+    }
+
+    .title{
+        color: var(--theme-color);;
+        font-weight: bold;
+        font-size: 35px
     }
 
     .input-container {
@@ -194,9 +202,8 @@
         padding: 20px;
         margin-bottom: 20px;
         color: #666666;
+        border: solid #969896;
         border-bottom-width: 2px;
-        border-style: solid;
-        border-color: #969896;
     }
 
     .input {
@@ -209,9 +216,7 @@
         border-radius: 12px;
         padding: 20px;
         color: #666666;
-        border-width: 2px;
-        border-style: solid;
-        border-color: #969896;
+        border: 2px solid #969896;
     }
 
     .btn-text {

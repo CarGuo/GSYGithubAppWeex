@@ -24,13 +24,15 @@
         </loading-component>
     </div>
 </template>
+
+<style src='../config/style.css' ></style>
 <style scoped>
     .wrapper {
         align-items: center;
         justify-content: center;
         width: 750px;
         height: 1334px;
-        background-color: #3c3f41;
+        background-color: var(--theme-color);
     }
 
     .input-container {
@@ -40,7 +42,7 @@
         background-color: white;
         border-radius: 10px;
         padding: 25px;
-        box-shadow: 0 0 10px rgba(211, 210, 210, 0.50);
+        box-shadow: var(--box-shadow-color);
     }
 
     .input {
@@ -51,9 +53,7 @@
         color: #666666;
         align-items: center;
         justify-content: center;
-        border-width: 2px;
-        border-style: solid;
-        border-color: #3c3f41;
+        border: 2px solid var(--theme-color);
     }
 
 
@@ -61,7 +61,6 @@
         align-items: center;
         justify-content: center;
         font-size: 55px;
-        font-family: 'wxcIconFont';
         display: -webkit-box;
         margin-top: 10px;
         margin-right: 25px;

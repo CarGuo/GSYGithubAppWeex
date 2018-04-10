@@ -32,8 +32,7 @@
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {WxcSearchbar} from 'weex-ui';
-    import {addIconFontSupport} from '../config/IconConfig'
-    const dom = weex.requireModule('dom');
+
 
     export default {
         props: {},
@@ -53,7 +52,6 @@
         },
         created: function () {
             this.init()
-            //addIconFontSupport(dom, "../../")
         },
         activated: function () {
             //keep alive

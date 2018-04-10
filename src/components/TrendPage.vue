@@ -136,6 +136,8 @@
     }
 </script>
 
+
+<style src='../config/style.css' ></style>
 <style scoped>
     .title-container {
         position: absolute;
@@ -149,7 +151,7 @@
         justify-content: center;
         background-color: white;
         z-index: 999;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.80);
+        box-shadow: var(--box-shadow-color);
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }

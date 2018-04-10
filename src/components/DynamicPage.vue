@@ -73,7 +73,6 @@
             itemClick(index) {
                 let data = this.dataList[index];
                 ActionUtils(data, this)
-                //this.jumpWithParams("RepositoryDetailPage", {userName:'CarGuo',reposName:'GSYGithubApp',title:'GSYGithubApp'})
             },
         }
     }
