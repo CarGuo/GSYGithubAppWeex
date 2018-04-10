@@ -11,6 +11,8 @@
 
 <script>
     import NavigationBar from './widget/NavigationBar.vue'
+    import {getEntryPageStyle} from "../config/Config"
+
     export default {
         components:{
             NavigationBar
@@ -28,8 +30,7 @@
         },
         created() {
             this.url =  this.getQuery().url;
-            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
-            this.mainStyle = {height:'1334px',width: '750px', marginTop: mainMarginTop}
+            this.mainStyle = getEntryPageStyle(1334)
         },
     }
 </script>

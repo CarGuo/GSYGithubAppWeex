@@ -1,5 +1,5 @@
 <template>
-    <div class="card-white-wrapper" @click="onCardClick">
+    <div class="card-white-wrapper user-container" @click="onCardClick">
         <image v-if="itemValue.ex.userPic" :src="itemValue.ex.userPic" class="user-icon"></image>
         <text class="user-text">{{itemValue.ex.user}}</text>
     </div>
@@ -37,6 +37,9 @@
     }
 </style>
 <style scoped>
+    .user-container {
+        flex-direction: row;
+    }
     .user-icon {
         width: 80px;
         height: 80px;

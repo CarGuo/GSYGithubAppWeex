@@ -4,11 +4,20 @@
                      :isMe="false" :userName="getUserName"></person-page>
     </div>
 </template>
-<style scoped>
 
+
+<style lang="scss" >
+    @import '../config/styles.scss';
+    .wrapper {
+        backgroundColor: $--container-color
+    }
+</style>
+<style scoped>
 </style>
 <script>
     import PersonPage from './PersonPage.vue'
+    import {getEntryPageStyle} from "../config/Config"
+
     export default {
         props: {
             userType: {type: Number, default: 1},
@@ -23,8 +32,7 @@
             }
         },
         created() {
-            let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
-            this.mainStyle = {marginTop: mainMarginTop, backgroundColor: '#f2f3f4'}
+            this.mainStyle = getEntryPageStyle(1334)
         }
 
     }

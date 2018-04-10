@@ -37,7 +37,7 @@
         align-items: center;
         background-color:$--theme-color;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.80);
-        border-bottom: 0.5px #f2f3f4;
+        border-bottom: 0.5px $--container-color;
     }
 </style>
 <style scoped>
