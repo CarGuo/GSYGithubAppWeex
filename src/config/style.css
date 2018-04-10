@@ -67,8 +67,42 @@
     font-size: 28px;
 }
 
+.content-text-white {
+    color: white;
+    font-size: 28px;
+}
+
 .name-text {
     color: var(--gray-color);
     font-size: 30px;
     font-weight: bold;
+}
+
+.name-text-white {
+    display: -webkit-box;
+    white-space: normal !important;
+    word-wrap: break-word;
+    -webkit-line-clamp: 1;
+
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    lines: 1;
+}
+
+
+.user-text-theme {
+    color: var(--theme-color);
+    font-size: 30px;
+    display: -webkit-box;
+    overflow: hidden;
+    white-space: normal !important;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    -webkit-line-clamp: 1;
+    flex:1;
+    font-weight: bold;
+    -webkit-box-orient: vertical;
 }
