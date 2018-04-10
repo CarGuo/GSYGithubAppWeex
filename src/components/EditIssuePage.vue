@@ -184,25 +184,12 @@
         font-weight: bold;
         font-size: 35px
     }
-</style>
-<style scoped>
-
-    .input-container {
-        align-items: center;
-        justify-content: center;
-        width: 600px;
-        background-color: white;
-        border-radius: 10px;
-        padding: 25px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.70);
-    }
-
     .input-title {
         font-size: 30px;
         width: 560px;
         padding: 20px;
         margin-bottom: 20px;
-        color: #666666;
+        color: $--input-color;
         border: solid #969896;
         border-bottom-width: 2px;
     }
@@ -216,8 +203,21 @@
         justify-content: flex-start;
         border-radius: 12px;
         padding: 20px;
-        color: #666666;
+        color: $--input-color;
         border: 2px solid #969896;
+    }
+
+</style>
+<style scoped>
+
+    .input-container {
+        align-items: center;
+        justify-content: center;
+        width: 600px;
+        background-color: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.70);
     }
 
     .btn-text {

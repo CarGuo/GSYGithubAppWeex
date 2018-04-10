@@ -49,11 +49,12 @@
         width: 460px;
         border-radius: 12px;
         padding: 20px;
-        color: #666666;
+        color: $--input-color;
         align-items: center;
         justify-content: center;
         border: 2px solid $--theme-color;
     }
+
     .icon-text{
         align-items: center;
         color: $--theme-color;
