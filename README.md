@@ -2,7 +2,7 @@
 
 ## 一款跨平台的开源Github Weex客户端App，提供更丰富的功能，更好体验，旨在更好的日常管理和维护个人Github，提供更好更方便的驾车体验～～Σ(￣。￣ﾉ)ﾉ。
 
-ps 同款开源React Native版本 https://github.com/CarGuo/GSYGithubAPP
+#### ps 同款开源React Native版本 https://github.com/CarGuo/GSYGithubAPP
 
 ```
 基于Weex开发，适配Android\IOS\Web。（开发和适配中）
@@ -15,11 +15,52 @@ ps 同款开源React Native版本 https://github.com/CarGuo/GSYGithubAPP
 ```
 -----
 
-## 编译运行
+### 编译运行流程
 
-```
-完成后补齐
-```
+1、配置好Weex开发环境，可参阅 [【搭建环境】](http://weex.apache.org/cn/guide/set-up-env.html)
+
+2、clone代码，根目录下执行`npm install`安装node_modules(太慢建议科学上网或使用淘宝镜像)
+
+3、你需要自己项目src/core/common/目录下 创建一个ignoreConfig.js文件，然后输入你申请的Github client_id 和 client_secret。
+
+     export const CLIENT_ID = "xxxx";
+
+     export const CLIENT_SECRET = "xxxx";
+
+
+     //如果需要上传七牛
+     export const ACCESS_KEY = "xxxx";
+     export const SECRET_KEY = "xxx";
+     export const QN_HOST = "xxxx";
+     export const SCOPE = "xxxx";
+
+   [      注册 Github APP 传送门](https://github.com/settings/applications/new)，当然，前提是你现有一个github账号(～￣▽￣)～ 。
+
+4、执行`weex run android` 或者 `weex run ios` 活着 `npm run serve`
+
+
+### 示例图片
+
+<img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/1.jpg" width="426px"/>
+
+<img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/2.jpg" width="426px"/>
+
+<img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/3.jpg" width="426px"/>
+
+### 第三方框架
+
+* [vue-router](https://github.com/vuejs/vue-router)
+* [vuex](https://github.com/vuejs/vuex)
+* [highlight.js](https://github.com/isagalaev/highlight.js)
+* [weex-ui](https://github.com/alibaba/weex-ui)
+* [node-sass](https://github.com/sass/node-sass)
+* [url-parse url解析](https://github.com/unshiftio/url-parse)
+
+### 常见问题
+
+#### [点我传送](https://github.com/CarGuo/GSYGithubAppWeex/blob/master/question.md)
+
+<img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/thanks.jpg" width="426px"/>
 
 ### LICENSE
 ```
