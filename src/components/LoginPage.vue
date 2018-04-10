@@ -89,11 +89,12 @@
     import {isEmptyString} from '../core/common/commonUtils'
     import * as ignoreConfig from '../core/common/ignoreConfig'
     import {getImagePath, addIconFontSupport} from '../config/IconConfig'
+    import LoadingComponent from './widget/LoadingComponent.vue'
     const modal = weex.requireModule('modal')
     const dom = weex.requireModule('dom');
 
     export default {
-        components: {WxcButton, WxcLoading},
+        components: {WxcButton, WxcLoading, LoadingComponent},
         data() {
             return {
                 logo: '',
