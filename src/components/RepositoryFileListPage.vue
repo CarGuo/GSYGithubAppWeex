@@ -15,7 +15,7 @@
 
             </div>
         </scroller>
-        <r-l-list ref="dylist" listItemName="FileItem" :listData="list" :bottomEmpty="400"
+        <r-l-list ref="dylist" listItemName="FileItem" :listData="list" :bottomEmpty="getListBottomEmtry"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
 </template>
@@ -26,6 +26,7 @@
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {isImageEnd} from '../core/common/htmlUtils'
+    import {getListBottomEmtry} from '../config/Config'
 
     export default {
         props: {

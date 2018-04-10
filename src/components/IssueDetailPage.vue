@@ -3,7 +3,7 @@
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list"
-                  headerComponent="IssueHeadItem" :headerData="issueInfo"
+                  headerComponent="IssueHeadItem" :headerData="issueInfo" :bottomEmpty="getListBottomEmtry"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         <div v-if="issueInfo.body" class="bottom-container">
             <div class="bottom-item bottom-item-line" @click="replyClick">
@@ -361,6 +361,7 @@
         padding-bottom: 10px;
         flex: 1;
         align-items: center;
+        background-color: white;
         justify-content: center;
     }
 
