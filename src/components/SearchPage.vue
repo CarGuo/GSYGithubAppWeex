@@ -51,7 +51,7 @@
                 selectSortData: null,
                 selectLanguageData: null,
                 mainStyle:{},
-                listHeight:getListHeight(1300 - navigatorbBarHeight - 300)
+                listHeight:getListHeight(1300 - navigatorbBarHeight - 200)
             }
         },
         created: function () {
@@ -179,7 +179,7 @@
     .search-page-container {
         align-items: center;
         justify-content: center;
-        background-color: $--theme-color;
+        background-color: $--container-color;
     }
 </style>
 <style scoped>
