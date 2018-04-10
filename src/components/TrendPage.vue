@@ -29,7 +29,7 @@
                          @wxcPopoverButtonClicked="popoverLanguageButtonClicked"></wxc-popover>
         </div>
         <div class="list-container">
-            <r-l-list ref="dylist" listItemName="RepositoryItem" :listData="dataList" :bottomEmpty="getListBottomEmtry"
+            <r-l-list ref="dylist" listItemName="RepositoryItem" :listData="dataList" :bottomEmpty="getListBottomEmpty"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
     </div>
@@ -41,7 +41,7 @@
     import {WxcButton, WxcPopover} from 'weex-ui'
     import {TrendTime, TrendType} from '../core/common/filterUtils'
     import RLList from './widget/RLList.vue'
-    import {getListBottomEmtry} from '../config/Config'
+    import {getListBottomEmpty} from '../config/Config'
     import * as Config from '../config/Config'
 
 
