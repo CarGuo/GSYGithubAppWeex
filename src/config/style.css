@@ -5,6 +5,7 @@
     --box-shadow-color: 0 0 10px rgba(211, 210, 210, 0.50);
     --theme-color: #3c3f41;
     --gray-color: rgba(97, 97, 97, 0.6);
+    --container-color: #f2f3f4;;
 }
 
 .card-white-wrapper {
@@ -77,6 +78,13 @@
     font-size: 30px;
     font-weight: bold;
 }
+
+.name-text-theme {
+    color: var(--theme-color);
+    font-size: 30px;
+    font-weight: bold;
+}
+
 
 .name-text-white {
     display: -webkit-box;

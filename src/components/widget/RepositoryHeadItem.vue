@@ -1,20 +1,20 @@
 <template>
     <div>
-        <div class="card-wrapper">
+        <div class="card-black-wrapper">
             <div class="card-user-wrapper" style="flex-direction: row">
-                <text class="name-text" @click="userNameClick">{{itemValue.userName}}</text>
-                <text class="name-text">{{" / "}}</text>
-                <text class="name-text">{{itemValue.reposName}}</text>
+                <text class="name-text-white " @click="userNameClick">{{itemValue.userName}}</text>
+                <text class="name-text-white name-text-repos">{{" / "}}</text>
+                <text class="name-text-white name-text-repos">{{itemValue.reposName}}</text>
             </div>
             <div style="flex-direction: row;margin-top: 20px">
-                <text class="repo-text">{{itemValue.language}}</text>
-                <text class="repo-text">{{itemValue.size ? ((itemValue.size / 1024).toFixed(2) + "M") : ' '}}</text>
-                <text class="repo-text">{{itemValue.license ? itemValue.license.name : ""}}</text>
+                <text class="content-text-gray repo-text">{{itemValue.language}}</text>
+                <text class="content-text-gray repo-text">{{itemValue.size ? ((itemValue.size / 1024).toFixed(2) + "M") : ' '}}</text>
+                <text class="content-text-gray repo-text">{{itemValue.license ? itemValue.license.name : ""}}</text>
             </div>
 
             <text class="content-text" style="flex: 1; margin-top: 20px;" >{{itemValue.description}}</text>
 
-            <text class="time-text" style="flex: 1; margin-top: 20px;margin-bottom: 20px;"  @click="desClick">{{itemValue.infoText}}</text>
+            <text class="content-text-gray time-text" style="flex: 1; margin-top: 20px;margin-bottom: 20px;"  @click="desClick">{{itemValue.infoText}}</text>
 
             <div class="bottom-container">
                 <div class="bottom-item bottom-item-line" @click="reposStarClick">
@@ -120,19 +120,12 @@
     }
 </script>
 
+<style src='../../config/style.css' ></style>
 <style scoped>
 
     .bottom-item-text {
         font-size: 23px;
-        font-family: 'wxcIconFont';
         color: rgba(255, 255, 255, 0.7);
-        display: -webkit-box;
-        overflow: hidden;
-        white-space: normal !important;
-        text-overflow: ellipsis;
-        word-wrap: break-word;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
     }
 
     .bottom-container {
@@ -158,21 +151,11 @@
     }
 
     .repo-text {
-        color: rgba(227, 227, 227, 0.4);
         font-size: 25px;
-        display: -webkit-box;
-        overflow: hidden;
-        white-space: normal !important;
-        text-overflow: ellipsis;
-        word-wrap: break-word;
-        -webkit-line-clamp: 1;
         margin-right: 20px;
-        flex-direction: row-reverse;
-        -webkit-box-orient: vertical;
     }
 
     .time-text {
-        color: rgba(227, 227, 227, 0.5);
         font-size: 25px;
         flex: 1;
         text-align: end;
@@ -184,27 +167,16 @@
         font-weight: bold;
     }
 
-    .card-wrapper {
-        width: 710px;
-        background-color: #3c3f41;
-        padding: 20px;
-        margin-top: 20px;
-        border-radius: 15px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
-    }
-
     .card-user-wrapper {
         align-items: center;
     }
 
-    .name-text {
-        color: rgba(255, 255, 255, 0.9);
+    .name-text-repos {
         font-size: 34px;
-        font-weight: bold;
     }
 
     .control-container {
-        background-color: #3c3f41;
+        background-color: var(--theme-color);
         width: 710px;
         flex-direction: row;
         margin-top: 30px;
@@ -213,7 +185,7 @@
         justify-content: center;
         border-radius: 15px;
         padding: 20px 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.90);
+        box-shadow: var(--box-shadow-color);
     }
 
     .control-text {

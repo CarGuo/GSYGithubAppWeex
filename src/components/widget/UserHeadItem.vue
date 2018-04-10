@@ -1,5 +1,5 @@
 <template>
-    <div class="card-wrapper">
+    <div class="card-black-full-wrapper">
         <div class="card-user-wrapper" style="flex-direction: row">
             <image v-if="itemValue.ex.userPic" :src="itemValue.ex.userPic" class="user-icon"></image>
             <div style="flex: 1;">
@@ -37,9 +37,6 @@
 </template>
 
 <script>
-    import {addIconFontSupport} from '../../config/IconConfig'
-
-    const dom = weex.requireModule('dom');
     export default {
         props: {
             itemValue: {
@@ -88,11 +85,11 @@
             }
         },
         created() {
-            //addIconFontSupport(dom, "../../")
         },
     }
 </script>
 
+<style src='../../config/style.css' ></style>
 <style scoped>
     .user-icon {
         width: 140px;
@@ -101,15 +98,6 @@
         justify-content: center;
         border-radius: 70px;
         margin-right: 20px;
-    }
-
-    .card-wrapper {
-        width: 750px;
-        background-color: #3c3f41;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.60);
     }
 
     .bottom-container {
@@ -138,6 +126,7 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
     }
+
     .bottom-item-value {
         color: rgba(255, 255, 255, 0.7);
         font-size: 28px;
@@ -161,8 +150,8 @@
         flex: 1;
         margin-top: 20px;
     }
+
     .link-text {
-        font-family: 'wxcIconFont';
         font-size: 23px;
         color: rgba(0, 111, 255, 0.6);
         flex: 1;
@@ -172,14 +161,12 @@
     .location-text {
         font-size: 23px;
         margin-top: 5px;
-        font-family: 'wxcIconFont';
         color: rgba(255, 255, 255, 0.9);
     }
 
     .org-text {
         font-size: 23px;
         margin-top: 5px;
-        font-family: 'wxcIconFont';
         color: rgba(255, 255, 255, 0.9);
     }
 

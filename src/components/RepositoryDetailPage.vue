@@ -234,6 +234,7 @@
     }
 </script>
 
+<style src='../config/style.css' ></style>
 <style scoped>
     .item-container {
         width: 750px;
@@ -251,14 +252,13 @@
     }
 
     .bottom-item-line {
-        border-color: rgba(60, 63, 65, 0.7);
+        border-color: var(--theme-color);
         border-right-width: 1px;
     }
 
     .bottom-item-text {
         font-size: 23px;
-        font-family: 'wxcIconFont';
-        color: rgba(60, 63, 65, 0.7);
+        color: var(--theme-color);
         display: -webkit-box;
         overflow: hidden;
         white-space: normal !important;
@@ -274,7 +274,6 @@
         width: 750px;
         padding-top: 15px;
         padding-bottom: 15px;
-        border-top: 1px #3c3f41;
     }
 
 </style>

@@ -20,7 +20,6 @@
     </div>
 </template>
 
-<style src='../../config/style.css' ></style>
 <script>
     import IssueRichText from './IssueRichText.vue'
     export default {
@@ -53,6 +52,7 @@
     }
 </script>
 
+<style src='../../config/style.css' ></style>
 <style scoped>
     .user-icon {
         width: 70px;
@@ -88,6 +88,5 @@
         font-size: 24px;
         margin-left: 10px;
     }
-
 
 </style>

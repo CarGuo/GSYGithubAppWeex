@@ -56,8 +56,6 @@
     import LoadingComponent from './widget/LoadingComponent.vue'
     const clipboard = weex.requireModule('clipboard')
     const modal = weex.requireModule('modal')
-    import {addIconFontSupport} from '../config/IconConfig'
-    const dom = weex.requireModule('dom');
 
 
     export default {
@@ -86,7 +84,6 @@
             let mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : '1334px'
             let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
             this.mainStyle = {height: mainHeight, width: '750px',backgroundColor: '#f2f3f4', marginTop: mainMarginTop}
-            //addIconFontSupport(dom, "../../")
         },
         activated: function () {
             //keep alive
@@ -315,6 +312,7 @@
     }
 </script>
 
+<style src='../config/style.css' ></style>
 <style scoped>
 
     .content {
@@ -323,17 +321,17 @@
         justify-content: center;
         padding: 30px;
     }
+
     .content-text {
         flex: 1;
-        color: #333333;
+        color: var(--theme-color);
         width: 500px;
         height: 60px;
         align-items: center;
         justify-content: center;
         text-align: center;
         margin-top: 30px;
-        border-bottom-width: 2px;
-        border-bottom-color: #969896;
+        border-bottom: 2px #969896;
         font-size: 35px;
     }
 
@@ -346,7 +344,6 @@
         width: 750px;
         padding-top: 15px;
         padding-bottom: 15px;
-        border-top: 1px #3c3f41;
     }
 
 
@@ -365,8 +362,7 @@
 
     .bottom-item-text {
         font-size: 26px;
-        font-family: 'wxcIconFont';
-        color: rgba(60, 63, 65, 0.7);
+        color: var(--theme-color);
         display: -webkit-box;
         overflow: hidden;
         white-space: normal !important;

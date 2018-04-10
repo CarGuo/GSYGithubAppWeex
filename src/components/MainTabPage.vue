@@ -19,10 +19,11 @@
     </div>
 </template>
 
+<style src='../config/style.css' ></style>
 <style scoped>
     .item-container {
         width: 750px;
-        background-color: #f2f3f4;
+        background-color: var(--container-color);
         overflow: scroll;
     }
 </style>
@@ -57,18 +58,10 @@
         methods: {
             wxcTabBarCurrentTabSelected(e) {
                 const index = e.page;
-                // console.log(index);
-            },
-            minibarLeftButtonClick() {
-                //console.log("FFFFFF")
             },
             minibarRightButtonClick() {
                 this.jumpWithParams("SearchPage",{})
             },
-            itemClick(event) {
-                console.log("click index ", event.index);
-                modal.toast({message: "click index " + event.index})
-            }
         }
     };
 </script>
