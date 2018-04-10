@@ -4904,6 +4904,41 @@ var REFRESH_LANGUAGE = exports.REFRESH_LANGUAGE = 'refreshLanguageApp';
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.getEntryPageStyle = getEntryPageStyle;
+exports.getContentStyle = getContentStyle;
+exports.getListBottomEmtry = getListBottomEmtry;
+var navigatorbBarHeight = exports.navigatorbBarHeight = 100;
+
+var mainTabBarHeight = exports.mainTabBarHeight = 120;
+
+var reposDetailTopTabBarHeight = exports.reposDetailTopTabBarHeight = 80;
+
+var controlBarHeight = exports.controlBarHeight = 80;
+
+function getEntryPageStyle(pageHeight) {
+    var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
+    var mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : pageHeight - 32 + 'px';
+    return { height: mainHeight, width: '750px', backgroundColor: 'white', marginTop: mainMarginTop };
+}
+
+function getContentStyle(pageHeight, tabHeight) {
+    return { height: pageHeight - tabHeight + 'px' };
+}
+
+function getListBottomEmtry() {
+    return WXEnvironment.platform.toLowerCase() === 'ios' ? '400px' : '200px';
+}
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.WxcTag = exports.WxcTabBar = exports.WxcTabPage = exports.WxcStepper = exports.WxcSliderBar = exports.WxcSlideNav = exports.WxcSimpleFlow = exports.WxcSearchbar = exports.WxcSpecialRichText = exports.WxcRichText = exports.WxcResult = exports.WxcRadio = exports.WxcProgress = exports.WxcPopup = exports.WxcPopover = exports.WxcPageCalendar = exports.WxcOverlay = exports.WxcNoticebar = exports.WxcLotteryRain = exports.WxcMinibar = exports.WxcMask = exports.WxcPartLoading = exports.WxcLoading = exports.WxcLightbox = exports.WxcIndexlist = exports.WxcIcon = exports.WxcGridSelect = exports.WxcPanItem = exports.WxcEpSlider = exports.WxcDialog = exports.WxcCountdown = exports.WxcCheckboxList = exports.WxcCheckbox = exports.WxcCity = exports.WxcCell = exports.WxcButton = exports.Utils = undefined;
@@ -5100,7 +5135,7 @@ exports.WxcTag = _wxcTag2.default; /**
                                     */
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6455,7 +6490,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
@@ -6499,7 +6534,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
@@ -6543,41 +6578,6 @@ if (typeof __register_static_styles__ === "function") {
 
 module.exports = __vue_exports__
 
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.getEntryPageStyle = getEntryPageStyle;
-exports.getContentStyle = getContentStyle;
-exports.getListBottomEmtry = getListBottomEmtry;
-var navigatorbBarHeight = exports.navigatorbBarHeight = 100;
-
-var mainTabBarHeight = exports.mainTabBarHeight = 120;
-
-var reposDetailTopTabBarHeight = exports.reposDetailTopTabBarHeight = 80;
-
-var controlBarHeight = exports.controlBarHeight = 80;
-
-function getEntryPageStyle(pageHeight) {
-    var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
-    var mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : pageHeight - 32 + 'px';
-    return { height: mainHeight, width: '750px', backgroundColor: 'white', marginTop: mainMarginTop };
-}
-
-function getContentStyle(pageHeight, tabHeight) {
-    return { height: pageHeight - tabHeight + 'px' };
-}
-
-function getListBottomEmtry() {
-    return WXEnvironment.platform.toLowerCase() === 'ios' ? '400px' : '200px';
-}
 
 /***/ }),
 /* 8 */
@@ -30797,7 +30797,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _repository = __webpack_require__(4);
+var _repository = __webpack_require__(5);
 
 var _repository2 = _interopRequireDefault(_repository);
 
@@ -35210,7 +35210,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
 var _buffer = __webpack_require__(27);
 
@@ -50014,7 +50014,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
 //
 //
@@ -50691,7 +50691,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
 var _MainTabConfig = __webpack_require__(434);
 
@@ -50701,7 +50701,7 @@ var _TabBar = __webpack_require__(435);
 
 var _TabBar2 = _interopRequireDefault(_TabBar);
 
-var _NavigationBar = __webpack_require__(6);
+var _NavigationBar = __webpack_require__(7);
 
 var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
@@ -50796,6 +50796,12 @@ Object.defineProperty(exports, "__esModule", {
 
 var _IconConfig = __webpack_require__(9);
 
+var _Config = __webpack_require__(3);
+
+var Config = _interopRequireWildcard(_Config);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 exports.default = {
 
     // 使用 iconFont 模式的tab title配置
@@ -50813,11 +50819,11 @@ exports.default = {
     tabIconFontStyles: {
         bgColor: '#FFFFFF',
         titleColor: '#666666',
-        activeTitleColor: '#3D3D3D',
+        activeTitleColor: '#3c3f41',
         activeBgColor: '#FFFFFF',
         isActiveTitleBold: true,
         width: 160,
-        height: 120,
+        height: Config.mainTabBarHeight,
         fontSize: 24,
         textPaddingLeft: 10,
         textPaddingRight: 10,
@@ -50948,7 +50954,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
 //
 //
@@ -51391,7 +51397,6 @@ module.exports = {
   },
   "title": {
     "width": "750",
-    "height": "100",
     "alignItems": "center",
     "backgroundColor": "#3c3f41",
     "boxShadow": "0 0 10px rgba(0, 0, 0, 0.8)",
@@ -51416,30 +51421,43 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
+
+var _Config = __webpack_require__(3);
+
+var Config = _interopRequireWildcard(_Config);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     components: { WxcMinibar: _weexUi.WxcMinibar },
+    data: function data() {
+        return {
+            nvheight: Config.navigatorbBarHeight
+        };
+    },
     props: {
         onLeftButtonClick: { type: Function, default: function _default() {} },
         onRightButtonClick: { type: Function, default: function _default() {} },
         title: { type: String, default: "" },
         rightIcon: { type: String, default: "" },
-        leftIcon: { type: String, default: "\uE78A" }
+        leftIcon: { type: String, default: '\uE78A' }
     },
     created: function created() {}
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 442 */
@@ -51447,7 +51465,10 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: ["title"]
+    staticClass: ["title"],
+    style: {
+      height: _vm.nvheight
+    }
   }, [_c('wxc-minibar', {
     attrs: {
       "backgroundColor": "rgba(97, 97, 97, 0.0)"
@@ -51558,7 +51579,7 @@ var Constant = _interopRequireWildcard(_constant);
 
 var _eventUtils = __webpack_require__(10);
 
-var _RLList = __webpack_require__(5);
+var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
@@ -54187,7 +54208,7 @@ module.exports = {
     "WebkitBoxOrient": "vertical"
   },
   "icon-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "#3c3f41",
     "fontSize": "30"
   },
   "arrow-text": {
@@ -54266,7 +54287,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('text', {
     staticClass: ["icon-text"],
     style: {
-      color: '#3c3f41',
       fontFamily: 'wxcIconFont'
     }
   }, [_vm._v(_vm._s(_vm.itemValue.type !== 'file' ? '\ue793' : '\uea77'))]), _c('text', {
@@ -54762,7 +54782,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
 var _constant = __webpack_require__(2);
 
@@ -54770,11 +54790,11 @@ var Constant = _interopRequireWildcard(_constant);
 
 var _filterUtils = __webpack_require__(493);
 
-var _RLList = __webpack_require__(5);
+var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
-var _Config = __webpack_require__(7);
+var _Config = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -55076,7 +55096,7 @@ var _constant = __webpack_require__(2);
 
 var Constant = _interopRequireWildcard(_constant);
 
-var _RLList = __webpack_require__(5);
+var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
@@ -55092,7 +55112,7 @@ var _user = __webpack_require__(13);
 
 var _user2 = _interopRequireDefault(_user);
 
-var _NavigationBar = __webpack_require__(6);
+var _NavigationBar = __webpack_require__(7);
 
 var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
@@ -55484,13 +55504,13 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
 var _RepositoryTabConfig = __webpack_require__(502);
 
 var _RepositoryTabConfig2 = _interopRequireDefault(_RepositoryTabConfig);
 
-var _NavigationBar = __webpack_require__(6);
+var _NavigationBar = __webpack_require__(7);
 
 var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
@@ -55522,7 +55542,7 @@ var _RepositoryFileListPage = __webpack_require__(522);
 
 var _RepositoryFileListPage2 = _interopRequireDefault(_RepositoryFileListPage);
 
-var _repository = __webpack_require__(4);
+var _repository = __webpack_require__(5);
 
 var _repository2 = _interopRequireDefault(_repository);
 
@@ -55532,7 +55552,7 @@ var Constant = _interopRequireWildcard(_constant);
 
 var _htmlUtils = __webpack_require__(11);
 
-var _Config = __webpack_require__(7);
+var _Config = __webpack_require__(3);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -55771,6 +55791,13 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _Config = __webpack_require__(3);
+
+var Config = _interopRequireWildcard(_Config);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 exports.default = {
     // 正常模式的tab title配置
     tabTitles: [{
@@ -55791,7 +55818,7 @@ exports.default = {
         iconWidth: 70,
         iconHeight: 70,
         width: 160,
-        height: 80,
+        height: Config.reposDetailTopTabBarHeight,
         fontSize: 24,
         textPaddingLeft: 10,
         textPaddingRight: 10
@@ -55917,7 +55944,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
 //
 //
@@ -56707,7 +56734,7 @@ var _constant = __webpack_require__(2);
 
 var Constant = _interopRequireWildcard(_constant);
 
-var _RLList = __webpack_require__(5);
+var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
@@ -56715,7 +56742,7 @@ var _event = __webpack_require__(8);
 
 var _event2 = _interopRequireDefault(_event);
 
-var _repository = __webpack_require__(4);
+var _repository = __webpack_require__(5);
 
 var _repository2 = _interopRequireDefault(_repository);
 
@@ -56999,7 +57026,7 @@ var _constant = __webpack_require__(2);
 
 var Constant = _interopRequireWildcard(_constant);
 
-var _RLList = __webpack_require__(5);
+var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
@@ -57007,13 +57034,13 @@ var _event = __webpack_require__(8);
 
 var _event2 = _interopRequireDefault(_event);
 
-var _repository = __webpack_require__(4);
+var _repository = __webpack_require__(5);
 
 var _repository2 = _interopRequireDefault(_repository);
 
-var _Config = __webpack_require__(7);
+var _Config = __webpack_require__(3);
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57367,7 +57394,7 @@ var _constant = __webpack_require__(2);
 
 var Constant = _interopRequireWildcard(_constant);
 
-var _RLList = __webpack_require__(5);
+var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
@@ -57375,13 +57402,13 @@ var _event = __webpack_require__(8);
 
 var _event2 = _interopRequireDefault(_event);
 
-var _repository = __webpack_require__(4);
+var _repository = __webpack_require__(5);
 
 var _repository2 = _interopRequireDefault(_repository);
 
 var _htmlUtils = __webpack_require__(11);
 
-var _Config = __webpack_require__(7);
+var _Config = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57736,11 +57763,11 @@ var _WebComponent = __webpack_require__(170);
 
 var _WebComponent2 = _interopRequireDefault(_WebComponent);
 
-var _repository = __webpack_require__(4);
+var _repository = __webpack_require__(5);
 
 var _repository2 = _interopRequireDefault(_repository);
 
-var _NavigationBar = __webpack_require__(6);
+var _NavigationBar = __webpack_require__(7);
 
 var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
@@ -57748,7 +57775,7 @@ var _htmlUtils = __webpack_require__(11);
 
 var _IconConfig = __webpack_require__(9);
 
-var _Config = __webpack_require__(7);
+var _Config = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57984,7 +58011,7 @@ var _PersonPage = __webpack_require__(169);
 
 var _PersonPage2 = _interopRequireDefault(_PersonPage);
 
-var _Config = __webpack_require__(7);
+var _Config = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58220,25 +58247,25 @@ var _constant = __webpack_require__(2);
 
 var Constant = _interopRequireWildcard(_constant);
 
-var _RLList = __webpack_require__(5);
+var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
-var _NavigationBar = __webpack_require__(6);
+var _NavigationBar = __webpack_require__(7);
 
 var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
-var _repository = __webpack_require__(4);
+var _repository = __webpack_require__(5);
 
 var _repository2 = _interopRequireDefault(_repository);
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
 var _LoadingComponent = __webpack_require__(18);
 
 var _LoadingComponent2 = _interopRequireDefault(_LoadingComponent);
 
-var _Config = __webpack_require__(7);
+var _Config = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58704,15 +58731,15 @@ var _constant = __webpack_require__(2);
 
 var Constant = _interopRequireWildcard(_constant);
 
-var _RLList = __webpack_require__(5);
+var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
-var _NavigationBar = __webpack_require__(6);
+var _NavigationBar = __webpack_require__(7);
 
 var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
-var _repository = __webpack_require__(4);
+var _repository = __webpack_require__(5);
 
 var _repository2 = _interopRequireDefault(_repository);
 
@@ -58720,7 +58747,7 @@ var _user = __webpack_require__(13);
 
 var _user2 = _interopRequireDefault(_user);
 
-var _Config = __webpack_require__(7);
+var _Config = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59093,11 +59120,11 @@ var _constant = __webpack_require__(2);
 
 var Constant = _interopRequireWildcard(_constant);
 
-var _RLList = __webpack_require__(5);
+var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
-var _NavigationBar = __webpack_require__(6);
+var _NavigationBar = __webpack_require__(7);
 
 var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
@@ -59105,13 +59132,13 @@ var _event = __webpack_require__(8);
 
 var _event2 = _interopRequireDefault(_event);
 
-var _repository = __webpack_require__(4);
+var _repository = __webpack_require__(5);
 
 var _repository2 = _interopRequireDefault(_repository);
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
-var _Config = __webpack_require__(7);
+var _Config = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59351,11 +59378,11 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _NavigationBar = __webpack_require__(6);
+var _NavigationBar = __webpack_require__(7);
 
 var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
-var _Config = __webpack_require__(7);
+var _Config = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59599,9 +59626,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(4);
 
-var _repository = __webpack_require__(4);
+var _repository = __webpack_require__(5);
 
 var _repository2 = _interopRequireDefault(_repository);
 

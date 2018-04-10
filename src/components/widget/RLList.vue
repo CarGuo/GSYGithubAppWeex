@@ -30,7 +30,6 @@
 </template>
 
 <script>
-    import * as Constant from '../../core/common/constant'
     import EventItem from './EventItem.vue'
     import RepositoryItem from './RepositoryItem.vue'
     import RepositoryHeadItem from './RepositoryHeadItem.vue'

@@ -1,4 +1,4 @@
-import {TOKEN_KEY, USER_BASIC_CODE, DEBUG} from '../common/constant'
+import {TOKEN_KEY, USER_BASIC_CODE, DEBUG} from '../../config/Config'
 import {getCache, removeCache, setCache} from '../common/storageUtils'
 
 

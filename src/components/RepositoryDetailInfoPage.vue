@@ -8,7 +8,6 @@
 </template>
 
 <script>
-    import * as Constant from '../core/common/constant'
     import RLList from './widget/RLList.vue'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
@@ -88,9 +87,6 @@
                         this.eventList = this.eventList.concat(res.data);
                     }
                 }
-                if (Constant.DEBUG) {
-                    console.info("repos detail info loadData ", res)
-                }
                 if (type === 1) {
                     if (this.$refs.dylist) {
                         this.$refs.dylist.stopRefresh();
@@ -101,7 +97,7 @@
                     }
                 }
                 if (this.$refs.dylist) {
-                    if (!res.data || res.data.length < Constant.PAGE_SIZE) {
+                    if (!res.data || res.data.length < this.getPageSize()) {
                         this.$refs.dylist.setNotNeedLoadMore();
                     } else {
                         this.$refs.dylist.setNeedLoadMore();

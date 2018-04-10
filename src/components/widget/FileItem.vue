@@ -1,6 +1,6 @@
 <template>
     <div class="card-white-wrapper card-wrapper-file"  @click="onCardClick">
-        <text class="icon-text" :style="{color: '#3c3f41', fontFamily: 'wxcIconFont'}">{{itemValue.type !== 'file' ? '\ue793' : '\uea77'}}</text>
+        <text class="icon-text" :style="{fontFamily: 'wxcIconFont'}">{{itemValue.type !== 'file' ? '\ue793' : '\uea77'}}</text>
         <text class="content-text-gray text-line-one content-text-file" >{{itemValue.name}}</text>
         <text v-if="itemValue.type !== 'file'" class="arrow-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue610'}}</text>
     </div>
@@ -32,7 +32,7 @@
     @import '../../config/styles.scss';
 
     .icon-text{
-        color: $--gray-color;
+        color: $--theme-color;
         font-size: 30px;
     }
 

@@ -9,13 +9,13 @@
 <script>
     const modal = weex.requireModule('modal')
 
-    import * as Constant from '../core/common/constant'
     import WebComponent from './widget/WebComponent.vue'
     import repository from '../core/net/repository'
     import NavigationBar from './widget/NavigationBar.vue'
     import {formName, generateHtml, generateCode2HTml} from '../core/common/htmlUtils'
     import {addIconFontSupport} from '../config/IconConfig'
     import {getEntryPageStyle} from "../config/Config"
+    import * as Config from "../config/Config"
 
 
     export default {
@@ -65,7 +65,7 @@
                             if ('markdown' === lang) {
                                 this.codeData = generateHtml(res.data)
                             } else {
-                                this.codeData = generateCode2HTml(res.data, Constant.webDraculaBackgroundColor, lang)
+                                this.codeData = generateCode2HTml(res.data, Config.webDraculaBackgroundColor, lang)
 
                             }
                         } else {

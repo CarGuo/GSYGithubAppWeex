@@ -1,5 +1,5 @@
 <template>
-    <div class="title">
+    <div class="title" :style="{height: nvheight}">
         <wxc-minibar background-color="rgba(97, 97, 97, 0.0)">
             <text slot="left" :style="{fontFamily: 'wxcIconFont',fontSize: '30px', color:'#FFFFFF'}"
                   @click="onLeftButtonClick">{{leftIcon}}</text>
@@ -12,8 +12,13 @@
 
 <script>
     import {WxcMinibar} from 'weex-ui';
+    import * as Config from '../../config/Config'
+
     export default {
         components: {WxcMinibar},
+        data: () => ({
+            nvheight: Config.navigatorbBarHeight
+        }),
         props: {
             onLeftButtonClick: {type: Function, default:function(){
                 }},
@@ -33,7 +38,6 @@
     @import '../../config/styles.scss';
     .title {
         width: 750px;
-        height:100px;
         align-items: center;
         background-color:$--theme-color;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.80);

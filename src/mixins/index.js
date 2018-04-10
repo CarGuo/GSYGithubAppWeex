@@ -1,3 +1,4 @@
+import {PAGE_SIZE} from '../config/Config'
 
 export default {
     methods: {
@@ -93,5 +94,8 @@ export default {
         getUserInfo() {
             return this.$store.state.user.userInfo
         },
+        getPageSize() {
+            return PAGE_SIZE
+        }
     }
 }

@@ -48,7 +48,6 @@
 </template>
 
 <script>
-    import * as Constant from '../core/common/constant'
     import RLList from './widget/RLList.vue'
     import NavigationBar from './widget/NavigationBar.vue'
     import repository from '../core/net/repository'
@@ -157,9 +156,6 @@
                         this.list = this.list.concat(res.data);
                     }
                 }
-                if (Constant.DEBUG) {
-                    console.info("issue detail info loadData ", res)
-                }
                 if (type === 1) {
                     if (this.$refs.dylist) {
                         this.$refs.dylist.stopRefresh();
@@ -170,7 +166,7 @@
                     }
                 }
                 if (this.$refs.dylist) {
-                    if (!res.data || res.data.length < Constant.PAGE_SIZE) {
+                    if (!res.data || res.data.length < this.getPageSize()) {
                         this.$refs.dylist.setNotNeedLoadMore();
                     } else {
                         this.$refs.dylist.setNeedLoadMore();

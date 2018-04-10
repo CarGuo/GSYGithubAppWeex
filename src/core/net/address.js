@@ -2,7 +2,7 @@
  * Created by guoshuyu on 2017/11/8.
  */
 
-import * as Config from '../common/constant'
+import * as Config from '../../config/Config'
 
 let host = "https://api.github.com/";
 export const hostWeb = "https://github.com/";

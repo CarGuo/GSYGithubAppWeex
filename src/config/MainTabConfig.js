@@ -1,4 +1,5 @@
 import {getIonFontPath} from './IconConfig'
+import * as Config from './Config'
 
 
 export default {
@@ -22,11 +23,11 @@ export default {
     tabIconFontStyles: {
         bgColor: '#FFFFFF',
         titleColor: '#666666',
-        activeTitleColor: '#3D3D3D',
+        activeTitleColor: Config.primaryColor,
         activeBgColor: '#FFFFFF',
         isActiveTitleBold: true,
         width: 160,
-        height: 120,
+        height: Config.mainTabBarHeight,
         fontSize: 24,
         textPaddingLeft: 10,
         textPaddingRight: 10,

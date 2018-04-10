@@ -6,7 +6,6 @@
 <script>
     const modal = weex.requireModule('modal')
 
-    import * as Constant from '../core/common/constant'
     import {ActionUtils} from '../core/common/eventUtils'
     import RLList from './widget/RLList.vue'
 
@@ -40,9 +39,7 @@
                 }
                 this.$store.dispatch('getEventReceived', {
                     page: this.currentPage, callback: (res) => {
-                        if (Constant.DEBUG) {
-                            console.info("dy loadData ", res)
-                        }
+
                         if (type === 1) {
                             if (this.$refs.dylist) {
                                 this.$refs.dylist.stopRefresh();
@@ -53,7 +50,7 @@
                             }
                         }
                         if (this.$refs.dylist) {
-                            if (!res.data || res.data.length < Constant.PAGE_SIZE) {
+                            if (!res.data || res.data.length < this.getPageSize()) {
                                 this.$refs.dylist.setNotNeedLoadMore();
                             } else {
                                 this.$refs.dylist.setNeedLoadMore();
