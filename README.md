@@ -36,7 +36,13 @@
 
    [      注册 Github APP 传送门](https://github.com/settings/applications/new)，当然，前提是你现有一个github账号(～￣▽￣)～ 。
 
-4、执行`weex run android` 或者 `weex run ios` 活着 `npm run serve`
+4、运行
+
+执行 `weex run android` 运行android。
+
+执行 `weex run ios` 运行ios。
+
+执行 `npm run serve` 运行web（目前未详细适配）。（推荐chrome，调试模式下手机模式）
 
 
 ### 示例图片
