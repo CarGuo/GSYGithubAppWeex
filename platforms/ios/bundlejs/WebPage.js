@@ -4490,6 +4490,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getEntryPageStyle = getEntryPageStyle;
 exports.getContentStyle = getContentStyle;
 exports.getListBottomEmpty = getListBottomEmpty;
+exports.getListHeight = getListHeight;
 var PAGE_SIZE = exports.PAGE_SIZE = 30;
 
 var DEBUG = exports.DEBUG = true;
@@ -4524,6 +4525,15 @@ function getContentStyle(pageHeight, tabHeight) {
 
 function getListBottomEmpty() {
     return WXEnvironment.platform.toLowerCase() === 'ios' ? '400px' : '200px';
+}
+
+function getListHeight() {
+    var height = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1234;
+
+    if (WXEnvironment.platform === 'Web') {
+        return height;
+    }
+    return height - 32;
 }
 
 /***/ }),
@@ -51520,6 +51530,8 @@ var _RLList = __webpack_require__(5);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
+var _Config = __webpack_require__(1);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //
@@ -51534,7 +51546,8 @@ exports.default = {
     components: { RLList: _RLList2.default },
     data: function data() {
         return {
-            currentPage: 1
+            currentPage: 1,
+            listHeight: (0, _Config.getListHeight)(1334 - _Config.navigatorbBarHeight - _Config.mainTabBarHeight)
         };
     },
 
@@ -51756,7 +51769,7 @@ module.exports = {
     "marginTop": "30"
   },
   "list": {
-    "height": "1334"
+    "height": "1234"
   },
   "empty-page": {
     "width": "750",
@@ -51877,7 +51890,8 @@ exports.default = {
         listData: { type: Array },
         headerComponent: { type: String },
         headerData: { type: Object },
-        bottomEmpty: { type: [String, Number], default: ' 240px' }
+        bottomEmpty: { type: [String, Number], default: '240px' },
+        listHeight: { type: [String, Number], default: '1234px' }
     },
     data: function data() {
         return {
@@ -54551,6 +54565,9 @@ module.exports.render._withStripped = true
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('list', {
     staticClass: ["list"],
+    style: {
+      height: _vm.listHeight
+    },
     attrs: {
       "loadmoreoffset": "30"
     },
@@ -54651,6 +54668,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": "EventItem",
       "listData": _vm.dataList,
+      "listHeight": _vm.listHeight,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -54905,6 +54923,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 var modal = weex.requireModule('modal');
 
@@ -54917,6 +54936,7 @@ exports.default = {
             language: '全部',
             since: null,
             languageType: null,
+            listHeight: (0, _Config.getListHeight)(1334 - _Config.navigatorbBarHeight - _Config.mainTabBarHeight),
             primaryColor: Config.primaryColor,
             btns1: _filterUtils.TrendTime,
             btns2: _filterUtils.TrendType,
@@ -55133,6 +55153,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "listItemName": "RepositoryItem",
       "listData": _vm.dataList,
       "bottomEmpty": _vm.getListBottomEmpty,
+      "listHeight": _vm.listHeight,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -55180,8 +55201,11 @@ var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
 var _eventUtils = __webpack_require__(9);
 
+var _Config = __webpack_require__(1);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -55200,7 +55224,8 @@ exports.default = {
         needTitle: { type: Boolean, default: false },
         userType: { type: Number, default: 1 },
         isMe: { type: Boolean, default: true },
-        userName: { type: String, default: '' }
+        userName: { type: String, default: '' },
+        listHeight: (0, _Config.getListHeight)(1300 - _Config.navigatorbBarHeight - _Config.mainTabBarHeight)
     },
     components: { RLList: _RLList2.default, NavigationBar: _NavigationBar2.default },
     data: function data() {
@@ -55347,8 +55372,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": "EventItem",
       "listData": _vm.dataList,
+      "bottomEmpty": _vm.getListBottomEmpty,
       "headerComponent": "UserHeadItem",
       "headerData": _vm.userInfo,
+      "listHeight": _vm.listHeight,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -55544,6 +55571,9 @@ module.exports = {
     "height": "80",
     "paddingTop": "15",
     "paddingBottom": "15"
+  },
+  "item-color": {
+    "backgroundColor": "#FFFFFF"
   }
 }
 
@@ -55744,6 +55774,9 @@ exports.default = {
             _repository2.default.getRepositoryDetailReadmeHtmlDao(this.userName, this.reposName).then(function (res) {
                 if (res && res.data) {
                     _this2.readme = res.data;
+                }
+                if (Constant.DEBUG) {
+                    console.info("repository detail readme", res);
                 }
             });
         },
@@ -56787,17 +56820,9 @@ var _repository2 = _interopRequireDefault(_repository);
 
 var _eventUtils = __webpack_require__(9);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Config = __webpack_require__(1);
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
     props: {},
@@ -56809,7 +56834,8 @@ exports.default = {
             currentPage: 1,
             listType: 1,
             eventList: [],
-            reposInfo: {}
+            reposInfo: {},
+            listHeight: (0, _Config.getListHeight)(1300 - _Config.navigatorbBarHeight - 120)
         };
     },
 
@@ -56923,7 +56949,15 @@ exports.default = {
             return !this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1;
         }
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 517 */
@@ -56940,6 +56974,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": "EventItem",
       "listData": _vm.eventList,
+      "listHeight": _vm.listHeight,
       "headerComponent": "RepositoryHeadItem",
       "headerData": _vm.reposInfo,
       "headerClick": _vm.headerClick,
@@ -57189,7 +57224,8 @@ exports.default = {
             list: [],
             dataState: 1,
             selectIndex: 1,
-            searchValue: ""
+            searchValue: "",
+            listHeight: (0, _Config.getListHeight)(1300 - _Config.navigatorbBarHeight - 300)
         };
     },
 
@@ -57361,6 +57397,7 @@ exports.default = {
 //
 //
 //
+//
 
 /***/ }),
 /* 521 */
@@ -57426,6 +57463,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "listItemName": "IssueItem",
       "listData": _vm.list,
       "bottomEmpty": _vm.getListBottomEmpty,
+      "listHeight": _vm.listHeight,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -57573,7 +57611,8 @@ exports.default = {
             list: [],
             path: "",
             loading: false,
-            primaryColor: Config.primaryColor
+            primaryColor: Config.primaryColor,
+            listHeight: (0, _Config.getListHeight)(1334 - _Config.navigatorbBarHeight - 150)
         };
     },
 
@@ -57729,6 +57768,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "listItemName": "FileItem",
       "listData": _vm.list,
       "bottomEmpty": _vm.getListBottomEmpty,
+      "listHeight": _vm.listHeight,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
@@ -57762,13 +57802,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "wxcTabBarCurrentTabSelected": _vm.wxcTabBarCurrentTabSelected
     }
   }, [_c('div', {
-    staticClass: ["item-container"],
-    style: _vm.contentStyle
+    staticClass: ["item-container", "item-color"],
+    style: {
+      height: '1034px',
+      width: '750px'
+    }
   }, [_c('web-component', {
     attrs: {
       "source": _vm.readme,
       "webStyle": {
-        height: '1074px',
+        height: '1034px',
         width: '750px',
         paddingBottom: '30px',
       },
@@ -57991,7 +58034,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "source": _vm.codeData,
       "webStyle": {
-        height: '1244px',
+        height: '1212px',
         width: '750px'
       }
     }
@@ -58455,7 +58498,8 @@ exports.default = {
             ondisappearStatus: false,
             list: [],
             issueInfo: {},
-            mainStyle: {}
+            mainStyle: {},
+            listHeight: (0, _Config.getListHeight)(1334 - _Config.navigatorbBarHeight - 80)
         };
     },
 
@@ -58727,6 +58771,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": "IssueCommentItem",
       "listData": _vm.list,
+      "listHeight": _vm.listHeight,
       "headerComponent": "IssueHeadItem",
       "headerData": _vm.issueInfo,
       "bottomEmpty": _vm.getListBottomEmpty,
@@ -59295,6 +59340,11 @@ module.exports = {
     "paddingBottom": "20",
     "paddingLeft": "20",
     "boxShadow": "0 0 10px rgba(211, 210, 210, 0.5)"
+  },
+  "search-page-container": {
+    "alignItems": "center",
+    "justifyContent": "center",
+    "backgroundColor": "#f2f3f4"
   }
 }
 
@@ -59303,10 +59353,6 @@ module.exports = {
 /***/ (function(module, exports) {
 
 module.exports = {
-  "search-page-container": {
-    "alignItems": "center",
-    "justifyContent": "center"
-  },
   "control-text": {
     "flex": 1,
     "textAlign": "center",
@@ -59377,6 +59423,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
 
 
 exports.default = {
@@ -59393,7 +59440,8 @@ exports.default = {
             selectTypeData: null,
             selectSortData: null,
             selectLanguageData: null,
-            mainStyle: {}
+            mainStyle: {},
+            listHeight: (0, _Config.getListHeight)(1300 - _Config.navigatorbBarHeight - 150)
         };
     },
 
@@ -59561,6 +59609,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "listItemName": _vm.itemClass,
       "listData": _vm.list,
       "bottomEmpty": _vm.getListBottomEmpty,
+      "listHeight": _vm.listHeight,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick
