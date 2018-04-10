@@ -15,6 +15,10 @@
 ```
 -----
 
+[![GitHub issues](https://img.shields.io/github/issues/CarGuo/GSYGithubAPPWeex.svg)](https://github.com/CarGuo/GSYGithubAPPWeex/issues)
+[![GitHub forks](https://img.shields.io/github/forks/CarGuo/GSYGithubAPPWeex.svg)](https://github.com/CarGuo/GSYGithubAPPWeex/network)
+[![GitHub stars](https://img.shields.io/github/stars/CarGuo/GSYGithubAPPWeex.svg)](https://github.com/CarGuo/GSYGithubAPPWeex/stargazers)
+
 ### 编译运行流程
 
 1、配置好Weex开发环境，可参阅 [【搭建环境】](http://weex.apache.org/cn/guide/set-up-env.html)
