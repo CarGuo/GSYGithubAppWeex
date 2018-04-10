@@ -63,7 +63,6 @@
     import RepositoryIssueListPage from './RepositoryIssueListPage.vue'
     import RepositoryFileListPage from './RepositoryFileListPage.vue'
     import repository from '../core/net/repository'
-    import * as Constant from '../core/common/constant'
     import  {launchUrl} from "../core/common/htmlUtils"
     import  {getEntryPageStyle,getContentStyle} from "../config/Config"
     const modal = weex.requireModule('modal')
@@ -147,9 +146,6 @@
                     .then((res)=>{
                         if(res && res.data) {
                             this.readme = res.data;
-                        }
-                        if (Constant.DEBUG) {
-                            console.info("repository detail readme", res)
                         }
                     })
             },

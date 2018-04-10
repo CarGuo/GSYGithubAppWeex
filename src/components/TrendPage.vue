@@ -4,15 +4,15 @@
             <div :style="{flex:'1'}">
                 <wxc-button :text="time"
                             type="white"
-                            :textStyle="{color: '#3c3f41', fontSize: '30px'}"
+                            :textStyle="{color: primaryColor, fontSize: '30px'}"
                             :btn-style="{flex:'1',width:'325px', height:'75px', borderRadius: 0, backgroundColor:'white' }"
                             @wxcButtonClicked="onDailyClick"></wxc-button>
             </div>
-            <div :style="{ width: '3px', backgroundColor: '#3c3f41', height:'50px', opacity: 0.4}"></div>
+            <div :style="{ width: '3px', backgroundColor: primaryColor, height:'50px', opacity: 0.4}"></div>
             <div :style="{flex:'1'}">
                 <wxc-button :text="language"
                             type="white"
-                            :textStyle="{color: '#3c3f41', fontSize: '30px'}"
+                            :textStyle="{color: primaryColor, fontSize: '30px'}"
                             :btn-style="{flex:'1',width:'325px', height:'75px', borderRadius: 0, backgroundColor:'white'}"
                             @wxcButtonClicked="onLanguageClick"></wxc-button>
             </div>
@@ -39,10 +39,10 @@
     const modal = weex.requireModule('modal')
 
     import {WxcButton, WxcPopover} from 'weex-ui'
-    import * as Constant from '../core/common/constant'
     import {TrendTime, TrendType} from '../core/common/filterUtils'
     import RLList from './widget/RLList.vue'
     import {getListBottomEmtry} from '../config/Config'
+    import * as Config from '../config/Config'
 
 
     export default {
@@ -54,6 +54,7 @@
                 language: '全部',
                 since:null,
                 languageType:null,
+                primaryColor:Config.primaryColor,
                 btns1:TrendTime,
                 btns2:TrendType,
                 popoverPosition1: {  x: -400, y: 180  },
@@ -84,9 +85,6 @@
                     since: this.since,
                     languageType: this.languageType,
                     callback: (res) => {
-                        if (Constant.DEBUG) {
-                            console.info("trend loadData ", res)
-                        }
                         if (type === 1) {
                             if (this.$refs.dylist) {
                                 this.$refs.dylist.stopRefresh();

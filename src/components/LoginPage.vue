@@ -3,14 +3,14 @@
         <div class="input-container">
             <image :src="logo" class="logo"></image>
             <div style="flex-direction: row; margin-top: 50px">
-                <text class="icon-text" :style="{color: '#3c3f41', fontFamily: 'wxcIconFont'}">{{'\ue666'}}</text>
+                <text class="icon-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue666'}}</text>
                 <input class="input" @input="onUserNameChange" ref="username" placeholder="用户名" :value="username"/>
             </div>
             <div style="flex-direction: row; margin-top: 50px">
-                <text class="icon-text" :style="{color: '#3c3f41', fontFamily: 'wxcIconFont'}">{{'\ue60e'}}</text>
+                <text class="icon-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue60e'}}</text>
                 <input class="input" @input="onPWChange" type="password" ref="password" placeholder="密码" :value="password"/>
             </div>
-            <wxc-button text="登录" type="red" :btn-style="{flex:'1',width:'550px',marginTop: '80px', marginBottom:'40px', backgroundColor: '#3c3f41'}"
+            <wxc-button text="登录" type="red" :btn-style="{flex:'1',width:'550px',marginTop: '80px', marginBottom:'40px', backgroundColor: primaryColor}"
                         @wxcButtonClicked="onLogin"></wxc-button>
         </div>
         <loading-component height="1334"
@@ -54,10 +54,9 @@
         justify-content: center;
         border: 2px solid $--theme-color;
     }
-</style>
-<style scoped>
     .icon-text{
         align-items: center;
+        color: $--theme-color;
         justify-content: center;
         font-size: 55px;
         display: -webkit-box;
@@ -70,7 +69,8 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
     }
-
+</style>
+<style scoped>
 
     .logo {
         width: 200px;
@@ -83,11 +83,13 @@
     import {WxcButton, WxcLoading} from 'weex-ui'
     import {Buffer} from 'buffer'
     import user from '../core/net/user'
-    import * as Constant from '../core/common/constant'
+
     import {isEmptyString} from '../core/common/commonUtils'
     import * as ignoreConfig from '../core/common/ignoreConfig'
     import {getImagePath, addIconFontSupport} from '../config/IconConfig'
     import LoadingComponent from './widget/LoadingComponent.vue'
+    import * as Config from '../config/Config'
+
     const modal = weex.requireModule('modal')
     const dom = weex.requireModule('dom');
 
@@ -100,6 +102,7 @@
                 password: "",
                 isLoading: false,
                 loadingText: "处理中···",
+                primaryColor: Config.primaryColor,
             }
         },
         created: function () {

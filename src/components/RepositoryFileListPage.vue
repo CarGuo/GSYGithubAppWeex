@@ -10,7 +10,7 @@
                  :key="index"
                  @click="tabClick(index)">
 
-                <text :style="{ fontSize: '28px', color: '#3c3f41', marginLeft: '15px', height: '70px'}"
+                <text :style="{ fontSize: '28px', color: primaryColor, marginLeft: '15px', height: '70px'}"
                         class="tab-text">{{v + ' >'}}</text>
 
             </div>
@@ -21,12 +21,12 @@
 </template>
 
 <script>
-    import * as Constant from '../core/common/constant'
     import RLList from './widget/RLList.vue'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {isImageEnd} from '../core/common/htmlUtils'
     import {getListBottomEmtry} from '../config/Config'
+    import * as Config from '../config/Config'
 
     export default {
         props: {
@@ -41,6 +41,7 @@
                 list: [],
                 path: "",
                 loading:false,
+                primaryColor:Config.primaryColor,
             }
         },
         created: function () {
@@ -72,9 +73,6 @@
                     } else {
                         this.list = this.list.concat(res.data);
                     }
-                }
-                if (Constant.DEBUG) {
-                    console.info("repo file loadData ", res)
                 }
                 if (this.$refs.dylist) {
                     this.$refs.dylist.stopRefresh();

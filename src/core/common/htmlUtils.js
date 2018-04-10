@@ -1,5 +1,5 @@
-import * as Constant from './constant'
 import URL from 'url-parse';
+import * as Config from '../../config/Config';
 
 export const generateHtml = (mdData, backgroundColor = "#FFFFFF", userBR = true) => {
     if (!mdData) {
@@ -55,14 +55,14 @@ export const generateHtml = (mdData, backgroundColor = "#FFFFFF", userBR = true)
             return match;
         }
     });
-    return generateCodeHtml(data, false, backgroundColor, Constant.actionBlue, userBR);
+    return generateCodeHtml(data, false, backgroundColor, Config.actionBlue, userBR);
 };
 
 
 /**
  * style for mdHTml
  */
-const generateCodeHtml = (mdHTML, wrap, backgroundColor = Constant.white, actionColor = Constant.actionBlue, userBR = true) => {
+const generateCodeHtml = (mdHTML, wrap, backgroundColor = '#FFFFFF', actionColor = Config.actionBlue, userBR = true) => {
     let doc = "<html>\n" +
         "<head>\n" +
         "<meta charset=\"utf-8\" />\n" +
@@ -79,25 +79,25 @@ const generateCodeHtml = (mdHTML, wrap, backgroundColor = Constant.white, action
         " white-space: " + (wrap ? "pre-wrap" : "pre") + "; " +
         "}" +
         "thead, tr {" +
-        "background:" + Constant.miWhite + ";}" +
+        "background:" + Config.miWhite + ";}" +
         "td, th {" +
         "padding: 5px 10px;" +
         "font-size: 12px;" +
         "direction:hor" +
         "}" +
-        ".highlight {overflow: scroll; background: " + Constant.webDraculaBackgroundColor + "}" +
+        ".highlight {overflow: scroll; background: " + Config.webDraculaBackgroundColor + "}" +
         "tr:nth-child(even) {" +
-        "background:" + Constant.primaryLightColor + ";" +
-        "color:" + Constant.miWhite + ";" +
+        "background:" + Config.primaryLightColor + ";" +
+        "color:" + Config.miWhite + ";" +
         "}" +
         "tr:nth-child(odd) {" +
-        "background: " + Constant.miWhite + ";" +
-        "color:" + Constant.primaryLightColor + ";" +
+        "background: " + Config.miWhite + ";" +
+        "color:" + Config.primaryLightColor + ";" +
         "}" +
         "th {" +
         "font-size: 14px;" +
-        "color:" + Constant.miWhite + ";" +
-        "background:" + Constant.primaryLightColor + ";" +
+        "color:" + Config.miWhite + ";" +
+        "background:" + Config.primaryLightColor + ";" +
         "}" +
         "</style>" +
         "</head>\n" +
@@ -108,7 +108,7 @@ const generateCodeHtml = (mdHTML, wrap, backgroundColor = Constant.white, action
     return doc;
 };
 
-export const generateCode2HTml = (mdData, backgroundColor = Constant.white, lang = 'java', userBR = true) => {
+export const generateCode2HTml = (mdData, backgroundColor = '#FFFFFF', lang = 'java', userBR = true) => {
     let currentData = (mdData && mdData.indexOf("<code>") === -1) ?
         "<body>\n" +
         "<pre class=\"pre\">\n" +
@@ -181,7 +181,7 @@ export const issueJsonToRichJson = (jsonData, textColor = 'white') => {
 
         switch (item.tagName) {
             case 'pre':
-                return {backgroundColor: '#AAAAAA', borderRadius: '5px', padding: '5px', color: "#3c3f41"}
+                return {backgroundColor: '#AAAAAA', borderRadius: '5px', padding: '5px', color: Config.primaryColor}
             case 'h1':
                 return {fontSize: '50px', color: textColor, paddingTop: '5px', paddingBottom:'5px'};
             case 'h2':

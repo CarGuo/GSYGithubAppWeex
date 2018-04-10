@@ -10,7 +10,7 @@
             </div>
             <div style="flex: 1;flex-direction: row;margin-top: 20px; width:600px;">
                 <text class="btn-text" @click="function(){toBack()}">取消</text>
-                <text class="btn-text" @click="confirmClick" :style="{color: '#3c3f41'}">确定</text>
+                <text class="btn-text" @click="confirmClick" :style="{color: primaryColor}">确定</text>
             </div>
         </div>
         <loading-component height="1334"
@@ -27,10 +27,11 @@
 <script>
     import {WxcLoading} from 'weex-ui'
     import repository from '../core/net/repository'
-    import * as Constant from '../core/common/constant'
     import {isEmptyString} from '../core/common/commonUtils'
     import * as ignoreConfig from '../core/common/ignoreConfig'
     import LoadingComponent from './widget/LoadingComponent.vue'
+    import * as Config from '../config/Config'
+
 
     const modal = weex.requireModule('modal')
 
@@ -45,6 +46,7 @@
                 needTitle: null,
                 title: "回复",
                 type: 'createIssue',
+                primaryColor: Config.primaryColor,
                 issueNum: "",
                 commentNum: "",
                 reposName: "",

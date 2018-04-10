@@ -1,7 +1,7 @@
 import {Buffer} from 'buffer'
 import Api from './api'
 import Address from './address'
-import * as Constant from '../common/constant'
+import * as Config from '../../config/Config'
 import {getCache, setCache} from '../common/storageUtils'
 import * as ignoreConfig from '../common/ignoreConfig'
 
@@ -9,7 +9,7 @@ import * as ignoreConfig from '../common/ignoreConfig'
  * 初始化用户信息
  */
 const initUserInfo = async () => {
-    let token = await getCache(Constant.TOKEN_KEY);
+    let token = await getCache(Config.TOKEN_KEY);
     let res = await getUserInfoLocal();
     return {
         result: res.result && (token !== null),
@@ -22,7 +22,7 @@ const initUserInfo = async () => {
  * 获取本地登录用户信息
  */
 const getUserInfoLocal = async () => {
-    let userText = await getCache(Constant.USER_INFO);
+    let userText = await getCache(Config.USER_INFO);
     if (userText) {
         let res = JSON.parse(userText);
         return {
@@ -42,8 +42,8 @@ const getUserInfoLocal = async () => {
 const doLogin = async (userName, password) => {
     console.log("user " + userName + " pw " + password)
     let base64Str = Buffer(userName + ":" + password).toString('base64');
-    await setCache(Constant.USER_NAME_KEY, userName);
-    await setCache(Constant.USER_BASIC_CODE, base64Str);
+    await setCache(Config.USER_NAME_KEY, userName);
+    await setCache(Config.USER_BASIC_CODE, base64Str);
     let requestParams = {
         scopes: ['user', 'repo', 'gist', 'notifications'],
         note: "admin_script",
@@ -53,7 +53,7 @@ const doLogin = async (userName, password) => {
     Api.clearAuthorization();
     let res = await Api.netFetch(Address.getAuthorization(), 'POST', requestParams, true);
     if (res && res.result) {
-        setCache(Constant.PW_KEY, password);
+        setCache(Config.PW_KEY, password);
     }
     return res;
 };
@@ -77,7 +77,7 @@ const getUserInfoDao = async (userName) => {
         }
         let totalInfo = Object.assign({}, res.data, {starred: starred});
         if (!userName || userName === undefined) {
-            setCache(Constant.USER_INFO, JSON.stringify(totalInfo));
+            setCache(Config.USER_INFO, JSON.stringify(totalInfo));
         }
         return {
             result: true,

@@ -2,8 +2,6 @@
 
 import Api from './api'
 import Address from './address'
-import * as Constant from '../common/constant'
-import {getCache, setCache} from '../common/storageUtils'
 import {getActionAndDes} from '../common/eventUtils'
 
 const getEventReceived = async(page = 0, userInfo) => {

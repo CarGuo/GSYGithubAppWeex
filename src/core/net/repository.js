@@ -2,7 +2,7 @@ import Api from './api'
 import GitHubTrending from './trending/GitHubTrending'
 import Address from './address'
 import {generateHtml} from '../common/htmlUtils'
-import {getCache, setCache} from '../common/storageUtils'
+import * as Config from '../../config/Config'
 import {parse} from 'himalaya'
 import {issueJsonToRichJson} from '../common/htmlUtils'
 
@@ -290,7 +290,7 @@ const getIssueCommentDao = async (page = 0, userName, repository, number) => {
     if (res && res.result && res.data.length > 0) {
         res.data.forEach((item) => {
             const json = parse(item.body_html)
-            item.rich_list = issueJsonToRichJson(json, "#3c3f41")
+            item.rich_list = issueJsonToRichJson(json, Config.primaryColor)
         })
     }
     return {

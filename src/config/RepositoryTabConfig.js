@@ -1,3 +1,4 @@
+import * as Config from './Config'
 
 export default {
     // 正常模式的tab title配置
@@ -16,15 +17,15 @@ export default {
         }
     ],
     tabStyles: {
-        bgColor: '#3c3f41',
+        bgColor: Config.primaryColor,
         titleColor: '#666666',
         activeTitleColor: '#FFFFFF',
-        activeBgColor: '#3c3f41',
+        activeBgColor: Config.primaryColor,
         isActiveTitleBold: true,
         iconWidth: 70,
         iconHeight: 70,
         width: 160,
-        height: 80,
+        height: Config.reposDetailTopTabBarHeight,
         fontSize: 24,
         textPaddingLeft: 10,
         textPaddingRight: 10

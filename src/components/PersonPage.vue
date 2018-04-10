@@ -11,7 +11,7 @@
 <script>
     const modal = weex.requireModule('modal')
 
-    import * as Constant from '../core/common/constant'
+
     import RLList from './widget/RLList.vue'
     import resolveLongToTime from '../core/common/timeUtils'
     import event from '../core/net/event'
@@ -92,9 +92,6 @@
                 }
                 user.getUserInfoDao(this.userName).then((res) => {
                     if (res && res.result) {
-                        if (Constant.DEBUG) {
-                            console.info("userInfo loadData ", res.data)
-                        }
                         this.userData = res.data
                     }
                 });
@@ -114,9 +111,6 @@
                                 this.eventList = this.eventList.concat(res.data);
                             }
                         }
-                        if (Constant.DEBUG) {
-                            console.info("person loadData ", res)
-                        }
                         if (type === 1) {
                             if (this.$refs.dylist) {
                                 this.$refs.dylist.stopRefresh();
@@ -127,7 +121,7 @@
                             }
                         }
                         if (this.$refs.dylist) {
-                            if (!res.data || res.data.length < Constant.PAGE_SIZE) {
+                            if (!res.data || res.data.length < this.getPageSize()) {
                                 this.$refs.dylist.setNotNeedLoadMore();
                             } else {
                                 this.$refs.dylist.setNeedLoadMore();
