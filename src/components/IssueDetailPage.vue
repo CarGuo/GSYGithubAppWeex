@@ -1,5 +1,5 @@
 <template>
-    <div :style="mainStyle" @viewappear="onappear"  @viewdisappear ="ondisappear">
+    <div  class="wrapper"  :style="mainStyle" @viewappear="onappear"  @viewdisappear ="ondisappear">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list"
@@ -308,7 +308,9 @@
 
 <style lang="scss" scoped>
     @import '../config/styles.scss';
-
+    .wrapper {
+        background-color: $--container-color
+    }
     .bottom-item-text {
         font-size: 26px;
         color: $--theme-color;

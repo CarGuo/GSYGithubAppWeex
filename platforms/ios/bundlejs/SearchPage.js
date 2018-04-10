@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 560);
+/******/ 	return __webpack_require__(__webpack_require__.s = 561);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -6439,12 +6439,14 @@ var __vue_styles__ = []
 /* styles */
 __vue_styles__.push(__webpack_require__(445)
 )
+__vue_styles__.push(__webpack_require__(446)
+)
 
 /* script */
-__vue_exports__ = __webpack_require__(446)
+__vue_exports__ = __webpack_require__(447)
 
 /* template */
-var __vue_template__ = __webpack_require__(486)
+var __vue_template__ = __webpack_require__(487)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -27687,16 +27689,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(447)
-)
 __vue_styles__.push(__webpack_require__(448)
+)
+__vue_styles__.push(__webpack_require__(449)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(449)
+__vue_exports__ = __webpack_require__(450)
 
 /* template */
-var __vue_template__ = __webpack_require__(450)
+var __vue_template__ = __webpack_require__(451)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -27734,16 +27736,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(451)
-)
 __vue_styles__.push(__webpack_require__(452)
+)
+__vue_styles__.push(__webpack_require__(453)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(453)
+__vue_exports__ = __webpack_require__(454)
 
 /* template */
-var __vue_template__ = __webpack_require__(454)
+var __vue_template__ = __webpack_require__(455)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -27780,16 +27782,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(455)
-)
 __vue_styles__.push(__webpack_require__(456)
+)
+__vue_styles__.push(__webpack_require__(457)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(457)
+__vue_exports__ = __webpack_require__(458)
 
 /* template */
-var __vue_template__ = __webpack_require__(458)
+var __vue_template__ = __webpack_require__(459)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -27826,16 +27828,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(459)
-)
 __vue_styles__.push(__webpack_require__(460)
+)
+__vue_styles__.push(__webpack_require__(461)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(461)
+__vue_exports__ = __webpack_require__(462)
 
 /* template */
-var __vue_template__ = __webpack_require__(465)
+var __vue_template__ = __webpack_require__(466)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -27872,14 +27874,14 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(462)
+__vue_styles__.push(__webpack_require__(463)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(463)
+__vue_exports__ = __webpack_require__(464)
 
 /* template */
-var __vue_template__ = __webpack_require__(464)
+var __vue_template__ = __webpack_require__(465)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -27916,16 +27918,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(466)
-)
 __vue_styles__.push(__webpack_require__(467)
+)
+__vue_styles__.push(__webpack_require__(468)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(468)
+__vue_exports__ = __webpack_require__(469)
 
 /* template */
-var __vue_template__ = __webpack_require__(469)
+var __vue_template__ = __webpack_require__(470)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -27962,16 +27964,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(470)
-)
 __vue_styles__.push(__webpack_require__(471)
+)
+__vue_styles__.push(__webpack_require__(472)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(472)
+__vue_exports__ = __webpack_require__(473)
 
 /* template */
-var __vue_template__ = __webpack_require__(473)
+var __vue_template__ = __webpack_require__(474)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28008,16 +28010,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(474)
-)
 __vue_styles__.push(__webpack_require__(475)
+)
+__vue_styles__.push(__webpack_require__(476)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(476)
+__vue_exports__ = __webpack_require__(477)
 
 /* template */
-var __vue_template__ = __webpack_require__(477)
+var __vue_template__ = __webpack_require__(478)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28054,16 +28056,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(478)
-)
 __vue_styles__.push(__webpack_require__(479)
+)
+__vue_styles__.push(__webpack_require__(480)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(480)
+__vue_exports__ = __webpack_require__(481)
 
 /* template */
-var __vue_template__ = __webpack_require__(481)
+var __vue_template__ = __webpack_require__(482)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28100,16 +28102,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(482)
-)
 __vue_styles__.push(__webpack_require__(483)
+)
+__vue_styles__.push(__webpack_require__(484)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(484)
+__vue_exports__ = __webpack_require__(485)
 
 /* template */
-var __vue_template__ = __webpack_require__(485)
+var __vue_template__ = __webpack_require__(486)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28146,14 +28148,14 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(494)
+__vue_styles__.push(__webpack_require__(495)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(495)
+__vue_exports__ = __webpack_require__(496)
 
 /* template */
-var __vue_template__ = __webpack_require__(496)
+var __vue_template__ = __webpack_require__(497)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28190,14 +28192,14 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(506)
+__vue_styles__.push(__webpack_require__(507)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(507)
+__vue_exports__ = __webpack_require__(508)
 
 /* template */
-var __vue_template__ = __webpack_require__(508)
+var __vue_template__ = __webpack_require__(509)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28234,16 +28236,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(498)
-)
 __vue_styles__.push(__webpack_require__(499)
+)
+__vue_styles__.push(__webpack_require__(500)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(500)
+__vue_exports__ = __webpack_require__(501)
 
 /* template */
-var __vue_template__ = __webpack_require__(525)
+var __vue_template__ = __webpack_require__(526)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28280,14 +28282,14 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(526)
+__vue_styles__.push(__webpack_require__(527)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(527)
+__vue_exports__ = __webpack_require__(528)
 
 /* template */
-var __vue_template__ = __webpack_require__(528)
+var __vue_template__ = __webpack_require__(529)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28324,16 +28326,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(529)
-)
 __vue_styles__.push(__webpack_require__(530)
+)
+__vue_styles__.push(__webpack_require__(531)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(531)
+__vue_exports__ = __webpack_require__(532)
 
 /* template */
-var __vue_template__ = __webpack_require__(532)
+var __vue_template__ = __webpack_require__(533)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28370,14 +28372,14 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(533)
+__vue_styles__.push(__webpack_require__(534)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(534)
+__vue_exports__ = __webpack_require__(535)
 
 /* template */
-var __vue_template__ = __webpack_require__(535)
+var __vue_template__ = __webpack_require__(536)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28414,14 +28416,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(536)
+__vue_styles__.push(__webpack_require__(564)
+)
+__vue_styles__.push(__webpack_require__(565)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(537)
+__vue_exports__ = __webpack_require__(538)
 
 /* template */
-var __vue_template__ = __webpack_require__(538)
+var __vue_template__ = __webpack_require__(539)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28458,16 +28462,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(539)
-)
 __vue_styles__.push(__webpack_require__(540)
+)
+__vue_styles__.push(__webpack_require__(541)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(541)
+__vue_exports__ = __webpack_require__(542)
 
 /* template */
-var __vue_template__ = __webpack_require__(542)
+var __vue_template__ = __webpack_require__(543)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28504,14 +28508,14 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(543)
+__vue_styles__.push(__webpack_require__(544)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(544)
+__vue_exports__ = __webpack_require__(545)
 
 /* template */
-var __vue_template__ = __webpack_require__(545)
+var __vue_template__ = __webpack_require__(546)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -28548,16 +28552,16 @@ var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(546)
-)
 __vue_styles__.push(__webpack_require__(547)
+)
+__vue_styles__.push(__webpack_require__(548)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(548)
+__vue_exports__ = __webpack_require__(549)
 
 /* template */
-var __vue_template__ = __webpack_require__(549)
+var __vue_template__ = __webpack_require__(550)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -35034,7 +35038,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -35042,7 +35046,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -35177,6 +35181,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
 //
 //
 //
@@ -50472,7 +50477,7 @@ __vue_styles__.push(__webpack_require__(431)
 __vue_exports__ = __webpack_require__(432)
 
 /* template */
-var __vue_template__ = __webpack_require__(497)
+var __vue_template__ = __webpack_require__(498)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -50564,7 +50569,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -50572,7 +50577,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -50647,7 +50652,7 @@ var _DynamicPage = __webpack_require__(442);
 
 var _DynamicPage2 = _interopRequireDefault(_DynamicPage);
 
-var _TrendPage = __webpack_require__(488);
+var _TrendPage = __webpack_require__(489);
 
 var _TrendPage2 = _interopRequireDefault(_TrendPage);
 
@@ -51168,8 +51173,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: ["tab-title-list"],
     style: {
       backgroundColor: _vm.tabStyles.bgColor,
-      borderColor: _vm.tabStyles.titleColor,
-      borderTopWidth: '0.5px',
       height: (_vm.tabStyles.height + (_vm.isIPhoneX ? 78 : 0)) + 'px',
       paddingBottom: _vm.isIPhoneX ? '78px' : '0'
     }
@@ -51291,7 +51294,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -51299,7 +51302,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -51465,7 +51468,7 @@ __vue_styles__.push(__webpack_require__(443)
 __vue_exports__ = __webpack_require__(444)
 
 /* template */
-var __vue_template__ = __webpack_require__(487)
+var __vue_template__ = __webpack_require__(488)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -51599,6 +51602,124 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports = {
+  "card-white-wrapper": {
+    "width": "700",
+    "backgroundColor": "#FFFFFF",
+    "borderRadius": "10",
+    "paddingTop": "20",
+    "paddingRight": "20",
+    "paddingBottom": "20",
+    "paddingLeft": "20",
+    "boxShadow": "0 0 10px rgba(211, 210, 210, 0.5)"
+  },
+  "card-black-full-wrapper": {
+    "width": "750",
+    "backgroundColor": "#3c3f41",
+    "borderBottomLeftRadius": "15",
+    "borderBottomRightRadius": "15",
+    "paddingTop": "20",
+    "paddingRight": "20",
+    "paddingBottom": "20",
+    "paddingLeft": "20",
+    "boxShadow": "0 0 10px rgba(211, 210, 210, 0.5)"
+  },
+  "card-black-wrapper": {
+    "width": "710",
+    "backgroundColor": "#3c3f41",
+    "paddingTop": "20",
+    "paddingRight": "20",
+    "paddingBottom": "20",
+    "paddingLeft": "20",
+    "marginTop": "20",
+    "borderRadius": "15",
+    "boxShadow": "0 0 10px rgba(211, 210, 210, 0.5)"
+  },
+  "text-line-three": {
+    "WebkitLineClamp": 3,
+    "WebkitBoxOrient": "vertical",
+    "display": "-webkit-box",
+    "whiteSpace": "normal !important",
+    "overflow": "hidden",
+    "textOverflow": "ellipsis",
+    "wordWrap": "break-word",
+    "lines": 3
+  },
+  "text-line-one": {
+    "WebkitLineClamp": 1,
+    "WebkitBoxOrient": "vertical",
+    "display": "-webkit-box",
+    "whiteSpace": "normal !important",
+    "overflow": "hidden",
+    "textOverflow": "ellipsis",
+    "wordWrap": "break-word",
+    "lines": 1
+  },
+  "content-text-black-bold": {
+    "color": "#3c3f41",
+    "fontSize": "28",
+    "fontWeight": "bold"
+  },
+  "content-text-gray": {
+    "color": "rgba(97,97,97,0.9)",
+    "fontSize": "28"
+  },
+  "content-text-white": {
+    "color": "#FFFFFF",
+    "fontSize": "28"
+  },
+  "name-text": {
+    "color": "rgba(97,97,97,0.9)",
+    "fontSize": "30",
+    "fontWeight": "bold"
+  },
+  "name-text-theme": {
+    "color": "#3c3f41",
+    "fontSize": "30",
+    "fontWeight": "bold"
+  },
+  "name-text-white": {
+    "display": "-webkit-box",
+    "whiteSpace": "normal !important",
+    "wordWrap": "break-word",
+    "WebkitLineClamp": 1,
+    "color": "#FFFFFF",
+    "fontWeight": "bold",
+    "fontSize": "30",
+    "overflow": "hidden",
+    "textOverflow": "ellipsis",
+    "lines": 1
+  },
+  "user-text-theme": {
+    "color": "#3c3f41",
+    "fontSize": "30",
+    "display": "-webkit-box",
+    "overflow": "hidden",
+    "whiteSpace": "normal !important",
+    "textOverflow": "ellipsis",
+    "wordWrap": "break-word",
+    "WebkitLineClamp": 1,
+    "flex": 1,
+    "fontWeight": "bold",
+    "WebkitBoxOrient": "vertical"
+  },
+  "indicator-text": {
+    "color": "rgba(97,97,97,0.9)",
+    "fontSize": "42",
+    "textAlign": "center"
+  },
+  "indicator": {
+    "marginTop": "16",
+    "height": "80",
+    "width": "80",
+    "color": "#3c3f41"
+  }
+}
+
+/***/ }),
+/* 446 */
+/***/ (function(module, exports) {
+
+module.exports = {
   "loading": {
     "marginTop": "20",
     "width": "750",
@@ -51617,23 +51738,6 @@ module.exports = {
     "WebkitBoxAlign": "center",
     "alignItems": "center"
   },
-  "indicator-text": {
-    "color": "#888888",
-    "fontSize": "42",
-    "textAlign": "center"
-  },
-  "indicator": {
-    "marginTop": "16",
-    "height": "80",
-    "width": "80",
-    "color": "#121917"
-  },
-  "indicator-loadmore": {
-    "marginRight": "20",
-    "height": "80",
-    "width": "80",
-    "color": "#121917"
-  },
   "header": {
     "flexDirection": "column",
     "alignItems": "center",
@@ -51651,7 +51755,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 446 */
+/* 447 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51835,7 +51939,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 447 */
+/* 448 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -51897,7 +52001,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -51905,7 +52009,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -51942,7 +52046,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 448 */
+/* 449 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -51961,7 +52065,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 449 */
+/* 450 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52011,7 +52115,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 450 */
+/* 451 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -52120,7 +52224,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 451 */
+/* 452 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -52182,7 +52286,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -52190,7 +52294,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -52227,7 +52331,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 452 */
+/* 453 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -52254,7 +52358,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 453 */
+/* 454 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52325,7 +52429,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 454 */
+/* 455 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -52394,7 +52498,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 455 */
+/* 456 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -52456,7 +52560,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -52464,7 +52568,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -52516,7 +52620,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 456 */
+/* 457 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -52576,7 +52680,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 457 */
+/* 458 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52705,7 +52809,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 458 */
+/* 459 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -52821,7 +52925,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 459 */
+/* 460 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -52883,7 +52987,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -52891,7 +52995,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -52928,7 +53032,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 460 */
+/* 461 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -52961,7 +53065,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 461 */
+/* 462 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53027,13 +53131,13 @@ exports.default = {
 //
 
 /***/ }),
-/* 462 */
+/* 463 */
 /***/ (function(module, exports) {
 
 module.exports = {}
 
 /***/ }),
-/* 463 */
+/* 464 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53073,7 +53177,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 464 */
+/* 465 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -53088,7 +53192,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 465 */
+/* 466 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -53156,7 +53260,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 466 */
+/* 467 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -53218,7 +53322,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -53226,7 +53330,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -53263,7 +53367,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 467 */
+/* 468 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -53296,7 +53400,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 468 */
+/* 469 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53350,7 +53454,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 469 */
+/* 470 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -53410,7 +53514,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 470 */
+/* 471 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -53472,7 +53576,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -53480,7 +53584,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -53517,7 +53621,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 471 */
+/* 472 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -53607,7 +53711,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 472 */
+/* 473 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53703,7 +53807,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 473 */
+/* 474 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -53796,7 +53900,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 474 */
+/* 475 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -53858,7 +53962,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -53866,7 +53970,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -53903,7 +54007,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 475 */
+/* 476 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -53923,7 +54027,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 476 */
+/* 477 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53980,7 +54084,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 477 */
+/* 478 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -54025,7 +54129,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 478 */
+/* 479 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -54087,7 +54191,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -54095,7 +54199,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -54140,7 +54244,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 479 */
+/* 480 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -54156,7 +54260,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 480 */
+/* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54197,7 +54301,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 481 */
+/* 482 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -54223,7 +54327,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 482 */
+/* 483 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -54285,7 +54389,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -54293,7 +54397,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -54336,7 +54440,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 483 */
+/* 484 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -54354,7 +54458,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 484 */
+/* 485 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54391,7 +54495,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 485 */
+/* 486 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -54412,7 +54516,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 486 */
+/* 487 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -54494,7 +54598,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 487 */
+/* 488 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -54512,23 +54616,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 488 */
+/* 489 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(489)
-)
 __vue_styles__.push(__webpack_require__(490)
+)
+__vue_styles__.push(__webpack_require__(491)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(491)
+__vue_exports__ = __webpack_require__(492)
 
 /* template */
-var __vue_template__ = __webpack_require__(493)
+var __vue_template__ = __webpack_require__(494)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -54558,7 +54662,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 489 */
+/* 490 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -54620,7 +54724,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -54628,7 +54732,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -54684,7 +54788,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 490 */
+/* 491 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -54694,7 +54798,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 491 */
+/* 492 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54706,7 +54810,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _weexUi = __webpack_require__(3);
 
-var _filterUtils = __webpack_require__(492);
+var _filterUtils = __webpack_require__(493);
 
 var _RLList = __webpack_require__(5);
 
@@ -54852,7 +54956,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 492 */
+/* 493 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -54898,7 +55002,7 @@ var TrendType = exports.TrendType = [{
 }];
 
 /***/ }),
-/* 493 */
+/* 494 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -54994,13 +55098,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 494 */
+/* 495 */
 /***/ (function(module, exports) {
 
 module.exports = {}
 
 /***/ }),
-/* 495 */
+/* 496 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55178,7 +55282,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 496 */
+/* 497 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -55210,7 +55314,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 497 */
+/* 498 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -55250,7 +55354,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 498 */
+/* 499 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -55312,7 +55416,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -55320,7 +55424,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -55378,7 +55482,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 499 */
+/* 500 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -55400,7 +55504,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 500 */
+/* 501 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55412,7 +55516,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _weexUi = __webpack_require__(3);
 
-var _RepositoryTabConfig = __webpack_require__(501);
+var _RepositoryTabConfig = __webpack_require__(502);
 
 var _RepositoryTabConfig2 = _interopRequireDefault(_RepositoryTabConfig);
 
@@ -55420,7 +55524,7 @@ var _NavigationBar = __webpack_require__(6);
 
 var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
-var _TopTabBar = __webpack_require__(502);
+var _TopTabBar = __webpack_require__(503);
 
 var _TopTabBar2 = _interopRequireDefault(_TopTabBar);
 
@@ -55432,19 +55536,19 @@ var _LoadingComponent = __webpack_require__(16);
 
 var _LoadingComponent2 = _interopRequireDefault(_LoadingComponent);
 
-var _PopoverComponent = __webpack_require__(509);
+var _PopoverComponent = __webpack_require__(510);
 
 var _PopoverComponent2 = _interopRequireDefault(_PopoverComponent);
 
-var _RepositoryDetailInfoPage = __webpack_require__(513);
+var _RepositoryDetailInfoPage = __webpack_require__(514);
 
 var _RepositoryDetailInfoPage2 = _interopRequireDefault(_RepositoryDetailInfoPage);
 
-var _RepositoryIssueListPage = __webpack_require__(517);
+var _RepositoryIssueListPage = __webpack_require__(518);
 
 var _RepositoryIssueListPage2 = _interopRequireDefault(_RepositoryIssueListPage);
 
-var _RepositoryFileListPage = __webpack_require__(521);
+var _RepositoryFileListPage = __webpack_require__(522);
 
 var _RepositoryFileListPage2 = _interopRequireDefault(_RepositoryFileListPage);
 
@@ -55677,7 +55781,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 501 */
+/* 502 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55721,21 +55825,21 @@ exports.default = {
 };
 
 /***/ }),
-/* 502 */
+/* 503 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(503)
+__vue_styles__.push(__webpack_require__(504)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(504)
+__vue_exports__ = __webpack_require__(505)
 
 /* template */
-var __vue_template__ = __webpack_require__(505)
+var __vue_template__ = __webpack_require__(506)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -55765,7 +55869,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 503 */
+/* 504 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -55829,7 +55933,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 504 */
+/* 505 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56096,7 +56200,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 505 */
+/* 506 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -56176,13 +56280,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 506 */
+/* 507 */
 /***/ (function(module, exports) {
 
 module.exports = {}
 
 /***/ }),
-/* 507 */
+/* 508 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56252,7 +56356,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 508 */
+/* 509 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -56279,21 +56383,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 509 */
+/* 510 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(510)
+__vue_styles__.push(__webpack_require__(511)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(511)
+__vue_exports__ = __webpack_require__(512)
 
 /* template */
-var __vue_template__ = __webpack_require__(512)
+var __vue_template__ = __webpack_require__(513)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -56323,7 +56427,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 510 */
+/* 511 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -56388,7 +56492,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 511 */
+/* 512 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56522,7 +56626,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 512 */
+/* 513 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -56565,21 +56669,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 513 */
+/* 514 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(514)
+__vue_styles__.push(__webpack_require__(515)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(515)
+__vue_exports__ = __webpack_require__(516)
 
 /* template */
-var __vue_template__ = __webpack_require__(516)
+var __vue_template__ = __webpack_require__(517)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -56609,13 +56713,13 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 514 */
+/* 515 */
 /***/ (function(module, exports) {
 
 module.exports = {}
 
 /***/ }),
-/* 515 */
+/* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -56778,7 +56882,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 516 */
+/* 517 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -56804,21 +56908,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 517 */
+/* 518 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(518)
+__vue_styles__.push(__webpack_require__(519)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(519)
+__vue_exports__ = __webpack_require__(520)
 
 /* template */
-var __vue_template__ = __webpack_require__(520)
+var __vue_template__ = __webpack_require__(521)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -56848,7 +56952,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 518 */
+/* 519 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -56910,7 +57014,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -56918,7 +57022,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -57000,7 +57104,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 519 */
+/* 520 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57215,7 +57319,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 520 */
+/* 521 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -57297,21 +57401,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 521 */
+/* 522 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = []
 
 /* styles */
-__vue_styles__.push(__webpack_require__(522)
+__vue_styles__.push(__webpack_require__(523)
 )
 
 /* script */
-__vue_exports__ = __webpack_require__(523)
+__vue_exports__ = __webpack_require__(524)
 
 /* template */
-var __vue_template__ = __webpack_require__(524)
+var __vue_template__ = __webpack_require__(525)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -57341,7 +57445,7 @@ module.exports = __vue_exports__
 
 
 /***/ }),
-/* 522 */
+/* 523 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -57357,7 +57461,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 523 */
+/* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57537,7 +57641,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 524 */
+/* 525 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -57590,7 +57694,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 525 */
+/* 526 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -57712,13 +57816,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 526 */
+/* 527 */
 /***/ (function(module, exports) {
 
 module.exports = {}
 
 /***/ }),
-/* 527 */
+/* 528 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57825,7 +57929,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 528 */
+/* 529 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -57852,7 +57956,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 529 */
+/* 530 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -57914,7 +58018,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -57922,7 +58026,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -57962,13 +58066,13 @@ module.exports = {
 }
 
 /***/ }),
-/* 530 */
+/* 531 */
 /***/ (function(module, exports) {
 
 module.exports = {}
 
 /***/ }),
-/* 531 */
+/* 532 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58024,7 +58128,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 532 */
+/* 533 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -58043,7 +58147,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 533 */
+/* 534 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -58105,7 +58209,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -58113,7 +58217,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -58204,7 +58308,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 534 */
+/* 535 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58552,7 +58656,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 535 */
+/* 536 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -58672,13 +58776,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 536 */
-/***/ (function(module, exports) {
-
-module.exports = {}
-
-/***/ }),
-/* 537 */
+/* 537 */,
+/* 538 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -58886,11 +58985,12 @@ exports.default = {
 //
 
 /***/ }),
-/* 538 */
+/* 539 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: ["wrapper"],
     style: _vm.mainStyle
   }, [_c('navigation-bar', {
     attrs: {
@@ -58914,7 +59014,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 539 */
+/* 540 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -58976,7 +59076,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -58984,7 +59084,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -59036,7 +59136,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 540 */
+/* 541 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -59056,7 +59156,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 541 */
+/* 542 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59240,7 +59340,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 542 */
+/* 543 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -59307,13 +59407,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 543 */
+/* 544 */
 /***/ (function(module, exports) {
 
 module.exports = {}
 
 /***/ }),
-/* 544 */
+/* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59364,7 +59464,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 545 */
+/* 546 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -59388,7 +59488,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 546 */
+/* 547 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -59450,7 +59550,7 @@ module.exports = {
     "fontWeight": "bold"
   },
   "content-text-gray": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "28"
   },
   "content-text-white": {
@@ -59458,7 +59558,7 @@ module.exports = {
     "fontSize": "28"
   },
   "name-text": {
-    "color": "rgba(97,97,97,0.6)",
+    "color": "rgba(97,97,97,0.9)",
     "fontSize": "30",
     "fontWeight": "bold"
   },
@@ -59503,25 +59603,6 @@ module.exports = {
     "color": "#3c3f41",
     "fontWeight": "bold",
     "fontSize": "35"
-  }
-}
-
-/***/ }),
-/* 547 */
-/***/ (function(module, exports) {
-
-module.exports = {
-  "input-container": {
-    "alignItems": "center",
-    "justifyContent": "center",
-    "width": "600",
-    "backgroundColor": "#FFFFFF",
-    "borderRadius": "10",
-    "paddingTop": "25",
-    "paddingRight": "25",
-    "paddingBottom": "25",
-    "paddingLeft": "25",
-    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.70)"
   },
   "input-title": {
     "fontSize": "30",
@@ -59548,6 +59629,25 @@ module.exports = {
     "paddingLeft": "20",
     "color": "#666666",
     "border": "2px solid #969896"
+  }
+}
+
+/***/ }),
+/* 548 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "input-container": {
+    "alignItems": "center",
+    "justifyContent": "center",
+    "width": "600",
+    "backgroundColor": "#FFFFFF",
+    "borderRadius": "10",
+    "paddingTop": "25",
+    "paddingRight": "25",
+    "paddingBottom": "25",
+    "paddingLeft": "25",
+    "boxShadow": "0 0 10px rgba(0, 0, 0, 0.70)"
   },
   "btn-text": {
     "alignItems": "center",
@@ -59561,7 +59661,7 @@ module.exports = {
 }
 
 /***/ }),
-/* 548 */
+/* 549 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59762,7 +59862,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 549 */
+/* 550 */
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -59834,7 +59934,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 module.exports.render._withStripped = true
 
 /***/ }),
-/* 550 */,
 /* 551 */,
 /* 552 */,
 /* 553 */,
@@ -59844,7 +59943,8 @@ module.exports.render._withStripped = true
 /* 557 */,
 /* 558 */,
 /* 559 */,
-/* 560 */
+/* 560 */,
+/* 561 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -59884,6 +59984,124 @@ Vue.mixin(_index2.default);
 /* eslint-disable no-new */
 new Vue(Vue.util.extend({ el: '#root', router: router, store: _store2.default }, _SearchPage2.default));
 router.push('/');
+
+/***/ }),
+/* 562 */,
+/* 563 */,
+/* 564 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  "card-white-wrapper": {
+    "width": "700",
+    "backgroundColor": "#FFFFFF",
+    "borderRadius": "10",
+    "paddingTop": "20",
+    "paddingRight": "20",
+    "paddingBottom": "20",
+    "paddingLeft": "20",
+    "boxShadow": "0 0 10px rgba(211, 210, 210, 0.5)"
+  },
+  "card-black-full-wrapper": {
+    "width": "750",
+    "backgroundColor": "#3c3f41",
+    "borderBottomLeftRadius": "15",
+    "borderBottomRightRadius": "15",
+    "paddingTop": "20",
+    "paddingRight": "20",
+    "paddingBottom": "20",
+    "paddingLeft": "20",
+    "boxShadow": "0 0 10px rgba(211, 210, 210, 0.5)"
+  },
+  "card-black-wrapper": {
+    "width": "710",
+    "backgroundColor": "#3c3f41",
+    "paddingTop": "20",
+    "paddingRight": "20",
+    "paddingBottom": "20",
+    "paddingLeft": "20",
+    "marginTop": "20",
+    "borderRadius": "15",
+    "boxShadow": "0 0 10px rgba(211, 210, 210, 0.5)"
+  },
+  "text-line-three": {
+    "WebkitLineClamp": 3,
+    "WebkitBoxOrient": "vertical",
+    "display": "-webkit-box",
+    "whiteSpace": "normal !important",
+    "overflow": "hidden",
+    "textOverflow": "ellipsis",
+    "wordWrap": "break-word",
+    "lines": 3
+  },
+  "text-line-one": {
+    "WebkitLineClamp": 1,
+    "WebkitBoxOrient": "vertical",
+    "display": "-webkit-box",
+    "whiteSpace": "normal !important",
+    "overflow": "hidden",
+    "textOverflow": "ellipsis",
+    "wordWrap": "break-word",
+    "lines": 1
+  },
+  "content-text-black-bold": {
+    "color": "#3c3f41",
+    "fontSize": "28",
+    "fontWeight": "bold"
+  },
+  "content-text-gray": {
+    "color": "rgba(97,97,97,0.9)",
+    "fontSize": "28"
+  },
+  "content-text-white": {
+    "color": "#FFFFFF",
+    "fontSize": "28"
+  },
+  "name-text": {
+    "color": "rgba(97,97,97,0.9)",
+    "fontSize": "30",
+    "fontWeight": "bold"
+  },
+  "name-text-theme": {
+    "color": "#3c3f41",
+    "fontSize": "30",
+    "fontWeight": "bold"
+  },
+  "name-text-white": {
+    "display": "-webkit-box",
+    "whiteSpace": "normal !important",
+    "wordWrap": "break-word",
+    "WebkitLineClamp": 1,
+    "color": "#FFFFFF",
+    "fontWeight": "bold",
+    "fontSize": "30",
+    "overflow": "hidden",
+    "textOverflow": "ellipsis",
+    "lines": 1
+  },
+  "user-text-theme": {
+    "color": "#3c3f41",
+    "fontSize": "30",
+    "display": "-webkit-box",
+    "overflow": "hidden",
+    "whiteSpace": "normal !important",
+    "textOverflow": "ellipsis",
+    "wordWrap": "break-word",
+    "WebkitLineClamp": 1,
+    "flex": 1,
+    "fontWeight": "bold",
+    "WebkitBoxOrient": "vertical"
+  },
+  "wrapper": {
+    "backgroundColor": "#f2f3f4"
+  }
+}
+
+/***/ }),
+/* 565 */
+/***/ (function(module, exports) {
+
+module.exports = {}
 
 /***/ })
 /******/ ]);
