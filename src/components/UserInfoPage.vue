@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper" :style="mainStyle">
-        <person-page :needTitle="true" :userType="userType"
+        <person-page :needTitle="true" :userType="userType" :jumpSetting="false"
                      :isMe="false" :userName="getUserName"></person-page>
     </div>
 </template>

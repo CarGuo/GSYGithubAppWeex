@@ -1,7 +1,7 @@
 <template>
     <div class="card-black-full-wrapper">
         <div class="card-user-wrapper" style="flex-direction: row">
-            <image v-if="itemValue.ex.userPic" :src="itemValue.ex.userPic" class="user-icon"></image>
+            <image v-if="itemValue.ex.userPic" :src="itemValue.ex.userPic" class="user-icon" @click="imgClick"></image>
             <div style="flex: 1;">
                 <text class="user-text">{{itemValue.ex.user}}</text>
                 <text class="name-text">{{itemValue.ex.name}}</text>
@@ -44,6 +44,7 @@
                     return {ex:{}}
                 }
             },
+            onItemClick:{type:Function}
         },
         components: {},
         methods: {
@@ -82,6 +83,9 @@
             },
             honorClick() {
 
+            },
+            imgClick() {
+                this.onItemClick && this.onItemClick(11)
             }
         },
         created() {

@@ -4,6 +4,7 @@
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList"
                   :bottomEmpty="getListBottomEmpty"
+                  :headerClick="headerClick"
                   headerComponent="UserHeadItem" :headerData="userInfo" :listHeight="listHeight"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
@@ -27,6 +28,7 @@
             userType: {type: Number, default: 1},
             isMe: {type: Boolean, default: true},
             userName: {type: String, default: ''},
+            jumpSetting: {type: Boolean, default: true},
             listHeight: getListHeight(1300 - navigatorbBarHeight - mainTabBarHeight),
         },
         components: {RLList, NavigationBar},
@@ -34,7 +36,7 @@
             return {
                 currentPage: 1,
                 eventList: [],
-                userData: {}
+                userData: {},
             }
         },
         created: function () {
@@ -74,6 +76,7 @@
                     followed: (userInfo.following) ? userInfo.following : '---',
                     star: (userInfo.starred) ? userInfo.starred : "---",
                     stared: "---",
+                    jumpSetting: this.jumpSetting,
                 };
                 let user = {
                     ex: ex
@@ -145,6 +148,12 @@
                 let data = this.dataList[index];
                 ActionUtils(data, this)
             },
+            headerClick() {
+                if (this.jumpSetting && this.jumpSetting === true) {
+                    this.jumpInter("setting")
+                }
+            },
+
         }
     }
 </script>
