@@ -2,10 +2,10 @@
 
 ## 一款跨平台的开源Github Weex客户端App，提供更丰富的功能，更好体验，旨在更好的日常管理和维护个人Github，提供更好更方便的驾车体验～～Σ(￣。￣ﾉ)ﾉ。
 
-#### ps 同款开源React Native版本 https://github.com/CarGuo/GSYGithubAPP
+### ps 同款开源React Native版本 https://github.com/CarGuo/GSYGithubAPP
 
 ```
-基于Weex开发，适配Android\IOS\Web。（开发和适配中）
+基于Weex开发，适配Android\IOS\Web。
 
 项目的目的是为方便个人日常维护和查阅Github，更好的沉浸于码友之间的互基，Github就是你的家。
 
@@ -19,7 +19,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/CarGuo/GSYGithubAPPWeex.svg)](https://github.com/CarGuo/GSYGithubAPPWeex/network)
 [![GitHub stars](https://img.shields.io/github/stars/CarGuo/GSYGithubAPPWeex.svg)](https://github.com/CarGuo/GSYGithubAPPWeex/stargazers)
 
-### 编译运行流程
+## 编译运行流程
 
 1、配置好Weex开发环境，可参阅 [【搭建环境】](http://weex.apache.org/cn/guide/set-up-env.html)
 
@@ -49,7 +49,7 @@
 执行 `npm run serve` 运行web（目前未详细适配）。（推荐chrome，调试模式下手机模式）
 
 
-### 示例图片
+## 示例图片
 
 <img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/1.jpg" width="426px"/>
 
@@ -57,7 +57,7 @@
 
 <img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/3.jpg" width="426px"/>
 
-### 第三方框架
+## 第三方框架
 
 * [vue-router](https://github.com/vuejs/vue-router)
 * [vuex](https://github.com/vuejs/vuex)
@@ -66,13 +66,13 @@
 * [node-sass](https://github.com/sass/node-sass)
 * [url-parse url解析](https://github.com/unshiftio/url-parse)
 
-### 常见问题
+## 常见问题👇
 
-#### [点我传送](https://github.com/CarGuo/GSYGithubAppWeex/blob/master/question.md)
+### [****** 点我传送 ******](https://github.com/CarGuo/GSYGithubAppWeex/blob/master/question.md)
 
 <img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/thanks.jpg" width="426px"/>
 
-### LICENSE
+## LICENSE
 ```
 CarGuo/GSYGithubAPPWeex is licensed under the
 Apache License 2.0
