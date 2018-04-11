@@ -12,6 +12,7 @@ import CommonListPage from '@/components/CommonListPage.vue'
 import SearchPage from '@/components/SearchPage.vue'
 import WebPage from '@/components/WebPage.vue'
 import EditIssuePage from '@/components/EditIssuePage.vue'
+import SettingPage from '@/components/SettingPage.vue'
 
 import EventItem from '@/components/widget/EventItem.vue'
 import RepositoryItem from '@/components/widget/RepositoryItem.vue'
@@ -103,6 +104,11 @@ module.exports = new Router({
             name: 'EditIssuePage',
             component: EditIssuePage
         },
+        {
+            path:  '/setting',
+            name: 'SettingPage',
+            component: SettingPage
+        },
 
     ]
-})
+});

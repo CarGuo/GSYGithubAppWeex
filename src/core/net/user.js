@@ -2,7 +2,7 @@ import {Buffer} from 'buffer'
 import Api from './api'
 import Address from './address'
 import * as Config from '../../config/Config'
-import {getCache, setCache} from '../common/storageUtils'
+import {getCache, setCache, removeCache} from '../common/storageUtils'
 import * as ignoreConfig from '../common/ignoreConfig'
 
 /**
@@ -34,6 +34,14 @@ const getUserInfoLocal = async () => {
             result: false
         }
     }
+};
+
+/**
+ * 获取本地登录用户信息
+ */
+const cleanUserInfoLocal = async () => {
+    await removeCache(Config.USER_INFO);
+    return true
 };
 
 /**
@@ -208,4 +216,5 @@ export default {
     getUserInfoLocal,
     getFollowerListDao,
     getFollowedListDao,
+    cleanUserInfoLocal,
 }

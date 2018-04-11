@@ -45,6 +45,11 @@ export default {
             }
             return nativeBase;
         },
+        jumpInter(to) {
+            if (this.$router) {
+                this.$router.push(to)
+            }
+        },
         jumpWithParams(to, params) {
             if(WXEnvironment.platform === 'Web') {
                 if (this.$router) {
