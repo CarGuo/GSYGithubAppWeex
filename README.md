@@ -1,6 +1,6 @@
 ![](https://github.com/CarGuo/GSYGithubAppWeex/blob/master/logo.png)
 
-## 一款跨平台的开源Github Weex客户端App，提供更丰富的功能，更好体验，旨在更好的日常管理和维护个人Github，提供更好更方便的驾车体验～～Σ(￣。￣ﾉ)ﾉ。
+## 一款跨平台的开源Github Weex客户端App，提供更丰富的功能，更好体验，旨在更好的日常管理和维护个人Github，提供更好更方便的驾车体验～～Σ(￣。￣ﾉ)ﾉ。 [****** ***Weex之带你去蹲坑文章***  ******](https://www.jianshu.com/p/ae1d7a2b0a8a)
 
 ### ps 同款开源React Native版本 https://github.com/CarGuo/GSYGithubAPP
 
