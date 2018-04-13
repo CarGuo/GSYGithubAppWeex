@@ -29,7 +29,7 @@
                          @wxcPopoverButtonClicked="popoverLanguageButtonClicked"></wxc-popover>
         </div>
         <div class="list-container">
-            <r-l-list ref="dylist" listItemName="RepositoryItem" :listData="dataList" :bottomEmpty="getListBottomEmpty"
+            <r-l-list ref="dylist" listItemName="RepositoryItem" :listData="dataList" :bottomEmpty="listBottomEmpty"
                       :listHeight="listHeight"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
@@ -57,6 +57,7 @@
                 languageType:null,
                 listHeight: getListHeight(1334 - navigatorbBarHeight - mainTabBarHeight),
                 primaryColor:Config.primaryColor,
+                listBottomEmpty:getListBottomEmpty(),
                 btns1:TrendTime,
                 btns2:TrendType,
                 popoverPosition1: {  x: -400, y: 180  },

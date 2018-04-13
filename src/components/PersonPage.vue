@@ -3,7 +3,7 @@
         <navigation-bar v-if="needTitle" :title="userName" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="EventItem" :listData="dataList"
-                  :bottomEmpty="getListBottomEmpty"
+                  :bottomEmpty="listBottomEmpty"
                   :headerClick="headerClick"
                   headerComponent="UserHeadItem" :headerData="userInfo" :listHeight="listHeight"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
@@ -37,6 +37,7 @@
                 currentPage: 1,
                 eventList: [],
                 userData: {},
+                listBottomEmpty: getListBottomEmpty(),
             }
         },
         created: function () {

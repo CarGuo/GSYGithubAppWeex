@@ -15,7 +15,7 @@
 
             </div>
         </scroller>
-        <r-l-list ref="dylist" listItemName="FileItem" :listData="list" :bottomEmpty="getListBottomEmpty"
+        <r-l-list ref="dylist" listItemName="FileItem" :listData="list" :bottomEmpty="listBottomEmpty"
                   :listHeight="listHeight" :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
 </template>
@@ -41,6 +41,7 @@
                 list: [],
                 path: "",
                 loading:false,
+                listBottomEmpty:getListBottomEmpty(),
                 primaryColor:Config.primaryColor,
                 listHeight: getListHeight(1334 - navigatorbBarHeight - 150),
             }

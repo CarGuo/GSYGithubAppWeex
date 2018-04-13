@@ -17,7 +17,7 @@
         </div>
 
         <div style="flex:1;width:750px;">
-            <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="getListBottomEmpty"
+            <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="listBottomEmpty"
                       :listHeight="listHeight"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
@@ -49,6 +49,7 @@
                 dataState: 1,
                 selectIndex: 1,
                 searchValue: "",
+                listBottomEmpty:  getListBottomEmpty(),
                 listHeight: getListHeight(1300 - navigatorbBarHeight - 300),
             }
         },
