@@ -12,7 +12,7 @@
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {ActionUtils} from '../core/common/eventUtils'
-    import {getListBottomEmpty, getListHeight, navigatorbBarHeight} from '../config/Config'
+    import {getListHeight, navigatorbBarHeight} from '../config/Config'
 
     export default {
         props: {
