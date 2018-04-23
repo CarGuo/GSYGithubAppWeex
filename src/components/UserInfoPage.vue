@@ -17,6 +17,7 @@
 <script>
     import PersonPage from './PersonPage.vue'
     import {getEntryPageStyle} from "../config/Config"
+    import {Utils} from "weex-ui"
 
     export default {
         props: {
@@ -32,7 +33,7 @@
             }
         },
         created() {
-            this.mainStyle = getEntryPageStyle(1334)
+            this.mainStyle = getEntryPageStyle(Utils)
         }
 
     }

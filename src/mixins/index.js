@@ -68,6 +68,9 @@ export default {
         },
         // object 转 URL 参数
         createQuery(obj) {
+            if(obj === null || obj === "" || obj.length === 0) {
+                return ""
+            }
             let url = '?';
             for (let key in obj) {
                 if (obj[key] !== null) {

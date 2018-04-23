@@ -16,6 +16,7 @@
     import {addIconFontSupport} from '../config/IconConfig'
     import {getEntryPageStyle} from "../config/Config"
     import * as Config from "../config/Config"
+    import {Utils} from 'weex-ui'
 
 
     export default {
@@ -33,7 +34,7 @@
         },
         created: function () {
             this.loadData()
-            this.mainStyle = getEntryPageStyle(1334)
+            this.mainStyle = getEntryPageStyle(Utils)
 
         },
         methods: {

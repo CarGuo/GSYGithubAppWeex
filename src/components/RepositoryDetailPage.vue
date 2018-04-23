@@ -64,7 +64,7 @@
     import RepositoryFileListPage from './RepositoryFileListPage.vue'
     import repository from '../core/net/repository'
     import {launchUrl} from "../core/common/htmlUtils"
-    import {getEntryPageStyle,getContentStyle} from "../config/Config"
+    import {getEntryPageStyle,getContentStyle, DEBUG} from "../config/Config"
     const modal = weex.requireModule('modal')
 
     export default {
@@ -95,7 +95,7 @@
         }),
         created () {
             this.contentStyle = getContentStyle(Utils.env.getScreenHeight(), this.tabStyles.height)
-            this.mainStyle = getEntryPageStyle(Utils.env.getScreenHeight())
+            this.mainStyle = getEntryPageStyle(Utils)
             this.init()
         },
         activated: function () {
@@ -128,6 +128,7 @@
                     .then((res) => {
                         if(res && res.result) {
                             console.log("repos statu", res)
+                            console.log("repos statu!!!", res.data)
                             this.reposStatus = res.data
                             this.star = res.data.star
                             this.watch = res.data.watch
@@ -147,7 +148,7 @@
                         if(res && res.data) {
                             this.readme = res.data;
                         }
-                        if (Constant.DEBUG) {
+                        if (DEBUG) {
                             console.info("repository detail readme", res)
                         }
                     })
