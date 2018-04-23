@@ -23,8 +23,12 @@ export const webDraculaBackgroundColor = '#282a36';
 
 export function getEntryPageStyle(Utils) {
     let mainHeight = getRealScreenHeight(Utils)
-    if(WXEnvironment.platform.toLowerCase() === 'ios') {
-        return {height: mainHeight, width: '750px', marginTop: statusHeight}
+    if (WXEnvironment.platform.toLowerCase() === 'ios') {
+        if (Utils.env.isIPhoneX()) {
+            return {height: mainHeight, width: '750px', marginTop: statusHeight + 44}
+        } else {
+            return {height: mainHeight, width: '750px', marginTop: statusHeight}
+        }
     }
     return {height: mainHeight, width: '750px'}
 }
