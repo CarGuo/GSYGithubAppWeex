@@ -82,7 +82,7 @@
         created: function () {
             this.init()
             this.mainStyle = getEntryPageStyle(Utils)
-            this.listHeight = getListHeight(Utils.env.getScreenHeight() - controlBarHeight - navigatorbBarHeight)
+            this.listHeight = getListHeight(Utils.env.getScreenHeight() - controlBarHeight - navigatorbBarHeight, Utils)
         },
         activated: function () {
             //keep alive

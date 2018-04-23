@@ -51,7 +51,7 @@
                 selectSortData: null,
                 selectLanguageData: null,
                 mainStyle:{},
-                listHeight:getListHeight(1300 - navigatorbBarHeight - 150)
+                listHeight:getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - 150, Utils)
             }
         },
         created: function () {

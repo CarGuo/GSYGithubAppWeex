@@ -13,8 +13,8 @@
 <script>
     const modal = weex.requireModule('modal')
 
-
     import RLList from './widget/RLList.vue'
+    import {Utils} from 'weex-ui'
     import resolveLongToTime from '../core/common/timeUtils'
     import event from '../core/net/event'
     import user from '../core/net/user'
@@ -29,7 +29,7 @@
             isMe: {type: Boolean, default: true},
             userName: {type: String, default: ''},
             jumpSetting: {type: Boolean, default: true},
-            listHeight: getListHeight(1300 - navigatorbBarHeight - mainTabBarHeight),
+            listHeight: getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - mainTabBarHeight, Utils),
         },
         components: {RLList, NavigationBar},
         data() {

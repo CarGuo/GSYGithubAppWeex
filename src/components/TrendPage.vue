@@ -39,7 +39,7 @@
 <script>
     const modal = weex.requireModule('modal')
 
-    import {WxcButton, WxcPopover} from 'weex-ui'
+    import {WxcButton, WxcPopover, Utils} from 'weex-ui'
     import {TrendTime, TrendType} from '../core/common/filterUtils'
     import RLList from './widget/RLList.vue'
     import {getListBottomEmpty, getListHeight,navigatorbBarHeight, mainTabBarHeight} from '../config/Config'
@@ -55,7 +55,7 @@
                 language: '全部',
                 since:null,
                 languageType:null,
-                listHeight: getListHeight(1334 - navigatorbBarHeight - mainTabBarHeight),
+                listHeight: getListHeight(Utils.env.getScreenHeight() - - navigatorbBarHeight - mainTabBarHeight, Utils),
                 primaryColor:Config.primaryColor,
                 btns1:TrendTime,
                 btns2:TrendType,

@@ -41,9 +41,12 @@ export function getListBottomEmpty() {
     return (WXEnvironment.platform.toLowerCase() === 'ios') ? '400px' : '200px'
 }
 
-export function getListHeight(height = 1234) {
+export function getListHeight(height = 1234, Utils) {
     if(WXEnvironment.platform === 'Web') {
         return height
+    }
+    if (Utils.env.isIPhoneX()) {
+        return height - statusHeight - 44;
     }
     return height - statusHeight;
 }
