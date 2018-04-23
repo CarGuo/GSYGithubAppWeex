@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper" :style="{height: mainHeight}">
         <div class="input-container">
             <text class="title">{{title}}</text>
             <div style="margin-top: 50px">
@@ -25,7 +25,7 @@
     </div>
 </template>
 <script>
-    import {WxcLoading} from 'weex-ui'
+    import {WxcLoading, Utils} from 'weex-ui'
     import repository from '../core/net/repository'
     import {isEmptyString} from '../core/common/commonUtils'
     import * as ignoreConfig from '../core/common/ignoreConfig'
@@ -51,6 +51,7 @@
                 commentNum: "",
                 reposName: "",
                 userName: "",
+                mainHeight: 0,
             }
         },
         created: function () {
@@ -81,6 +82,7 @@
             if (this.getQuery().commentNum) {
                 this.commentNum = this.getQuery().commentNum
             }
+            this.mainHeight  = Utils.env.getScreenHeight();
         },
         methods: {
             onTitleChange(event) {
@@ -176,7 +178,6 @@
         align-items: center;
         justify-content: center;
         width: 750px;
-        height: 1334px;
         background-color: $--theme-color;
     }
     .title{
