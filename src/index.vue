@@ -14,11 +14,12 @@
 
 <script>
     import {Utils} from 'weex-ui';
+    import {navigatorbBarHeight, getRealScreenHeight} from './config/Config';
     export default {
         name: 'App',
         data() {
             return {
-                realHeight: Utils.getPageHeight()
+                realHeight: getRealScreenHeight(Utils)
             }
         },
     }
@@ -26,7 +27,6 @@
 
 <style scoped>
     .wrapper {
-        height: 1158px;
         width: 750px;
         justify-content: center;
         align-items: center;

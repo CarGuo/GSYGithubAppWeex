@@ -21,9 +21,8 @@ export const primaryLightColor = '#42464b';
 export const webDraculaBackgroundColor = '#282a36';
 
 export function getEntryPageStyle(Utils) {
-    let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
-    let mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : ((Utils.env.getPageHeight())+ 'px');
-    return {height: mainHeight, width: '750px', marginTop: 0}
+    let mainHeight = getRealScreenHeight(Utils)
+    return {height: mainHeight, width: '750px'}
 }
 
 export function getContentStyle(pageHeight, tabHeight) {
@@ -39,4 +38,11 @@ export function getListHeight(height = 1234) {
         return height
     }
     return height - 32;
+}
+
+export function getRealScreenHeight(Utils) {
+    if(WXEnvironment.platform === 'Web') {
+        return Utils.env.getScreenHeight()
+    }
+    return Utils.env.getScreenHeight() - 32
 }

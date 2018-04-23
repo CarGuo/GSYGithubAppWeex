@@ -104,6 +104,6 @@ export default {
         },
         getPageSize() {
             return PAGE_SIZE
-        }
+        },
     }
 }
