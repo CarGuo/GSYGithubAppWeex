@@ -5,7 +5,7 @@
         <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list" :listHeight="listHeight"
                   headerComponent="IssueHeadItem" :headerData="issueInfo" :bottomEmpty="getListBottomEmpty"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
-        <div v-if="issueInfo.body" class="bottom-container">
+        <div v-if="issueInfo.body" class="bottom-container" :style="bottomStyle">
             <div class="bottom-item bottom-item-line" @click="replyClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{'回复'}}</text>
             </div>
@@ -76,12 +76,14 @@
                 list: [],
                 issueInfo: {},
                 mainStyle:{},
+                bottomStyle:{},
                 listHeight:getListHeight(1334 - navigatorbBarHeight - 80),
             }
         },
         created: function () {
             this.init()
             this.mainStyle = getEntryPageStyle(1334)
+            this.bottomStyle = {top: 1300}
         },
         activated: function () {
             //keep alive
@@ -346,7 +348,7 @@
     .bottom-container {
         position:absolute;
         height: 80px;
-        top: 1222px;
+        top: 1252px;
         background-color: white;
         flex-direction: row;
         width: 750px;
