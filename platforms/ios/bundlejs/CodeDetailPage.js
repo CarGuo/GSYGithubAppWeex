@@ -4518,7 +4518,11 @@ var webDraculaBackgroundColor = exports.webDraculaBackgroundColor = '#282a36';
 function getEntryPageStyle(Utils) {
     var mainHeight = getRealScreenHeight(Utils);
     if (WXEnvironment.platform.toLowerCase() === 'ios') {
-        return { height: mainHeight, width: '750px', marginTop: statusHeight };
+        if (Utils.env.isIPhoneX()) {
+            return { height: mainHeight, width: '750px', marginTop: statusHeight + 44 };
+        } else {
+            return { height: mainHeight, width: '750px', marginTop: statusHeight };
+        }
     }
     return { height: mainHeight, width: '750px' };
 }
