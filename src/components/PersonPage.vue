@@ -28,7 +28,6 @@
             isMe: {type: Boolean, default: true},
             userName: {type: String, default: ''},
             jumpSetting: {type: Boolean, default: true},
-            listHeight: getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - mainTabBarHeight, Utils),
         },
         components: {RLList, NavigationBar},
         data() {
@@ -36,6 +35,7 @@
                 currentPage: 1,
                 eventList: [],
                 userData: {},
+                listHeight:0
             }
         },
         created: function () {
@@ -43,6 +43,7 @@
             if (this.isMe === false) {
                 this.loadUserInfo()
             }
+            this.listHeight = getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight, Utils)
         },
         activated: function () {
             if(WXEnvironment.platform === 'Web') {

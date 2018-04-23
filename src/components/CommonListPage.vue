@@ -13,7 +13,7 @@
     import NavigationBar from './widget/NavigationBar.vue'
     import repository from '../core/net/repository'
     import user from '../core/net/user'
-    import  {getEntryPageStyle, getListHeight} from "../config/Config"
+    import  {getEntryPageStyle, getListHeight, navigatorbBarHeight} from "../config/Config"
     import  {Utils} from "weex-ui"
 
     export default {
@@ -36,7 +36,7 @@
         created: function () {
             this.init()
             this.mainStyle = getEntryPageStyle(Utils)
-            this.listHeight = getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - mainTabBarHeight, Utils),
+            this.listHeight = getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight, Utils)
 
         },
         activated: function () {

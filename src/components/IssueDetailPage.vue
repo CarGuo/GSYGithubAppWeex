@@ -5,7 +5,7 @@
         <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list" :listHeight="listHeight"
                   headerComponent="IssueHeadItem" :headerData="issueInfo" :bottomEmpty="getListBottomEmpty"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
-        <div v-if="issueInfo.body" class="bottom-container">
+        <div v-if="issueInfo.body" class="bottom-container" :style="{top: controlTop}">
             <div class="bottom-item bottom-item-line" @click="replyClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{'回复'}}</text>
             </div>
@@ -77,10 +77,13 @@
                 issueInfo: {},
                 mainStyle:{},
                 listHeight:0,
+                controlTop:0,
             }
         },
         created: function () {
             this.init()
+            let top =  Utils.env.getScreenHeight() - 80;
+            this.controlTop = Utils.env.isIPhoneX() ? top - 88 : top
             this.mainStyle = getEntryPageStyle(Utils)
             this.listHeight = getListHeight(Utils.env.getScreenHeight() - controlBarHeight - navigatorbBarHeight, Utils)
         },

@@ -20,7 +20,7 @@
                 <repository-issue-list-page ref="c"></repository-issue-list-page>
             </div>
         </top-tab-bar>
-        <div v-if="reposStatus != null" class="bottom-item-container">
+        <div v-if="reposStatus != null" class="bottom-item-container" :style="{marginBottom: controlBottom}">
             <div class="bottom-item bottom-item-line" @click="reposStarClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{starIcon + "   " +  starText}}</text>
             </div>
@@ -89,13 +89,15 @@
             mainHeight: '1334px',
             mainMarginTop: '0px',
             branch: [],
-            popoverPosition: {  x: -50, y: 1134  },
+            popoverPosition: {x: -50, y: 1134},
+            controlBottom: 0,
             mainStyle:{},
             popoverArrowPosition: {pos: 'bottom', x: -50},
         }),
         created () {
             this.contentStyle = getContentStyle(Utils.env.getScreenHeight(), this.tabStyles.height)
             this.mainStyle = getEntryPageStyle(Utils)
+            this.controlBottom = Utils.env.isIPhoneX() ? 78 : 0
             this.init()
         },
         activated: function () {

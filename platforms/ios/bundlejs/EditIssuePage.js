@@ -55042,7 +55042,7 @@ exports.default = {
             language: '全部',
             since: null,
             languageType: null,
-            listHeight: (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - -_Config.navigatorbBarHeight - _Config.mainTabBarHeight, _weexUi.Utils),
+            listHeight: (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.navigatorbBarHeight - _Config.mainTabBarHeight, _weexUi.Utils),
             primaryColor: Config.primaryColor,
             btns1: _filterUtils.TrendTime,
             btns2: _filterUtils.TrendType,
@@ -55333,15 +55333,15 @@ exports.default = {
         userType: { type: Number, default: 1 },
         isMe: { type: Boolean, default: true },
         userName: { type: String, default: '' },
-        jumpSetting: { type: Boolean, default: true },
-        listHeight: (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.navigatorbBarHeight - _Config.mainTabBarHeight, _weexUi.Utils)
+        jumpSetting: { type: Boolean, default: true }
     },
     components: { RLList: _RLList2.default, NavigationBar: _NavigationBar2.default },
     data: function data() {
         return {
             currentPage: 1,
             eventList: [],
-            userData: {}
+            userData: {},
+            listHeight: 0
         };
     },
 
@@ -55350,6 +55350,7 @@ exports.default = {
         if (this.isMe === false) {
             this.loadUserInfo();
         }
+        this.listHeight = (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.navigatorbBarHeight, _weexUi.Utils);
     },
     activated: function activated() {
         if (WXEnvironment.platform === 'Web') {
@@ -55830,6 +55831,7 @@ exports.default = {
             mainMarginTop: '0px',
             branch: [],
             popoverPosition: { x: -50, y: 1134 },
+            controlBottom: 0,
             mainStyle: {},
             popoverArrowPosition: { pos: 'bottom', x: -50 }
         };
@@ -55837,6 +55839,7 @@ exports.default = {
     created: function created() {
         this.contentStyle = (0, _Config.getContentStyle)(_weexUi.Utils.env.getScreenHeight(), this.tabStyles.height);
         this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
+        this.controlBottom = _weexUi.Utils.env.isIPhoneX() ? 78 : 0;
         this.init();
     },
 
@@ -57957,7 +57960,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('repository-issue-list-page', {
     ref: "c"
   })], 1)]), (_vm.reposStatus != null) ? _c('div', {
-    staticClass: ["bottom-item-container"]
+    staticClass: ["bottom-item-container"],
+    style: {
+      marginBottom: _vm.controlBottom
+    }
   }, [_c('div', {
     staticClass: ["bottom-item", "bottom-item-line"],
     on: {
@@ -58623,12 +58629,15 @@ exports.default = {
             list: [],
             issueInfo: {},
             mainStyle: {},
-            listHeight: 0
+            listHeight: 0,
+            controlTop: 0
         };
     },
 
     created: function created() {
         this.init();
+        var top = _weexUi.Utils.env.getScreenHeight() - 80;
+        this.controlTop = _weexUi.Utils.env.isIPhoneX() ? top - 88 : top;
         this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
         this.listHeight = (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.controlBarHeight - _Config.navigatorbBarHeight, _weexUi.Utils);
     },
@@ -58905,7 +58914,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "itemClick": _vm.itemClick
     }
   }), (_vm.issueInfo.body) ? _c('div', {
-    staticClass: ["bottom-container"]
+    staticClass: ["bottom-container"],
+    style: {
+      top: _vm.controlTop
+    }
   }, [_c('div', {
     staticClass: ["bottom-item", "bottom-item-line"],
     on: {
@@ -59111,9 +59123,218 @@ module.exports = {}
 
 /***/ }),
 /* 540 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unexpected token (41:4)\n\n  39 |         this.listHeight = getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - mainTabBarHeight, Utils),\n  40 | \n> 41 |     },\n     |     ^\n  42 |     activated: function () {\n  43 |         //keep alive\n  44 |         if(WXEnvironment.platform === 'Web') {\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _RLList = __webpack_require__(6);
+
+var _RLList2 = _interopRequireDefault(_RLList);
+
+var _NavigationBar = __webpack_require__(5);
+
+var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
+
+var _repository = __webpack_require__(4);
+
+var _repository2 = _interopRequireDefault(_repository);
+
+var _user = __webpack_require__(10);
+
+var _user2 = _interopRequireDefault(_user);
+
+var _Config = __webpack_require__(1);
+
+var _weexUi = __webpack_require__(2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+    props: {},
+    components: { RLList: _RLList2.default, NavigationBar: _NavigationBar2.default },
+    data: function data() {
+        return {
+            userName: "",
+            reposName: "",
+            title: "",
+            currentPage: 1,
+            list: [],
+            listHeight: 0,
+            itemClass: 'EventItem',
+            dataType: '',
+            mainStyle: {}
+        };
+    },
+
+    created: function created() {
+        this.init();
+        this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
+        this.listHeight = (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.navigatorbBarHeight, _weexUi.Utils);
+    },
+    activated: function activated() {
+        //keep alive
+        if (WXEnvironment.platform === 'Web') {
+            this.init();
+        }
+    },
+    methods: {
+        init: function init() {
+            this.list = [];
+            if (this.getQuery().title) {
+                this.title = this.getQuery().title;
+            }
+            if (this.getQuery().userName) {
+                this.userName = this.getQuery().userName;
+            }
+            if (this.getQuery().reposName) {
+                this.reposName = this.getQuery().reposName;
+            }
+            if (this.getQuery().dataType) {
+                this.dataType = this.getQuery().dataType;
+            }
+            this.initItemClass();
+            this.onRefresh();
+        },
+        resolveResult: function resolveResult(res, type) {
+            if (res && res.result) {
+                if (type === 1) {
+                    this.list = res.data;
+                } else {
+                    this.list = this.list.concat(res.data);
+                }
+            }
+            if (type === 1) {
+                if (this.$refs.dylist) {
+                    this.$refs.dylist.stopRefresh();
+                }
+            } else if (type === 2) {
+                if (this.$refs.dylist) {
+                    this.$refs.dylist.stopLoadMore();
+                }
+            }
+            if (this.$refs.dylist) {
+                if (!res.data || res.data.length < this.getPageSize()) {
+                    this.$refs.dylist.setNotNeedLoadMore();
+                } else {
+                    this.$refs.dylist.setNeedLoadMore();
+                }
+            }
+        },
+        loadData: function loadData(type) {
+            this.commonGetData(type);
+        },
+        onLoadMore: function onLoadMore() {
+            this.currentPage++;
+            this.loadData(2);
+        },
+        onRefresh: function onRefresh() {
+            this.currentPage = 1;
+            this.list = [];
+            this.loadData(1);
+        },
+        itemClick: function itemClick(index) {
+            var data = this.list[index];
+            switch (this.dataType) {
+                case "userRepos":
+                    this.jumpWithParams("RepositoryDetailPage", {
+                        userName: this.userName,
+                        reposName: data.name,
+                        title: this.userName + "/" + data.name
+                    });
+                    break;
+                case "userStar":
+                    this.jumpWithParams("RepositoryDetailPage", {
+                        userName: data.owner.login,
+                        reposName: data.name,
+                        title: this.userName + "/" + data.name
+                    });
+                    break;
+                case "userFollower":
+                case "userFollowed":
+                case "reposStarer":
+                case "reposForker":
+                case "reposWatcher":
+                    this.jumpWithParams("UserInfoPage", { userName: data.login });
+                    break;
+            }
+        },
+        isPreparing: function isPreparing() {
+            return !this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1;
+        },
+        initItemClass: function initItemClass() {
+            switch (this.dataType) {
+                case "userRepos":
+                case "userStar":
+                case "reposForker":
+                    this.itemClass = 'RepositoryItem';
+                    break;
+                case "userFollower":
+                case "userFollowed":
+                case "reposStarer":
+                case "reposWatcher":
+                    this.itemClass = 'UserItem';
+                    break;
+            }
+        },
+        commonGetData: function commonGetData(type) {
+            var _this = this;
+
+            switch (this.dataType) {
+                case "userRepos":
+                    _repository2.default.getUserRepositoryDao(this.userName, this.currentPage).then(function (res) {
+                        _this.resolveResult(res, type);
+                    });
+                    break;
+                case "userStar":
+                    _repository2.default.getStarRepositoryDao(this.userName, this.currentPage).then(function (res) {
+                        _this.resolveResult(res, type);
+                    });
+                    break;
+                case "userFollower":
+                    _user2.default.getFollowerListDao(this.userName, this.currentPage).then(function (res) {
+                        _this.resolveResult(res, type);
+                    });
+                    break;
+                case "userFollowed":
+                    _user2.default.getFollowedListDao(this.userName, this.currentPage).then(function (res) {
+                        _this.resolveResult(res, type);
+                    });
+                    break;
+                case "reposStarer":
+                    _repository2.default.getRepositoryStarDao(this.userName, this.reposName, this.currentPage).then(function (res) {
+                        _this.resolveResult(res, type);
+                    });
+                    break;
+                case "reposForker":
+                    _repository2.default.getRepositoryForksDao(this.userName, this.reposName, this.currentPage).then(function (res) {
+                        _this.resolveResult(res, type);
+                    });
+                    break;
+                case "reposWatcher":
+                    _repository2.default.getRepositoryWatcherDao(this.userName, this.reposName, this.currentPage).then(function (res) {
+                        _this.resolveResult(res, type);
+                    });
+                    break;
+            }
+        }
+    }
+};
 
 /***/ }),
 /* 541 */
