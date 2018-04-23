@@ -4503,6 +4503,7 @@ var USER_BASIC_CODE = exports.USER_BASIC_CODE = 'user_basic_code';
 var USER_INFO = exports.USER_INFO = 'user_info';
 
 var navigatorbBarHeight = exports.navigatorbBarHeight = 100;
+var statusHeight = exports.statusHeight = 32;
 var mainTabBarHeight = exports.mainTabBarHeight = 120;
 var reposDetailTopTabBarHeight = exports.reposDetailTopTabBarHeight = 80;
 var controlBarHeight = exports.controlBarHeight = 80;
@@ -4516,6 +4517,9 @@ var webDraculaBackgroundColor = exports.webDraculaBackgroundColor = '#282a36';
 
 function getEntryPageStyle(Utils) {
     var mainHeight = getRealScreenHeight(Utils);
+    if (WXEnvironment.platform.toLowerCase() === 'ios') {
+        return { height: mainHeight, width: '750px', marginTop: statusHeight };
+    }
     return { height: mainHeight, width: '750px' };
 }
 
@@ -4533,14 +4537,14 @@ function getListHeight() {
     if (WXEnvironment.platform === 'Web') {
         return height;
     }
-    return height - 32;
+    return height - statusHeight;
 }
 
 function getRealScreenHeight(Utils) {
     if (WXEnvironment.platform === 'Web') {
         return Utils.env.getScreenHeight();
     }
-    return Utils.env.getScreenHeight() - 32;
+    return Utils.env.getScreenHeight() - statusHeight;
 }
 
 /***/ }),
@@ -46886,7 +46890,7 @@ exports.default = {
                 if (matches && matches.length >= 2) {
                     host = matches[1];
                 }
-                nativeBase = 'http://' + host + '/index.html?page=./dist/';
+                nativeBase = 'http://' + host + '/';
             }
             return nativeBase;
         },
@@ -51976,7 +51980,8 @@ exports.default = {
         headerComponent: { type: String },
         headerData: { type: Object },
         bottomEmpty: { type: [String, Number], default: '240px' },
-        listHeight: { type: [String, Number], default: '1234px' }
+        listHeight: { type: [String, Number], default: '1234px' },
+        listWidth: { type: [String, Number], default: '750px' }
     },
     data: function data() {
         return {
@@ -54658,7 +54663,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('list', {
     staticClass: ["list"],
     style: {
-      height: _vm.listHeight
+      height: _vm.listHeight,
+      width: _vm.listWidth
     },
     attrs: {
       "loadmoreoffset": "30"
@@ -58443,9 +58449,6 @@ module.exports = {
     "fontWeight": "bold",
     "WebkitBoxOrient": "vertical"
   },
-  "wrapper": {
-    "backgroundColor": "#f2f3f4"
-  },
   "bottom-item-text": {
     "fontSize": "26",
     "color": "#3c3f41",
@@ -58481,12 +58484,15 @@ module.exports = {
   "bottom-container": {
     "position": "absolute",
     "height": "80",
-    "top": "1222",
+    "top": "1234",
     "backgroundColor": "#FFFFFF",
     "flexDirection": "row",
     "width": "750",
+    "alignItems": "center",
+    "justifyContent": "center",
     "paddingTop": "15",
-    "paddingBottom": "15"
+    "paddingBottom": "15",
+    "overflow": "hidden"
   },
   "bottom-item": {
     "paddingTop": "10",
@@ -58604,15 +58610,14 @@ exports.default = {
             list: [],
             issueInfo: {},
             mainStyle: {},
-            bottomStyle: {},
-            listHeight: (0, _Config.getListHeight)(1334 - _Config.navigatorbBarHeight - 80)
+            listHeight: 0
         };
     },
 
     created: function created() {
         this.init();
         this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
-        this.bottomStyle = { top: 1300 };
+        this.listHeight = (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.controlBarHeight - _Config.navigatorbBarHeight);
     },
     activated: function activated() {
         //keep alive
@@ -58887,8 +58892,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "itemClick": _vm.itemClick
     }
   }), (_vm.issueInfo.body) ? _c('div', {
-    staticClass: ["bottom-container"],
-    style: _vm.bottomStyle
+    staticClass: ["bottom-container"]
   }, [_c('div', {
     staticClass: ["bottom-item", "bottom-item-line"],
     on: {

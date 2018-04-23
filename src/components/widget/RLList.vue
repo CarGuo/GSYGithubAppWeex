@@ -1,8 +1,8 @@
 <template>
-    <list class="list" :style="{height:listHeight}" @loadmore="loadMore" @onloadmore="loadMore" loadmoreoffset="30">
-        <refresh class="refresh" @refresh="onRefresh"
-                 :display="refreshDisplay">
-            <loading-indicator class="indicator"></loading-indicator>
+    <list class="list" :style="{height:listHeight, width:listWidth}" @loadmore="loadMore" @onloadmore="loadMore"
+          loadmoreoffset="30">
+        <refresh class="refresh" @refresh="onRefresh" :display="refreshDisplay">
+        <loading-indicator class="indicator"></loading-indicator>
         </refresh>
         <cell :v-if="headerComponent" class="header">
             <component v-bind:is="headerComponent"
@@ -71,6 +71,7 @@
             headerData: {type: Object},
             bottomEmpty: {type: [String, Number], default:'240px'},
             listHeight: {type: [String, Number], default:'1234px'},
+            listWidth: {type: [String, Number], default:'750px'},
         },
         data() {
             return {

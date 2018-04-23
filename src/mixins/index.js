@@ -41,7 +41,7 @@ export default {
                 if (matches && matches.length >= 2) {
                     host = matches[1];
                 }
-                nativeBase = 'http://' + host + '/index.html?page=./dist/';
+                nativeBase = 'http://' + host + '/';
             }
             return nativeBase;
         },
