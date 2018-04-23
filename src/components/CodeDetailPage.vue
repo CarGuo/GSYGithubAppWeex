@@ -2,6 +2,7 @@
     <div :style="mainStyle">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
+        <!--todo fix height for ipx-->
         <web-component :source="codeData" :webStyle="{height:'1212px', width: '750px'}"></web-component>
     </div>
 </template>
