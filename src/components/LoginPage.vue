@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper" :style="{height: mainHeight}">
         <div class="input-container">
             <image :src="logo" class="logo"></image>
             <div style="flex-direction: row; margin-top: 50px">
@@ -81,7 +81,7 @@
     }
 </style>
 <script>
-    import {WxcButton, WxcLoading} from 'weex-ui'
+    import {WxcButton, WxcLoading, Utils} from 'weex-ui'
     import {Buffer} from 'buffer'
     import user from '../core/net/user'
 
@@ -104,11 +104,13 @@
                 isLoading: false,
                 loadingText: "处理中···",
                 primaryColor: Config.primaryColor,
+                mainHeight: 0
             }
         },
         created: function () {
             this.logo = getImagePath('logo', '.png')
             addIconFontSupport(dom, "../../")
+            this.mainHeight = Utils.env.getScreenHeight()
         },
         methods: {
             onUserNameChange(event) {
