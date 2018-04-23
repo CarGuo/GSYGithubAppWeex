@@ -25,7 +25,6 @@
             }
         },
         props: {
-            <!--todo fix height for ipx-->
             webStyle: {type: Object, default: {height:'1334px', width: '750px'}},
         },
         methods: {
