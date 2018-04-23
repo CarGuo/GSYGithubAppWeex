@@ -2,8 +2,7 @@
     <div :style="mainStyle">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
-        <!--todo fix height for ipx-->
-        <web-component :source="codeData" :webStyle="{height:'1212px', width: '750px'}"></web-component>
+        <web-component :source="codeData" :webStyle="{height: webH, width: '750px'}"></web-component>
     </div>
 </template>
 
@@ -36,6 +35,10 @@
         created: function () {
             this.loadData()
             this.mainStyle = getEntryPageStyle(Utils)
+            this.webH = Utils.env.getScreenHeight() - Config.navigatorbBarHeight - Config.statusHeight
+            if(Utils.env.isIPhoneX()) {
+                this.webH  = this.webH  - 44
+            }
 
         },
         methods: {

@@ -58100,6 +58100,10 @@ exports.default = {
     created: function created() {
         this.loadData();
         this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
+        this.webH = _weexUi.Utils.env.getScreenHeight() - Config.navigatorbBarHeight - Config.statusHeight;
+        if (_weexUi.Utils.env.isIPhoneX()) {
+            this.webH = this.webH - 44;
+        }
     },
     methods: {
         loadData: function loadData() {
@@ -58163,7 +58167,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "source": _vm.codeData,
       "webStyle": {
-        height: '1212px',
+        height: _vm.webH,
         width: '750px'
       }
     }
@@ -59953,7 +59957,6 @@ module.exports = {
     "alignItems": "center",
     "justifyContent": "center",
     "width": "750",
-    "height": "1334",
     "backgroundColor": "#3c3f41"
   },
   "title": {
@@ -60096,7 +60099,8 @@ exports.default = {
             issueNum: "",
             commentNum: "",
             reposName: "",
-            userName: ""
+            userName: "",
+            mainHeight: 0
         };
     },
 
@@ -60128,6 +60132,7 @@ exports.default = {
         if (this.getQuery().commentNum) {
             this.commentNum = this.getQuery().commentNum;
         }
+        this.mainHeight = _weexUi.Utils.env.getScreenHeight();
     },
     methods: {
         onTitleChange: function onTitleChange(event) {
@@ -60224,7 +60229,10 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: ["wrapper"]
+    staticClass: ["wrapper"],
+    style: {
+      height: _vm.mainHeight
+    }
   }, [_c('div', {
     staticClass: ["input-container"]
   }, [_c('text', {
