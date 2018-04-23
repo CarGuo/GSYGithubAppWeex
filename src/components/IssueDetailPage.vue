@@ -55,7 +55,7 @@
     import LoadingComponent from './widget/LoadingComponent.vue'
     const clipboard = weex.requireModule('clipboard')
     const modal = weex.requireModule('modal')
-    import {getEntryPageStyle, getListHeight, controlBarHeight, navigatorbBarHeight} from "../config/Config"
+    import {getEntryPageStyle, getListHeight, controlBarHeight, navigatorbBarHeight, statusHeight} from "../config/Config"
 
     export default {
         props: {
@@ -82,7 +82,7 @@
         },
         created: function () {
             this.init()
-            let top =  Utils.env.getScreenHeight() - 80;
+            let top =  Utils.env.getScreenHeight() - controlBarHeight - statusHeight;
             this.controlTop = Utils.env.isIPhoneX() ? top - 88 : top
             this.mainStyle = getEntryPageStyle(Utils)
             this.listHeight = getListHeight(Utils.env.getScreenHeight() - controlBarHeight - navigatorbBarHeight, Utils)
