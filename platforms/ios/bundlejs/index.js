@@ -4513,11 +4513,10 @@ var primaryDarkColor = exports.primaryDarkColor = '#121917';
 var primaryLightColor = exports.primaryLightColor = '#42464b';
 var webDraculaBackgroundColor = exports.webDraculaBackgroundColor = '#282a36';
 
-function getEntryPageStyle(pageHeight) {
-    var Utils = __webpack_require__(3);
+function getEntryPageStyle(Utils) {
     var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
     var mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : Utils.env.getPageHeight() + 'px';
-    return { height: mainHeight, width: '750px', marginTop: mainMarginTop };
+    return { height: mainHeight, width: '750px', marginTop: 0 };
 }
 
 function getContentStyle(pageHeight, tabHeight) {
@@ -46908,6 +46907,9 @@ exports.default = {
 
         // object 转 URL 参数
         createQuery: function createQuery(obj) {
+            if (obj === null || obj === "" || obj.length === 0) {
+                return "";
+            }
             var url = '?';
             for (var key in obj) {
                 if (obj[key] !== null) {
@@ -50804,6 +50806,7 @@ exports.default = {
             var index = e.page;
         },
         minibarRightButtonClick: function minibarRightButtonClick() {
+            console.log("*************************************");
             this.jumpWithParams("SearchPage", {});
         }
     }
@@ -55809,7 +55812,7 @@ exports.default = {
     },
     created: function created() {
         this.contentStyle = (0, _Config.getContentStyle)(_weexUi.Utils.env.getScreenHeight(), this.tabStyles.height);
-        this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils.env.getScreenHeight());
+        this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
         this.init();
     },
 
@@ -55844,6 +55847,7 @@ exports.default = {
             _repository2.default.getRepositoryStatusDao(this.userName, this.reposName).then(function (res) {
                 if (res && res.result) {
                     console.log("repos statu", res);
+                    console.log("repos statu!!!", res.data);
                     _this.reposStatus = res.data;
                     _this.star = res.data.star;
                     _this.watch = res.data.watch;
@@ -55864,7 +55868,7 @@ exports.default = {
                 if (res && res.data) {
                     _this2.readme = res.data;
                 }
-                if (Constant.DEBUG) {
+                if (_Config.DEBUG) {
                     console.info("repository detail readme", res);
                 }
             });
@@ -58028,6 +58032,8 @@ var _Config = __webpack_require__(1);
 
 var Config = _interopRequireWildcard(_Config);
 
+var _weexUi = __webpack_require__(3);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -58059,7 +58065,7 @@ exports.default = {
 
     created: function created() {
         this.loadData();
-        this.mainStyle = (0, _Config.getEntryPageStyle)(1334);
+        this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
     },
     methods: {
         loadData: function loadData() {
@@ -58264,24 +58270,9 @@ var _PersonPage2 = _interopRequireDefault(_PersonPage);
 
 var _Config = __webpack_require__(1);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _weexUi = __webpack_require__(3);
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
     props: {
@@ -58299,9 +58290,24 @@ exports.default = {
         }
     },
     created: function created() {
-        this.mainStyle = (0, _Config.getEntryPageStyle)(1334);
+        this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 534 */
@@ -58466,7 +58472,7 @@ module.exports = {
   "bottom-container": {
     "position": "absolute",
     "height": "80",
-    "top": "1252",
+    "top": "1222",
     "backgroundColor": "#FFFFFF",
     "flexDirection": "row",
     "width": "750",
@@ -58596,7 +58602,7 @@ exports.default = {
 
     created: function created() {
         this.init();
-        this.mainStyle = (0, _Config.getEntryPageStyle)(1334);
+        this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
         this.bottomStyle = { top: 1300 };
     },
     activated: function activated() {
@@ -59106,7 +59112,19 @@ var _user2 = _interopRequireDefault(_user);
 
 var _Config = __webpack_require__(1);
 
+var _weexUi = __webpack_require__(3);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {},
@@ -59126,7 +59144,7 @@ exports.default = {
 
     created: function created() {
         this.init();
-        this.mainStyle = (0, _Config.getEntryPageStyle)(1334);
+        this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
     },
     activated: function activated() {
         //keep alive
@@ -59275,15 +59293,7 @@ exports.default = {
             }
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 541 */
@@ -59540,7 +59550,7 @@ exports.default = {
 
     created: function created() {
         this.init();
-        this.mainStyle = (0, _Config.getEntryPageStyle)(1334);
+        this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
     },
     activated: function activated() {
         //keep alive
@@ -59734,19 +59744,9 @@ var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
 var _Config = __webpack_require__(1);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _weexUi = __webpack_require__(3);
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
     components: {
@@ -59764,9 +59764,19 @@ exports.default = {
     methods: {},
     created: function created() {
         this.url = this.getQuery().url;
-        this.mainStyle = (0, _Config.getEntryPageStyle)(1334);
+        this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 548 */
@@ -60415,7 +60425,7 @@ exports.default = {
     },
 
     created: function created() {
-        var mainStyle = (0, _Config.getEntryPageStyle)(1334);
+        var mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
         mainStyle.marginTop = 0;
         this.mainStyle = mainStyle;
     },

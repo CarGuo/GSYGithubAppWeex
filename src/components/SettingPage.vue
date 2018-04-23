@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import { WxcCell, WxcButton } from 'weex-ui';
+    import { WxcCell, WxcButton, Utils} from 'weex-ui';
     import NavigationBar from './widget/NavigationBar.vue';
     import {getEntryPageStyle} from "../config/Config"
     import user from "../core/net/user"
@@ -31,7 +31,7 @@
             }
         },
         created: function () {
-            let mainStyle = getEntryPageStyle(1334)
+            let mainStyle = getEntryPageStyle(Utils)
             mainStyle.marginTop = 0
             this.mainStyle = mainStyle
         },

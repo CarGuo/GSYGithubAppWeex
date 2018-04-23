@@ -51,7 +51,7 @@
     import RLList from './widget/RLList.vue'
     import NavigationBar from './widget/NavigationBar.vue'
     import repository from '../core/net/repository'
-    import {WxcMask} from 'weex-ui'
+    import {WxcMask, Utils} from 'weex-ui'
     import LoadingComponent from './widget/LoadingComponent.vue'
     const clipboard = weex.requireModule('clipboard')
     const modal = weex.requireModule('modal')
@@ -82,7 +82,7 @@
         },
         created: function () {
             this.init()
-            this.mainStyle = getEntryPageStyle(1334)
+            this.mainStyle = getEntryPageStyle(Utils)
             this.bottomStyle = {top: 1300}
         },
         activated: function () {
@@ -348,7 +348,7 @@
     .bottom-container {
         position:absolute;
         height: 80px;
-        top: 1252px;
+        top: 1222px;
         background-color: white;
         flex-direction: row;
         width: 750px;

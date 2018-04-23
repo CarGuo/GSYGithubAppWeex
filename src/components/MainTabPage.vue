@@ -62,6 +62,7 @@
                 const index = e.page;
             },
             minibarRightButtonClick() {
+                console.log("*************************************")
                 this.jumpWithParams("SearchPage",{})
             },
         }

@@ -13,6 +13,7 @@
     import repository from '../core/net/repository'
     import user from '../core/net/user'
     import  {getEntryPageStyle} from "../config/Config"
+    import  {Utils} from "weex-ui"
 
     export default {
         props: {
@@ -32,7 +33,7 @@
         },
         created: function () {
             this.init()
-            this.mainStyle = getEntryPageStyle(1334)
+            this.mainStyle = getEntryPageStyle(Utils)
         },
         activated: function () {
             //keep alive

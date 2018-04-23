@@ -20,11 +20,10 @@ export const primaryDarkColor = '#121917';
 export const primaryLightColor = '#42464b';
 export const webDraculaBackgroundColor = '#282a36';
 
-export function getEntryPageStyle(pageHeight) {
-    let Utils = require('weex-ui')
+export function getEntryPageStyle(Utils) {
     let mainMarginTop = (WXEnvironment.platform.toLowerCase() === 'ios') ? '32px' : '0px'
     let mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : ((Utils.env.getPageHeight())+ 'px');
-    return {height: mainHeight, width: '750px', marginTop: mainMarginTop}
+    return {height: mainHeight, width: '750px', marginTop: 0}
 }
 
 export function getContentStyle(pageHeight, tabHeight) {
