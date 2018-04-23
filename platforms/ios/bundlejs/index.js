@@ -4491,6 +4491,7 @@ exports.getEntryPageStyle = getEntryPageStyle;
 exports.getContentStyle = getContentStyle;
 exports.getListBottomEmpty = getListBottomEmpty;
 exports.getListHeight = getListHeight;
+exports.getRealScreenHeight = getRealScreenHeight;
 var PAGE_SIZE = exports.PAGE_SIZE = 30;
 
 var DEBUG = exports.DEBUG = true;
@@ -4514,9 +4515,8 @@ var primaryLightColor = exports.primaryLightColor = '#42464b';
 var webDraculaBackgroundColor = exports.webDraculaBackgroundColor = '#282a36';
 
 function getEntryPageStyle(Utils) {
-    var mainMarginTop = WXEnvironment.platform.toLowerCase() === 'ios' ? '32px' : '0px';
-    var mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : Utils.env.getPageHeight() + 'px';
-    return { height: mainHeight, width: '750px', marginTop: 0 };
+    var mainHeight = getRealScreenHeight(Utils);
+    return { height: mainHeight, width: '750px' };
 }
 
 function getContentStyle(pageHeight, tabHeight) {
@@ -4534,6 +4534,13 @@ function getListHeight() {
         return height;
     }
     return height - 32;
+}
+
+function getRealScreenHeight(Utils) {
+    if (WXEnvironment.platform === 'Web') {
+        return Utils.env.getScreenHeight();
+    }
+    return Utils.env.getScreenHeight() - 32;
 }
 
 /***/ }),
@@ -50747,9 +50754,11 @@ var _PersonPage2 = _interopRequireDefault(_PersonPage);
 
 var _IconConfig = __webpack_require__(7);
 
+var _Config = __webpack_require__(1);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var dom = weex.requireModule('dom'); //
+//
 //
 //
 //
@@ -50781,6 +50790,7 @@ var dom = weex.requireModule('dom'); //
 //
 //
 
+var dom = weex.requireModule('dom');
 var modal = weex.requireModule('modal');
 
 exports.default = {
@@ -50789,15 +50799,13 @@ exports.default = {
         return {
             tabTitles: _MainTabConfig2.default.tabIconFontTitles,
             tabStyles: _MainTabConfig2.default.tabIconFontStyles,
-            mainHeight: _weexUi.Utils.env.getScreenHeight() - 32
+            mainHeight: 0
         };
     },
     created: function created() {
         var tabPageHeight = _weexUi.Utils.env.getPageHeight();
-        var tabStyles = this.tabStyles;
-
-        this.contentStyle = { height: tabPageHeight - tabStyles.height + 'px' };
-        this.mainHeight = WXEnvironment.platform === 'Web' ? '1334px' : _weexUi.Utils.env.getScreenHeight();
+        this.contentStyle = { height: tabPageHeight };
+        this.mainHeight = (0, _Config.getRealScreenHeight)(_weexUi.Utils);
         (0, _IconConfig.addIconFontSupport)(dom, "../../");
     },
 
@@ -50806,7 +50814,6 @@ exports.default = {
             var index = e.page;
         },
         minibarRightButtonClick: function minibarRightButtonClick() {
-            console.log("*************************************");
             this.jumpWithParams("SearchPage", {});
         }
     }
@@ -51599,6 +51606,8 @@ module.exports = {}
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _weexUi = __webpack_require__(3);
 
 var _eventUtils = __webpack_require__(11);
 
@@ -60627,7 +60636,6 @@ module.exports = __vue_exports__
 
 module.exports = {
   "wrapper": {
-    "height": "1158",
     "width": "750",
     "justifyContent": "center",
     "alignItems": "center"
@@ -60647,27 +60655,31 @@ Object.defineProperty(exports, "__esModule", {
 
 var _weexUi = __webpack_require__(3);
 
+var _Config = __webpack_require__(1);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 exports.default = {
     name: 'App',
     data: function data() {
         return {
-            realHeight: _weexUi.Utils.getPageHeight()
+            realHeight: (0, _Config.getRealScreenHeight)(_weexUi.Utils)
         };
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 561 */

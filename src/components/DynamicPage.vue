@@ -6,6 +6,7 @@
 <script>
     const modal = weex.requireModule('modal')
 
+    import {Utils} from 'weex-ui';
     import {ActionUtils} from '../core/common/eventUtils'
     import RLList from './widget/RLList.vue'
     import {getListHeight, mainTabBarHeight, navigatorbBarHeight} from '../config/Config'
