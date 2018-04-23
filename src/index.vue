@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wrapper" :style="{height: realHeight}">
         <keep-alive>
           <router-view v-if="$route.meta.keepAlive" @androidback="function() {$router.back()}">
             <!-- 这里是会被缓存的视图组件，比如 page1,page2 -->
@@ -13,11 +13,12 @@
 </template>
 
 <script>
+    import {Utils} from 'weex-ui';
     export default {
         name: 'App',
         data() {
             return {
-                logo: 'https://gw.alicdn.com/tfs/TB1yopEdgoQMeJjy1XaXXcSsFXa-640-302.png'
+                realHeight: Utils.getPageHeight()
             }
         },
     }
@@ -25,6 +26,8 @@
 
 <style scoped>
     .wrapper {
+        height: 1158px;
+        width: 750px;
         justify-content: center;
         align-items: center;
     }

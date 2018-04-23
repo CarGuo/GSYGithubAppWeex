@@ -54,7 +54,7 @@
             const tabPageHeight = Utils.env.getPageHeight();
             const {tabStyles} = this;
             this.contentStyle = {height: (tabPageHeight - tabStyles.height) + 'px'};
-            this.mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : Utils.env.getScreenHeight() - 32
+            this.mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : Utils.env.getScreenHeight()
             addIconFontSupport(dom, "../../")
         },
         methods: {

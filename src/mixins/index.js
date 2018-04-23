@@ -24,7 +24,7 @@ export default {
             }
         },
         getBaseUrl() {
-            let bundleUrl = this.$getConfig().bundleUrl;
+            let bundleUrl = weex.config.bundleUrl;
             bundleUrl = String(bundleUrl);
             let nativeBase;
             let isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
