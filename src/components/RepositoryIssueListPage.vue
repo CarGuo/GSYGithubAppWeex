@@ -32,7 +32,7 @@
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {getListBottomEmpty, getListHeight, navigatorbBarHeight} from '../config/Config'
-    import {WxcSearchbar} from 'weex-ui';
+    import {WxcSearchbar, Utils} from 'weex-ui';
 
 
     export default {
@@ -49,7 +49,7 @@
                 dataState: 1,
                 selectIndex: 1,
                 searchValue: "",
-                listHeight: getListHeight(1300 - navigatorbBarHeight - 300),
+                listHeight: getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - 300, Utils),
             }
         },
         created: function () {

@@ -17,10 +17,11 @@
         data() {
             return {
                 currentPage: 1,
-                listHeight: getListHeight(1334 - navigatorbBarHeight - mainTabBarHeight),
+                listHeight: 0,
             }
         },
         created: function () {
+            this.listHeight = getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - mainTabBarHeight, Utils),
             this.onRefresh();
         },
         activated: function () {

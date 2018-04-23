@@ -4537,9 +4537,13 @@ function getListBottomEmpty() {
 
 function getListHeight() {
     var height = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1234;
+    var Utils = arguments[1];
 
     if (WXEnvironment.platform === 'Web') {
         return height;
+    }
+    if (Utils.env.isIPhoneX()) {
+        return height - statusHeight - 44;
     }
     return height - statusHeight;
 }
@@ -4553,6 +4557,209 @@ function getRealScreenHeight(Utils) {
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.WxcTag = exports.WxcTabBar = exports.WxcTabPage = exports.WxcStepper = exports.WxcSliderBar = exports.WxcSlideNav = exports.WxcSimpleFlow = exports.WxcSearchbar = exports.WxcSpecialRichText = exports.WxcRichText = exports.WxcResult = exports.WxcRadio = exports.WxcProgress = exports.WxcPopup = exports.WxcPopover = exports.WxcPageCalendar = exports.WxcOverlay = exports.WxcNoticebar = exports.WxcLotteryRain = exports.WxcMinibar = exports.WxcMask = exports.WxcPartLoading = exports.WxcLoading = exports.WxcLightbox = exports.WxcIndexlist = exports.WxcIcon = exports.WxcGridSelect = exports.WxcPanItem = exports.WxcEpSlider = exports.WxcDialog = exports.WxcCountdown = exports.WxcCheckboxList = exports.WxcCheckbox = exports.WxcCity = exports.WxcCell = exports.WxcButton = exports.Utils = undefined;
+
+var _utils = __webpack_require__(3);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _wxcButton = __webpack_require__(181);
+
+var _wxcButton2 = _interopRequireDefault(_wxcButton);
+
+var _wxcCell = __webpack_require__(18);
+
+var _wxcCell2 = _interopRequireDefault(_wxcCell);
+
+var _wxcCity = __webpack_require__(191);
+
+var _wxcCity2 = _interopRequireDefault(_wxcCity);
+
+var _wxcCheckbox = __webpack_require__(217);
+
+var _wxcCheckbox2 = _interopRequireDefault(_wxcCheckbox);
+
+var _wxcCheckboxList = __webpack_require__(222);
+
+var _wxcCheckboxList2 = _interopRequireDefault(_wxcCheckboxList);
+
+var _wxcCountdown = __webpack_require__(226);
+
+var _wxcCountdown2 = _interopRequireDefault(_wxcCountdown);
+
+var _wxcDialog = __webpack_require__(231);
+
+var _wxcDialog2 = _interopRequireDefault(_wxcDialog);
+
+var _wxcEpSlider = __webpack_require__(241);
+
+var _wxcEpSlider2 = _interopRequireDefault(_wxcEpSlider);
+
+var _wxcPanItem = __webpack_require__(246);
+
+var _wxcPanItem2 = _interopRequireDefault(_wxcPanItem);
+
+var _wxcGridSelect = __webpack_require__(250);
+
+var _wxcGridSelect2 = _interopRequireDefault(_wxcGridSelect);
+
+var _wxcIcon = __webpack_require__(259);
+
+var _wxcIcon2 = _interopRequireDefault(_wxcIcon);
+
+var _wxcIndexlist = __webpack_require__(28);
+
+var _wxcIndexlist2 = _interopRequireDefault(_wxcIndexlist);
+
+var _wxcLightbox = __webpack_require__(265);
+
+var _wxcLightbox2 = _interopRequireDefault(_wxcLightbox);
+
+var _wxcLoading = __webpack_require__(274);
+
+var _wxcLoading2 = _interopRequireDefault(_wxcLoading);
+
+var _wxcPartLoading = __webpack_require__(279);
+
+var _wxcPartLoading2 = _interopRequireDefault(_wxcPartLoading);
+
+var _wxcMask = __webpack_require__(30);
+
+var _wxcMask2 = _interopRequireDefault(_wxcMask);
+
+var _wxcMinibar = __webpack_require__(32);
+
+var _wxcMinibar2 = _interopRequireDefault(_wxcMinibar);
+
+var _wxcLotteryRain = __webpack_require__(287);
+
+var _wxcLotteryRain2 = _interopRequireDefault(_wxcLotteryRain);
+
+var _wxcNoticebar = __webpack_require__(299);
+
+var _wxcNoticebar2 = _interopRequireDefault(_wxcNoticebar);
+
+var _wxcOverlay = __webpack_require__(13);
+
+var _wxcOverlay2 = _interopRequireDefault(_wxcOverlay);
+
+var _wxcPageCalendar = __webpack_require__(305);
+
+var _wxcPageCalendar2 = _interopRequireDefault(_wxcPageCalendar);
+
+var _wxcPopover = __webpack_require__(311);
+
+var _wxcPopover2 = _interopRequireDefault(_wxcPopover);
+
+var _wxcPopup = __webpack_require__(316);
+
+var _wxcPopup2 = _interopRequireDefault(_wxcPopup);
+
+var _wxcProgress = __webpack_require__(321);
+
+var _wxcProgress2 = _interopRequireDefault(_wxcProgress);
+
+var _wxcRadio = __webpack_require__(326);
+
+var _wxcRadio2 = _interopRequireDefault(_wxcRadio);
+
+var _wxcResult = __webpack_require__(27);
+
+var _wxcResult2 = _interopRequireDefault(_wxcResult);
+
+var _wxcRichText = __webpack_require__(336);
+
+var _wxcRichText2 = _interopRequireDefault(_wxcRichText);
+
+var _wxcSpecialRichText = __webpack_require__(354);
+
+var _wxcSpecialRichText2 = _interopRequireDefault(_wxcSpecialRichText);
+
+var _wxcSearchbar = __webpack_require__(26);
+
+var _wxcSearchbar2 = _interopRequireDefault(_wxcSearchbar);
+
+var _wxcSimpleFlow = __webpack_require__(359);
+
+var _wxcSimpleFlow2 = _interopRequireDefault(_wxcSimpleFlow);
+
+var _wxcSlideNav = __webpack_require__(364);
+
+var _wxcSlideNav2 = _interopRequireDefault(_wxcSlideNav);
+
+var _wxcSliderBar = __webpack_require__(369);
+
+var _wxcSliderBar2 = _interopRequireDefault(_wxcSliderBar);
+
+var _wxcStepper = __webpack_require__(374);
+
+var _wxcStepper2 = _interopRequireDefault(_wxcStepper);
+
+var _wxcTabPage = __webpack_require__(379);
+
+var _wxcTabPage2 = _interopRequireDefault(_wxcTabPage);
+
+var _wxcTabBar = __webpack_require__(384);
+
+var _wxcTabBar2 = _interopRequireDefault(_wxcTabBar);
+
+var _wxcTag = __webpack_require__(389);
+
+var _wxcTag2 = _interopRequireDefault(_wxcTag);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.Utils = _utils2.default;
+exports.WxcButton = _wxcButton2.default;
+exports.WxcCell = _wxcCell2.default;
+exports.WxcCity = _wxcCity2.default;
+exports.WxcCheckbox = _wxcCheckbox2.default;
+exports.WxcCheckboxList = _wxcCheckboxList2.default;
+exports.WxcCountdown = _wxcCountdown2.default;
+exports.WxcDialog = _wxcDialog2.default;
+exports.WxcEpSlider = _wxcEpSlider2.default;
+exports.WxcPanItem = _wxcPanItem2.default;
+exports.WxcGridSelect = _wxcGridSelect2.default;
+exports.WxcIcon = _wxcIcon2.default;
+exports.WxcIndexlist = _wxcIndexlist2.default;
+exports.WxcLightbox = _wxcLightbox2.default;
+exports.WxcLoading = _wxcLoading2.default;
+exports.WxcPartLoading = _wxcPartLoading2.default;
+exports.WxcMask = _wxcMask2.default;
+exports.WxcMinibar = _wxcMinibar2.default;
+exports.WxcLotteryRain = _wxcLotteryRain2.default;
+exports.WxcNoticebar = _wxcNoticebar2.default;
+exports.WxcOverlay = _wxcOverlay2.default;
+exports.WxcPageCalendar = _wxcPageCalendar2.default;
+exports.WxcPopover = _wxcPopover2.default;
+exports.WxcPopup = _wxcPopup2.default;
+exports.WxcProgress = _wxcProgress2.default;
+exports.WxcRadio = _wxcRadio2.default;
+exports.WxcResult = _wxcResult2.default;
+exports.WxcRichText = _wxcRichText2.default;
+exports.WxcSpecialRichText = _wxcSpecialRichText2.default;
+exports.WxcSearchbar = _wxcSearchbar2.default;
+exports.WxcSimpleFlow = _wxcSimpleFlow2.default;
+exports.WxcSlideNav = _wxcSlideNav2.default;
+exports.WxcSliderBar = _wxcSliderBar2.default;
+exports.WxcStepper = _wxcStepper2.default;
+exports.WxcTabPage = _wxcTabPage2.default;
+exports.WxcTabBar = _wxcTabBar2.default;
+exports.WxcTag = _wxcTag2.default; /**
+                                    * CopyRight (C) 2017-2022 Alibaba Group Holding Limited.
+                                    * Created by Tw93 on 17/09/25
+                                    */
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4891,209 +5098,6 @@ var Utils = {
 };
 
 exports.default = Utils;
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.WxcTag = exports.WxcTabBar = exports.WxcTabPage = exports.WxcStepper = exports.WxcSliderBar = exports.WxcSlideNav = exports.WxcSimpleFlow = exports.WxcSearchbar = exports.WxcSpecialRichText = exports.WxcRichText = exports.WxcResult = exports.WxcRadio = exports.WxcProgress = exports.WxcPopup = exports.WxcPopover = exports.WxcPageCalendar = exports.WxcOverlay = exports.WxcNoticebar = exports.WxcLotteryRain = exports.WxcMinibar = exports.WxcMask = exports.WxcPartLoading = exports.WxcLoading = exports.WxcLightbox = exports.WxcIndexlist = exports.WxcIcon = exports.WxcGridSelect = exports.WxcPanItem = exports.WxcEpSlider = exports.WxcDialog = exports.WxcCountdown = exports.WxcCheckboxList = exports.WxcCheckbox = exports.WxcCity = exports.WxcCell = exports.WxcButton = exports.Utils = undefined;
-
-var _utils = __webpack_require__(2);
-
-var _utils2 = _interopRequireDefault(_utils);
-
-var _wxcButton = __webpack_require__(181);
-
-var _wxcButton2 = _interopRequireDefault(_wxcButton);
-
-var _wxcCell = __webpack_require__(18);
-
-var _wxcCell2 = _interopRequireDefault(_wxcCell);
-
-var _wxcCity = __webpack_require__(191);
-
-var _wxcCity2 = _interopRequireDefault(_wxcCity);
-
-var _wxcCheckbox = __webpack_require__(217);
-
-var _wxcCheckbox2 = _interopRequireDefault(_wxcCheckbox);
-
-var _wxcCheckboxList = __webpack_require__(222);
-
-var _wxcCheckboxList2 = _interopRequireDefault(_wxcCheckboxList);
-
-var _wxcCountdown = __webpack_require__(226);
-
-var _wxcCountdown2 = _interopRequireDefault(_wxcCountdown);
-
-var _wxcDialog = __webpack_require__(231);
-
-var _wxcDialog2 = _interopRequireDefault(_wxcDialog);
-
-var _wxcEpSlider = __webpack_require__(241);
-
-var _wxcEpSlider2 = _interopRequireDefault(_wxcEpSlider);
-
-var _wxcPanItem = __webpack_require__(246);
-
-var _wxcPanItem2 = _interopRequireDefault(_wxcPanItem);
-
-var _wxcGridSelect = __webpack_require__(250);
-
-var _wxcGridSelect2 = _interopRequireDefault(_wxcGridSelect);
-
-var _wxcIcon = __webpack_require__(259);
-
-var _wxcIcon2 = _interopRequireDefault(_wxcIcon);
-
-var _wxcIndexlist = __webpack_require__(28);
-
-var _wxcIndexlist2 = _interopRequireDefault(_wxcIndexlist);
-
-var _wxcLightbox = __webpack_require__(265);
-
-var _wxcLightbox2 = _interopRequireDefault(_wxcLightbox);
-
-var _wxcLoading = __webpack_require__(274);
-
-var _wxcLoading2 = _interopRequireDefault(_wxcLoading);
-
-var _wxcPartLoading = __webpack_require__(279);
-
-var _wxcPartLoading2 = _interopRequireDefault(_wxcPartLoading);
-
-var _wxcMask = __webpack_require__(30);
-
-var _wxcMask2 = _interopRequireDefault(_wxcMask);
-
-var _wxcMinibar = __webpack_require__(32);
-
-var _wxcMinibar2 = _interopRequireDefault(_wxcMinibar);
-
-var _wxcLotteryRain = __webpack_require__(287);
-
-var _wxcLotteryRain2 = _interopRequireDefault(_wxcLotteryRain);
-
-var _wxcNoticebar = __webpack_require__(299);
-
-var _wxcNoticebar2 = _interopRequireDefault(_wxcNoticebar);
-
-var _wxcOverlay = __webpack_require__(13);
-
-var _wxcOverlay2 = _interopRequireDefault(_wxcOverlay);
-
-var _wxcPageCalendar = __webpack_require__(305);
-
-var _wxcPageCalendar2 = _interopRequireDefault(_wxcPageCalendar);
-
-var _wxcPopover = __webpack_require__(311);
-
-var _wxcPopover2 = _interopRequireDefault(_wxcPopover);
-
-var _wxcPopup = __webpack_require__(316);
-
-var _wxcPopup2 = _interopRequireDefault(_wxcPopup);
-
-var _wxcProgress = __webpack_require__(321);
-
-var _wxcProgress2 = _interopRequireDefault(_wxcProgress);
-
-var _wxcRadio = __webpack_require__(326);
-
-var _wxcRadio2 = _interopRequireDefault(_wxcRadio);
-
-var _wxcResult = __webpack_require__(27);
-
-var _wxcResult2 = _interopRequireDefault(_wxcResult);
-
-var _wxcRichText = __webpack_require__(336);
-
-var _wxcRichText2 = _interopRequireDefault(_wxcRichText);
-
-var _wxcSpecialRichText = __webpack_require__(354);
-
-var _wxcSpecialRichText2 = _interopRequireDefault(_wxcSpecialRichText);
-
-var _wxcSearchbar = __webpack_require__(26);
-
-var _wxcSearchbar2 = _interopRequireDefault(_wxcSearchbar);
-
-var _wxcSimpleFlow = __webpack_require__(359);
-
-var _wxcSimpleFlow2 = _interopRequireDefault(_wxcSimpleFlow);
-
-var _wxcSlideNav = __webpack_require__(364);
-
-var _wxcSlideNav2 = _interopRequireDefault(_wxcSlideNav);
-
-var _wxcSliderBar = __webpack_require__(369);
-
-var _wxcSliderBar2 = _interopRequireDefault(_wxcSliderBar);
-
-var _wxcStepper = __webpack_require__(374);
-
-var _wxcStepper2 = _interopRequireDefault(_wxcStepper);
-
-var _wxcTabPage = __webpack_require__(379);
-
-var _wxcTabPage2 = _interopRequireDefault(_wxcTabPage);
-
-var _wxcTabBar = __webpack_require__(384);
-
-var _wxcTabBar2 = _interopRequireDefault(_wxcTabBar);
-
-var _wxcTag = __webpack_require__(389);
-
-var _wxcTag2 = _interopRequireDefault(_wxcTag);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.Utils = _utils2.default;
-exports.WxcButton = _wxcButton2.default;
-exports.WxcCell = _wxcCell2.default;
-exports.WxcCity = _wxcCity2.default;
-exports.WxcCheckbox = _wxcCheckbox2.default;
-exports.WxcCheckboxList = _wxcCheckboxList2.default;
-exports.WxcCountdown = _wxcCountdown2.default;
-exports.WxcDialog = _wxcDialog2.default;
-exports.WxcEpSlider = _wxcEpSlider2.default;
-exports.WxcPanItem = _wxcPanItem2.default;
-exports.WxcGridSelect = _wxcGridSelect2.default;
-exports.WxcIcon = _wxcIcon2.default;
-exports.WxcIndexlist = _wxcIndexlist2.default;
-exports.WxcLightbox = _wxcLightbox2.default;
-exports.WxcLoading = _wxcLoading2.default;
-exports.WxcPartLoading = _wxcPartLoading2.default;
-exports.WxcMask = _wxcMask2.default;
-exports.WxcMinibar = _wxcMinibar2.default;
-exports.WxcLotteryRain = _wxcLotteryRain2.default;
-exports.WxcNoticebar = _wxcNoticebar2.default;
-exports.WxcOverlay = _wxcOverlay2.default;
-exports.WxcPageCalendar = _wxcPageCalendar2.default;
-exports.WxcPopover = _wxcPopover2.default;
-exports.WxcPopup = _wxcPopup2.default;
-exports.WxcProgress = _wxcProgress2.default;
-exports.WxcRadio = _wxcRadio2.default;
-exports.WxcResult = _wxcResult2.default;
-exports.WxcRichText = _wxcRichText2.default;
-exports.WxcSpecialRichText = _wxcSpecialRichText2.default;
-exports.WxcSearchbar = _wxcSearchbar2.default;
-exports.WxcSimpleFlow = _wxcSimpleFlow2.default;
-exports.WxcSlideNav = _wxcSlideNav2.default;
-exports.WxcSliderBar = _wxcSliderBar2.default;
-exports.WxcStepper = _wxcStepper2.default;
-exports.WxcTabPage = _wxcTabPage2.default;
-exports.WxcTabBar = _wxcTabBar2.default;
-exports.WxcTag = _wxcTag2.default; /**
-                                    * CopyRight (C) 2017-2022 Alibaba Group Holding Limited.
-                                    * Created by Tw93 on 17/09/25
-                                    */
 
 /***/ }),
 /* 4 */
@@ -29134,7 +29138,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -29460,7 +29464,7 @@ var _util = __webpack_require__(196);
 
 var Util = _interopRequireWildcard(_util);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -29691,7 +29695,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getCities = getCities;
 exports.query = query;
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -30679,7 +30683,7 @@ var _type = __webpack_require__(209);
 
 var _type2 = _interopRequireDefault(_type);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -31087,7 +31091,7 @@ var _format = __webpack_require__(214);
 
 var Format = _interopRequireWildcard(_format);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -31336,7 +31340,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.totalList = totalList;
 exports.getSpecialData = getSpecialData;
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -33058,7 +33062,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -33608,7 +33612,7 @@ var _weexBindingx = __webpack_require__(9);
 
 var _weexBindingx2 = _interopRequireDefault(_weexBindingx);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -35175,7 +35179,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _type = __webpack_require__(31);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -36179,7 +36183,7 @@ exports.showPig = showPig;
 exports.hidePig = hidePig;
 exports.shakePig = shakePig;
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -36290,7 +36294,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -36536,7 +36540,7 @@ var _type = __webpack_require__(303);
 
 var _type2 = _interopRequireDefault(_type);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -36971,7 +36975,7 @@ var _format = __webpack_require__(309);
 
 var Format = _interopRequireWildcard(_format);
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -39022,7 +39026,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -39290,7 +39294,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -40002,7 +40006,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -41068,7 +41072,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -42136,7 +42140,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -42709,7 +42713,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _utils = __webpack_require__(2);
+var _utils = __webpack_require__(3);
 
 var _utils2 = _interopRequireDefault(_utils);
 
@@ -49845,7 +49849,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 var _buffer = __webpack_require__(34);
 
@@ -50059,7 +50063,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 //
 //
@@ -50734,7 +50738,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 var _MainTabConfig = __webpack_require__(434);
 
@@ -50998,7 +51002,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 //
 //
@@ -51463,7 +51467,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 var _Config = __webpack_require__(1);
 
@@ -51615,7 +51619,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 var _eventUtils = __webpack_require__(11);
 
@@ -51640,12 +51644,12 @@ exports.default = {
     data: function data() {
         return {
             currentPage: 1,
-            listHeight: (0, _Config.getListHeight)(1334 - _Config.navigatorbBarHeight - _Config.mainTabBarHeight)
+            listHeight: 0
         };
     },
 
     created: function created() {
-        this.onRefresh();
+        this.listHeight = (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.navigatorbBarHeight - _Config.mainTabBarHeight, _weexUi.Utils), this.onRefresh();
     },
     activated: function activated() {
         //keep alive
@@ -54972,7 +54976,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 var _filterUtils = __webpack_require__(494);
 
@@ -55038,7 +55042,7 @@ exports.default = {
             language: '全部',
             since: null,
             languageType: null,
-            listHeight: (0, _Config.getListHeight)(1334 - _Config.navigatorbBarHeight - _Config.mainTabBarHeight),
+            listHeight: (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - -_Config.navigatorbBarHeight - _Config.mainTabBarHeight, _weexUi.Utils),
             primaryColor: Config.primaryColor,
             btns1: _filterUtils.TrendTime,
             btns2: _filterUtils.TrendType,
@@ -55285,6 +55289,8 @@ var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
+var _weexUi = __webpack_require__(2);
+
 var _timeUtils = __webpack_require__(23);
 
 var _timeUtils2 = _interopRequireDefault(_timeUtils);
@@ -55329,7 +55335,7 @@ exports.default = {
         isMe: { type: Boolean, default: true },
         userName: { type: String, default: '' },
         jumpSetting: { type: Boolean, default: true },
-        listHeight: (0, _Config.getListHeight)(1300 - _Config.navigatorbBarHeight - _Config.mainTabBarHeight)
+        listHeight: (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.navigatorbBarHeight - _Config.mainTabBarHeight, _weexUi.Utils)
     },
     components: { RLList: _RLList2.default, NavigationBar: _NavigationBar2.default },
     data: function data() {
@@ -55699,7 +55705,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 var _RepositoryTabConfig = __webpack_require__(503);
 
@@ -56132,7 +56138,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 //
 //
@@ -56930,11 +56936,23 @@ var _repository = __webpack_require__(4);
 
 var _repository2 = _interopRequireDefault(_repository);
 
+var _weexUi = __webpack_require__(2);
+
 var _eventUtils = __webpack_require__(11);
 
 var _Config = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     props: {},
@@ -56947,7 +56965,7 @@ exports.default = {
             listType: 1,
             eventList: [],
             reposInfo: {},
-            listHeight: (0, _Config.getListHeight)(1300 - _Config.navigatorbBarHeight - 120)
+            listHeight: (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.navigatorbBarHeight - 120, _weexUi.Utils)
         };
     },
 
@@ -57061,15 +57079,7 @@ exports.default = {
             return !this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1;
         }
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 518 */
@@ -57319,7 +57329,7 @@ var _repository2 = _interopRequireDefault(_repository);
 
 var _Config = __webpack_require__(1);
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57337,7 +57347,7 @@ exports.default = {
             dataState: 1,
             selectIndex: 1,
             searchValue: "",
-            listHeight: (0, _Config.getListHeight)(1300 - _Config.navigatorbBarHeight - 300)
+            listHeight: (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.navigatorbBarHeight - 300, _weexUi.Utils)
         };
     },
 
@@ -57669,6 +57679,8 @@ var _RLList = __webpack_require__(6);
 
 var _RLList2 = _interopRequireDefault(_RLList);
 
+var _weexUi = __webpack_require__(2);
+
 var _event = __webpack_require__(8);
 
 var _event2 = _interopRequireDefault(_event);
@@ -57687,29 +57699,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 exports.default = {
     props: {
         curBranch: { type: String, default: "master" }
@@ -57724,7 +57713,7 @@ exports.default = {
             path: "",
             loading: false,
             primaryColor: Config.primaryColor,
-            listHeight: (0, _Config.getListHeight)(1334 - _Config.navigatorbBarHeight - 150)
+            listHeight: (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.navigatorbBarHeight - 150, _weexUi.Utils)
         };
     },
 
@@ -57833,7 +57822,28 @@ exports.default = {
             return !this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1;
         }
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 526 */
@@ -58051,7 +58061,7 @@ var _Config = __webpack_require__(1);
 
 var Config = _interopRequireWildcard(_Config);
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -58289,7 +58299,7 @@ var _PersonPage2 = _interopRequireDefault(_PersonPage);
 
 var _Config = __webpack_require__(1);
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58535,7 +58545,7 @@ var _repository = __webpack_require__(4);
 
 var _repository2 = _interopRequireDefault(_repository);
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 var _LoadingComponent = __webpack_require__(16);
 
@@ -58621,7 +58631,7 @@ exports.default = {
     created: function created() {
         this.init();
         this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
-        this.listHeight = (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.controlBarHeight - _Config.navigatorbBarHeight);
+        this.listHeight = (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.controlBarHeight - _Config.navigatorbBarHeight, _weexUi.Utils);
     },
     activated: function activated() {
         //keep alive
@@ -59129,7 +59139,7 @@ var _user2 = _interopRequireDefault(_user);
 
 var _Config = __webpack_require__(1);
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59511,7 +59521,7 @@ var _repository = __webpack_require__(4);
 
 var _repository2 = _interopRequireDefault(_repository);
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 var _Config = __webpack_require__(1);
 
@@ -59561,7 +59571,7 @@ exports.default = {
             selectSortData: null,
             selectLanguageData: null,
             mainStyle: {},
-            listHeight: (0, _Config.getListHeight)(1300 - _Config.navigatorbBarHeight - 150)
+            listHeight: (0, _Config.getListHeight)(_weexUi.Utils.env.getScreenHeight() - _Config.navigatorbBarHeight - 150, _weexUi.Utils)
         };
     },
 
@@ -59761,7 +59771,7 @@ var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
 
 var _Config = __webpack_require__(1);
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -60003,7 +60013,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 var _repository = __webpack_require__(4);
 
@@ -60398,7 +60408,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _weexUi = __webpack_require__(3);
+var _weexUi = __webpack_require__(2);
 
 var _NavigationBar = __webpack_require__(5);
 
