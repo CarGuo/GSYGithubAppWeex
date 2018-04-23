@@ -49959,6 +49959,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
 
 var modal = weex.requireModule('modal');
 var dom = weex.requireModule('dom');
@@ -49972,13 +49976,15 @@ exports.default = {
             password: "",
             isLoading: false,
             loadingText: "处理中···",
-            primaryColor: Config.primaryColor
+            primaryColor: Config.primaryColor,
+            mainHeight: 0
         };
     },
 
     created: function created() {
         this.logo = (0, _IconConfig.getImagePath)('logo', '.png');
         (0, _IconConfig.addIconFontSupport)(dom, "../../");
+        this.mainHeight = _weexUi.Utils.env.getScreenHeight();
     },
     methods: {
         onUserNameChange: function onUserNameChange(event) {
@@ -50349,7 +50355,10 @@ module.exports.render._withStripped = true
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: ["wrapper"]
+    staticClass: ["wrapper"],
+    style: {
+      height: _vm.mainHeight
+    }
   }, [_c('div', {
     staticClass: ["input-container"]
   }, [_c('image', {
@@ -50504,11 +50513,36 @@ Object.defineProperty(exports, "__esModule", {
 
 var _IconConfig = __webpack_require__(7);
 
+var _weexUi = __webpack_require__(2);
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 exports.default = {
     components: {},
     data: function data() {
         return {
-            imagePath: ''
+            imagePath: '',
+            mainHeight: 0
         };
     },
 
@@ -50517,6 +50551,7 @@ exports.default = {
         var _this = this;
 
         this.imagePath = (0, _IconConfig.getImagePath)('welcome', '.png');
+        this.mainHeight = _weexUi.Utils.env.getScreenHeight();
         setTimeout(function () {
             _this.$store.dispatch('initUserInfo', function (res) {
                 if (res && res.result) {
@@ -50527,26 +50562,7 @@ exports.default = {
             });
         }, 2000);
     }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 429 */
@@ -50554,7 +50570,10 @@ exports.default = {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: ["wrapper"]
+    staticClass: ["wrapper"],
+    style: {
+      height: _vm.mainHeight
+    }
   }, [_c('image', {
     staticClass: ["logo"],
     attrs: {
