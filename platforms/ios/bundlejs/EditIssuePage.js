@@ -55327,7 +55327,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 
 var modal = weex.requireModule('modal');
-
 exports.default = {
     props: {
         needTitle: { type: Boolean, default: false },
@@ -59112,215 +59111,9 @@ module.exports = {}
 
 /***/ }),
 /* 540 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _RLList = __webpack_require__(6);
-
-var _RLList2 = _interopRequireDefault(_RLList);
-
-var _NavigationBar = __webpack_require__(5);
-
-var _NavigationBar2 = _interopRequireDefault(_NavigationBar);
-
-var _repository = __webpack_require__(4);
-
-var _repository2 = _interopRequireDefault(_repository);
-
-var _user = __webpack_require__(10);
-
-var _user2 = _interopRequireDefault(_user);
-
-var _Config = __webpack_require__(1);
-
-var _weexUi = __webpack_require__(2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-    props: {},
-    components: { RLList: _RLList2.default, NavigationBar: _NavigationBar2.default },
-    data: function data() {
-        return {
-            userName: "",
-            reposName: "",
-            title: "",
-            currentPage: 1,
-            list: [],
-            itemClass: 'EventItem',
-            dataType: '',
-            mainStyle: {}
-        };
-    },
-
-    created: function created() {
-        this.init();
-        this.mainStyle = (0, _Config.getEntryPageStyle)(_weexUi.Utils);
-    },
-    activated: function activated() {
-        //keep alive
-        if (WXEnvironment.platform === 'Web') {
-            this.init();
-        }
-    },
-    methods: {
-        init: function init() {
-            this.list = [];
-            if (this.getQuery().title) {
-                this.title = this.getQuery().title;
-            }
-            if (this.getQuery().userName) {
-                this.userName = this.getQuery().userName;
-            }
-            if (this.getQuery().reposName) {
-                this.reposName = this.getQuery().reposName;
-            }
-            if (this.getQuery().dataType) {
-                this.dataType = this.getQuery().dataType;
-            }
-            this.initItemClass();
-            this.onRefresh();
-        },
-        resolveResult: function resolveResult(res, type) {
-            if (res && res.result) {
-                if (type === 1) {
-                    this.list = res.data;
-                } else {
-                    this.list = this.list.concat(res.data);
-                }
-            }
-            if (type === 1) {
-                if (this.$refs.dylist) {
-                    this.$refs.dylist.stopRefresh();
-                }
-            } else if (type === 2) {
-                if (this.$refs.dylist) {
-                    this.$refs.dylist.stopLoadMore();
-                }
-            }
-            if (this.$refs.dylist) {
-                if (!res.data || res.data.length < this.getPageSize()) {
-                    this.$refs.dylist.setNotNeedLoadMore();
-                } else {
-                    this.$refs.dylist.setNeedLoadMore();
-                }
-            }
-        },
-        loadData: function loadData(type) {
-            this.commonGetData(type);
-        },
-        onLoadMore: function onLoadMore() {
-            this.currentPage++;
-            this.loadData(2);
-        },
-        onRefresh: function onRefresh() {
-            this.currentPage = 1;
-            this.list = [];
-            this.loadData(1);
-        },
-        itemClick: function itemClick(index) {
-            var data = this.list[index];
-            switch (this.dataType) {
-                case "userRepos":
-                    this.jumpWithParams("RepositoryDetailPage", {
-                        userName: this.userName,
-                        reposName: data.name,
-                        title: this.userName + "/" + data.name
-                    });
-                    break;
-                case "userStar":
-                    this.jumpWithParams("RepositoryDetailPage", {
-                        userName: data.owner.login,
-                        reposName: data.name,
-                        title: this.userName + "/" + data.name
-                    });
-                    break;
-                case "userFollower":
-                case "userFollowed":
-                case "reposStarer":
-                case "reposForker":
-                case "reposWatcher":
-                    this.jumpWithParams("UserInfoPage", { userName: data.login });
-                    break;
-            }
-        },
-        isPreparing: function isPreparing() {
-            return !this.userName || !this.reposName || this.userName.length < 1 || this.reposName.length < 1;
-        },
-        initItemClass: function initItemClass() {
-            switch (this.dataType) {
-                case "userRepos":
-                case "userStar":
-                case "reposForker":
-                    this.itemClass = 'RepositoryItem';
-                    break;
-                case "userFollower":
-                case "userFollowed":
-                case "reposStarer":
-                case "reposWatcher":
-                    this.itemClass = 'UserItem';
-                    break;
-            }
-        },
-        commonGetData: function commonGetData(type) {
-            var _this = this;
-
-            switch (this.dataType) {
-                case "userRepos":
-                    _repository2.default.getUserRepositoryDao(this.userName, this.currentPage).then(function (res) {
-                        _this.resolveResult(res, type);
-                    });
-                    break;
-                case "userStar":
-                    _repository2.default.getStarRepositoryDao(this.userName, this.currentPage).then(function (res) {
-                        _this.resolveResult(res, type);
-                    });
-                    break;
-                case "userFollower":
-                    _user2.default.getFollowerListDao(this.userName, this.currentPage).then(function (res) {
-                        _this.resolveResult(res, type);
-                    });
-                    break;
-                case "userFollowed":
-                    _user2.default.getFollowedListDao(this.userName, this.currentPage).then(function (res) {
-                        _this.resolveResult(res, type);
-                    });
-                    break;
-                case "reposStarer":
-                    _repository2.default.getRepositoryStarDao(this.userName, this.reposName, this.currentPage).then(function (res) {
-                        _this.resolveResult(res, type);
-                    });
-                    break;
-                case "reposForker":
-                    _repository2.default.getRepositoryForksDao(this.userName, this.reposName, this.currentPage).then(function (res) {
-                        _this.resolveResult(res, type);
-                    });
-                    break;
-                case "reposWatcher":
-                    _repository2.default.getRepositoryWatcherDao(this.userName, this.reposName, this.currentPage).then(function (res) {
-                        _this.resolveResult(res, type);
-                    });
-                    break;
-            }
-        }
-    }
-};
+throw new Error("Module build failed: SyntaxError: Unexpected token (41:4)\n\n  39 |         this.listHeight = getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - mainTabBarHeight, Utils),\n  40 | \n> 41 |     },\n     |     ^\n  42 |     activated: function () {\n  43 |         //keep alive\n  44 |         if(WXEnvironment.platform === 'Web') {\n");
 
 /***/ }),
 /* 541 */
@@ -59343,6 +59136,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "listItemName": _vm.itemClass,
       "listData": _vm.list,
+      "listHeight": _vm.listHeight,
       "forLoadMore": _vm.onLoadMore,
       "forRefresh": _vm.onRefresh,
       "itemClick": _vm.itemClick

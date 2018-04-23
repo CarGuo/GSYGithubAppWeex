@@ -55,7 +55,7 @@
                 language: '全部',
                 since:null,
                 languageType:null,
-                listHeight: getListHeight(Utils.env.getScreenHeight() - - navigatorbBarHeight - mainTabBarHeight, Utils),
+                listHeight: getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - mainTabBarHeight, Utils),
                 primaryColor:Config.primaryColor,
                 btns1:TrendTime,
                 btns2:TrendType,

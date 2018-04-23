@@ -12,7 +12,6 @@
 
 <script>
     const modal = weex.requireModule('modal')
-
     import RLList from './widget/RLList.vue'
     import {Utils} from 'weex-ui'
     import resolveLongToTime from '../core/common/timeUtils'
