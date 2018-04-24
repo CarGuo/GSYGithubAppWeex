@@ -6,6 +6,7 @@
 <script>
     const modal = weex.requireModule('modal')
 
+    import {Utils} from 'weex-ui';
     import {ActionUtils} from '../core/common/eventUtils'
     import RLList from './widget/RLList.vue'
     import {getListHeight, mainTabBarHeight, navigatorbBarHeight} from '../config/Config'
@@ -16,10 +17,11 @@
         data() {
             return {
                 currentPage: 1,
-                listHeight: getListHeight(1334 - navigatorbBarHeight - mainTabBarHeight),
+                listHeight: 0,
             }
         },
         created: function () {
+            this.listHeight = getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - mainTabBarHeight, Utils),
             this.onRefresh();
         },
         activated: function () {

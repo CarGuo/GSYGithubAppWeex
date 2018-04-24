@@ -62,7 +62,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 566);
+/******/ 	return __webpack_require__(__webpack_require__.s = 570);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -60589,7 +60589,11 @@ module.exports.render._withStripped = true
 /* 563 */,
 /* 564 */,
 /* 565 */,
-/* 566 */
+/* 566 */,
+/* 567 */,
+/* 568 */,
+/* 569 */,
+/* 570 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -60607,9 +60611,9 @@ var _filter = __webpack_require__(415);
 
 var filters = _interopRequireWildcard(_filter);
 
-var _CommonListPage = __webpack_require__(174);
+var _SettingPage = __webpack_require__(178);
 
-var _CommonListPage2 = _interopRequireDefault(_CommonListPage);
+var _SettingPage2 = _interopRequireDefault(_SettingPage);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -60627,7 +60631,7 @@ Object.keys(filters).forEach(function (key) {
 Vue.mixin(_index2.default);
 
 /* eslint-disable no-new */
-new Vue(Vue.util.extend({ el: '#root', router: router, store: _store2.default }, _CommonListPage2.default));
+new Vue(Vue.util.extend({ el: '#root', router: router, store: _store2.default }, _SettingPage2.default));
 router.push('/');
 
 /***/ })

@@ -22,6 +22,7 @@
 
 <script>
     import RLList from './widget/RLList.vue'
+    import {Utils} from 'weex-ui'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {isImageEnd} from '../core/common/htmlUtils'
@@ -43,7 +44,7 @@
                 loading:false,
                 listBottomEmpty:getListBottomEmpty(),
                 primaryColor:Config.primaryColor,
-                listHeight: getListHeight(1334 - navigatorbBarHeight - 150),
+                listHeight: getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - 150, Utils),
             }
         },
         created: function () {

@@ -17,7 +17,7 @@
         </div>
 
         <div style="flex:1;width:750px;">
-            <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="listBottomEmpty"
+            <r-l-list ref="dylist" listItemName="IssueItem" :listData="list" :bottomEmpty="getListBottomEmpty"
                       :listHeight="listHeight"
                       :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
         </div>
@@ -32,7 +32,7 @@
     import event from '../core/net/event'
     import repository from '../core/net/repository'
     import {getListBottomEmpty, getListHeight, navigatorbBarHeight} from '../config/Config'
-    import {WxcSearchbar} from 'weex-ui';
+    import {WxcSearchbar, Utils} from 'weex-ui';
 
 
     export default {
@@ -49,8 +49,7 @@
                 dataState: 1,
                 selectIndex: 1,
                 searchValue: "",
-                listBottomEmpty:  getListBottomEmpty(),
-                listHeight: getListHeight(1300 - navigatorbBarHeight - 300),
+                listHeight: getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - 300, Utils),
             }
         },
         created: function () {

@@ -11,6 +11,7 @@
     import RLList from './widget/RLList.vue'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
+    import {Utils} from 'weex-ui'
     import {ActionUtils} from '../core/common/eventUtils'
     import {getListHeight, navigatorbBarHeight} from '../config/Config'
 
@@ -26,7 +27,7 @@
                 listType: 1,
                 eventList: [],
                 reposInfo: {},
-                listHeight: getListHeight(1300 - navigatorbBarHeight - 120),
+                listHeight: getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - 120, Utils),
             }
         },
         created: function () {

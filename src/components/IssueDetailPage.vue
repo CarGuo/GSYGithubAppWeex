@@ -1,11 +1,11 @@
 <template>
-    <div  class="wrapper"  :style="mainStyle" @viewappear="onappear"  @viewdisappear ="ondisappear">
+    <div class="wrapper" :style="mainStyle" @viewappear="onappear" @viewdisappear="ondisappear">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" listItemName="IssueCommentItem" :listData="list" :listHeight="listHeight"
-                  headerComponent="IssueHeadItem" :headerData="issueInfo" :bottomEmpty="listBottomEmpty"
+                  headerComponent="IssueHeadItem" :headerData="issueInfo" :bottomEmpty="getListBottomEmpty"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
-        <div v-if="issueInfo.body" class="bottom-container">
+        <div v-if="issueInfo.body" class="bottom-container" :style="{top: controlTop}">
             <div class="bottom-item bottom-item-line" @click="replyClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{'回复'}}</text>
             </div>
@@ -51,11 +51,11 @@
     import RLList from './widget/RLList.vue'
     import NavigationBar from './widget/NavigationBar.vue'
     import repository from '../core/net/repository'
-    import {WxcMask} from 'weex-ui'
+    import {WxcMask, Utils} from 'weex-ui'
     import LoadingComponent from './widget/LoadingComponent.vue'
     const clipboard = weex.requireModule('clipboard')
     const modal = weex.requireModule('modal')
-    import {getEntryPageStyle, getListHeight, getListBottomEmpty, navigatorbBarHeight} from "../config/Config"
+    import {getEntryPageStyle, getListHeight, controlBarHeight, navigatorbBarHeight, statusHeight} from "../config/Config"
 
     export default {
         props: {
@@ -76,13 +76,16 @@
                 list: [],
                 issueInfo: {},
                 mainStyle:{},
-                listBottomEmpty:getListBottomEmpty(),
-                listHeight:getListHeight(1334 - navigatorbBarHeight - 80),
+                listHeight:0,
+                controlTop:0,
             }
         },
         created: function () {
             this.init()
-            this.mainStyle = getEntryPageStyle(1334)
+            let top =  Utils.env.getScreenHeight() - controlBarHeight - statusHeight;
+            this.controlTop = Utils.env.isIPhoneX() ? top - 88 : top
+            this.mainStyle = getEntryPageStyle(Utils)
+            this.listHeight = getListHeight(Utils.env.getScreenHeight() - controlBarHeight - navigatorbBarHeight, Utils)
         },
         activated: function () {
             //keep alive
@@ -310,9 +313,6 @@
 
 <style lang="scss" scoped>
     @import '../config/styles.scss';
-    .wrapper {
-        background-color: $--container-color
-    }
     .bottom-item-text {
         font-size: 26px;
         color: $--theme-color;
@@ -347,12 +347,15 @@
     .bottom-container {
         position:absolute;
         height: 80px;
-        top: 1222px;
+        top: 1234px;
         background-color: white;
         flex-direction: row;
         width: 750px;
+        align-items: center;
+        justify-content: center;
         padding-top: 15px;
         padding-bottom: 15px;
+        overflow: hidden;
     }
 
 

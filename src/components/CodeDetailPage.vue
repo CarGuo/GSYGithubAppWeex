@@ -2,7 +2,7 @@
     <div :style="mainStyle">
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
-        <web-component :source="codeData" :webStyle="{height:'1212px', width: '750px'}"></web-component>
+        <web-component :source="codeData" :webStyle="{height: webH, width: '750px'}"></web-component>
     </div>
 </template>
 
@@ -16,6 +16,7 @@
     import {addIconFontSupport} from '../config/IconConfig'
     import {getEntryPageStyle} from "../config/Config"
     import * as Config from "../config/Config"
+    import {Utils} from 'weex-ui'
 
 
     export default {
@@ -33,7 +34,11 @@
         },
         created: function () {
             this.loadData()
-            this.mainStyle = getEntryPageStyle(1334)
+            this.mainStyle = getEntryPageStyle(Utils)
+            this.webH = Utils.env.getScreenHeight() - Config.navigatorbBarHeight - Config.statusHeight
+            if(Utils.env.isIPhoneX()) {
+                this.webH  = this.webH  - 44
+            }
 
         },
         methods: {
