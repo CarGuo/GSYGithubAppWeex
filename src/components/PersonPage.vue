@@ -20,6 +20,7 @@
     import user from '../core/net/user'
     import NavigationBar from './widget/NavigationBar.vue'
     import {ActionUtils} from '../core/common/eventUtils'
+    import {Utils} from 'weex-ui'
     import {getListHeight, getListBottomEmpty, navigatorbBarHeight, mainTabBarHeight} from '../config/Config'
 
     export default {
@@ -29,7 +30,6 @@
             isMe: {type: Boolean, default: true},
             userName: {type: String, default: ''},
             jumpSetting: {type: Boolean, default: true},
-            listHeight: getListHeight(1300 - navigatorbBarHeight - mainTabBarHeight),
         },
         components: {RLList, NavigationBar},
         data() {
@@ -38,9 +38,11 @@
                 eventList: [],
                 userData: {},
                 listBottomEmpty: getListBottomEmpty(),
+                listHeight: 0,
             }
         },
         created: function () {
+            this.listHeight = getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight, Utils)
             this.onRefresh()
             if (this.isMe === false) {
                 this.loadUserInfo()
