@@ -3,6 +3,7 @@
         <navigation-bar :title="title" :onLeftButtonClick="function(){toBack()}"
                         :rightIcon="' '"></navigation-bar>
         <r-l-list ref="dylist" :listItemName="itemClass" :listData="list"
+                  :listHeight="listHeight"
                   :forLoadMore="onLoadMore" :forRefresh="onRefresh" :itemClick="itemClick"></r-l-list>
     </div>
 </template>
@@ -12,7 +13,8 @@
     import NavigationBar from './widget/NavigationBar.vue'
     import repository from '../core/net/repository'
     import user from '../core/net/user'
-    import  {getEntryPageStyle} from "../config/Config"
+    import  {getEntryPageStyle, getListHeight, navigatorbBarHeight} from "../config/Config"
+    import  {Utils} from "weex-ui"
 
     export default {
         props: {
@@ -25,6 +27,7 @@
                 title: "",
                 currentPage: 1,
                 list: [],
+                listHeight: 0,
                 itemClass:  'EventItem',
                 dataType:   '',
                 mainStyle: {}
@@ -32,7 +35,9 @@
         },
         created: function () {
             this.init()
-            this.mainStyle = getEntryPageStyle(1334)
+            this.mainStyle = getEntryPageStyle(Utils)
+            this.listHeight = getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight, Utils)
+
         },
         activated: function () {
             //keep alive

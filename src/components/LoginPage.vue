@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="wrapper" :style="{height: mainHeight}">
         <div class="input-container">
             <image :src="logo" class="logo"></image>
             <div style="flex-direction: row; margin-top: 50px">
@@ -8,9 +8,11 @@
             </div>
             <div style="flex-direction: row; margin-top: 50px">
                 <text class="icon-text" :style="{fontFamily: 'wxcIconFont'}">{{'\ue60e'}}</text>
-                <input class="input" @input="onPWChange" type="password" ref="password" placeholder="密码" :value="password"/>
+                <input class="input" @input="onPWChange" type="password" ref="password" placeholder="密码"
+                       :value="password"/>
             </div>
-            <wxc-button text="登录" type="red" :btn-style="{flex:'1',width:'550px',marginTop: '80px', marginBottom:'40px', backgroundColor: primaryColor}"
+            <wxc-button text="登录" type="red"
+                        :btn-style="{flex:'1',width:'550px',marginTop: '80px', marginBottom:'40px', backgroundColor: primaryColor}"
                         @wxcButtonClicked="onLogin"></wxc-button>
         </div>
         <loading-component height="1334"
@@ -25,8 +27,9 @@
     </div>
 </template>
 
-<style lang="scss" >
+<style lang="scss">
     @import '../config/styles.scss';
+
     .wrapper {
         align-items: center;
         justify-content: center;
@@ -34,6 +37,7 @@
         height: 1334px;
         background-color: $--theme-color;
     }
+
     .input-container {
         align-items: center;
         justify-content: center;
@@ -55,7 +59,7 @@
         border: 2px solid $--theme-color;
     }
 
-    .icon-text{
+    .icon-text {
         align-items: center;
         color: $--theme-color;
         justify-content: center;
@@ -81,7 +85,7 @@
     }
 </style>
 <script>
-    import {WxcButton, WxcLoading} from 'weex-ui'
+    import {WxcButton, WxcLoading, Utils} from 'weex-ui'
     import {Buffer} from 'buffer'
     import user from '../core/net/user'
 
@@ -104,11 +108,13 @@
                 isLoading: false,
                 loadingText: "处理中···",
                 primaryColor: Config.primaryColor,
+                mainHeight: 0
             }
         },
         created: function () {
             this.logo = getImagePath('logo', '.png')
             addIconFontSupport(dom, "../../")
+            this.mainHeight = Utils.env.getScreenHeight()
         },
         methods: {
             onUserNameChange(event) {
@@ -119,7 +125,7 @@
             },
             onLogin() {
                 let username = this.username;
-                let password =  this.password;
+                let password = this.password;
                 if (isEmptyString(username)) {
                     modal.toast({
                         message: "用户名不能为空"
@@ -136,7 +142,7 @@
                     password: password,
                     resultCallback: (res) => {
                         this.isLoading = false;
-                        if(res && res.result) {
+                        if (res && res.result) {
                             this.reset("/main")
                         }
                         console.info("resultCallback", res)

@@ -12,6 +12,7 @@
 <script>
     import NavigationBar from './widget/NavigationBar.vue'
     import {getEntryPageStyle} from "../config/Config"
+    import {Utils} from "weex-ui"
 
     export default {
         components:{
@@ -30,7 +31,7 @@
         },
         created() {
             this.url =  this.getQuery().url;
-            this.mainStyle = getEntryPageStyle(1334)
+            this.mainStyle = getEntryPageStyle(Utils)
         },
     }
 </script>

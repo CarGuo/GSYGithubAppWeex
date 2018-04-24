@@ -39,6 +39,7 @@
     import PersonPage from './PersonPage.vue'
     import {getIonFontPath} from '../config/IconConfig'
     import {addIconFontSupport} from '../config/IconConfig'
+    import {getRealScreenHeight} from '../config/Config'
 
     const dom = weex.requireModule('dom');
     const modal = weex.requireModule('modal');
@@ -48,13 +49,12 @@
         data: () => ({
             tabTitles: Config.tabIconFontTitles,
             tabStyles: Config.tabIconFontStyles,
-            mainHeight: Utils.env.getScreenHeight() - 32,
+            mainHeight: 0,
         }),
         created() {
             const tabPageHeight = Utils.env.getPageHeight();
-            const {tabStyles} = this;
-            this.contentStyle = {height: (tabPageHeight - tabStyles.height) + 'px'};
-            this.mainHeight = ( WXEnvironment.platform === 'Web') ? '1334px' : Utils.env.getScreenHeight() - 32
+            this.contentStyle = {height: tabPageHeight};
+            this.mainHeight =  getRealScreenHeight(Utils)
             addIconFontSupport(dom, "../../")
         },
         methods: {

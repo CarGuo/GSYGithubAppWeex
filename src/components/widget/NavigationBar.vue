@@ -22,7 +22,7 @@
         props: {
             onLeftButtonClick: {type: Function, default:function(){
                 }},
-            onRightButtonClick: {type: Function, default:()=>{
+            onRightButtonClick: {type: Function, default:function(){
 
                 }},
             title: {type: String, default: ""},

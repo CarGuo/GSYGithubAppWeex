@@ -169,22 +169,6 @@ export const ActionUtils = (event, target, currentRepository) => {
             break;
         case 'IssueCommentEvent':
         case 'IssuesEvent':
-            // 去issue
-            /*Actions.IssueDetail({
-                issue: event.payload.issue,
-                title: fullName,
-                repositoryName: repositoryName,
-                userName: owner,
-                needRightBtn: true,
-                iconType:1,
-                rightBtn: 'home',
-                rightBtnPress: () => {
-                    Actions.RepositoryDetail({
-                        repositoryName: repositoryName, ownerName: owner
-                        , title: repositoryName
-                    });
-                }
-            });*/
             target.jumpWithParams("IssueDetailPage", {
                 userName: owner,
                 reposName: repositoryName,

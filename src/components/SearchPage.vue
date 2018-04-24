@@ -32,7 +32,7 @@
     import NavigationBar from './widget/NavigationBar.vue'
     import event from '../core/net/event'
     import repository from '../core/net/repository'
-    import {WxcSearchbar} from 'weex-ui';
+    import {WxcSearchbar, Utils} from 'weex-ui';
     import {getEntryPageStyle, getListBottomEmpty, getListHeight, navigatorbBarHeight} from "../config/Config"
 
 
@@ -52,12 +52,12 @@
                 selectLanguageData: null,
                 listBottomEmpty: getListBottomEmpty(),
                 mainStyle:{},
-                listHeight:getListHeight(1300 - navigatorbBarHeight - 150)
+                listHeight:getListHeight(Utils.env.getScreenHeight() - navigatorbBarHeight - 150, Utils)
             }
         },
         created: function () {
             this.init()
-            this.mainStyle = getEntryPageStyle(1334)
+            this.mainStyle = getEntryPageStyle(Utils)
         },
         activated: function () {
             //keep alive

@@ -24,7 +24,7 @@ export default {
             }
         },
         getBaseUrl() {
-            let bundleUrl = this.$getConfig().bundleUrl;
+            let bundleUrl = weex.config.bundleUrl;
             bundleUrl = String(bundleUrl);
             let nativeBase;
             let isAndroidAssets = bundleUrl.indexOf('file://assets/') >= 0;
@@ -41,7 +41,7 @@ export default {
                 if (matches && matches.length >= 2) {
                     host = matches[1];
                 }
-                nativeBase = 'http://' + host + '/index.html?page=./dist/';
+                nativeBase = 'http://' + host + '/';
             }
             return nativeBase;
         },
@@ -68,6 +68,9 @@ export default {
         },
         // object 转 URL 参数
         createQuery(obj) {
+            if(obj === null || obj === "" || obj.length === 0) {
+                return ""
+            }
             let url = '?';
             for (let key in obj) {
                 if (obj[key] !== null) {
@@ -101,6 +104,6 @@ export default {
         },
         getPageSize() {
             return PAGE_SIZE
-        }
+        },
     }
 }
