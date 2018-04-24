@@ -10,7 +10,15 @@
     "es2015",
     "stage-0"
   ],
-  "plugins": []
+  "plugins": [ [
+    "transform-runtime",
+    {
+      "helpers": false,
+      "polyfill": false,
+      "regenerator": true,
+      "moduleName": "babel-runtime"
+    }
+  ]]
 }
 ```
 
@@ -100,3 +108,5 @@ ActivityNotFoundException问题：
 tail -f
 /Users/your name/Library/Developer/CoreSimulator/Devices/FDEACA11-D84E-4E8F-A6B8-26239559A928/data/Containers/Data/Application/9394D6CC-6B4A-4200-A13D-0CBE6F2BB67A/Documents/console.log
 ```
+
+* 17、ios的坐标点是从状态栏（其实是导航栏，但是导航栏没用的话）开始算的，所以多页面下的需要有marginTop：一般32，如果是iPhoneX的话，还需要多44高度。
