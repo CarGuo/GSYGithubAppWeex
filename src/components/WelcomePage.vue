@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper" :style="{height:mainHeight}">
+    <div class="wrapper" ref="container" :style="{height:mainHeight}">
         <image :src="imagePath" class="logo"></image>
     </div>
 </template>
@@ -22,6 +22,7 @@
 <script>
     import {getImagePath} from '../config/IconConfig'
     import {Utils} from 'weex-ui'
+    const animation = weex.requireModule('animation');
 
     export default {
         components: {},
@@ -37,11 +38,21 @@
             this.mainHeight = Utils.env.getScreenHeight();
             setTimeout(() => {
                 this.$store.dispatch('initUserInfo', (res) => {
-                    if (res && res.result) {
-                        this.reset("/main")
-                    } else {
-                        this.reset("/login")
-                    }
+                    let containerEl = this.$refs[`container`];
+                    animation.transition(containerEl, {
+                        styles: {
+                            transform: `translateY(${Utils.env.getPageHeight()}px)`
+                        },
+                        duration: 1000,
+                        'cubic-bezier': (0.25, 0.46, 0.45, 0.94),
+                        delay: 0
+                    }, () => {
+                        if (res && res.result) {
+                            this.reset("/main")
+                        } else {
+                            this.reset("/login")
+                        }
+                    });
                 })
             }, 2000)
         },
