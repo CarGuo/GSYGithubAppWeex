@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper" :style="{height: mainHeight}">
+    <div class="wrapper" ref="container" :style="{height: mainHeight}">
         <div class="input-container">
             <image :src="logo" class="logo"></image>
             <div style="flex-direction: row; margin-top: 50px">
@@ -97,6 +97,7 @@
 
     const modal = weex.requireModule('modal')
     const dom = weex.requireModule('dom');
+    const animation = weex.requireModule('animation');
 
     export default {
         components: {WxcButton, WxcLoading, LoadingComponent},
@@ -143,7 +144,18 @@
                     resultCallback: (res) => {
                         this.isLoading = false;
                         if (res && res.result) {
-                            this.reset("/main")
+                                let containerEl = this.$refs[`container`];
+                                animation.transition(containerEl, {
+                                    styles: {
+                                        transform: `translateY(${Utils.env.getPageHeight()}px)`
+                                    },
+                                    duration: 1000,
+                                    'cubic-bezier': (0.25, 0.46, 0.45, 0.94),
+                                    delay: 0
+                                }, () => {
+                                    this.reset("/main")
+                                });
+
                         }
                         console.info("resultCallback", res)
                     }
