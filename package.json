@@ -34,7 +34,7 @@
     "highlight.js": "^9.12.0",
     "himalaya": "^1.0.1",
     "moment": "^2.21.0",
-    "node-sass": "^4.8.3",
+    "node-sass": "^4.9.0",
     "phantom-limb": "0.0.1",
     "sass-loader": "^6.0.7",
     "url-parse": "^1.2.0",
