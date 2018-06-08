@@ -6,7 +6,7 @@ android {
     buildToolsVersion project.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.weex.app"
+        applicationId "com.weex.shuyu.githubapp"
         minSdkVersion project.appMinSdkVersion
         targetSdkVersion project.targetSdkVersion
         versionCode 1
@@ -35,6 +35,9 @@ android {
     }
     buildTypes {
         debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
             signingConfig signingConfigs.debug
         }
     }
