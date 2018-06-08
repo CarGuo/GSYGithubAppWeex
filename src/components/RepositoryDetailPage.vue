@@ -7,8 +7,9 @@
                      :tab-styles="tabStyles"
                      title-type="text"
                      @wxcTabBarCurrentTabSelected="wxcTabBarCurrentTabSelected">
-            <div class="item-container item-color" :style="{height:'1034px', width: '750px'}">
-                <web-component :source="readme" :webStyle="{height:'1034px', width: '750px', paddingBottom:'30px', }" :gsygithubLink="gsygithubLink"></web-component>
+            <div class="item-container item-color" :style="webContentStyle">
+                <web-component :source="readme" :webStyle="webContentStyle"
+                               :gsygithubLink="gsygithubLink"></web-component>
             </div>
             <div class="item-container" :style="contentStyle">
                 <repository-detail-info-page ref="a"></repository-detail-info-page>
@@ -22,37 +23,38 @@
         </top-tab-bar>
         <div v-if="reposStatus != null" class="bottom-item-container" :style="{marginBottom: controlBottom}">
             <div class="bottom-item bottom-item-line" @click="reposStarClick">
-                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{starIcon + "   " +  starText}}</text>
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{starIcon + "   " + starText}}
+                </text>
             </div>
             <div class="bottom-item bottom-item-line" @click="reposWatcherClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{watcherIcon + "   " + watcherText}}</text>
             </div>
             <div class="bottom-item bottom-item-line" @click="reposForkerClick">
-                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue67e "  + ('Fork')}}</text>
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue67e " + ('Fork')}}</text>
             </div>
             <div class="bottom-item" @click="reposBranchClick">
-                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue61a "  +  curBranch}}</text>
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{"\ue61a " + curBranch}}</text>
             </div>
         </div>
         <popover-component ref="wxc-popover"
-                     :buttons="branch"
-                     :position="popoverPosition"
-                     :arrowPosition="popoverArrowPosition"
-                     @wxcPopoverButtonClicked="popoverLanguageButtonClicked"></popover-component>
+                           :buttons="branch"
+                           :position="popoverPosition"
+                           :arrowPosition="popoverArrowPosition"
+                           @wxcPopoverButtonClicked="popoverLanguageButtonClicked"></popover-component>
         <loading-component height="1334"
-                  width="750"
-                  border-radius="0"
-                  duration="100"
-                  :has-overlay="true"
-                  :show-close="false"
-                  :show="isLoading"
-                  :has-animation="true">
+                           width="750"
+                           border-radius="0"
+                           duration="100"
+                           :has-overlay="true"
+                           :show-close="false"
+                           :show="isLoading"
+                           :has-animation="true">
         </loading-component>
     </div>
 </template>
 
 <script>
-    import {Utils, WxcMinibar}  from 'weex-ui';
+    import {Utils, WxcMinibar} from 'weex-ui';
     import Config from '../config/RepositoryTabConfig'
     import NavigationBar from './widget/NavigationBar.vue'
     import TopTabBar from './widget/TopTabBar.vue'
@@ -64,12 +66,15 @@
     import RepositoryFileListPage from './RepositoryFileListPage.vue'
     import repository from '../core/net/repository'
     import {launchUrl} from "../core/common/htmlUtils"
-    import {getEntryPageStyle,getContentStyle, DEBUG} from "../config/Config"
+    import {getEntryPageStyle, getContentStyle, DEBUG, navigatorbBarHeight} from "../config/Config"
+
     const modal = weex.requireModule('modal')
 
     export default {
-        components: {TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage,
-            RepositoryIssueListPage, RepositoryFileListPage, LoadingComponent, PopoverComponent},
+        components: {
+            TopTabBar, NavigationBar, WebComponent, RepositoryDetailInfoPage,
+            RepositoryIssueListPage, RepositoryFileListPage, LoadingComponent, PopoverComponent
+        },
         data: () => ({
             tabTitles: Config.tabTitles,
             tabStyles: Config.tabStyles,
@@ -91,44 +96,48 @@
             branch: [],
             popoverPosition: {x: -50, y: 1134},
             controlBottom: 0,
-            mainStyle:{},
+            mainStyle: {},
+            webContentStyle: {},
             popoverArrowPosition: {pos: 'bottom', x: -50},
         }),
-        created () {
+        created() {
             this.contentStyle = getContentStyle(Utils.env.getScreenHeight(), this.tabStyles.height)
+            let webHeight = Utils.env.getScreenHeight() - this.tabStyles.height - navigatorbBarHeight
+            this.webContentStyle = {height: webHeight + 'px', width: '750px'};
+
             this.mainStyle = getEntryPageStyle(Utils)
             this.controlBottom = Utils.env.isIPhoneX() ? 78 : 0
             this.init()
         },
         activated: function () {
             //keep alive
-            if(WXEnvironment.platform === 'Web') {
+            if (WXEnvironment.platform === 'Web') {
                 this.init();
             }
         },
         methods: {
             init() {
                 this.readme = ''
-                if(this.getQuery().title) {
+                if (this.getQuery().title) {
                     this.title = this.getQuery().title
                 }
-                if(this.getQuery().userName) {
+                if (this.getQuery().userName) {
                     this.userName = this.getQuery().userName
                 }
-                if(this.getQuery().reposName) {
+                if (this.getQuery().reposName) {
                     this.reposName = this.getQuery().reposName
                 }
                 this.loadReadme();
                 this.loadStatus();
                 this.loadBranch();
             },
-            wxcTabBarCurrentTabSelected (e) {
+            wxcTabBarCurrentTabSelected(e) {
                 const index = e.page;
             },
             loadStatus() {
                 repository.getRepositoryStatusDao(this.userName, this.reposName)
                     .then((res) => {
-                        if(res && res.result) {
+                        if (res && res.result) {
                             console.log("repos statu", res)
                             console.log("repos statu!!!", res.data)
                             this.reposStatus = res.data
@@ -146,8 +155,8 @@
                     return
                 }
                 repository.getRepositoryDetailReadmeHtmlDao(this.userName, this.reposName)
-                    .then((res)=>{
-                        if(res && res.data) {
+                    .then((res) => {
+                        if (res && res.data) {
                             this.readme = res.data;
                         }
                         if (DEBUG) {
@@ -157,8 +166,8 @@
             },
             loadBranch() {
                 repository.getBranchesDao(this.userName, this.reposName)
-                    .then((res)=>{
-                        if(res && res.data) {
+                    .then((res) => {
+                        if (res && res.data) {
                             this.branch.shift()
                             let data = res.data;
                             if (data && data.length > 0) {
@@ -186,8 +195,8 @@
             reposStarClick() {
                 this.isLoading = true
                 repository.doRepositoryStarDao(this.userName, this.reposName, this.star)
-                    .then((res)=>{
-                        if(res && res.result) {
+                    .then((res) => {
+                        if (res && res.result) {
                             this.loadStatus()
                         }
                         this.isLoading = false
@@ -196,8 +205,8 @@
             reposWatcherClick() {
                 this.isLoading = true
                 repository.doRepositoryWatchDao(this.userName, this.reposName, this.watch)
-                    .then((res)=>{
-                        if(res && res.result) {
+                    .then((res) => {
+                        if (res && res.result) {
                             this.loadStatus()
                         }
                         this.isLoading = false
@@ -207,21 +216,21 @@
                 this.isLoading = true
                 repository.createForkDao(this.userName, this.reposName)
                     .then((res) => {
-                        setTimeout(()=>{
+                        setTimeout(() => {
                             modal.toast({
-                                message:(res && res.result) ? 'fork 成功' : 'fork 异常'
+                                message: (res && res.result) ? 'fork 成功' : 'fork 异常'
                             });
                         }, 500);
                         this.isLoading = false
                     })
             },
             reposBranchClick() {
-                if(!this.branch || this.branch.length < 1) {
+                if (!this.branch || this.branch.length < 1) {
                     return
                 }
                 this.$refs['wxc-popover'].wxcPopoverShow();
             },
-            popoverLanguageButtonClicked (obj) {
+            popoverLanguageButtonClicked(obj) {
                 this.curBranch = this.branch[obj.index].text;
                 this.loadReadme()
             },
@@ -229,7 +238,7 @@
     }
 </script>
 
-<style lang="scss" >
+<style lang="scss">
     @import '../config/styles.scss';
 
     .bottom-item-line {
@@ -266,7 +275,7 @@
         justify-content: center;
     }
 
-    .bottom-item-container{
+    .bottom-item-container {
         background-color: white;
         flex-direction: row;
         width: 750px;
