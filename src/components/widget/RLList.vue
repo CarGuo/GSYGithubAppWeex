@@ -87,7 +87,7 @@
                 return this.listData;
             },
             isNotEmpty() {
-                return (this.listData && this.listData.length > 0);
+                return ((this.listData && this.listData.length > 0) || this.headerComponent != null);
             },
             refreshDisplay() {
                 let display = (this.refreshing === true && this.needRefresh === true) ? 'show' : 'hide';

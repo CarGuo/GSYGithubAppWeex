@@ -313,6 +313,9 @@
 
 <style lang="scss" scoped>
     @import '../config/styles.scss';
+    .wrapper {
+        background-color: $--container-color;
+    }
     .bottom-item-text {
         font-size: 26px;
         color: $--theme-color;
