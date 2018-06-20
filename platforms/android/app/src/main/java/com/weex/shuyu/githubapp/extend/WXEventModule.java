@@ -1,10 +1,10 @@
-package com.weex.app.extend;
+package com.weex.shuyu.githubapp.extend;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.text.TextUtils;
 
-import com.weex.app.WXPageActivity;
+import com.weex.shuyu.githubapp.WXPageActivity;
 import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.common.WXModule;
 

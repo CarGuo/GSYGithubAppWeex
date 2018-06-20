@@ -1,4 +1,4 @@
-package com.weex.app.hotreload;
+package com.weex.shuyu.githubapp.hotreload;
 
 import android.text.TextUtils;
 

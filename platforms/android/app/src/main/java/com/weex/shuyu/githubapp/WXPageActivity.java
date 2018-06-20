@@ -1,4 +1,4 @@
-package com.weex.app;
+package com.weex.shuyu.githubapp;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,9 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.weex.app.hotreload.HotReloadManager;
-import com.weex.app.util.AppConfig;
-import com.weex.app.util.Constants;
+import com.weex.shuyu.githubapp.hotreload.HotReloadManager;
+import com.weex.shuyu.githubapp.util.AppConfig;
+import com.weex.shuyu.githubapp.util.Constants;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.taobao.weex.WXEnvironment;

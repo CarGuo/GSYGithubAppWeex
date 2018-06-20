@@ -1,4 +1,4 @@
-package com.weex.app.ui;
+package com.weex.shuyu.githubapp.ui;
 
 import android.content.Context;
 import android.net.Uri;
@@ -15,8 +15,8 @@ import com.taobao.weex.ui.component.WXComponent;
 import com.taobao.weex.ui.component.WXComponentProp;
 import com.taobao.weex.ui.component.WXVContainer;
 import com.taobao.weex.utils.WXUtils;
-import com.weex.app.ui.view.IGSYWebView;
-import com.weex.app.ui.view.GSYWXWebView;
+import com.weex.shuyu.githubapp.ui.view.IGSYWebView;
+import com.weex.shuyu.githubapp.ui.view.GSYWXWebView;
 
 import java.util.HashMap;
 import java.util.Map;

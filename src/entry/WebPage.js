@@ -4,8 +4,6 @@ import mixins from '../mixins/index'
 import * as filters from '../filter/filter'
 import WebPage from '../components/WebPage.vue'
 
-const router = require('../router')
-
 //sync(store, router)
 
 Object.keys(filters).forEach(key => {
@@ -16,5 +14,5 @@ Object.keys(filters).forEach(key => {
 Vue.mixin(mixins)
 
 /* eslint-disable no-new */
-new Vue(Vue.util.extend({el: '#root', router, store}, WebPage))
-router.push('/')
+new Vue(Vue.util.extend({el: '#root', store}, WebPage))
+

@@ -1,7 +1,6 @@
-package com.weex.app.ui.view;
+package com.weex.shuyu.githubapp.ui.view;
 
 import android.view.View;
-import android.webkit.WebView;
 
 public interface IGSYWebView {
     public View getView();
