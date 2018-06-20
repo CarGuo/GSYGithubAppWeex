@@ -23,8 +23,7 @@
         </top-tab-bar>
         <div v-if="reposStatus != null" class="bottom-item-container" :style="{marginBottom: controlBottom}">
             <div class="bottom-item bottom-item-line" @click="reposStarClick">
-                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{starIcon + "   " + starText}}
-                </text>
+                <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{starIcon + "   " + starText}}</text>
             </div>
             <div class="bottom-item bottom-item-line" @click="reposWatcherClick">
                 <text class="bottom-item-text" :style="{fontFamily: 'wxcIconFont'}">{{watcherIcon + "   " + watcherText}}</text>
