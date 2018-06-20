@@ -17,7 +17,7 @@
        under the License.
 */
 
-package com.weex.app.util;
+package com.weex.shuyu.githubapp.util;
 
 import android.content.Context;
 import android.util.Log;

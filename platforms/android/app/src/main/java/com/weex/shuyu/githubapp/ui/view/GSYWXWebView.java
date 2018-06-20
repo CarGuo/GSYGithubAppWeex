@@ -1,4 +1,4 @@
-package com.weex.app.ui.view;
+package com.weex.shuyu.githubapp.ui.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;

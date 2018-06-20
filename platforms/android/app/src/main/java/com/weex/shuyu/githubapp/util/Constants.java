@@ -1,4 +1,4 @@
-package com.weex.app.util;
+package com.weex.shuyu.githubapp.util;
 
 public class Constants {
 

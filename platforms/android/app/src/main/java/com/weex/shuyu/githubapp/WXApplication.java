@@ -1,14 +1,14 @@
-package com.weex.app;
+package com.weex.shuyu.githubapp;
 
 import android.app.Application;
 import android.os.Build;
 import android.os.StrictMode;
 
-import com.weex.app.extend.ImageAdapter;
-import com.weex.app.extend.WXEventModule;
+import com.weex.shuyu.githubapp.extend.ImageAdapter;
+import com.weex.shuyu.githubapp.extend.WXEventModule;
 import com.alibaba.weex.plugin.loader.WeexPluginContainer;
-import com.weex.app.ui.GSYWeb;
-import com.weex.app.util.AppConfig;
+import com.weex.shuyu.githubapp.ui.GSYWeb;
+import com.weex.shuyu.githubapp.util.AppConfig;
 import com.taobao.weex.InitConfig;
 import com.taobao.weex.WXSDKEngine;
 import com.taobao.weex.common.WXException;

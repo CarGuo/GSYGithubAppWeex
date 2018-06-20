@@ -1,4 +1,4 @@
-package com.weex.app;
+package com.weex.shuyu.githubapp;
 
 import android.content.Intent;
 import android.net.Uri;

@@ -102,7 +102,7 @@
         }),
         created() {
             this.contentStyle = getContentStyle(Utils.env.getScreenHeight(), this.tabStyles.height)
-            let webHeight = Utils.env.getScreenHeight() - this.tabStyles.height - navigatorbBarHeight
+            let webHeight = Utils.env.getScreenHeight() - this.tabStyles.height - navigatorbBarHeight - 80
             this.webContentStyle = {height: webHeight + 'px', width: '750px'};
 
             this.mainStyle = getEntryPageStyle(Utils)
