@@ -4,6 +4,9 @@
 
 ### ps 同款开源React Native版本 https://github.com/CarGuo/GSYGithubAPP
 
+### ps 同款Flutter版本 ： https://github.com/CarGuo/GSYGithubAppFlutter
+
+
 ```
 基于Weex开发，适配Android\IOS\Web。
 
