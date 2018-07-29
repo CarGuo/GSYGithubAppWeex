@@ -52,6 +52,8 @@
 
 执行 `npm run serve` 运行web（目前未详细适配）。（推荐chrome，调试模式下手机模式）
 
+```
+
 ## 下载
 
 ### [Apk下载链接](https://www.pgyer.com/K5kU)

@@ -3,7 +3,7 @@ platform :ios, '8.0'
 #inhibit_all_warnings!
 
 def common
-	pod 'WeexSDK'
+	pod 'WeexSDK', :git => 'https://github.com/CarGuo/incubator-weex.git', :branch => '0.18.0.2_web'
     pod 'WeexPluginLoader'
     pod 'SDWebImage', '3.7.5'
     pod 'SocketRocket', '0.4.2'

@@ -11,21 +11,30 @@ DEPENDENCIES:
   - SDWebImage (= 3.7.5)
   - SocketRocket (= 0.4.2)
   - WeexPluginLoader
-  - WeexSDK
+  - WeexSDK (from `https://github.com/CarGuo/incubator-weex.git`, branch `0.18.0.2_web`)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - SDWebImage
     - SocketRocket
     - WeexPluginLoader
-    - WeexSDK
+
+EXTERNAL SOURCES:
+  WeexSDK:
+    :branch: 0.18.0.2_web
+    :git: https://github.com/CarGuo/incubator-weex.git
+
+CHECKOUT OPTIONS:
+  WeexSDK:
+    :commit: ddb01578fcdd8bd8354f912c0ca4e9d4c1b1c2d6
+    :git: https://github.com/CarGuo/incubator-weex.git
 
 SPEC CHECKSUMS:
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SocketRocket: ffe08119b00ef982f6c37052a4705a057c8494ad
   WeexPluginLoader: 85c1304f8ba29864e58531614a0acfeceef1b85c
-  WeexSDK: ac56f255ce9a48e93ebc2e003956ab20da33321d
+  WeexSDK: b113345e7e1904553b742b2f68943164f6ffe7c1
 
-PODFILE CHECKSUM: ec0e31166e143bcabfaa1962c9ed874f00c462e6
+PODFILE CHECKSUM: ee17af158a573fdd0d2865cbe37287949f3c45c3
 
 COCOAPODS: 1.5.0
