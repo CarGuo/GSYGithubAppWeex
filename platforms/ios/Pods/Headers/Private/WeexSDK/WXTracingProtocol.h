@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Protocol/WXTracingProtocol.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Protocol/WXTracingProtocol.h

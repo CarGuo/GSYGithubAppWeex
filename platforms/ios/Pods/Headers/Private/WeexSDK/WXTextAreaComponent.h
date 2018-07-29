@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Component/WXTextAreaComponent.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Component/WXTextAreaComponent.h

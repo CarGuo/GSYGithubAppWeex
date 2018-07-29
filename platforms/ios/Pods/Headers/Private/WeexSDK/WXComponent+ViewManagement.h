@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/View/WXComponent+ViewManagement.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/View/WXComponent+ViewManagement.h

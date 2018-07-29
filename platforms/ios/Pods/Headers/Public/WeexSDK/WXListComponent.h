@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Component/WXListComponent.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Component/WXListComponent.h

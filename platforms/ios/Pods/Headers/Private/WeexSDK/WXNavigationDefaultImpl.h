@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Handler/WXNavigationDefaultImpl.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Handler/WXNavigationDefaultImpl.h

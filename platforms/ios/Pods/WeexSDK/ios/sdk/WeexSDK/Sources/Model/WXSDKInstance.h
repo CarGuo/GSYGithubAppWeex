@@ -22,6 +22,7 @@
 #import "WXJSExceptionInfo.h"
 #import "WXResourceResponse.h"
 #import "WXResourceRequest.h"
+#import "WXBridgeProtocol.h"
 
 extern NSString *const bundleUrlOptionKey;
 
@@ -133,11 +134,23 @@ typedef NS_ENUM(NSInteger, WXErrorCode) {//error.code
 @property (nonatomic, copy) void (^refreshFinish)(UIView *);
 
 /**
+ * bundleType is the DSL type
+ */
+@property (nonatomic, strong) NSString * bundleType;
+
+/**
  *  The callback triggered when the instance fails to render.
  *
  *  @return A block that takes a NSError argument, which is the error occured
  **/
 @property (nonatomic, copy) void (^onFailed)(NSError *error);
+
+/**
+ *
+ *  @return instance runtime JavaScript.
+ *  you must call it in brige thread. Learn more at WXPerformBlockOnBridgeThread
+ **/
+- (id<WXBridgeProtocol>)instanceJavaScriptContext;
 
 /**
  *  The callback triggered when js occurs runtime error while executing.
@@ -165,6 +178,13 @@ typedef NS_ENUM(NSInteger, WXErrorCode) {//error.code
  * @return A block that takes response which the server response,request which send to server,data which the server returned and an error
  */
 @property (nonatomic, copy) void(^onJSDownloadedFinish)(WXResourceResponse *response,WXResourceRequest *request,NSData *data, NSError* error);
+
+/**
+ * The callback triggered when the bundleJS request finished in the renderWithURL. If the callback returns YES, the render process will terminate.
+ * @return A block that takes response which the server response,request which send to server,data which the server returned and an error
+ */
+@property (nonatomic, copy) BOOL (^onRenderTerminateWhenJSDownloadedFinish)(WXResourceResponse *response,WXResourceRequest *request,NSData *data, NSError* error);
+
 
 /**
  *  the frame of current instance.

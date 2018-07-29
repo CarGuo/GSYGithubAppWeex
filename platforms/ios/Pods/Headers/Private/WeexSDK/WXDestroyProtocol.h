@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Protocol/WXDestroyProtocol.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Protocol/WXDestroyProtocol.h

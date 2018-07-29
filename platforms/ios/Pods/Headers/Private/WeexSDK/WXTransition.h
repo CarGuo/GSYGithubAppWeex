@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Module/WXTransition.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Module/WXTransition.h

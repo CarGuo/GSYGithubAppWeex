@@ -26,13 +26,32 @@
 {
     pthread_mutex_t _safeThreadDictionaryMutex;
     pthread_mutexattr_t _safeThreadDictionaryMutexAttr;
-    os_unfair_lock _unfairLock;// this type of lock is not recurisive
 }
 
 @property (nonatomic, strong) dispatch_queue_t queue;
 @property (nonatomic, strong) NSMutableDictionary* dict;
 
 @end
+
+#define OVERRIDE_METHOD(method,retValue) \
+do { \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+    if (![WXUtility threadSafeCollectionUsingLock]) {\
+        dispatch_sync(_queue, ^{\
+            if ([_dict respondsToSelector:method]) {\
+            retValue = [_dict performSelector:method];\
+            }\
+        });\
+    } else {\
+        pthread_mutex_lock(&_safeThreadDictionaryMutex);\
+        if ([_dict respondsToSelector:method]) {\
+            retValue = [_dict performSelector:method];\
+        }\
+        pthread_mutex_unlock(&_safeThreadDictionaryMutex);\
+    }\
+    _Pragma("clang diagnostic pop")\
+} while (0)
 
 @implementation WXThreadSafeMutableDictionary
 
@@ -45,9 +64,6 @@
         pthread_mutexattr_init(&(_safeThreadDictionaryMutexAttr));
         pthread_mutexattr_settype(&(_safeThreadDictionaryMutexAttr), PTHREAD_MUTEX_RECURSIVE);
         pthread_mutex_init(&(_safeThreadDictionaryMutex), &(_safeThreadDictionaryMutexAttr));
-        if (WX_SYS_VERSION_GREATER_THAN(@"10.0")) {
-            _unfairLock = OS_UNFAIR_LOCK_INIT;
-        }
     }
     return self;
 }
@@ -109,15 +125,9 @@
             count = _dict.count;
         });
     } else {
-        if (WX_SYS_VERSION_GREATER_THAN(@"10.0")) {
-            os_unfair_lock_lock(&_unfairLock);
-            count = [_dict count];
-            os_unfair_lock_unlock(&_unfairLock);
-        } else {
-            pthread_mutex_lock(&_safeThreadDictionaryMutex);
-            count = [_dict count];
-            pthread_mutex_unlock(&_safeThreadDictionaryMutex);
-        }
+        pthread_mutex_lock(&_safeThreadDictionaryMutex);
+        count = [_dict count];
+        pthread_mutex_unlock(&_safeThreadDictionaryMutex);
     }
     return count;
 }
@@ -133,15 +143,9 @@
             obj = _dict[aKey];
         });
     } else {
-        if (WX_SYS_VERSION_GREATER_THAN(@"10.0")) {
-            os_unfair_lock_lock(&_unfairLock);
-            obj = _dict[aKey];
-            os_unfair_lock_unlock(&_unfairLock);
-        } else {
-            pthread_mutex_lock(&_safeThreadDictionaryMutex);
-            obj = _dict[aKey];
-            pthread_mutex_unlock(&_safeThreadDictionaryMutex);
-        }
+        pthread_mutex_lock(&_safeThreadDictionaryMutex);
+        obj = _dict[aKey];
+        pthread_mutex_unlock(&_safeThreadDictionaryMutex);
     }
     return obj;
 }
@@ -154,15 +158,9 @@
             enu = [_dict keyEnumerator];
         });
     } else {
-        if (WX_SYS_VERSION_GREATER_THAN(@"10.0")) {
-            os_unfair_lock_lock(&_unfairLock);
-            enu = [_dict keyEnumerator];
-            os_unfair_lock_unlock(&_unfairLock);
-        } else {
-            pthread_mutex_lock(&_safeThreadDictionaryMutex);
-            enu = [_dict keyEnumerator];
-            pthread_mutex_unlock(&_safeThreadDictionaryMutex);
-        }
+        pthread_mutex_lock(&_safeThreadDictionaryMutex);
+        enu = [_dict keyEnumerator];
+        pthread_mutex_unlock(&_safeThreadDictionaryMutex);
     }
     return enu;
 }
@@ -175,16 +173,24 @@
         _dict[aKey] = anObject;
         });
     } else {
-        if (WX_SYS_VERSION_GREATER_THAN(@"10.0")) {
-            os_unfair_lock_lock(&_unfairLock);
-            _dict[aKey] = anObject;
-            os_unfair_lock_unlock(&_unfairLock);
-        }else {
-            pthread_mutex_lock(&_safeThreadDictionaryMutex);
-            _dict[aKey] = anObject;
-            pthread_mutex_unlock(&_safeThreadDictionaryMutex);
-        }
+        pthread_mutex_lock(&_safeThreadDictionaryMutex);
+        _dict[aKey] = anObject;
+        pthread_mutex_unlock(&_safeThreadDictionaryMutex);
     }
+}
+
+- (NSArray *)allKeys
+{
+    __block NSArray *allKeys = nil;
+    OVERRIDE_METHOD(_cmd, allKeys);
+    return allKeys;
+}
+
+- (NSArray *)allValues
+{
+    __block NSArray *allValues = nil;
+    OVERRIDE_METHOD(_cmd, allValues);
+    return allValues;
 }
 
 - (void)removeObjectForKey:(id)aKey
@@ -194,15 +200,9 @@
             [_dict removeObjectForKey:aKey];
         });
     } else {
-        if (WX_SYS_VERSION_GREATER_THAN(@"10.0")) {
-            os_unfair_lock_lock(&_unfairLock);
-            [_dict removeObjectForKey:aKey];
-            os_unfair_lock_unlock(&_unfairLock);
-        }else {
-            pthread_mutex_lock(&_safeThreadDictionaryMutex);
-            [_dict removeObjectForKey:aKey];
-            pthread_mutex_unlock(&_safeThreadDictionaryMutex);
-        }
+        pthread_mutex_lock(&_safeThreadDictionaryMutex);
+        [_dict removeObjectForKey:aKey];
+        pthread_mutex_unlock(&_safeThreadDictionaryMutex);
     }
 }
 
@@ -213,15 +213,9 @@
             [_dict removeAllObjects];
         });
     }else {
-        if (WX_SYS_VERSION_GREATER_THAN(@"10.0")) {
-            os_unfair_lock_lock(&_unfairLock);
-            [_dict removeAllObjects];
-            os_unfair_lock_unlock(&_unfairLock);
-        } else {
-            pthread_mutex_lock(&_safeThreadDictionaryMutex);
-            [_dict removeAllObjects];
-            pthread_mutex_unlock(&_safeThreadDictionaryMutex);
-        }
+        pthread_mutex_lock(&_safeThreadDictionaryMutex);
+        [_dict removeAllObjects];
+        pthread_mutex_unlock(&_safeThreadDictionaryMutex);
     }
 }
 
@@ -232,15 +226,9 @@
             copyInstance = [_dict copy];
         });
     } else {
-        if (WX_SYS_VERSION_GREATER_THAN(@"10.0")) {
-            os_unfair_lock_lock(&_unfairLock);
-            copyInstance = [_dict copy];
-            os_unfair_lock_unlock(&_unfairLock);
-        } else {
-            pthread_mutex_lock(&_safeThreadDictionaryMutex);
-            copyInstance = [_dict copy];
-            pthread_mutex_unlock(&_safeThreadDictionaryMutex);
-        }
+        pthread_mutex_lock(&_safeThreadDictionaryMutex);
+        copyInstance = [_dict copy];
+        pthread_mutex_unlock(&_safeThreadDictionaryMutex);
     }
     
     return copyInstance;

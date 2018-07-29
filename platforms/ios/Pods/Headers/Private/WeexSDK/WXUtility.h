@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Utility/WXUtility.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Utility/WXUtility.h

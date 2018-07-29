@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Component/Recycler/WXMultiColumnLayout.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Component/Recycler/WXMultiColumnLayout.h

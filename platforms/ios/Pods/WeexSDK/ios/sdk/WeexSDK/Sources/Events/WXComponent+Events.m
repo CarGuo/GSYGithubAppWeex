@@ -29,7 +29,6 @@
 #import "WXDefine.h"
 #import "WXRecycleListComponent.h"
 #import "WXRecycleListDataManager.h"
-
 #import <objc/runtime.h>
 #import <UIKit/UIGestureRecognizerSubclass.h>
 #import "WXComponent+PseudoClassManagement.h"
@@ -37,13 +36,11 @@
 #pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
 
 @interface UITouch (WXTouchGestureRecognizer)
-
 @property (nonatomic, strong) NSNumber *wx_identifier;
-
+@property (nonatomic, strong) NSNumber *wx_stopPropagation;
 @end
 
 @implementation UITouch (WXTouchGestureRecognizer)
-
 - (NSNumber *)wx_identifier
 {
     return objc_getAssociatedObject(self, _cmd);
@@ -54,16 +51,22 @@
     objc_setAssociatedObject(self, @selector(wx_identifier), wx_identifier, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (NSNumber *)wx_stopPropagation
+{
+    return objc_getAssociatedObject(self, _cmd);
+}
+
+- (void)setWx_stopPropagation:(NSNumber *)wx_stopPropagation
+{
+    objc_setAssociatedObject(self, @selector(wx_stopPropagation), wx_stopPropagation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 @end
 
 @interface UIGestureRecognizer (WXGesture)
-
 @property (nonatomic, strong) NSNumber *wx_identifier;
-
 @end
 
 @implementation UIGestureRecognizer (WXGesture)
-
 - (NSNumber *)wx_identifier
 {
     NSNumber *identifier = objc_getAssociatedObject(self, _cmd);
@@ -80,7 +83,6 @@
 {
     objc_setAssociatedObject(self, @selector(wx_identifier), wx_identifier, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
 @end
 
 @interface WXTouchGestureRecognizer : UIGestureRecognizer
@@ -92,6 +94,44 @@
 @property (nonatomic, assign) BOOL listenPseudoTouch;
 
 - (instancetype)initWithComponent:(WXComponent *)component NS_DESIGNATED_INITIALIZER;
+
+@end
+
+@interface WXEventManager :NSObject
++ (instancetype) sharedManager;
+- (BOOL)stopPropagation:(NSString *)instanceId ref:(NSString *)ref type:(NSString *)type params:(NSDictionary *)params;
+@end
+
+@implementation WXEventManager
+
+- (instancetype) init
+{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
++ (instancetype)sharedManager
+{
+    static id _sharedInstance = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{
+        _sharedInstance = [[self alloc] init];
+    });
+    return _sharedInstance;
+}
+
+- (BOOL)stopPropagation:(NSString *)instanceId ref:(NSString *)ref type:(NSString *)type params:(NSDictionary *)params
+{
+    JSValue *value = [[WXSDKManager bridgeMgr] fireEventWithResult:instanceId ref:ref type:type params:params domChanges:nil];
+    
+    if ([value.toString isEqualToString:@"true"]) {
+        return YES;
+    }
+    return NO;
+}
 
 @end
 
@@ -192,6 +232,8 @@ if ([removeEventName isEqualToString:@#eventName]) {\
     WX_ADD_EVENT(touchcancel, addTouchCancelEvent)
     WX_ADD_EVENT(accessibilityMagicTap, addAccessibilityMagicTapEvent)
     
+    WX_ADD_EVENT(stopPropagation, addStopPropagationEvent)
+    
     if(_isListenPseudoTouch) {
         self.touchGesture.listenPseudoTouch = YES;
     }
@@ -220,6 +262,9 @@ if ([removeEventName isEqualToString:@#eventName]) {\
     WX_REMOVE_EVENT(touchend, removeTouchEndEvent)
     WX_REMOVE_EVENT(touchcancel, removeTouchCancelEvent)
     WX_REMOVE_EVENT(accessibilityMagicTap, removeAccessibilityMagicTapEvent)
+    
+    WX_REMOVE_EVENT(stopPropagation, removeStopPropagationEvent)
+    
     if(_isListenPseudoTouch) {
         self.touchGesture.listenPseudoTouch = NO;
     }
@@ -290,6 +335,20 @@ if ([removeEventName isEqualToString:@#eventName]) {\
     _accessibilityMagicTapEvent = NO;
 }
 
+#pragma mark - StopPropagation
+
+- (void)addStopPropagationEvent
+{
+    _listenStopPropagation = YES;
+    self.touchGesture.listenTouchMove = YES;
+}
+
+- (void)removeStopPropagationEvent
+{
+    _listenStopPropagation = NO;
+    self.touchGesture.listenTouchMove = NO;
+}
+
 #pragma mark - Click Event
 
 - (void)addClickEvent
@@ -310,7 +369,13 @@ if ([removeEventName isEqualToString:@#eventName]) {\
                 [self.view removeGestureRecognizer:_tapGesture];
             }
         }
-        [_tapGesture removeTarget:self action:@selector(onClick:)];
+        @try {
+            [_tapGesture removeTarget:self action:@selector(onClick:)];
+        }@catch(NSException *exception) {
+            WXLog(@"%@", exception);
+        } @finally {
+            
+        }
         _tapGesture = nil;
     }
 }
@@ -329,7 +394,6 @@ if ([removeEventName isEqualToString:@#eventName]) {\
         position[@"width"] = @(frame.size.width/scaleFactor);
         position[@"height"] = @(frame.size.height/scaleFactor);
     }
-
     [self fireEvent:@"click" params:@{@"position":position}];
 }
 
@@ -380,14 +444,20 @@ if ([removeEventName isEqualToString:@#eventName]) {\
         return;
     }
   
-    for (UISwipeGestureRecognizer *recognizer in _swipeGestures) {
-        recognizer.delegate = nil;
-        if([self isViewLoaded]) {
-            if ([[self.view gestureRecognizers] containsObject:recognizer]) {
-                [self.view removeGestureRecognizer:recognizer];
+    @try {
+        for (UISwipeGestureRecognizer *recognizer in _swipeGestures) {
+            recognizer.delegate = nil;
+            if([self isViewLoaded]) {
+                if ([[self.view gestureRecognizers] containsObject:recognizer]) {
+                    [self.view removeGestureRecognizer:recognizer];
+                }
             }
+            [recognizer removeTarget:self action:@selector(onSwipe:)];
         }
-        [recognizer removeTarget:self action:@selector(onSwipe:)];
+    }@catch(NSException *exception) {
+        WXLog(@"%@", exception);
+    }@finally {
+        
     }
     _swipeGestures = nil;
 }
@@ -445,7 +515,13 @@ if ([removeEventName isEqualToString:@#eventName]) {\
                 [self.view removeGestureRecognizer:_longPressGesture];
             }
         }
-        [_longPressGesture removeTarget:self action:@selector(onLongPress:)];
+        @try {
+            [_longPressGesture removeTarget:self action:@selector(onLongPress:)];
+        }@catch(NSException * exception) {
+            WXLog(@"%@", exception);
+        }@finally {
+            
+        }
         _longPressGesture = nil;
     }
 }
@@ -599,7 +675,13 @@ if ([removeEventName isEqualToString:@#eventName]) {\
         }
         
         _panGesture.delegate = nil;
-        [_panGesture removeTarget:self action:@selector(onPan:)];
+        @try {
+            [_panGesture removeTarget:self action:@selector(onPan:)];
+        }@catch(NSException * exception) {
+            WXLog(@"%@", exception);
+        }@finally {
+            
+        }
         _panGesture = nil;
     }
 }
@@ -613,7 +695,6 @@ if ([removeEventName isEqualToString:@#eventName]) {\
         _touchGesture.delegate = self;
         [self.view addGestureRecognizer:_touchGesture];
     }
-    
     return _touchGesture;
 }
 
@@ -674,11 +755,40 @@ if ([removeEventName isEqualToString:@#eventName]) {\
     }
 }
 
-#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureShouldStopPropagation:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    if(touch.wx_stopPropagation && [touch.wx_stopPropagation isEqualToNumber:@1]){
+        return NO;
+    }
+    else
+    {
+        if (_listenStopPropagation)
+        {
+            NSString *ref = _templateComponent ? _templateComponent.ref : self.ref;
+            CGPoint screenLocation = [touch locationInView:touch.window];
+            CGPoint pageLocation = [touch locationInView:self.weexInstance.rootView];
+            NSDictionary *resultTouch = [self touchResultWithScreenLocation:screenLocation pageLocation:pageLocation identifier:touch.wx_identifier];
+            NSString *touchState;
+            if (touch.phase == UITouchPhaseBegan) {
+                touchState = @"start";
+            }
+            else if (touch.phase == UITouchPhaseMoved){
+                touchState = @"move";
+            }
+            else{
+                touchState = @"end";
+            }
+            BOOL stopPropagation = [[WXEventManager sharedManager]stopPropagation:self.weexInstance.instanceId ref:ref type:@"stopPropagation" params:@{@"changedTouches":resultTouch ? @[resultTouch] : @[],@"action":touchState}];
+            touch.wx_stopPropagation = stopPropagation ? @1 : @0;
+        }
+    }
+    return YES;
+}
 
+#pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    return YES;
+    return [self gestureShouldStopPropagation:gestureRecognizer shouldReceiveTouch:touch];
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer

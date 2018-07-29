@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Bridge/WXPolyfillSet.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Bridge/WXPolyfillSet.h

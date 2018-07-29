@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Component/WXRefreshComponent.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Component/WXRefreshComponent.h

@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Module/WXLocaleModule.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Module/WXLocaleModule.h

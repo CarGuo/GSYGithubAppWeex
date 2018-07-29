@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Protocol/WXExtendCallNativeProtocol.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Protocol/WXExtendCallNativeProtocol.h

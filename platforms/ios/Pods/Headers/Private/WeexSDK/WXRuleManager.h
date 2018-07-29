@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Manager/WXRuleManager.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Manager/WXRuleManager.h

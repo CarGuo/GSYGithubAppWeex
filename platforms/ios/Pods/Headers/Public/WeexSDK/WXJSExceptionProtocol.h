@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Protocol/WXJSExceptionProtocol.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Protocol/WXJSExceptionProtocol.h

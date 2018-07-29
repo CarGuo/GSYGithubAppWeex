@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Display/WXLayer.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Display/WXLayer.h

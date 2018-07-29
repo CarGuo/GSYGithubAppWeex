@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Bridge/WXJSCoreBridge.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Bridge/WXJSCoreBridge.h

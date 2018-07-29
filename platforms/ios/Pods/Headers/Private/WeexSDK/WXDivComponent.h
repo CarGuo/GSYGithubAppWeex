@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Component/WXDivComponent.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Component/WXDivComponent.h

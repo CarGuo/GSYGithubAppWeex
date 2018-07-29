@@ -17,8 +17,13 @@
  * under the License.
  */
 
+/**
+ *  def : use weex_flex_engin
+ *  ndef: use yoga
+ **/
+
+
 #import <Foundation/Foundation.h>
-#import "WXLayoutDefine.h"
 #import "WXType.h"
 
 @class WXSDKInstance;
@@ -32,7 +37,8 @@ typedef enum : NSUInteger {
  * @abstract the component callback , result can be string or dictionary.
  * @discussion callback data to js, the id of callback function will be removed to save memory.
  */
-typedef void (^WXCallback)(_Nonnull id result) DEPRECATED_MSG_ATTRIBUTE("use WXKeepAliveCallback, you can specify keep the callback or not, if keeped, it can be called multi times, or it will be removed after called.");
+typedef void (^WXCallback)(_Nonnull id result);
+// DEPRECATED_MSG_ATTRIBUTE("use WXKeepAliveCallback, you can specify keep the callback or not, if keeped, it can be called multi times, or it will be removed after called.")
 
 /**
  * @abstract the component callback , result can be string or dictionary.
@@ -140,13 +146,6 @@ NS_ASSUME_NONNULL_BEGIN
 // * @warning Subclasses must not override this.
 // */
 //@property(nonatomic, assign) CGPoint absolutePosition;
-
-/**
- * @abstract Return the css node used to layout.
- *
- * @warning Subclasses must not override this.
- */
-@property(nonatomic, readonly, assign) css_node_t *cssNode;
 
 /**
  * @abstract Invalidates the component's layout and marks it as needing an update.

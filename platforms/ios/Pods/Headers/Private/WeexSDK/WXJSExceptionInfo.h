@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Model/WXJSExceptionInfo.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Model/WXJSExceptionInfo.h

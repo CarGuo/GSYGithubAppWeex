@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Component/WXSliderNeighborComponent.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Component/WXSliderNeighborComponent.h

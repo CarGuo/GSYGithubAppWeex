@@ -36,15 +36,6 @@ typedef id (^WXDataBindingBlock)(NSDictionary *data, BOOL *needUpdate);
 @package
     NSString *_type;
     NSMutableArray *_subcomponents;
-    /**
-     *  Layout
-     */
-    css_node_t *_cssNode;
-    BOOL _isLayoutDirty;
-    CGRect _calculatedFrame;
-    CGPoint _absolutePosition;
-    WXPositionType _positionType;
-    
     
     //Transition
     WXTransition *_transition;
@@ -98,6 +89,8 @@ typedef id (^WXDataBindingBlock)(NSDictionary *data, BOOL *needUpdate);
     
     BOOL _listenHorizontalPan;
     BOOL _listenVerticalPan;
+    
+    BOOL _listenStopPropagation;
     
     WXTouchGestureRecognizer* _touchGesture;
     
@@ -159,6 +152,11 @@ typedef id (^WXDataBindingBlock)(NSDictionary *data, BOOL *needUpdate);
     NSMutableDictionary<NSString *, NSArray *> *_eventParameters;
 }
 
+/* _transform may be modified in mutiple threads. DO NOT use "_transform = XXX" directly.
+ Ivar access in ObjC is compiled to code with additional release or retain. So use Ivar in mutiple
+ thread may lead to crash. Use an ATOMIC property is well enough. */
+@property (atomic, strong) WXTransform *transform;
+
 ///--------------------------------------
 /// @name Package Internal Methods
 ///--------------------------------------
@@ -209,6 +207,8 @@ typedef id (^WXDataBindingBlock)(NSDictionary *data, BOOL *needUpdate);
 - (void)_transitionUpdateViewProperty:(NSDictionary *)styles;
 
 - (void)_initCSSNodeWithStyles:(NSDictionary *)styles;
+
+- (void)_initFlexCssNodeWithStyles:(NSDictionary *)styles;
 
 - (void)_updateCSSNodeStyles:(NSDictionary *)styles;
 

@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Utility/WXSimulatorShortcutManager.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Utility/WXSimulatorShortcutManager.h

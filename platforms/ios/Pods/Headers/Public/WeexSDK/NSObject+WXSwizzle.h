@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Utility/NSObject+WXSwizzle.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Utility/NSObject+WXSwizzle.h

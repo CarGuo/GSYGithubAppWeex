@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Loader/WXResourceLoader.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Loader/WXResourceLoader.h

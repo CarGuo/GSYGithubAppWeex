@@ -142,6 +142,8 @@ extern void WXPerformBlockOnBridgeThread(void (^block)(void));
  **/
 - (void)fireEvent:(NSString *)instanceId ref:(NSString *)ref type:(NSString *)type params:(NSDictionary *)params domChanges:(NSDictionary *)domChanges handlerArguments:(NSArray *)handlerArguments;
 
+- (JSValue *)fireEventWithResult:(NSString *)instanceId ref:(NSString *)ref type:(NSString *)type params:(NSDictionary *)params domChanges:(NSDictionary *)domChanges;
+
 /**
  * componentHook
  * @param instanceId  : instance id

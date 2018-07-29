@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Debug/WXDebugTool.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Debug/WXDebugTool.h

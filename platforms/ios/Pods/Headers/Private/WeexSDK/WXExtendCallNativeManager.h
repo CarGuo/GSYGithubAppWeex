@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Manager/WXExtendCallNativeManager.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Manager/WXExtendCallNativeManager.h

@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Component/WXEmbedComponent.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Component/WXEmbedComponent.h

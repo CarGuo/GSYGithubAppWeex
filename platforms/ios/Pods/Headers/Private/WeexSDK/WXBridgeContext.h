@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Bridge/WXBridgeContext.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Bridge/WXBridgeContext.h

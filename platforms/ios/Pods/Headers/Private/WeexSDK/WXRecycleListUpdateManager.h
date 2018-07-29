@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Component/RecycleList/WXRecycleListUpdateManager.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Component/RecycleList/WXRecycleListUpdateManager.h

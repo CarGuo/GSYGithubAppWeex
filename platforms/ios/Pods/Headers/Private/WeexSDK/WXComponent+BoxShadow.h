@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Display/WXComponent+BoxShadow.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Display/WXComponent+BoxShadow.h

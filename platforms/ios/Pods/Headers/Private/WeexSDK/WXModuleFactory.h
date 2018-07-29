@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Manager/WXModuleFactory.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Manager/WXModuleFactory.h

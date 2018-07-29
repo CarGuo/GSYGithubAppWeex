@@ -1,1 +1,1 @@
-../../../WeexSDK/ios/sdk/WeexSDK/Sources/Events/WXComponent+Events.h
+../../../../../../../incubator-weex/ios/sdk/WeexSDK/Sources/Events/WXComponent+Events.h
