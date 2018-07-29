@@ -46524,7 +46524,7 @@ exports.default = {
             }
             _repository2.default.getReposFileDirDao(this.userName, this.reposName, this.path, this.curBranch, "text").then(function (res) {
                 if (res && res.result) {
-                    var startTag = 'class="announce instapaper_body ';
+                    var startTag = 'class="instapaper_body ';
                     var startLang = res.data.indexOf(startTag);
                     var endLang = res.data.indexOf('" data-path="');
                     var lang = void 0;

@@ -54,7 +54,7 @@
                 repository.getReposFileDirDao(this.userName, this.reposName, this.path, this.curBranch, "text")
                     .then((res) => {
                         if (res && res.result) {
-                            let startTag = `class="announce instapaper_body `;
+                            let startTag = `class="instapaper_body `;
                             let startLang = res.data.indexOf(startTag);
                             let endLang = res.data.indexOf(`" data-path="`);
                             let lang;
