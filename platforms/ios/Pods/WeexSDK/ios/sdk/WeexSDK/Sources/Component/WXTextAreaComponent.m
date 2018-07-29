@@ -185,6 +185,11 @@ typedef UITextView WXTextAreaView;
 
 -(void)setAttributedPlaceholder:(NSMutableAttributedString *)attributedString font:(UIFont *)font
 {
+    if ([_textView.text length] > 0) {
+        self.placeHolderLabel.text = @"";
+        return;
+    }
+
     if (self.placeholderColor) {
         [attributedString addAttribute:NSForegroundColorAttributeName value:self.placeholderColor range:NSMakeRange(0, self.placeholderString.length)];
         [attributedString addAttribute:NSFontAttributeName value:font range:NSMakeRange(0, self.placeholderString.length)];
@@ -197,7 +202,7 @@ typedef UITextView WXTextAreaView;
     self.placeHolderLabel.clipsToBounds = NO;
     CGRect newFrame = self.placeHolderLabel.frame;
     newFrame.size.height = ceil(expectedLabelSize.size.height);
-    newFrame.size.width = _textView.frame.size.width- CorrectX*2;
+    newFrame.size.width = _textView.frame.size.width - (_padding.left + _border.left + _padding.right + _border.right) -CorrectX*2;
     newFrame.origin.x = CorrectX + _padding.left + _border.left; // the cursor origin.x
     self.placeHolderLabel.frame = newFrame;
     self.placeHolderLabel.attributedText = attributedString;
@@ -220,11 +225,11 @@ typedef UITextView WXTextAreaView;
     [_textView setTextContainerInset:UIEdgeInsetsMake(_padding.top + _border.top,
                                                       _padding.left + _border.left,
                                                       _padding.bottom + _border.bottom,
-                                                      _border.right + _border.right)];
+                                                      _padding.right + _border.right)];
     
     //when textview update, placeHolderLabel update too
     CGRect newFrame = self.placeHolderLabel.frame;
-    newFrame.size.width = self.textView.frame.size.width - (_padding.left + _border.left) -CorrectX*2;
+    newFrame.size.width = self.textView.frame.size.width - (_padding.left + _border.left + _padding.right + _border.right) -CorrectX*2;
     newFrame.origin.x = CorrectX + _padding.left + _border.left; // the cursor origin.x
     newFrame.origin.y = _padding.top + _border.top;
     self.placeHolderLabel.frame = newFrame;
