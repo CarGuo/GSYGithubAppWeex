@@ -53,7 +53,7 @@ export function getListHeight(height = 1234, Utils) {
 
 export function getRealScreenHeight(Utils) {
     if(WXEnvironment.platform === 'Web') {
-        return Utils.env.getScreenHeight()
+        return Utils.env.getScreenHeight() + 'px'
     }
     return Utils.env.getScreenHeight() - statusHeight
 }
