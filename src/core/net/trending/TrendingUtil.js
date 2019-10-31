@@ -12,26 +12,27 @@ import StringUtil from './StringUtil';
 
 var TAGS = {
     meta: {
-        start: '<span class="d-inline-block float-sm-right">',
-        end: '</span>'
+        start: '<span class="d-inline-block float-sm-right"',
+        flag: '/svg>',
+        end: '</span>end'
     },
     starCount: {
-        start: '<a class="muted-link d-inline-block mr-3"',
-        flag: '/stargazers">',
+        start: '<svg aria-label="star"',
+        flag: '/svg>',
         end: '</a>'
     },
     forkCount: {
-        start: '<a class="muted-link d-inline-block mr-3"',
-        flag: '/network">',
+        start: '<svg aria-label="repo-forked"',
+        flag: '/svg>',
         end: '</a>'
     }
 
 }
 export default class TrendingUtil {
     static htmlToRepo(responseData) {
-        responseData = responseData.substring(responseData.indexOf('<li class="repo-list-item'), responseData.indexOf('</ol>')).replace(/\n/, '');
+        responseData = responseData.replace(/\n/, '');
         var repos = [];
-        var splitWithH3 = responseData.split('<h3');
+        var splitWithH3 = responseData.split('<article');
         splitWithH3.shift();
         for (var i = 0; i < splitWithH3.length; i++) {
             var repo = new TrendingRepoModel();
@@ -39,7 +40,7 @@ export default class TrendingUtil {
 
             this.parseRepoBaseInfo(repo, html);
 
-            var metaNoteContent = this.parseContentWithNote(html, 'class="f6 text-gray mt-2">', '</li>');
+            var metaNoteContent = this.parseContentWithNote(html, 'class="f6 text-gray mt-2">', '</div>') + "end";
             repo.meta = this.parseRepoLabelWithTag(repo, metaNoteContent, TAGS.meta);
             repo.starCount = this.parseRepoLabelWithTag(repo, metaNoteContent, TAGS.starCount);
             repo.forkCount = this.parseRepoLabelWithTag(repo, metaNoteContent, TAGS.forkCount);
@@ -74,19 +75,20 @@ export default class TrendingUtil {
             repo.reposName = repo.fullName.split('/')[1];
         }
 
-        var description = this.parseContentWithNote(htmlBaseInfo, '<p class="col-9 d-inline-block text-gray m-0 pr-4">', '</p>');
+        var description = this.parseContentWithNote(htmlBaseInfo, '<p class="col-9 text-gray my-1 pr-4">', '</p>');
         repo.description = description;
     }
 
     static parseRepoLabelWithTag(repo, noteContent, tag) {
         let startFlag;
         if (TAGS.starCount === tag || TAGS.forkCount === tag) {
-            startFlag = tag.start + ' href="/' + repo.fullName + tag.flag;
+            //startFlag = tag.start + ' href="/' + repo.fullName + tag.flag;
+            startFlag = tag.start;
         } else {
             startFlag = tag.start;
         }
         let content = this.parseContentWithNote(noteContent, startFlag, tag.end);
-        let metaContent = content.substring(content.indexOf('</svg>') + '</svg>'.length, content.length);
+        let metaContent = content.substring(content.indexOf(tag["flag"]) + tag["flag"].length, content.length);
         return StringUtil.trim(metaContent);
     }
 
