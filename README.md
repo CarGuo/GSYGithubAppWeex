@@ -9,8 +9,7 @@
 * ### 同款Android Kotlin版本 ： https://github.com/CarGuo/GSYGithubAppKotlin
 
 
-### 公众号 GSYTech
-![公众号](http://img.cdn.guoshuyu.cn/10F364A6-69F5-40C2-AB2A-124EEC1AD8CC.png)
+![公众号](http://img.cdn.guoshuyu.cn/WeChat-Code)
 
 
 ### [****** ***Weex之带你去蹲坑文章***  ******](https://www.jianshu.com/p/ae1d7a2b0a8a)
