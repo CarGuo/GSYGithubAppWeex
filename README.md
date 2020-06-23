@@ -49,10 +49,12 @@
      export const SCOPE = "xxxx";
 
    [      注册 Github APP 传送门](https://github.com/settings/applications/new)，当然，前提是你现有一个github账号(～￣▽￣)～ 。
+ 
+### 3、如果使用安全登录（授权登录），那么在上述注册 Github App 的 Authorization callback URL 一栏必须填入 `gsygithubapp://authed`
 
 <div>
-<img src="https://raw.githubusercontent.com/CarGuo/GSYGithubAPPWeex/master/register0.jpg" width="426px"/>
-<img src="https://raw.githubusercontent.com/CarGuo/GSYGithubAPPWeex/master/register1.jpg" width="426px"/>
+<img src="http://img.cdn.guoshuyu.cn/register0.png" width="426px"/>
+<img src="http://img.cdn.guoshuyu.cn/register1.jpg" width="426px"/>
 </div>
 
 4、运行
@@ -94,7 +96,7 @@
 
 ### [****** 点我传送 ******](https://github.com/CarGuo/GSYGithubAppWeex/blob/master/question.md)
 
-<img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/thanks.jpg" width="426px"/>
+<img src="http://img.cdn.guoshuyu.cn/thanks.jpg" width="426px"/>
 
 ## LICENSE
 ```
