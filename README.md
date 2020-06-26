@@ -77,11 +77,11 @@
 
 ## 示例图片
 
-<img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/1.jpg" width="426px"/>
+<img src="http://img.cdn.guoshuyu.cn/showapp1.png" width="426px"/>
 
-<img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/2.jpg" width="426px"/>
+<img src="http://img.cdn.guoshuyu.cn/showapp2.jpg" width="426px"/>
 
-<img src="https://github.com/CarGuo/GSYGithubAppWeex/blob/master/3.jpg" width="426px"/>
+<img src="http://img.cdn.guoshuyu.cn/showapp3.jpg" width="426px"/>
 
 ## 第三方框架
 
