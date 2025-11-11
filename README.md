@@ -6,7 +6,9 @@
 
 * ### 同款Flutter版本 ： https://github.com/CarGuo/GSYGithubAppFlutter
 
-* ### 同款Android Kotlin版本 ： https://github.com/CarGuo/GSYGithubAppKotlin
+* ### 同款Android Kotlin View版本（ https://github.com/CarGuo/GSYGithubAppKotlin ）
+  
+* ### 同款Android Compose版本（ https://github.com/CarGuo/GSYGithubAppKotlinCompose ）
 
 
 ![公众号](http://img.cdn.guoshuyu.cn/WeChat-Code)
