@@ -1,0 +1,32 @@
+# PR / push 触发的常规校验：依赖冷却 + 类型检查。
+# 不做完整构建（构建产物只在 tag 推送时由 release.yml 出）。
+
+name: Verify
+
+on:
+  pull_request:
+    branches: [master, feat/migrate-uniapp]
+  push:
+    branches: [master, feat/migrate-uniapp]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.18.1'
+          cache: 'npm'
+
+      - name: Supply-chain cooldown (15d)
+        run: node scripts/check-deps-cooldown.mjs
+
+      - name: Install
+        run: npm ci
+
+      - name: Type check
+        run: npm run type-check
+        continue-on-error: true

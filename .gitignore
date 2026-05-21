@@ -1,60 +1,33 @@
-# Created by .ignore support plugin (hsz.mobi)
-*.iml
-.project
-.settings/
-
-# logs
-*.log
-.idea
-npm-debug.log*
-
-# dependencies
-/node_modules
-
-# cache files
-.DS_Store
-.npm
-
-# middle compile files
-/src/sprites/*
-
-# build results
-#/pub/
-#/entry/
-
-# local configs
-lauch.json
-.vscode
-
-
-#nei
-/mock/
-#/plugins/*
+# Build artifacts
 dist/
-/temp/
-assets/tools/
+unpackage/
+*.tgz
 
-package-lock.json
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
-ignoreConfig.js
+# Lockfiles from foreign package managers (we standardize on npm)
+yarn.lock
+pnpm-lock.yaml
 
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
 
-# Xcode
-#
-build/
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata
-*.xccheckout
-*.moved-aside
-DerivedData
-*.hmap
-*.ipa
-*.xcuserstate
-project.xcworkspace
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Old Weex artifacts (kept around if accidentally regenerated)
+.temp/
+release/
+platforms/build/
