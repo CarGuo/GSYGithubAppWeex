@@ -2,44 +2,59 @@
   <view class="repo">
     <view v-if="loading" class="repo__hint"><text>加载中…</text></view>
     <view v-else-if="!data" class="repo__hint"><text>未能获取仓库</text></view>
-    <view v-else>
-      <view class="repo__header">
-        <view class="repo__title-row">
-          <text class="repo__author">{{ data.owner.login }} /</text>
-          <text class="repo__name">{{ data.name }}</text>
+    <template v-else>
+      <view class="card-black-wrapper repo__head">
+        <view class="repo__title-row" @click="openOwner">
+          <text class="repo__user">{{ data.owner.login }}</text>
+          <text class="repo__user repo__name">{{ ' / ' }}</text>
+          <text class="repo__user repo__name">{{ data.name }}</text>
         </view>
-        <text class="repo__desc">{{ data.description || '无描述' }}</text>
         <view class="repo__meta">
-          <text v-if="data.language" class="repo__tag">{{ data.language }}</text>
-          <text class="iconfont icon-star repo__meta-icon" />
-          <text class="repo__meta-item">{{ data.stargazers_count }}</text>
-          <text class="iconfont icon-xing repo__meta-icon" />
-          <text class="repo__meta-item">{{ data.forks_count }}</text>
-          <text class="iconfont icon-pinglun repo__meta-icon" />
-          <text class="repo__meta-item">{{ data.open_issues_count }}</text>
+          <text class="repo__meta-text">{{ data.language || '' }}</text>
+          <text class="repo__meta-text">{{ data.size ? (data.size / 1024).toFixed(2) + 'M' : '' }}</text>
+          <text class="repo__meta-text">{{ data.license?.name || '' }}</text>
+        </view>
+        <text class="repo__des">{{ data.description || '无描述' }}</text>
+        <text class="repo__time">{{ infoText }}</text>
+
+        <view class="repo__bottom">
+          <view class="repo__bottom-item repo__bottom-line" @click="goCommonList('reposStarer', 'Starer')">
+            <text class="iconfont icon-star repo__bottom-icon" />
+            <text class="repo__bottom-text">{{ data.watchers_count ?? '---' }}</text>
+          </view>
+          <view class="repo__bottom-item repo__bottom-line" @click="goCommonList('reposForker', 'Forker')">
+            <text class="iconfont icon-xing repo__bottom-icon" />
+            <text class="repo__bottom-text">{{ data.forks_count ?? '---' }}</text>
+          </view>
+          <view class="repo__bottom-item repo__bottom-line" @click="goCommonList('reposWatcher', 'Watcher')">
+            <text class="iconfont icon-shijian repo__bottom-icon" />
+            <text class="repo__bottom-text">{{ data.subscribers_count ?? '---' }}</text>
+          </view>
+          <view class="repo__bottom-item" @click="openIssues">
+            <text class="iconfont icon-pinglun repo__bottom-icon" />
+            <text class="repo__bottom-text">{{ data.open_issues_count ?? '---' }}</text>
+          </view>
         </view>
       </view>
 
-      <view class="repo__list">
-        <view class="repo__item" @click="openIssues">
-          <text class="repo__item-title">Issues</text>
-          <text class="repo__item-arrow">›</text>
-        </view>
-        <view class="repo__item" @click="openWeb(data.html_url)">
-          <text class="repo__item-title">在 GitHub 打开</text>
-          <text class="repo__item-arrow">›</text>
-        </view>
-        <view v-if="data.homepage" class="repo__item" @click="openWeb(data.homepage)">
-          <text class="repo__item-title">主页</text>
-          <text class="repo__item-arrow">›</text>
-        </view>
+      <view class="card-white-wrapper repo__menu" @click="openIssues">
+        <text class="content-text-black-bold">Issues</text>
+        <text class="repo__menu-arrow">›</text>
       </view>
-    </view>
+      <view class="card-white-wrapper repo__menu" @click="openWeb(data.html_url)">
+        <text class="content-text-black-bold">在 GitHub 打开</text>
+        <text class="repo__menu-arrow">›</text>
+      </view>
+      <view v-if="data.homepage" class="card-white-wrapper repo__menu" @click="openWeb(data.homepage)">
+        <text class="content-text-black-bold">主页</text>
+        <text class="repo__menu-arrow">›</text>
+      </view>
+    </template>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import http from '@/api/http'
 import { Address } from '@/api/address'
@@ -48,18 +63,31 @@ interface RepoDetail {
   name: string
   description: string | null
   language: string | null
+  size?: number
+  license?: { name?: string } | null
   stargazers_count: number
+  watchers_count?: number
   forks_count: number
+  subscribers_count?: number
   open_issues_count: number
   html_url: string
   homepage?: string | null
-  owner: { login: string }
+  pushed_at?: string
+  created_at?: string
+  owner: { login: string; avatar_url?: string }
 }
 
 const data = ref<RepoDetail | null>(null)
 const loading = ref(false)
 const owner = ref('')
 const name = ref('')
+
+const infoText = computed(() => {
+  if (!data.value) return ''
+  const t = data.value.pushed_at ? new Date(data.value.pushed_at) : null
+  if (!t || isNaN(t.getTime())) return ''
+  return `最后更新 ${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`
+})
 
 onLoad(async (q: Record<string, string> | undefined) => {
   owner.value = q?.owner || ''
@@ -80,80 +108,113 @@ onLoad(async (q: Record<string, string> | undefined) => {
 function openIssues() {
   uni.navigateTo({ url: `/pages/repository-issues/index?owner=${owner.value}&name=${name.value}` })
 }
-function openWeb(url: string) {
+function openWeb(url?: string | null) {
   if (!url) return
   uni.navigateTo({ url: `/pages/web/index?url=${encodeURIComponent(url)}` })
+}
+function openOwner() {
+  if (!data.value) return
+  uni.navigateTo({ url: `/pages/user-info/index?login=${data.value.owner.login}` })
+}
+function goCommonList(dataType: string, title: string) {
+  uni.navigateTo({
+    url: `/pages/common-list/index?owner=${owner.value}&name=${name.value}&dataType=${dataType}&title=${encodeURIComponent(title)}`
+  })
 }
 </script>
 
 <style lang="scss" scoped>
 .repo {
-  padding: 24rpx;
   min-height: 100vh;
   background-color: $gsy-container;
+  padding: 20rpx 0 40rpx;
+}
+.repo__hint {
+  text-align: center;
+  color: $gsy-gray;
+  padding: 60rpx 0;
+}
 
-  &__hint {
-    text-align: center;
-    color: $gsy-gray;
-    padding: 80rpx 0;
-  }
-  &__header {
-    background: #ffffff;
-    border-radius: 10rpx;
-    padding: 24rpx;
-    box-shadow: $gsy-box-shadow;
-    margin-bottom: 24rpx;
-  }
-  &__title-row { display: flex; flex-direction: row; }
-  &__author { color: $gsy-action-blue; margin-right: 8rpx; font-weight: 600; font-size: 30rpx; }
-  &__name { color: $gsy-theme-color; font-weight: 600; font-size: 30rpx; }
-  &__desc {
-    display: block;
-    color: $gsy-gray;
-    font-size: 26rpx;
-    margin: 16rpx 0;
-    line-height: 1.6;
-  }
-  &__meta {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  &__tag {
-    background: $gsy-mi-white;
-    color: $gsy-theme-color;
-    font-size: 22rpx;
-    padding: 2rpx 10rpx;
-    border-radius: 8rpx;
-    margin-right: 16rpx;
-  }
-  &__meta-icon {
-    color: $gsy-theme-color;
-    font-size: 24rpx;
-    margin-right: 4rpx;
-  }
-  &__meta-item {
-    color: $gsy-gray;
-    font-size: 24rpx;
-    margin-right: 16rpx;
-  }
-  &__list {
-    background: #ffffff;
-    border-radius: 10rpx;
-    box-shadow: $gsy-box-shadow;
-    overflow: hidden;
-  }
-  &__item {
-    padding: 28rpx 24rpx;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1rpx solid $gsy-mi-white;
-    &:last-child { border-bottom: none; }
-  }
-  &__item-title { color: $gsy-theme-color; font-size: 28rpx; }
-  &__item-arrow { color: $gsy-gray; font-size: 32rpx; }
+.repo__head {
+  margin-top: 0;
+}
+.repo__title-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.repo__user {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.repo__name { font-size: 34rpx; }
+
+.repo__meta {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+}
+.repo__meta-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 24rpx;
+  margin-right: 20rpx;
+}
+
+.repo__des {
+  display: block;
+  color: rgba(227, 227, 227, 0.7);
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+}
+.repo__time {
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 22rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+  text-align: right;
+}
+
+.repo__bottom {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.7);
+  padding-top: 10rpx;
+}
+.repo__bottom-item {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 8rpx 0;
+}
+.repo__bottom-line {
+  border-right: 1rpx solid rgba(255, 255, 255, 0.5);
+}
+.repo__bottom-icon {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 24rpx;
+  margin-right: 6rpx;
+}
+.repo__bottom-text {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 24rpx;
+}
+
+.repo__menu {
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.repo__menu-arrow {
+  color: $gsy-gray;
+  font-size: 32rpx;
 }
 </style>

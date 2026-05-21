@@ -5,15 +5,37 @@
       <text :class="['issues__filter-item', { 'is-active': state === 'closed' }]" @click="setState('closed')">Closed</text>
       <text :class="['issues__filter-item', { 'is-active': state === 'all' }]" @click="setState('all')">All</text>
     </view>
+
     <view v-if="loading" class="issues__hint"><text>加载中…</text></view>
     <view v-else-if="list.length === 0" class="issues__hint"><text>暂无 Issue</text></view>
     <view v-else>
-      <view v-for="(it, idx) in list" :key="it.id || idx" class="issues__item">
-        <view class="issues__item-row">
-          <text class="issues__item-num">#{{ it.number }}</text>
-          <text class="issues__item-title">{{ it.title }}</text>
+      <view
+        v-for="(it, idx) in list"
+        :key="it.id || idx"
+        class="card-white-wrapper issues__card"
+        @click="openIssue(it)"
+      >
+        <view class="issues__row">
+          <image
+            v-if="it.user?.avatar_url"
+            :src="it.user.avatar_url"
+            class="issues__avatar"
+            @click.stop="openUser(it.user.login)"
+          />
+          <view class="issues__main">
+            <text class="name-text-theme">{{ it.user?.login || '' }}</text>
+            <text class="content-text-gray issues__content text-line-three">{{ it.title }}</text>
+          </view>
+          <text class="content-text-gray issues__time">{{ formatTime(it.updated_at || it.created_at) }}</text>
         </view>
-        <text class="issues__item-meta">{{ it.user.login }} · {{ it.state }} · 评论 {{ it.comments }}</text>
+        <view class="issues__bottom">
+          <text
+            class="content-text-gray issues__state iconfont"
+            :style="{ color: it.state === 'open' ? '#2cbe4e' : '#cb2431' }"
+          >{{ '\ue661' }}</text>
+          <text class="content-text-gray issues__number">{{ ' #' + it.number }}</text>
+          <text class="content-text-gray issues__comment iconfont">{{ '\ue6ba ' + (it.comments ?? 0) }}</text>
+        </view>
       </view>
     </view>
   </view>
@@ -31,7 +53,10 @@ interface Issue {
   title: string
   state: string
   comments: number
-  user: { login: string }
+  html_url?: string
+  created_at?: string
+  updated_at?: string
+  user: { login: string; avatar_url?: string }
 }
 
 const owner = ref('')
@@ -53,8 +78,31 @@ async function load() {
 }
 
 function setState(s: 'open' | 'closed' | 'all') {
+  if (state.value === s) return
   state.value = s
   load()
+}
+
+function openIssue(it: Issue) {
+  if (it.html_url) {
+    uni.navigateTo({ url: `/pages/web/index?url=${encodeURIComponent(it.html_url)}` })
+  }
+}
+
+function openUser(login?: string) {
+  if (!login) return
+  uni.navigateTo({ url: `/pages/user-info/index?login=${login}` })
+}
+
+function formatTime(iso?: string): string {
+  if (!iso) return ''
+  const t = Date.parse(iso)
+  if (isNaN(t)) return iso
+  const diff = Math.floor((Date.now() - t) / 1000)
+  if (diff < 60) return `${diff}s 前`
+  if (diff < 3600) return `${Math.floor(diff / 60)}m 前`
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h 前`
+  return `${Math.floor(diff / 86400)}d 前`
 }
 
 onLoad((q: Record<string, string> | undefined) => {
@@ -94,35 +142,52 @@ onLoad((q: Record<string, string> | undefined) => {
     color: $gsy-gray;
     padding: 64rpx 0;
   }
-  &__item {
-    background: #ffffff;
-    border-radius: 10rpx;
-    padding: 20rpx 24rpx;
+  &__card {
     margin-bottom: 16rpx;
-    box-shadow: $gsy-box-shadow;
   }
-  &__item-row {
+  &__row {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20rpx;
+  }
+  &__avatar {
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 35rpx;
+    margin-right: 20rpx;
+  }
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  &__content {
+    margin-top: 12rpx;
+  }
+  &__time {
+    font-size: 22rpx;
+    margin-top: 6rpx;
+    margin-left: 12rpx;
+  }
+  &__bottom {
     display: flex;
     flex-direction: row;
     align-items: center;
+    overflow: hidden;
   }
-  &__item-num {
-    color: $gsy-action-blue;
-    font-size: 26rpx;
-    margin-right: 12rpx;
-    font-weight: 600;
+  &__state {
+    margin-left: 90rpx;
+    font-family: 'wxcIconFont';
   }
-  &__item-title {
-    color: $gsy-theme-color;
-    font-size: 28rpx;
-    font-weight: 600;
+  &__number {
+    font-size: 24rpx;
     flex: 1;
+    margin-left: 10rpx;
   }
-  &__item-meta {
-    display: block;
-    color: $gsy-gray;
-    font-size: 22rpx;
-    margin-top: 8rpx;
+  &__comment {
+    text-align: right;
+    font-size: 24rpx;
+    font-family: 'wxcIconFont';
   }
 }
 </style>
