@@ -1,8 +1,9 @@
 <template>
   <view class="welcome">
-    <image class="welcome__logo" src="/static/logo.png" mode="aspectFit" />
-    <text class="welcome__title">GSY GitHub App</text>
-    <text class="welcome__subtitle">uni-app 版 · v{{ version }}</text>
+    <image class="welcome__bg" :src="welcomeImg" mode="aspectFill" />
+    <view class="welcome__overlay">
+      <text class="welcome__version">v{{ version }}</text>
+    </view>
   </view>
 </template>
 
@@ -10,6 +11,7 @@
 import { onLoad } from '@dcloudio/uni-app'
 import { APP_VERSION } from '@/config'
 import { useUserStore } from '@/stores/user'
+import welcomeImg from '@/static/welcome.png'
 
 const version = APP_VERSION
 
@@ -22,33 +24,35 @@ onLoad(async () => {
     } else {
       uni.redirectTo({ url: '/pages/login/index' })
     }
-  }, 800)
+  }, 1500)
 })
 </script>
 
 <style lang="scss" scoped>
 .welcome {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  width: 100vw;
   height: 100vh;
-  background: linear-gradient(180deg, #2196f3 0%, #1976d2 100%);
+  background-color: $gsy-theme-color;
+  overflow: hidden;
 
-  &__logo {
-    width: 140rpx;
-    height: 140rpx;
-    margin-bottom: 32rpx;
+  &__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  &__title {
-    color: #fff;
-    font-size: 44rpx;
-    font-weight: 600;
-    margin-bottom: 12rpx;
+  &__overlay {
+    position: absolute;
+    bottom: 60rpx;
+    left: 0;
+    right: 0;
+    text-align: center;
   }
 
-  &__subtitle {
+  &__version {
     color: rgba(255, 255, 255, 0.85);
     font-size: 26rpx;
   }

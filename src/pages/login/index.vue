@@ -1,15 +1,14 @@
 <template>
   <view class="login">
-    <view class="login__hero">
+    <view class="login__card">
       <image class="login__logo" src="/static/logo.png" mode="aspectFit" />
+
       <text class="login__title">登录到 GitHub</text>
       <text class="login__hint">
         Basic Auth 已被 GitHub 弃用，请贴入 Personal Access Token (PAT) 登录。
         创建入口：Settings → Developer settings → Personal access tokens。
       </text>
-    </view>
 
-    <view class="login__form">
       <input
         v-model="token"
         class="login__input"
@@ -19,7 +18,7 @@
 
       <view class="login__row">
         <text class="login__row-label">隐藏 token</text>
-        <switch :checked="masked" @change="onToggleMask" color="#2196F3" />
+        <switch :checked="masked" @change="onToggleMask" :color="themeColor" />
       </view>
 
       <button
@@ -43,6 +42,7 @@ import { useUserStore } from '@/stores/user'
 const userStore = useUserStore()
 const token = ref('')
 const masked = ref(true)
+const themeColor = '#3c3f41'
 
 function onToggleMask(e: any) {
   masked.value = e.detail.value
@@ -60,46 +60,52 @@ async function onLogin() {
 
 <style lang="scss" scoped>
 .login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: $gsy-theme-color;
   padding: 48rpx 32rpx;
 
-  &__hero {
-    text-align: center;
-    margin-bottom: 64rpx;
+  &__card {
+    width: 600rpx;
+    background-color: #ffffff;
+    border-radius: 10rpx;
+    padding: 50rpx 40rpx;
+    box-shadow: $gsy-box-shadow;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   &__logo {
-    width: 120rpx;
-    height: 120rpx;
+    width: 160rpx;
+    height: 160rpx;
     margin: 0 auto 24rpx;
-    display: block;
   }
 
   &__title {
-    display: block;
-    font-size: 40rpx;
+    text-align: center;
+    color: $gsy-theme-color;
+    font-size: 36rpx;
     font-weight: 600;
     margin-bottom: 16rpx;
   }
 
   &__hint {
-    display: block;
-    color: #888;
+    color: $gsy-gray;
     font-size: 24rpx;
     line-height: 1.5;
-    padding: 0 16rpx;
-  }
-
-  &__form {
-    background: #fff;
-    border-radius: 12rpx;
-    padding: 32rpx;
+    margin-bottom: 40rpx;
+    text-align: center;
   }
 
   &__input {
-    border: 1px solid #e5e5e5;
-    border-radius: 8rpx;
+    border: 2rpx solid $gsy-theme-color;
+    border-radius: 12rpx;
     padding: 20rpx 24rpx;
-    font-size: 28rpx;
+    font-size: 30rpx;
+    color: $gsy-input-color;
     margin-bottom: 24rpx;
   }
 
@@ -107,25 +113,29 @@ async function onLogin() {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24rpx;
+    margin-bottom: 32rpx;
   }
 
   &__row-label {
-    color: #555;
+    color: $gsy-input-color;
     font-size: 26rpx;
   }
 
   &__submit {
-    background: #2196f3;
-    color: #fff;
-    border-radius: 8rpx;
+    background-color: $gsy-theme-color;
+    color: #ffffff;
+    border-radius: 12rpx;
     font-size: 30rpx;
+
+    &[disabled] {
+      background-color: $gsy-theme-light;
+      color: rgba(255, 255, 255, 0.6);
+    }
   }
 
   &__error {
-    display: block;
     margin-top: 24rpx;
-    color: #f44336;
+    color: $uni-color-error;
     font-size: 26rpx;
     text-align: center;
   }

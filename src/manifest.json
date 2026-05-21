@@ -49,13 +49,13 @@
     "title": "GSY GitHub App",
     "router": {
       "mode": "history",
-      "base": "./"
+      "base": "/"
     },
     "devServer": {
       "port": 8080,
       "https": false
     },
-    "publicPath": "./"
+    "publicPath": "/"
   },
   "vueVersion": "3"
 }

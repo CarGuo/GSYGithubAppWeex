@@ -34,7 +34,7 @@
     "vue-i18n": "9.14.5"
   },
   "devDependencies": {
-    "@dcloudio/types": "3.4.31",
+    "@dcloudio/types": "3.4.28",
     "@dcloudio/uni-automator": "3.0.0-5000720260410001",
     "@dcloudio/uni-cli-shared": "3.0.0-5000720260410001",
     "@dcloudio/uni-stacktracey": "3.0.0-5000720260410001",
@@ -43,7 +43,7 @@
     "@vue/tsconfig": "0.9.1",
     "sass": "1.99.0",
     "typescript": "6.0.3",
-    "vite": "5.4.21",
+    "vite": "5.2.8",
     "vue-tsc": "3.2.7"
   },
   "uni-app": {

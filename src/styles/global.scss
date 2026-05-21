@@ -1,23 +1,147 @@
-@import './uni.scss';
+@import '../uni.scss';
+
+/* ========== 原 GSY iconfont 字体 ========== */
+@font-face {
+  font-family: 'iconfont';
+  src: url('/static/font/iconfont.woff') format('woff'),
+       url('/static/font/iconfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 32rpx;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shijian:before     { content: '\e62d'; }
+.icon-rifangwenqushi:before { content: '\e818'; }
+.icon-sousuo:before      { content: '\e61c'; }
+.icon-ren:before         { content: '\e604'; }
+.icon-GitHub:before      { content: '\ea0a'; }
+.icon-xing:before        { content: '\e698'; }
+.icon-star:before        { content: '\e643'; }
+.icon-fanhui:before      { content: '\e78a'; }
+.icon-pinglun:before     { content: '\e6ba'; }
+
+/* ========== 原 GSYGithubAppWeex/src/config/styles.scss 移植 ========== */
 
 page {
-  background-color: $uni-bg-color-grey;
-  color: $uni-text-color;
-  font-size: $uni-font-size-base;
+  background-color: $gsy-container;
+  color: $gsy-theme-color;
+  font-size: 28rpx;
 }
 
-.gsy-card {
-  background: $uni-bg-color;
-  border-radius: 6px;
-  padding: $uni-spacing-row-base;
-  margin: $uni-spacing-row-sm $uni-spacing-row-base;
+.gsy-card-white {
+  width: 700rpx;
+  background-color: #ffffff;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  box-shadow: $gsy-box-shadow;
 }
 
+.gsy-card-black-full {
+  width: 750rpx;
+  background-color: $gsy-theme-color;
+  border-bottom-left-radius: 15rpx;
+  border-bottom-right-radius: 15rpx;
+  padding: 20rpx;
+  box-shadow: $gsy-box-shadow;
+}
+
+.gsy-card-black {
+  width: 710rpx;
+  background-color: $gsy-theme-color;
+  padding: 20rpx;
+  margin-top: 20rpx;
+  border-radius: 15rpx;
+  box-shadow: $gsy-box-shadow;
+}
+
+.gsy-text-line-three {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
+.gsy-text-line-one {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
+.gsy-content-text-black-bold {
+  color: $gsy-theme-color;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.gsy-content-text-gray {
+  color: $gsy-gray;
+  font-size: 28rpx;
+}
+
+.gsy-content-text-white {
+  color: #ffffff;
+  font-size: 28rpx;
+}
+
+.gsy-name-text {
+  color: $gsy-gray;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.gsy-name-text-theme {
+  color: $gsy-theme-color;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.gsy-name-text-white {
+  display: -webkit-box;
+  white-space: normal !important;
+  word-wrap: break-word;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gsy-user-text-theme {
+  color: $gsy-theme-color;
+  font-size: 30rpx;
+  display: -webkit-box;
+  overflow: hidden;
+  white-space: normal !important;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  -webkit-line-clamp: 1;
+  flex: 1;
+  font-weight: bold;
+  -webkit-box-orient: vertical;
+}
+
+/* 兼容旧名 */
 .gsy-divider {
-  height: 1px;
+  height: 1rpx;
   background-color: $uni-border-color;
 }
 
-.gsy-text-primary { color: $uni-color-primary; }
-.gsy-text-grey    { color: $uni-text-color-grey; }
+.gsy-text-primary { color: $gsy-theme-color; }
+.gsy-text-grey    { color: $gsy-gray; }
 .gsy-text-error   { color: $uni-color-error; }
