@@ -142,6 +142,44 @@ H5 端会被 CORS 阻断（github.com 不允许跨域）；App / 小程序端没
 
 ---
 
+## 5.5 UI 对齐策略（不重画原 App）
+
+**原则**：所有可视产物按原 GSYGithubAppWeex 的设计稿/资源/色盘复刻，**不引入新视觉语言**。
+
+### 设计 token 对照（从原 [`src/config/Config.js`](https://github.com/CarGuo/GSYGithubAppWeex) 抽取）
+| Token | 旧（Weex Config） | 新（[`src/uni.scss`](./src/uni.scss)） |
+|---|---|---|
+| 主题深灰 | `primaryColor = '#3c3f41'` | `$gsy-theme-color`、`$uni-color-primary` |
+| 主题深色 | `primaryDarkColor = '#121917'` | `$gsy-theme-dark` |
+| 主题浅色 | `primaryLightColor = '#42464b'` | `$gsy-theme-light` |
+| 强调蓝 | `actionBlue = '#267aff'` | `$gsy-action-blue` |
+| 浅灰底 | `miWhite = '#ececec'` | `$gsy-mi-white` |
+| 容器底 | `subLightTextColor = '#f2f3f4'` | `$gsy-container` |
+| 输入字 | — | `$gsy-input-color = #666666` |
+| 灰阶 | `subTextColor = rgba(97,97,97,0.9)` | `$gsy-gray` |
+| 阴影 | 旧 styles.scss `box-shadow` | `$gsy-box-shadow` |
+
+### Utility 类（从原 [`src/config/styles.scss`] 移植到 [`src/styles/global.scss`]）
+`gsy-card-white` / `gsy-card-black` / `gsy-card-black-full` / `gsy-text-line-three` / `gsy-text-line-one` / `gsy-content-text-black-bold` / `gsy-content-text-gray` / `gsy-content-text-white` / `gsy-name-text` / `gsy-name-text-theme` / `gsy-name-text-white` / `gsy-user-text-theme`，全部用 `rpx` 重写，同时保留旧名 `gsy-divider` / `gsy-text-primary` / `gsy-text-grey` / `gsy-text-error`。
+
+### 资源迁移
+- [`src/static/logo.png`](./src/static/logo.png)（77KB，原戴墨镜笑脸 logo）
+- [`src/static/welcome.png`](./src/static/welcome.png)（835KB，启动闪屏背景）
+- [`src/static/default_img.png`](./src/static/default_img.png)（默认头像）
+- [`src/static/font/iconfont.{ttf,woff,css}`](./src/static/font/)（iconfont 字体）
+
+### 已落地的页面对齐
+- **WelcomePage** → [`pages/welcome/index.vue`](./src/pages/welcome/index.vue)：全屏 `welcome.png`（aspectFill）+ 底部版本号
+- **LoginPage** → [`pages/login/index.vue`](./src/pages/login/index.vue)：深主题色背景 + 600rpx 居中白卡（border-radius 10rpx + box-shadow）+ 160rpx logo + "登录到 GitHub" 标题 + PAT 说明 + 主题色描边输入框 + 主题色按钮 + 主题色 switch（**注意**：因 GitHub 已弃用 Basic Auth，登录方式从用户名/密码改为 PAT）
+- **MainPage** → [`pages/main/index.vue`](./src/pages/main/index.vue)：顶部深主题色 NavigationBar（标题居中 + 右侧 iconfont 搜索图标）+ 主体白卡 + iconfont 占位
+- **TrendPage** → [`pages/trend/index.vue`](./src/pages/trend/index.vue)：今日/本周/本月 segmented + 仓库白卡（作者蓝 + 仓库名主题色加粗 + 描述灰 + 语言 chip 浅白底主题色字 + iconfont star/xing + stars-added 警告色）
+- **TabBar** → [`pages.json`](./src/pages.json) 全局 tabBar：深主题色选中、灰未选、白底，4 项（动态 / 趋势 / 搜索 / 我）
+
+### 一处关键 bug（H5 资源路径）
+`manifest.json > h5.router.base` 和 `h5.publicPath` 默认 `./`（相对路径），导致 `<image src="/static/logo.png">` 在 `pages/login/index` 路由下被解析为 `/pages/login/static/logo.png` 而 404。修复：两者均改为 `/`（站点根），见 [src/manifest.json](./src/manifest.json#L48-L59)。
+
+---
+
 ## 6. 待迁移页面
 
 本轮**完整迁了 4 个页面**作为样板：
@@ -190,8 +228,8 @@ H5 端会被 CORS 阻断（github.com 不允许跨域）；App / 小程序端没
 1. **easycom 自动注册**：[pages.json](./src/pages.json) 已配置 `^uni-(.*)` 正则，组件用即引；自定义组件（GSY 自有）放 `src/components/` 下也能 easycom，注意命名冲突。
 2. **i18n 入口未启用**：vue-i18n 已在 dependencies 里，但 `main.ts` 未挂；待写 `src/locale/` 后启用。
 3. **TypeScript 严格模式开启**：`tsconfig.json` strict=true；老代码搬运时会有大量 any，建议局部 `// @ts-expect-error` 标注 + Issue 跟踪。
-4. **图片资源**：旧 `static/img/` 仅复制了 `logo.png`；其他图片（`default_img.png`、`welcome.png`）按需复制到 `src/static/`。
-5. **iconfont**：旧 `static/font/iconfont.*` 未迁移，需在 [`src/uni.scss`](./src/uni.scss) 中通过 `@font-face` 引入。
+4. **图片资源**：已从旧工程复制 `logo.png`、`welcome.png`、`default_img.png` 到 [`src/static/`](./src/static/)。
+5. **iconfont**：已从旧工程复制 `iconfont.ttf` / `iconfont.woff` / `iconfont.css` 到 [`src/static/font/`](./src/static/font/)，并在 [`src/styles/global.scss`](./src/styles/global.scss) 通过 `@font-face` 注入，常用图标（`icon-shijian` 动态、`icon-rifangwenqushi` 趋势、`icon-sousuo` 搜索、`icon-ren` 我、`icon-star`/`icon-xing` 星标/分支、`icon-GitHub`、`icon-fanhui`、`icon-pinglun`）已声明对应 unicode。
 
 ---
 

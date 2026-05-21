@@ -119,12 +119,12 @@
   "globalStyle": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "GSY GitHub App",
-    "navigationBarBackgroundColor": "#2196F3",
-    "backgroundColor": "#F5F5F5"
+    "navigationBarBackgroundColor": "#3c3f41",
+    "backgroundColor": "#f2f3f4"
   },
   "tabBar": {
     "color": "#999999",
-    "selectedColor": "#2196F3",
+    "selectedColor": "#3c3f41",
     "backgroundColor": "#FFFFFF",
     "borderStyle": "black",
     "list": [

@@ -13,7 +13,6 @@
     "skipLibCheck": true,
     "lib": ["ESNext", "DOM"],
     "types": ["@dcloudio/types", "vite/client"],
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }

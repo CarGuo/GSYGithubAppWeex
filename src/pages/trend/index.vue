@@ -24,8 +24,10 @@
         <text class="trend__item-desc">{{ item.reposDesc }}</text>
         <view class="trend__item-meta">
           <text v-if="item.reposLanguage" class="trend__item-tag">{{ item.reposLanguage }}</text>
-          <text class="trend__item-meta-item">★ {{ item.reposStars }}</text>
-          <text class="trend__item-meta-item">⑂ {{ item.reposForks }}</text>
+          <text class="iconfont icon-star trend__item-meta-icon" />
+          <text class="trend__item-meta-item">{{ item.reposStars }}</text>
+          <text class="iconfont icon-xing trend__item-meta-icon" />
+          <text class="trend__item-meta-item">{{ item.reposForks }}</text>
           <text class="trend__item-meta-add">{{ item.reposStarsAdded }}</text>
         </view>
       </view>
@@ -71,42 +73,44 @@ onShow(load)
 
   &__filter {
     display: flex;
-    background: #fff;
-    border-radius: 12rpx;
+    background: #ffffff;
+    border-radius: 10rpx;
     margin-bottom: 24rpx;
     overflow: hidden;
+    box-shadow: $gsy-box-shadow;
   }
   &__filter-item {
     flex: 1;
     text-align: center;
     padding: 24rpx 0;
-    color: #555;
+    color: $gsy-gray;
     &.is-active {
-      color: #2196f3;
+      color: $gsy-theme-color;
       font-weight: 600;
-      border-bottom: 4rpx solid #2196f3;
+      border-bottom: 4rpx solid $gsy-theme-color;
     }
   }
   &__loading {
     text-align: center;
-    color: #999;
+    color: $gsy-gray;
     padding: 64rpx 0;
   }
   &__item {
-    background: #fff;
-    border-radius: 12rpx;
+    background: #ffffff;
+    border-radius: 10rpx;
     padding: 24rpx;
     margin-bottom: 16rpx;
+    box-shadow: $gsy-box-shadow;
   }
   &__item-row {
     display: flex;
     flex-direction: row;
   }
-  &__item-author { color: #2196f3; margin-right: 8rpx; }
-  &__item-name { color: #2196f3; font-weight: 600; }
+  &__item-author { color: $gsy-action-blue; margin-right: 8rpx; font-weight: 600; }
+  &__item-name { color: $gsy-theme-color; font-weight: 600; }
   &__item-desc {
     display: block;
-    color: #555;
+    color: $gsy-gray;
     font-size: 26rpx;
     margin: 12rpx 0;
   }
@@ -117,20 +121,25 @@ onShow(load)
     flex-wrap: wrap;
   }
   &__item-tag {
-    background: #e3f2fd;
-    color: #1976d2;
+    background: $gsy-mi-white;
+    color: $gsy-theme-color;
     font-size: 22rpx;
     padding: 2rpx 10rpx;
     border-radius: 8rpx;
     margin-right: 16rpx;
   }
   &__item-meta-item {
-    color: #888;
+    color: $gsy-gray;
     font-size: 24rpx;
     margin-right: 16rpx;
   }
+  &__item-meta-icon {
+    color: $gsy-theme-color;
+    font-size: 24rpx;
+    margin-right: 4rpx;
+  }
   &__item-meta-add {
-    color: #ff9800;
+    color: $uni-color-warning;
     font-size: 24rpx;
   }
 }

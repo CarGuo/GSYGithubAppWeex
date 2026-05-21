@@ -1,31 +1,45 @@
 /* uni-app 全局变量入口（每个 vue 文件 style 前自动注入）。
-   保留尽量少的全局变量，避免污染 H5/小程序 端样式作用域。*/
+   设计 token 直接承接原 GSYGithubAppWeex 的 src/config/styles.scss + Config.js，
+   颜色与命名以"原工程为准"，仅做必要的 H5 化（rpx → 双端通用）。*/
 
-$uni-color-primary: #2196F3;
+/* ========== 原工程主题色 ========== */
+$gsy-theme-color: #3c3f41;
+$gsy-theme-dark: #121917;
+$gsy-theme-light: #42464b;
+$gsy-action-blue: #267aff;
+$gsy-mi-white: #ececec;
+$gsy-container: #f2f3f4;
+$gsy-input-color: #666666;
+$gsy-gray: rgba(97, 97, 97, 0.9);
+$gsy-box-shadow: 0 0 10rpx rgba(211, 210, 210, 0.5);
+$gsy-web-dracula-bg: #282a36;
+
+/* ========== uni-ui 默认 token（沿用，保 uni-ui 组件风格） ========== */
+$uni-color-primary: $gsy-theme-color;
 $uni-color-success: #4caf50;
 $uni-color-warning: #ff9800;
 $uni-color-error: #f44336;
 
-$uni-text-color: #333;
-$uni-text-color-inverse: #fff;
-$uni-text-color-grey: #999;
+$uni-text-color: $gsy-theme-color;
+$uni-text-color-inverse: #ffffff;
+$uni-text-color-grey: $gsy-gray;
 $uni-text-color-placeholder: #c0c4cc;
 $uni-text-color-disable: #c0c4cc;
 
 $uni-bg-color: #ffffff;
-$uni-bg-color-grey: #f8f8f8;
-$uni-bg-color-hover: #f1f1f1;
+$uni-bg-color-grey: $gsy-container;
+$uni-bg-color-hover: $gsy-mi-white;
 
 $uni-border-color: #e5e5e5;
 
-$uni-font-size-sm: 12px;
-$uni-font-size-base: 14px;
-$uni-font-size-lg: 16px;
+$uni-font-size-sm: 24rpx;
+$uni-font-size-base: 28rpx;
+$uni-font-size-lg: 30rpx;
 
-$uni-spacing-row-sm: 5px;
-$uni-spacing-row-base: 10px;
-$uni-spacing-row-lg: 15px;
+$uni-spacing-row-sm: 10rpx;
+$uni-spacing-row-base: 20rpx;
+$uni-spacing-row-lg: 30rpx;
 
-$uni-spacing-col-sm: 4px;
-$uni-spacing-col-base: 8px;
-$uni-spacing-col-lg: 12px;
+$uni-spacing-col-sm: 8rpx;
+$uni-spacing-col-base: 16rpx;
+$uni-spacing-col-lg: 24rpx;
