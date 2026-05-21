@@ -145,3 +145,95 @@ page {
 .gsy-text-primary { color: $gsy-theme-color; }
 .gsy-text-grey    { color: $gsy-gray; }
 .gsy-text-error   { color: $uni-color-error; }
+
+/* ========== 原 GSY class 别名（不带 gsy- 前缀，与原工程一致） ========== */
+.card-white-wrapper {
+  width: 700rpx;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 10rpx;
+  padding: 20rpx;
+  box-shadow: $gsy-box-shadow;
+}
+.card-black-full-wrapper {
+  width: 100%;
+  background-color: $gsy-theme-color;
+  border-bottom-left-radius: 15rpx;
+  border-bottom-right-radius: 15rpx;
+  padding: 20rpx;
+  box-shadow: $gsy-box-shadow;
+}
+.card-black-wrapper {
+  width: 710rpx;
+  margin: 20rpx auto 0;
+  background-color: $gsy-theme-color;
+  padding: 20rpx;
+  border-radius: 15rpx;
+  box-shadow: $gsy-box-shadow;
+}
+.text-line-three {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  white-space: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+.text-line-one {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: normal !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+.content-text-black-bold {
+  color: $gsy-theme-color;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.content-text-gray {
+  color: $gsy-gray;
+  font-size: 28rpx;
+}
+.content-text-white {
+  color: #ffffff;
+  font-size: 28rpx;
+}
+.name-text {
+  color: $gsy-gray;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.name-text-theme {
+  color: $gsy-theme-color;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+.name-text-white {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  white-space: normal !important;
+  word-wrap: break-word;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.user-text-theme {
+  color: $gsy-theme-color;
+  font-size: 30rpx;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: normal !important;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  flex: 1;
+  font-weight: bold;
+}

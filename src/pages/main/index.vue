@@ -1,40 +1,33 @@
 <template>
   <view class="main">
     <view class="navbar">
-      <text class="navbar__title">动态</text>
+      <text class="navbar__title">GSYGithubApp</text>
       <view class="navbar__action" @click="goSearch">
         <text class="iconfont icon-sousuo navbar__icon" />
       </view>
     </view>
 
     <scroll-view class="main__scroll" scroll-y refresher-enabled :refresher-triggered="refreshing" @refresherrefresh="onRefresh">
-      <view v-if="!isLoggedIn" class="empty">
-        <text class="iconfont icon-shijian empty__icon" />
-        <text class="empty__title">动态流</text>
-        <text class="empty__hint">登录后将展示个人动态。</text>
+      <view v-if="!isLoggedIn" class="card-white-wrapper empty">
+        <text class="empty__title">请先登录查看动态</text>
       </view>
 
       <view v-else>
-        <view v-if="loading && events.length === 0" class="empty">
+        <view v-if="loading && events.length === 0" class="card-white-wrapper empty">
           <text class="empty__hint">加载中…</text>
         </view>
 
-        <view v-for="(ev, idx) in events" :key="ev.id || idx" class="event-card">
+        <view v-for="(ev, idx) in events" :key="ev.id || idx" class="card-white-wrapper event-card" @click="openRepo(ev.repo?.name)">
           <view class="event-card__head">
-            <image class="event-card__avatar" :src="ev.actor.avatar_url" mode="aspectFill" />
-            <view class="event-card__meta">
-              <text class="event-card__actor">{{ ev.actor.display_login || ev.actor.login }}</text>
-              <text class="event-card__time">{{ formatTime(ev.created_at) }}</text>
-            </view>
+            <image class="event-card__avatar" :src="ev.actor.avatar_url" mode="aspectFill" @click.stop="openUser(ev.actor.display_login || ev.actor.login)" />
+            <text class="name-text event-card__login">{{ ev.actor.display_login || ev.actor.login }}</text>
+            <text class="content-text-gray">{{ formatTime(ev.created_at) }}</text>
           </view>
-          <text class="event-card__action">{{ describeEvent(ev) }}</text>
-          <view v-if="ev.repo" class="event-card__repo" @click="openRepo(ev.repo.name)">
-            <text class="iconfont icon-GitHub event-card__repo-icon" />
-            <text class="event-card__repo-name">{{ ev.repo.name }}</text>
-          </view>
+          <text class="content-text-black-bold event-card__action">{{ describeEvent(ev) }}</text>
+          <text v-if="describeEvent2(ev)" class="content-text-gray text-line-three">{{ describeEvent2(ev) }}</text>
         </view>
 
-        <view v-if="!loading && events.length === 0" class="empty">
+        <view v-if="!loading && events.length === 0" class="card-white-wrapper empty">
           <text class="empty__hint">暂无动态</text>
         </view>
       </view>
@@ -84,31 +77,30 @@ async function onRefresh() {
 }
 
 function describeEvent(ev: GhEvent): string {
+  const repo = ev.repo?.name || ''
   switch (ev.type) {
-    case 'PushEvent': {
-      const n = ev.payload?.commits?.length ?? 0
-      return `推送了 ${n} 个 commit 到 ${ev.payload?.ref || ''}`
-    }
-    case 'WatchEvent':
-      return 'Star 了仓库'
-    case 'ForkEvent':
-      return 'Fork 了仓库'
-    case 'CreateEvent':
-      return `创建了 ${ev.payload?.ref_type || ''} ${ev.payload?.ref || ''}`
+    case 'PushEvent': return `推送了 ${ev.payload?.commits?.length ?? 0} 个 commit 到 ${repo}`
+    case 'WatchEvent': return `Star 了 ${repo}`
+    case 'ForkEvent': return `Fork 了 ${repo}`
+    case 'CreateEvent': return `创建了 ${ev.payload?.ref_type || ''} ${ev.payload?.ref || ''} @ ${repo}`
+    case 'IssuesEvent': return `${ev.payload?.action || ''} 了 Issue #${ev.payload?.issue?.number || ''} @ ${repo}`
+    case 'IssueCommentEvent': return `评论了 Issue #${ev.payload?.issue?.number || ''} @ ${repo}`
+    case 'PullRequestEvent': return `${ev.payload?.action || ''} 了 PR #${ev.payload?.number || ''} @ ${repo}`
+    case 'PullRequestReviewCommentEvent': return `评论了 PR @ ${repo}`
+    case 'ReleaseEvent': return `发布了 ${ev.payload?.release?.tag_name || ''} @ ${repo}`
+    case 'PublicEvent': return `公开了仓库 ${repo}`
+    default: return `${ev.type} @ ${repo}`
+  }
+}
+
+function describeEvent2(ev: GhEvent): string {
+  switch (ev.type) {
+    case 'PushEvent': return (ev.payload?.commits || []).map((c: any) => c.message).join('\n')
     case 'IssuesEvent':
-      return `${ev.payload?.action || ''} 了 Issue #${ev.payload?.issue?.number || ''}`
-    case 'IssueCommentEvent':
-      return `评论了 Issue #${ev.payload?.issue?.number || ''}`
-    case 'PullRequestEvent':
-      return `${ev.payload?.action || ''} 了 PR #${ev.payload?.number || ''}`
-    case 'PullRequestReviewCommentEvent':
-      return '评论了 PR'
-    case 'ReleaseEvent':
-      return `发布了 ${ev.payload?.release?.tag_name || ''}`
-    case 'PublicEvent':
-      return '公开了仓库'
-    default:
-      return ev.type
+    case 'IssueCommentEvent': return ev.payload?.issue?.title || ''
+    case 'PullRequestEvent': return ev.payload?.pull_request?.title || ''
+    case 'ReleaseEvent': return ev.payload?.release?.name || ''
+    default: return ''
   }
 }
 
@@ -123,14 +115,18 @@ function formatTime(iso: string): string {
   return `${Math.floor(diff / 86400)}d 前`
 }
 
-function openRepo(fullName: string) {
+function openRepo(fullName?: string) {
   if (!fullName) return
   const [owner, name] = fullName.split('/')
+  if (!owner || !name) return
   uni.navigateTo({ url: `/pages/repository-detail/index?owner=${owner}&name=${name}` })
 }
-
+function openUser(login: string) {
+  if (!login) return
+  uni.navigateTo({ url: `/pages/user-info/index?login=${login}` })
+}
 function goSearch() {
-  uni.switchTab({ url: '/pages/search/index' })
+  uni.navigateTo({ url: '/pages/search/index' })
 }
 
 onShow(async () => {
@@ -162,7 +158,6 @@ onShow(async () => {
     font-size: 34rpx;
     font-weight: bold;
   }
-
   &__action {
     position: absolute;
     right: 24rpx;
@@ -171,7 +166,6 @@ onShow(async () => {
     display: flex;
     align-items: center;
   }
-
   &__icon {
     color: #ffffff;
     font-size: 36rpx;
@@ -183,90 +177,41 @@ onShow(async () => {
   width: 100%;
 }
 
-.empty {
-  margin: 60rpx auto;
-  width: 700rpx;
-  background-color: #ffffff;
-  border-radius: 10rpx;
-  padding: 60rpx 30rpx;
-  box-shadow: $gsy-box-shadow;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  &__icon {
-    color: $gsy-theme-color;
-    font-size: 96rpx;
-    margin-bottom: 20rpx;
-  }
-  &__title {
-    color: $gsy-theme-color;
-    font-size: 32rpx;
-    font-weight: bold;
-    margin-bottom: 12rpx;
-  }
-  &__hint {
-    color: $gsy-gray;
-    font-size: 26rpx;
-    text-align: center;
-    line-height: 1.6;
-  }
-}
-
 .event-card {
-  margin: 16rpx 24rpx;
-  background: #ffffff;
-  border-radius: 10rpx;
-  padding: 24rpx;
-  box-shadow: $gsy-box-shadow;
-
+  margin: 20rpx auto;
   &__head {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 12rpx;
+    margin-bottom: 20rpx;
   }
   &__avatar {
-    width: 64rpx;
-    height: 64rpx;
-    border-radius: 50%;
-    margin-right: 16rpx;
+    width: 50rpx;
+    height: 50rpx;
+    border-radius: 25rpx;
+    margin-right: 20rpx;
     background: $gsy-mi-white;
   }
-  &__meta {
-    display: flex;
-    flex-direction: column;
-  }
-  &__actor {
-    color: $gsy-action-blue;
-    font-size: 28rpx;
-    font-weight: 600;
-  }
-  &__time {
-    color: $gsy-gray;
-    font-size: 22rpx;
+  &__login {
+    flex: 1;
   }
   &__action {
     display: block;
-    color: $gsy-theme-color;
-    font-size: 26rpx;
-    margin-bottom: 8rpx;
+    margin-bottom: 20rpx;
   }
-  &__repo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 8rpx;
-  }
-  &__repo-icon {
+}
+
+.empty {
+  margin: 30rpx auto;
+  text-align: center;
+  &__title {
     color: $gsy-theme-color;
-    font-size: 26rpx;
-    margin-right: 8rpx;
+    font-size: 30rpx;
+    font-weight: bold;
   }
-  &__repo-name {
-    color: $gsy-theme-color;
+  &__hint {
+    color: $gsy-gray;
     font-size: 26rpx;
-    font-weight: 600;
   }
 }
 </style>

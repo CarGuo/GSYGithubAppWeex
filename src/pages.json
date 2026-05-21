@@ -82,7 +82,7 @@
     {
       "path": "pages/search/index",
       "style": {
-        "navigationBarTitleText": "搜索"
+        "navigationStyle": "custom"
       }
     },
     {
@@ -135,10 +135,6 @@
       {
         "pagePath": "pages/trend/index",
         "text": "趋势"
-      },
-      {
-        "pagePath": "pages/search/index",
-        "text": "搜索"
       },
       {
         "pagePath": "pages/person/index",
