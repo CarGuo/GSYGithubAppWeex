@@ -1,0 +1,1 @@
+<template><view class="placeholder"><text>仓库详情 待迁移自旧工程对应组件</text></view></template><script setup lang="ts"></script><style lang="scss" scoped>.placeholder{padding:48rpx;text-align:center;color:#888;}</style>

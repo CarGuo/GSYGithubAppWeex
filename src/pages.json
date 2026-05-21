@@ -1,0 +1,149 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/welcome/index",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white"
+      }
+    },
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/main/index",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/trend/index",
+      "style": {
+        "navigationBarTitleText": "趋势"
+      }
+    },
+    {
+      "path": "pages/dynamic/index",
+      "style": {
+        "navigationBarTitleText": "动态"
+      }
+    },
+    {
+      "path": "pages/repository-detail/index",
+      "style": {
+        "navigationBarTitleText": "仓库详情"
+      }
+    },
+    {
+      "path": "pages/repository-detail-info/index",
+      "style": {
+        "navigationBarTitleText": "仓库简介"
+      }
+    },
+    {
+      "path": "pages/repository-issues/index",
+      "style": {
+        "navigationBarTitleText": "Issues"
+      }
+    },
+    {
+      "path": "pages/repository-files/index",
+      "style": {
+        "navigationBarTitleText": "文件"
+      }
+    },
+    {
+      "path": "pages/code-detail/index",
+      "style": {
+        "navigationBarTitleText": "代码"
+      }
+    },
+    {
+      "path": "pages/issue-detail/index",
+      "style": {
+        "navigationBarTitleText": "Issue 详情"
+      }
+    },
+    {
+      "path": "pages/edit-issue/index",
+      "style": {
+        "navigationBarTitleText": "编辑 Issue"
+      }
+    },
+    {
+      "path": "pages/search/index",
+      "style": {
+        "navigationBarTitleText": "搜索"
+      }
+    },
+    {
+      "path": "pages/person/index",
+      "style": {
+        "navigationBarTitleText": "我"
+      }
+    },
+    {
+      "path": "pages/user-info/index",
+      "style": {
+        "navigationBarTitleText": "用户信息"
+      }
+    },
+    {
+      "path": "pages/setting/index",
+      "style": {
+        "navigationBarTitleText": "设置"
+      }
+    },
+    {
+      "path": "pages/web/index",
+      "style": {
+        "navigationBarTitleText": ""
+      }
+    },
+    {
+      "path": "pages/common-list/index",
+      "style": {
+        "navigationBarTitleText": "列表"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "GSY GitHub App",
+    "navigationBarBackgroundColor": "#2196F3",
+    "backgroundColor": "#F5F5F5"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2196F3",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/main/index",
+        "text": "动态"
+      },
+      {
+        "pagePath": "pages/trend/index",
+        "text": "趋势"
+      },
+      {
+        "pagePath": "pages/search/index",
+        "text": "搜索"
+      },
+      {
+        "pagePath": "pages/person/index",
+        "text": "我"
+      }
+    ]
+  }
+}

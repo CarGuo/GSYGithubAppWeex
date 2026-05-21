@@ -1,0 +1,31 @@
+/* uni-app 全局变量入口（每个 vue 文件 style 前自动注入）。
+   保留尽量少的全局变量，避免污染 H5/小程序 端样式作用域。*/
+
+$uni-color-primary: #2196F3;
+$uni-color-success: #4caf50;
+$uni-color-warning: #ff9800;
+$uni-color-error: #f44336;
+
+$uni-text-color: #333;
+$uni-text-color-inverse: #fff;
+$uni-text-color-grey: #999;
+$uni-text-color-placeholder: #c0c4cc;
+$uni-text-color-disable: #c0c4cc;
+
+$uni-bg-color: #ffffff;
+$uni-bg-color-grey: #f8f8f8;
+$uni-bg-color-hover: #f1f1f1;
+
+$uni-border-color: #e5e5e5;
+
+$uni-font-size-sm: 12px;
+$uni-font-size-base: 14px;
+$uni-font-size-lg: 16px;
+
+$uni-spacing-row-sm: 5px;
+$uni-spacing-row-base: 10px;
+$uni-spacing-row-lg: 15px;
+
+$uni-spacing-col-sm: 4px;
+$uni-spacing-col-base: 8px;
+$uni-spacing-col-lg: 12px;

@@ -1,0 +1,23 @@
+@import './uni.scss';
+
+page {
+  background-color: $uni-bg-color-grey;
+  color: $uni-text-color;
+  font-size: $uni-font-size-base;
+}
+
+.gsy-card {
+  background: $uni-bg-color;
+  border-radius: 6px;
+  padding: $uni-spacing-row-base;
+  margin: $uni-spacing-row-sm $uni-spacing-row-base;
+}
+
+.gsy-divider {
+  height: 1px;
+  background-color: $uni-border-color;
+}
+
+.gsy-text-primary { color: $uni-color-primary; }
+.gsy-text-grey    { color: $uni-text-color-grey; }
+.gsy-text-error   { color: $uni-color-error; }

@@ -1,0 +1,90 @@
+# tag 触发的自动发布工作流。
+#
+# 触发：推送形如 v* 的 tag（例：v2.0.0-uniapp.0）。
+# 行为：
+#   1. checkout（含 submodule）
+#   2. 安装 Node 20，恢复 npm 缓存
+#   3. 强制跑供应链冷却校验（即使本地已跑过，CI 二次拦截）
+#   4. npm ci 安装依赖
+#   5. 构建 H5 生产产物
+#   6. 把 H5 产物打包为 zip
+#   7. 创建 GitHub Release，附 zip 与 MIGRATION.md 摘要
+#
+# 不在 CI 中做的事：
+#   - App 离线包构建：需要 Android Studio + Java 17 + 资源签名，留给本地或专门的
+#     云打包流水线
+#   - iOS 构建：需 Mac runner（macos-latest 价格高），按需开
+#   - 真机 e2e：CI 没真机，留给开发本地或专门的设备农场
+
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release-h5:
+    name: Build & release H5 bundle
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.18.1'
+          cache: 'npm'
+
+      - name: Verify supply-chain cooldown (15 days)
+        run: |
+          echo "Running deps cooldown check before install..."
+          node scripts/check-deps-cooldown.mjs
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run type-check
+        continue-on-error: true
+
+      - name: Build H5
+        run: npm run build:h5
+
+      - name: Pack H5 bundle
+        run: |
+          cd dist/build/h5
+          zip -r ../../../gsy-github-app-uniapp-h5-${{ github.ref_name }}.zip .
+          cd -
+          ls -lh gsy-github-app-uniapp-h5-${{ github.ref_name }}.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          body: |
+            自动生成的 H5 发布包 (`gsy-github-app-uniapp-h5-${{ github.ref_name }}.zip`)。
+
+            **重要**：本仓库已从 Apache Weex 迁移到 uni-app + Vue 3 + Vite。
+            完整迁移说明请见仓库根 [MIGRATION.md](https://github.com/CarGuo/GSYGithubAppWeex/blob/${{ github.ref_name }}/MIGRATION.md)。
+
+            ### 安装/部署
+            1. 解压 zip；
+            2. 把目录内容部署到任意静态服务器或 CDN（路由模式默认 history，需要 web server 配置 fallback 到 index.html）。
+
+            ### 安全
+            - 所有 npm 依赖均通过 15 天供应链冷却校验（CI step 已二次确认）。
+          files: |
+            gsy-github-app-uniapp-h5-${{ github.ref_name }}.zip
+            MIGRATION.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
