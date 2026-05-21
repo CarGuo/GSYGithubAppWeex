@@ -50,7 +50,9 @@ export const useUserStore = defineStore('user', {
           return false
         }
         this.userInfo = res.data as UserInfo
-        this.token = pat.startsWith('token ') ? pat : `token ${pat}`
+        const auth = pat.startsWith('token ') || pat.startsWith('Bearer ') ? pat : `token ${pat}`
+        this.token = auth
+        await setCache(TOKEN_KEY, auth)
         await setCache(USER_INFO, this.userInfo)
         return true
       } catch (e: any) {

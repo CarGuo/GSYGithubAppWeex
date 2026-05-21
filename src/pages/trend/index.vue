@@ -16,7 +16,7 @@
     </view>
 
     <view v-else>
-      <view v-for="(item, idx) in list" :key="idx" class="trend__item">
+      <view v-for="(item, idx) in list" :key="idx" class="trend__item" @click="openRepo(item)">
         <view class="trend__item-row">
           <text class="trend__item-author">{{ item.reposAuthor }} /</text>
           <text class="trend__item-name">{{ item.reposName }}</text>
@@ -62,6 +62,13 @@ async function load() {
 function onPickSince(v: 'daily' | 'weekly' | 'monthly') {
   since.value = v
   load()
+}
+
+function openRepo(item: TrendItem) {
+  if (!item.reposAuthor || !item.reposName) return
+  uni.navigateTo({
+    url: `/pages/repository-detail/index?owner=${item.reposAuthor}&name=${item.reposName}`
+  })
 }
 
 onShow(load)

@@ -15,7 +15,12 @@ export const Address = {
   getAuthorization: () => `${HOST_API}authorizations`,
   getAuthenticatedUser: () => `${HOST_API}user`,
   getUser: (userName: string) => `${HOST_API}users/${userName}`,
+  getReceivedEvents: (userName: string, page = 1) =>
+    `${HOST_API}users/${userName}/received_events?page=${page}&per_page=${PAGE_SIZE}`,
+  getUserEvents: (userName: string, page = 1) =>
+    `${HOST_API}users/${userName}/events?page=${page}&per_page=${PAGE_SIZE}`,
   getReposDetail: (owner: string, name: string) => `${HOST_API}repos/${owner}/${name}`,
+  getReposReadme: (owner: string, name: string) => `${HOST_API}repos/${owner}/${name}/readme`,
   getReposIssues: (owner: string, name: string, state = 'open', page = 1) =>
     `${HOST_API}repos/${owner}/${name}/issues?state=${state}&page=${page}&per_page=${PAGE_SIZE}`,
   search: (q: string, page = 1, type: 'repositories' | 'users' = 'repositories') => {
@@ -32,5 +37,14 @@ export const Address = {
   trending: (since = 'daily', language = '') => {
     const lang = language ? `${language}` : ''
     return `${HOST_WEB}trending/${lang}?since=${since}`
+  },
+  /**
+   * 用 GitHub 官方 search 当 trending 替代：取最近 since 区间内创建且星标多的仓库。
+   * 比 HTML 抓取稳定且无跨域。
+   */
+  trendingFromSearch: (sinceISO: string, language = '', page = 1) => {
+    const langPart = language ? `+language:${encodeURIComponent(language)}` : ''
+    const q = `created:>${sinceISO}${langPart}`
+    return `${HOST_API}search/repositories?q=${q}&sort=stars&order=desc&page=${page}&per_page=${PAGE_SIZE}`
   }
 }

@@ -46,6 +46,24 @@ class HttpManager {
       }
       return config
     })
+
+    this.client.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        const status = error?.response?.status
+        if (status === 401) {
+          this.authorizationCode = null
+          await removeCache(TOKEN_KEY)
+          try {
+            uni.showToast({ title: '登录失效，请重新登录', icon: 'none' })
+            uni.reLaunch({ url: '/pages/login/index' })
+          } catch {
+            // ignore in non-uni env
+          }
+        }
+        return Promise.reject(error)
+      }
+    )
   }
 
   /**
