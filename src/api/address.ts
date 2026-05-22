@@ -44,11 +44,9 @@ export const Address = {
     const ref = branch ? `?ref=${encodeURIComponent(branch)}` : ''
     return `${HOST_API}repos/${owner}/${name}/contents/${cleanPath}${ref}`
   },
-  getReposFileContent: (owner: string, name: string, path: string, branch = '') => {
-    const cleanPath = path.replace(/^\/+/, '')
-    const ref = branch ? `?ref=${encodeURIComponent(branch)}` : ''
-    return `${HOST_API}repos/${owner}/${name}/contents/${cleanPath}${ref}`
-  },
+  /** 与 getReposContent 同一端点；保留独立命名以表达"取单文件 HTML"语义。 */
+  getReposFileContent: (owner: string, name: string, path: string, branch = '') =>
+    Address.getReposContent(owner, name, path, branch),
   search: (q: string, page = 1, type: 'repositories' | 'users' = 'repositories') => {
     if (type === 'users') {
       return `${HOST_API}search/users?q=${encodeURIComponent(q)}&page=${page}&per_page=${PAGE_SIZE}`

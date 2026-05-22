@@ -5,9 +5,9 @@ name: Verify
 
 on:
   pull_request:
-    branches: [master, feat/migrate-uniapp]
+    branches: [master, feat/migrate-uniapp, feat/full-features]
   push:
-    branches: [master, feat/migrate-uniapp]
+    branches: [master, feat/migrate-uniapp, feat/full-features]
 
 jobs:
   verify:

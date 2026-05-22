@@ -64,7 +64,7 @@ uni-app 的 dist-tag 设计较特殊：
 `npm view vite latest` = `8.0.10`（2026-04-23），但：
 * uni-app 官方至 2026-04 主线适配 vite 5/6；
 * vite 8 是 6 周前刚发布的大版本；
-* 选 `vite@5.4.21`（2025-10-20，沉淀 7 个月）以保稳定。
+* 选 `vite@5.2.8`（2024-04-04，沉淀 25 个月）以保稳定；该版本被 `@dcloudio/vite-plugin-uni` 的 peerDependencies 钉死，不能升级。
 
 ### 3.3 axios 而非 uni.request
 
@@ -145,6 +145,24 @@ H5 端会被 CORS 阻断（github.com 不允许跨域）；App / 小程序端没
 ## 5.5 UI 对齐策略（不重画原 App）
 
 **原则**：所有可视产物按原 GSYGithubAppWeex 的设计稿/资源/色盘复刻，**不引入新视觉语言**。
+
+### 5.5.0 强制工作流（每动一个 page 必须遵守）
+
+任何 `src/pages/<name>/index.vue` 的新建或修改，都必须**按下面顺序**完成，不允许跳步：
+
+1. **读原文件**：`src/components/<同名>Page.vue`（旧 Weex Vue2 实装），逐节看 template / script / style
+2. **读引用 widget**：原 Page 引用的 `src/components/widget/*.vue` 全部读完，理解 list item / icon / 颜色 / 字号
+3. **读 token**：[`src/config/Config.js`](./src/config/Config.js) + [`src/config/styles.scss`](./src/config/styles.scss)，确认色值、间距、iconfont 编码
+4. **写差异清单**：在 PR 描述或 commit body 列出「原版 X 的 UI 元素 → 新版用 Y 实现」的对照
+5. **再写代码**：严格用对照表里的元素，不允许"想象成 GSY 风格"，不允许新造卡片/icon/色彩
+6. **截图比对**（H5 dev 模式 + 原 app 截屏，并排对比）：列出还存在的差异并说明是否平台限制
+
+**反例**（已经发生过的，必须避免）：
+- ❌ 自创"两行 crumb 卡片"代替原版「水平 scroller 面包屑 ` . > a > b > `」
+- ❌ 给目录 icon 涂蓝色（原版统一 `$--theme-color` 深灰）
+- ❌ 给文件行加右箭头（原版只有目录才有箭头 `\ue610`）
+- ❌ 用 `<pre>` 本地渲染代码（原版借 GitHub HTML 走 webview）
+- ❌ 用 iconfont 编码 `\ue6e1` / `\ue63e`（原版是 `\ue793` / `\uea77`，且字体族是 `wxcIconFont`）
 
 ### 设计 token 对照（从原 [`src/config/Config.js`](https://github.com/CarGuo/GSYGithubAppWeex) 抽取）
 | Token | 旧（Weex Config） | 新（[`src/uni.scss`](./src/uni.scss)） |
