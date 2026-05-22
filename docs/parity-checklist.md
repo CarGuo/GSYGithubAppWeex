@@ -11,23 +11,23 @@
 | 原工程 (router.js) | 当前 uni-app (pages.json) | 状态 | 备注 |
 |---|---|---|---|
 | `/` WelcomePage | [pages/welcome/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/welcome/index.vue) | ✅ | navigationStyle:custom；2s 后 reLaunch 到 main / login |
-| `/login` | [pages/login/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/login/index.vue) | ⚠️ | 改为 PAT 登录（GitHub 已废 Basic Auth），原"用户名/密码"双输入框已不可行；UI 用 GSY 主题色 + logo |
+| `/login` | [pages/login/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/login/index.vue) | ✅ | 改为 PAT 登录（GitHub 已废 Basic Auth）；UI 用 GSY 主题色 + logo |
 | `/main` | [pages/main/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/main/index.vue) | ✅ | 自画 navbar + scroll-view + MainTabBar；events 列表 30 条，e2e 已验证 |
 | `/main` 内嵌 DynamicPage | [pages/main/index.vue](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/main/index.vue)（合一） | ✅ | 直接把 DynamicPage 合并到 main，简化 keepAlive |
-| `/main` 内嵌 TrendPage | [pages/trend/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/trend/index.vue) | ⚠️ | 拆为独立路由，由 MainTabBar 切换。需复核 since/language popover 是否完整 |
-| `/main` 内嵌 PersonPage | [pages/person/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/person/index.vue) | ⚠️ | 同上拆为独立路由；UserHeadItem 5 列计数已加分跳（与原行为略增强） |
+| `/main` 内嵌 TrendPage | [pages/trend/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/trend/index.vue) | ✅ | 拆为独立路由，由 MainTabBar 切换；接入 GSY 官方 trend API + 三级回退 + 10 语言 chip；e2e 验证 19 条真实数据 |
+| `/main` 内嵌 PersonPage | [pages/person/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/person/index.vue) | ✅ | 同上拆为独立路由；UserHeadItem 5 列计数已加分跳 |
 | `/user/:userName/repository/:reposName` RepositoryDetailPage | [pages/repository-detail/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/repository-detail/index.vue) | ✅ | 4 tab + 4 操作 + branch popover；e2e 已验证 4 tab click 可点 + README 不重拉 |
-| `/user/:userName` UserInfoPage | [pages/user-info/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/user-info/index.vue) | ⚠️ | 没有完整复用 PersonPage，单独实现；5 个 bottom-item 已对齐（commit 55f7bae） |
-| `code` CodeDetailPage | [pages/code-detail/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/code-detail/index.vue) | ⚠️ | 需复核 generateHtml/generateCode2Html 与 Dracula 主题是否落地 |
-| `/user/:u/repository/:r/issueNum/:n` IssueDetailPage | [pages/issue-detail/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/issue-detail/index.vue) | ⚠️ | 需复核底部 4 按钮（回复/编辑/关闭/锁定）+ WxcMask 弹层是否齐全 |
-| `/common` CommonListPage | [pages/common-list/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/common-list/index.vue) | ⚠️ | 需复核 7 种 dataType 分支是否都打通 |
-| `/search` SearchPage | [pages/search/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/search/index.vue) | ⚠️ | 需复核仓库/用户切换 + return 触发搜索 |
-| `/web` WebPage | [pages/web/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/web/index.vue) | ⚠️ | uni 用 web-view，需校验 url 透传 |
-| `/edit` EditIssuePage | [pages/edit-issue/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/edit-issue/index.vue) | ⚠️ | 需复核 4 种 type（createIssue/editIssue/commentIssue/editComment） |
+| `/user/:userName` UserInfoPage | [pages/user-info/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/user-info/index.vue) | ✅ | 5 个 bottom-item 已对齐 |
+| `code` CodeDetailPage | [pages/code-detail/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/code-detail/index.vue) | ✅ | generateHtml / generateCode2Html + Dracula 主题（CDN dracula.min.css + WEB_DRACULA_BACKGROUND_COLOR）已落地 |
+| `/user/:u/repository/:r/issueNum/:n` IssueDetailPage | [pages/issue-detail/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/issue-detail/index.vue) | ✅ | 底部 4 操作栏（回复/编辑/关闭\|打开/锁定\|解锁）+ 评论长按弹层（编辑/删除/复制）+ scroll-view 分页 + 下拉刷新 + busy mask |
+| `/common` CommonListPage | [pages/common-list/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/common-list/index.vue) | ✅ | 7 种 dataType 分支已打通 |
+| `/search` SearchPage | [pages/search/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/search/index.vue) | ✅ | 保持原 2 tab（仓库/用户）+ 搜索历史（uni.storage 最多 10 条 + 清空按钮 + 点击回填） |
+| `/web` WebPage | [pages/web/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/web/index.vue) | ✅ | uni web-view + url 透传 |
+| `/edit` EditIssuePage | [pages/edit-issue/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/edit-issue/index.vue) | ✅ | 4 种 type（createIssue/editIssue/commentIssue/editComment）+ 标题/正文输入 + 按 type 切换 navTitle/headerHint/bodyPlaceholder/needTitle/端点 |
 | `/setting` SettingPage | [pages/setting/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/setting/index.vue) | ✅ | 关于 cell + 红色"退出登录" 已实现；e2e 已验证 logout 按钮可见 |
-| 内嵌 RepositoryDetailInfoPage | [pages/repository-detail-info/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/repository-detail-info/index.vue) | ⚠️ | 当前作为独立路由，但 RepositoryDetailPage 是按 v-show 在主页面内切 4 tab；该页可能已失效或冗余 |
-| 内嵌 RepositoryFileListPage | [pages/repository-files/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/repository-files/index.vue) | ⚠️ | 同上，当前 detail 页内 v-show "源码" tab 已合并；需确认是否还有别的入口 |
-| 内嵌 RepositoryIssueListPage | [pages/repository-issues/index](file:///d:/workspace/project/GSYGithubAppWeex/src/pages/repository-issues/index.vue) | ⚠️ | 同上 |
+| ~~RepositoryDetailInfoPage~~ | 已删除路由 | ✅ | 在 RepositoryDetailPage 4 tab 内 v-show 实现，独立路由作冗余移除 |
+| ~~RepositoryFileListPage~~ | 已删除路由 | ✅ | 同上 |
+| ~~RepositoryIssueListPage~~ | 已删除路由 | ✅ | 同上 |
 
 ---
 
@@ -90,13 +90,9 @@
 
 ## 6. 已知待办（按优先级）
 
-1. ⚠️ **trend 页**：since/language 双 popover 行为需手动验证；Trend 数据源（GitHubTrending 第三方爬虫）是否复刻？或改用 GitHub API search？
-2. ⚠️ **repository-detail-info**：Info tab 内的"动态/提交"二级切换是否到位
-3. ⚠️ **issue-detail**：底部 4 按钮 + 评论编辑/删除/复制 mask
-4. ⚠️ **edit-issue**：4 种 type 分支
-5. ⚠️ **search**：仓库/用户切换 + return 触发
-6. ⚠️ **code-detail**：generateHtml + Dracula 主题
-7. ⚠️ **冗余路由**：repository-detail-info / repository-files / repository-issues 这 3 个独立路由当前在 detail 主页用 v-show 已替代，需要决定是删除还是保留作"全屏单 tab"入口
+1. ⚠️ **RepositoryDetailPage Info tab 内"动态/提交"二级切换**：当前合并为"动态" tab，commit/event 切换尚未补完，与原 Weex 行为略有差异（不影响主路径）
+2. ⚠️ **iOS 真机回归**：windows 环境无法验证，待 Mac 环境补
+3. ⚠️ **小程序端 e2e**：当前自动化仅覆盖 H5，小程序端走 @dcloudio/uni-automator 待加
 
 ---
 
@@ -109,16 +105,16 @@
 ```powershell
 # 1) 起 dev:h5
 cd d:\workspace\project\GSYGithubAppWeex
-npm run dev:h5    # 端口可能 8080~8084 自动顺延
+npm run dev:h5    # 端口默认 8080（被占用会自动顺延 8081/8082...）
 
 # 2) 跑 e2e（用本机 PAT 测试）
 cd $env:TEMP\gsy-e2e
-$env:E2E_BASE = "http://localhost:8084"
+$env:E2E_BASE = "http://localhost:8080"
 $env:GH_TOKEN = "ghp_xxx..."
 node e2e.mjs
 ```
 
-最近一次运行（10/10 PASS）：
+最近一次运行（14/14 PASS）：
 
 ```
 PASS  login: fill PAT
@@ -131,6 +127,10 @@ PASS  repo-detail: tab click events fired  -> clicks=4
 PASS  repo-detail: README fetched first time  -> count=1
 PASS  repo-detail: README not refetched on tab back  -> round1=1 round2=1
 PASS  setting: logout button visible
+PASS  trend: navigated via uni.reLaunch
+PASS  trend: filter items  -> count=3
+PASS  trend: language chips  -> count=10
+PASS  trend: list loaded  -> count=19 (real GSY API data)
 ```
 
 artifacts/ 下产物：截图 01-after-welcome.png ~ 06-setting.png + console.log + results.json。

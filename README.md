@@ -3,7 +3,7 @@
 # GSY GitHub App · uni-app 版
 
 > 一款跨平台开源 GitHub 客户端 App。**本仓库已从 Apache Weex 迁移到 [uni-app](https://uniapp.dcloud.net.cn/)（Vue 3 + Vite）**。
-> 旧版（Weex）代码保留在 `master` 分支历史中，新版迁移工作位于 [`feat/migrate-uniapp`](https://github.com/CarGuo/GSYGithubAppWeex/tree/feat/migrate-uniapp) 分支。
+> 旧版（Weex）代码保留在 git 历史中，新版迁移工作已完成并合并到 `master`。
 >
 > 迁移背景与详细说明：见 [MIGRATION.md](./MIGRATION.md)。
 
@@ -138,7 +138,7 @@ GitHub 已于 2020-11-13 弃用 `POST /authorizations` Basic Auth 流程，本�
 ├── src/
 │   ├── api/                          # 网络层（axios）+ 端点表
 │   ├── config/                       # 全局常量
-│   ├── pages/                        # 18 个页面
+│   ├── pages/                        # 15 个页面（welcome/login/main/trend/person/search/setting/repository-detail/user-info/code-detail/issue-detail/edit-issue/common-list/web/dynamic）
 │   ├── stores/                       # Pinia stores
 │   ├── styles/global.scss
 │   ├── utils/                        # 工具函数
@@ -154,15 +154,27 @@ GitHub 已于 2020-11-13 弃用 `POST /authorizations` Basic Auth 流程，本�
 
 ---
 
-## 已迁移 / 待迁移页面
+## 已迁移页面
+
+> 详细 parity 矩阵（含 store / UI token / 自动化回归）见 [docs/parity-checklist.md](./docs/parity-checklist.md)。
 
 | 页面 | 状态 | 说明 |
 |---|---|---|
-| WelcomePage | ✅ 已迁 | 启动闪屏 + 自动跳登录/主页 |
-| LoginPage   | ✅ 已迁 | PAT 登录 |
-| MainTabPage | ⚠️ 占位 | 主 Tab 框架已就位，业务流待补 |
-| TrendPage   | ✅ 已迁 | 含 mock 数据；趋势抓取需接入代理 |
-| 其余 14 个页面 | 🚧 占位 | 见 [MIGRATION.md § 待迁清单](./MIGRATION.md#%E5%BE%85%E8%BF%81%E7%A7%BB%E9%A1%B5%E9%9D%A2) |
+| WelcomePage | ✅ | 启动闪屏 + 自动跳登录/主页 |
+| LoginPage   | ✅ | PAT 登录（GitHub 已废 Basic Auth） |
+| MainPage    | ✅ | 自画 navbar + scroll-view + 30 条 events，Tab 切换不重拉 |
+| TrendPage   | ✅ | 接入 GSY 官方 trend API + 三级回退（GSY → GitHub search → mock）+ 10 语言 chip |
+| PersonPage  | ✅ | UserHeadItem 5 列计数 + 跳转 |
+| SearchPage  | ✅ | 仓库/用户 2 tab + 搜索历史（uni.storage 最多 10 条） |
+| SettingPage | ✅ | 关于 cell + 红色「退出登录」 |
+| RepositoryDetailPage | ✅ | README / 动态 / 文件 / Issue 4 tab + Star/Watch/Fork/Branch 4 操作 + tab 切换不重拉 |
+| RepositoryDetailInfo / Files / Issues | ✅ | 已合并到 RepositoryDetailPage 4 tab，独立路由作冗余移除 |
+| UserInfoPage | ✅ | 5 个 bottom-item 已对齐 |
+| CodeDetailPage | ✅ | generateHtml / generateCode2Html + Dracula 主题（CDN dracula.min.css） |
+| IssueDetailPage | ✅ | 底部 4 操作（回复/编辑/关闭｜打开/锁定｜解锁）+ 评论长按弹层 + 分页 + 下拉刷新 |
+| EditIssuePage | ✅ | 4 种 type（createIssue/editIssue/commentIssue/editComment）+ 标题/正文 |
+| CommonListPage | ✅ | 7 种 dataType 分支 |
+| WebPage | ✅ | uni web-view + url 透传 |
 
 ---
 
@@ -171,9 +183,9 @@ GitHub 已于 2020-11-13 弃用 `POST /authorizations` Basic Auth 流程，本�
 打 tag → 触发 [.github/workflows/release.yml](./.github/workflows/release.yml)：
 
 ```bash
-# 在 feat/migrate-uniapp 上确认无误后
-git tag -a v2.0.0-uniapp.0 -m "Migrate to uni-app preview 0"
-git push origin v2.0.0-uniapp.0
+# 在 master 上确认无误后
+git tag -a v2.0.0-uniapp -m "Release uni-app GA"
+git push origin v2.0.0-uniapp
 # CI 会自动打 H5 构建 + 上传 Release
 ```
 

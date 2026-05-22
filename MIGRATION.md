@@ -91,11 +91,15 @@ GitHub 没有官方 trending API。原工程 `src/core/net/trending/GitHubTrendi
 2. 用 `himalaya` 解析 HTML；
 3. 提取仓库列表。
 
-H5 端会被 CORS 阻断（github.com 不允许跨域）；App / 小程序端没有 CORS 限制但抓取页面变结构后维护代价高。
+H5 端会被 CORS 阻断（github.com 不允许跨域），且 GitHub 页面结构变更频繁，长期维护成本高。
 
-**目前实现**：[src/api/trending.ts](./src/api/trending.ts) 暴露 `fetchTrending()` 接口，stub 返回 mock 数据（保证 UI 可跑）。生产环境推荐：
-* 自行部署 `huchenme/github-trending-api` 这类代理；
-* 或换为 https://gtrend.yapie.me/。
+**当前实现**：[src/api/trending.ts](./src/api/trending.ts) 三级回退：
+
+1. **GSY 官方 trend API**（`https://guoshuyu.cn/github/trend/list` + `api-token: 4d65e2a5626103f92a71867d7b49fea0`）——主路径，与同系列 RN/Flutter/Kotlin 项目一致；
+2. **GitHub Search API**（`/search/repositories?q=created:>...&sort=stars`）——GSY 后端不可达时兜底；
+3. **本地 mock 数据**——双双失败时保证 UI 不空白。
+
+H5 端通过 [vite.config.ts](./vite.config.ts) 的 `/gsy-trend` 代理绕过 CORS 并注入 api-token；非 H5 端直发。GSY 后端在抓 github.com 超时时会返回 `200 + body{status:500,error}`，[trending.ts](./src/api/trending.ts) 会主动识别该错误形态并走兜底。
 
 ---
 
@@ -269,46 +273,29 @@ H5 端会被 CORS 阻断（github.com 不允许跨域）；App / 小程序端没
 
 ---
 
-## 6. 待迁移页面
+## 6. 页面迁移落地
 
-本轮**完整迁了 4 个页面**作为样板：
+15 个页面全部迁移完成（与 [pages.json](./src/pages.json) 一致），详情见 [docs/parity-checklist.md](./docs/parity-checklist.md) 的 parity 矩阵：
 
-* ✅ `src/pages/welcome/index.vue` — 启动闪屏（替代旧 WelcomePage）
-* ✅ `src/pages/login/index.vue` — PAT 登录（替代旧 LoginPage）
-* ⚠️ `src/pages/main/index.vue` — 主 Tab 框架（占位）
-* ✅ `src/pages/trend/index.vue` — 趋势页（mock 数据）
-
-**剩余 14 个待迁**（已建占位文件，按目录对应原工程）：
-
-| 新路径 | 原工程文件 | 难点 |
+| 路由 | 原工程文件 | 状态 |
 |---|---|---|
-| `pages/dynamic/index.vue` | `src/components/DynamicPage.vue` | 长列表 + 事件类型分发 |
-| `pages/repository-detail/index.vue` | `RepositoryDetailPage.vue` | tab 嵌套 |
-| `pages/repository-detail-info/index.vue` | `RepositoryDetailInfoPage.vue` | README markdown 渲染 |
-| `pages/repository-issues/index.vue` | `RepositoryIssueListPage.vue` | 过滤器 |
-| `pages/repository-files/index.vue` | `RepositoryFileListPage.vue` | 树形导航 |
-| `pages/code-detail/index.vue` | `CodeDetailPage.vue` | highlight.js + 大文件 |
-| `pages/issue-detail/index.vue` | `IssueDetailPage.vue` | 评论流 + reaction |
-| `pages/edit-issue/index.vue` | `EditIssuePage.vue` | 富文本/markdown 编辑 |
-| `pages/search/index.vue` | `SearchPage.vue` | 防抖 + 多类型 |
-| `pages/person/index.vue` | `PersonPage.vue` | 个人聚合 |
-| `pages/user-info/index.vue` | `UserInfoPage.vue` | 简介/统计 |
-| `pages/setting/index.vue` | `SettingPage.vue` | 主题、语言、清缓存 |
-| `pages/web/index.vue` | `WebPage.vue` | webview 嵌入 |
-| `pages/common-list/index.vue` | `CommonListPage.vue` | 通用列表抽象 |
+| `pages/welcome/index.vue` | `WelcomePage.vue` | ✅ |
+| `pages/login/index.vue` | `LoginPage.vue` | ✅ PAT 登录 |
+| `pages/main/index.vue` | `MainPage.vue` + `DynamicPage.vue` | ✅ 合一 |
+| `pages/trend/index.vue` | `TrendPage.vue` | ✅ GSY 官方 API + 三级回退 + 10 语言 chip |
+| `pages/person/index.vue` | `PersonPage.vue` | ✅ |
+| `pages/search/index.vue` | `SearchPage.vue` | ✅ 仓库/用户 2 tab + 搜索历史 |
+| `pages/setting/index.vue` | `SettingPage.vue` | ✅ |
+| `pages/repository-detail/index.vue` | `RepositoryDetailPage.vue` + 三个 sub Tab | ✅ 4 tab 内 v-show + Star/Watch/Fork/Branch + tab 切不重拉 |
+| `pages/user-info/index.vue` | `UserInfoPage.vue` | ✅ |
+| `pages/code-detail/index.vue` | `CodeDetailPage.vue` | ✅ Dracula 主题 |
+| `pages/issue-detail/index.vue` | `IssueDetailPage.vue` | ✅ 4 操作栏 + 评论长按弹层 + 分页 |
+| `pages/edit-issue/index.vue` | `EditIssuePage.vue` | ✅ 4 种 type |
+| `pages/common-list/index.vue` | `CommonListPage.vue` | ✅ 7 dataType 分支 |
+| `pages/web/index.vue` | `WebPage.vue` | ✅ |
+| `pages/dynamic/index.vue` | `DynamicPage.vue`（独立入口保留） | ✅ |
 
-每个占位文件已建好；后续迁移时**按 widget → 页面 → 联调**的顺序，参考 LoginPage / TrendPage 的样式 + script 写法。
-
-### 待补的 widget 组件（共 17）
-
-旧 `src/components/widget/*.vue`：EventItem、FileItem、FilterList、IssueCommentItem、IssueHeadItem、IssueItem、IssueRichText、LoadingComponent、NavigationBar、PopoverComponent、RLList、RepositoryHeadItem、RepositoryItem、TabBar、TopTabBar、UserHeadItem、UserItem、WebComponent。
-
-迁移要点：
-* `<text>` 标签直接对应；
-* `<div>` → `<view>`；
-* `<image>` 写法相同；
-* Weex 的 `position: absolute` 默认行为差异需要重写 layout（uni-app 默认走 H5/小程序的 CSS 盒模型）；
-* `weex.requireModule('xxx')` 全替换为 `uni.xxx`。
+**冗余路由清理**：原 `RepositoryDetailInfoPage` / `RepositoryFileListPage` / `RepositoryIssueListPage` 这 3 个独立路由已被 RepositoryDetailPage 4 tab 内的 v-show 实现替代，独立路由文件已删除（见 commit a117106）。
 
 ---
 
@@ -340,15 +327,17 @@ H5 端会被 CORS 阻断（github.com 不允许跨域）；App / 小程序端没
 
 ## 9. 后续 Roadmap
 
-* [ ] 完成 14 个占位页迁移
-* [ ] 17 个 widget 组件迁移
-* [ ] vue-i18n 入口接入 + 抽出现有中文 hardcode
-* [ ] 接入 GitHub Trending 代理
+* [x] 完成 15 个页面迁移
+* [x] 关键 widget 组件就地内联（EventItem / IssueItem / IssueCommentItem / RepositoryItem / RepositoryHeadItem / UserHeadItem / UserItem / FileItem / NavigationBar / TabBar / TopTabBar / WebComponent / 长按弹层 等）
+* [x] 接入 GSY 官方 trend API（替代原 himalaya 爬虫）
+* [x] Playwright H5 e2e（14/14 PASS，含 trend 真实数据）
+* [x] git 历史 author 全量重写为 `carguo <35936982@qq.com>`
+* [x] 合并 `feat/full-features` → `master`，发布 `v2.0.0-uniapp` GA
+* [ ] vue-i18n 入口接入 + 抽出现有中文 hardcode（保持原工程默认中文行为）
 * [ ] 引入 Vitest 单测覆盖 stores / utils
-* [ ] 引入 Playwright H5 e2e
-* [ ] iOS 端验证（需 Mac 环境）
-* [ ] 合并 `feat/migrate-uniapp` → `master`，归档旧 Weex 代码到 `legacy/weex` 分支
-* [ ] 发布 `v2.0.0-uniapp.0` tag 触发首次自动 release
+* [ ] iOS 端真机验证（需 Mac 环境）
+* [ ] 小程序端 e2e 接 @dcloudio/uni-automator
+* [ ] RepositoryDetail Info tab 内"动态/提交"二级切换补完
 
 ---
 
