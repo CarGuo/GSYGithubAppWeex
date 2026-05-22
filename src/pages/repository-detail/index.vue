@@ -244,14 +244,19 @@ const statusBarHeight = ref(0)
 
 const readmeSrcDoc = ref('')
 const readmeLoading = ref(false)
+const readmeLoaded = ref(false)
 
 const files = ref<FileNode[]>([])
 const filePath = ref('')
 const filesLoading = ref(false)
+const filesLoaded = ref(false)
 
 const issues = ref<IssueLite[]>([])
 const issueState = ref<'open' | 'closed' | 'all'>('open')
 const issuesLoading = ref(false)
+const issuesLoaded = ref(false)
+
+const eventsLoaded = ref(false)
 
 const starred = ref(false)
 const watched = ref(false)
@@ -292,14 +297,18 @@ async function loadRepo() {
   }
 }
 
-async function loadEvents() {
+async function loadEvents(force = false) {
   if (!owner.value || !name.value) return
+  if (!force && eventsLoaded.value) return
   const res = await http.getFetch<GhEvent[]>(Address.getReposEvent(owner.value, name.value, 1))
   if (res.result && Array.isArray(res.data)) events.value = res.data as GhEvent[]
+  eventsLoaded.value = true
 }
 
-async function loadReadme() {
+async function loadReadme(force = false) {
   if (!owner.value || !name.value) return
+  if (!force && readmeLoaded.value) return
+  if (readmeLoading.value) return
   readmeLoading.value = true
   try {
     const res = await http.getFetch<string>(
@@ -309,6 +318,7 @@ async function loadReadme() {
     if (res.result && typeof res.data === 'string' && res.data.length > 0) {
       readmeSrcDoc.value = generateHtml(res.data)
     }
+    readmeLoaded.value = true
   } catch (_) {
     // ignore
   } finally {
@@ -331,20 +341,23 @@ async function loadFiles(path = '') {
       })
       files.value = arr
       filePath.value = path
+      filesLoaded.value = true
     }
   } finally {
     filesLoading.value = false
   }
 }
 
-async function loadIssues() {
+async function loadIssues(force = false) {
   if (!owner.value || !name.value) return
+  if (!force && issuesLoaded.value) return
   issuesLoading.value = true
   try {
     const res = await http.getFetch<IssueLite[]>(
       Address.getReposIssues(owner.value, name.value, issueState.value, 1)
     )
     if (res.result && Array.isArray(res.data)) issues.value = res.data as IssueLite[]
+    issuesLoaded.value = true
   } finally {
     issuesLoading.value = false
   }
@@ -373,17 +386,17 @@ async function loadBranches() {
 function onPickTab(v: number) {
   console.info('[repo-detail] tab clicked', v)
   tab.value = v
-  if (v === 0 && !readmeSrcDoc.value) loadReadme()
-  if (v === 1 && !events.value.length) loadEvents()
-  if (v === 2 && !files.value.length) loadFiles('')
-  if (v === 3 && !issues.value.length) loadIssues()
+  if (v === 0 && !readmeLoaded.value) loadReadme()
+  if (v === 1 && !eventsLoaded.value) loadEvents()
+  if (v === 2 && !filesLoaded.value) loadFiles('')
+  if (v === 3 && !issuesLoaded.value) loadIssues()
 }
 
 async function onRefresh() {
   refreshing.value = true
   try {
     await loadRepo()
-    await loadEvents()
+    await loadEvents(true)
   } finally {
     refreshing.value = false
   }
@@ -446,6 +459,7 @@ function onPickIssueState(s: 'open' | 'closed' | 'all') {
   if (s === issueState.value) return
   issueState.value = s
   issues.value = []
+  issuesLoaded.value = false
   loadIssues()
 }
 
@@ -504,8 +518,10 @@ function onPickBranch(b: string) {
   curBranch.value = b
   branchOpen.value = false
   readmeSrcDoc.value = ''
+  readmeLoaded.value = false
   files.value = []
   filePath.value = ''
+  filesLoaded.value = false
   if (tab.value === 0) loadReadme()
   if (tab.value === 2) loadFiles('')
 }
