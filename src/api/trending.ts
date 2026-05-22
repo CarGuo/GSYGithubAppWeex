@@ -1,12 +1,19 @@
 /**
  * src/api/trending.ts
  *
- * GitHub Trending 抓取。原 src/core/net/trending/GitHubTrending.js 用 himalaya
- * 解析 HTML —— 在 H5 端跨域必失败（github.com 不允许跨域），所以本工程改用
- * 官方 search/repositories?q=created:>YYYY-MM-DD&sort=stars 当 trending：
- * 既不需要代理也不会跨域。
+ * GitHub Trending 实现。
  *
- * 失败时回退到 mock，保证 UI 永远不会空屏。
+ * 历史版本：原 [src/core/net/trending/GitHubTrending.js](file:///d:/workspace/project/GSYGithubAppWeex/src/core/net/trending/GitHubTrending.js)
+ * 用 himalaya 解析 https://github.com/trending 的 HTML，H5 端跨域。
+ *
+ * 当前版本：与 GSY 系（RN / Flutter / Kotlin / Compose）保持一致——直接调
+ * 作者本人维护的解析后端 `https://guoshuyu.cn/github/trend/list`，返回 JSON。
+ * H5 端走 vite proxy `/gsy-trend`（在 [vite.config.ts](file:///d:/workspace/project/GSYGithubAppWeex/vite.config.ts) 注入 api-token）；
+ * App/小程序直连绝对地址 + 手动带 api-token。
+ *
+ * 注意：不走 [src/api/http.ts](file:///d:/workspace/project/GSYGithubAppWeex/src/api/http.ts) 的 axios，否则拦截器会把 GitHub PAT 漏给 guoshuyu.cn。
+ *
+ * 兜底：GSY API 失败时回退 GitHub 官方 search，再失败回退到 mock。
  */
 
 import http from './http'
@@ -23,6 +30,8 @@ export interface TrendItem {
   reposFullName?: string
 }
 
+const GSY_API_TOKEN = '4d65e2a5626103f92a71867d7b49fea0'
+
 const FALLBACK: TrendItem[] = [
   {
     reposAuthor: 'CarGuo',
@@ -37,7 +46,7 @@ const FALLBACK: TrendItem[] = [
   {
     reposAuthor: 'CarGuo',
     reposName: 'GSYGithubAppFlutter',
-    reposDesc: 'Flutter 完整版完成版 GitHub 客户端',
+    reposDesc: 'Flutter 完整版 GitHub 客户端',
     reposLanguage: 'Dart',
     reposStars: '14k',
     reposForks: '2.1k',
@@ -56,6 +65,17 @@ const FALLBACK: TrendItem[] = [
   }
 ]
 
+interface GsyTrendItem {
+  fullName?: string
+  reposName?: string
+  name?: string
+  description?: string
+  language?: string
+  starCount?: string | number
+  forkCount?: string | number
+  meta?: string
+}
+
 function sinceToISO(since: 'daily' | 'weekly' | 'monthly'): string {
   const now = new Date()
   const offset = since === 'daily' ? 1 : since === 'weekly' ? 7 : 30
@@ -63,10 +83,11 @@ function sinceToISO(since: 'daily' | 'weekly' | 'monthly'): string {
   return d.toISOString().slice(0, 10)
 }
 
-function fmtCount(n: number | undefined): string {
-  if (!n && n !== 0) return '0'
-  if (n >= 1000) return `${(n / 1000).toFixed(1)}k`
-  return String(n)
+function fmtCount(n: number | string | undefined): string {
+  if (n === undefined || n === null || n === '') return '0'
+  const num = typeof n === 'number' ? n : parseInt(String(n).replace(/[^\d]/g, ''), 10) || 0
+  if (num >= 1000) return `${(num / 1000).toFixed(1)}k`
+  return String(num)
 }
 
 interface SearchRepoItem {
@@ -79,19 +100,89 @@ interface SearchRepoItem {
   forks_count: number
 }
 
-export async function fetchTrending(
-  since: 'daily' | 'weekly' | 'monthly' = 'daily',
-  language = ''
-): Promise<TrendItem[]> {
+/**
+ * 直接打 guoshuyu.cn / vite proxy，不经 axios，避免泄露 GitHub PAT。
+ */
+function rawRequest<T>(url: string, headers: Record<string, string> = {}): Promise<T> {
+  return new Promise((resolve, reject) => {
+    uni.request({
+      url,
+      method: 'GET',
+      header: headers,
+      timeout: 12000,
+      success: (res) => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve(res.data as T)
+        } else {
+          reject(new Error(`HTTP ${res.statusCode}`))
+        }
+      },
+      fail: (err) => reject(err)
+    })
+  })
+}
+
+async function fetchFromGsy(
+  since: 'daily' | 'weekly' | 'monthly',
+  language: string
+): Promise<TrendItem[] | null> {
+  try {
+    const url = Address.gsyTrending(since, language)
+    // H5 经过 vite proxy 已注入 api-token，无需重复带；
+    // 非 H5 端必须手动带 api-token
+    let headers: Record<string, string> = {}
+    // #ifndef H5
+    headers = { 'api-token': GSY_API_TOKEN }
+    // #endif
+    const data = await rawRequest<
+      GsyTrendItem[] | { data?: GsyTrendItem[]; status?: number; error?: string }
+    >(url, headers)
+    // GSY 后端业务异常时会以 200 包返回 { status:500, error:"...", message:"..." }
+    if (
+      data &&
+      typeof data === 'object' &&
+      !Array.isArray(data) &&
+      ((data as { status?: number }).status === 500 || (data as { error?: string }).error)
+    ) {
+      return null
+    }
+    const list = Array.isArray(data)
+      ? data
+      : Array.isArray((data as { data?: GsyTrendItem[] })?.data)
+        ? (data as { data: GsyTrendItem[] }).data
+        : []
+    if (!list.length) return null
+    const sinceLabel = since === 'daily' ? 'today' : since === 'weekly' ? 'this week' : 'this month'
+    return list.map<TrendItem>((it) => {
+      const fullName = it.fullName ?? `${it.name ?? ''}/${it.reposName ?? ''}`
+      const [author = '', repo = ''] = fullName.split('/')
+      return {
+        reposAuthor: author || it.name || '',
+        reposName: repo || it.reposName || '',
+        reposFullName: fullName,
+        reposDesc: it.description ?? '',
+        reposLanguage: it.language ?? '',
+        reposStars: fmtCount(it.starCount),
+        reposForks: fmtCount(it.forkCount),
+        reposStarsAdded: it.meta ? it.meta.trim() : `★ ${fmtCount(it.starCount)} ${sinceLabel}`
+      }
+    })
+  } catch {
+    return null
+  }
+}
+
+async function fetchFromSearch(
+  since: 'daily' | 'weekly' | 'monthly',
+  language: string
+): Promise<TrendItem[] | null> {
   try {
     const sinceISO = sinceToISO(since)
     const url = Address.trendingFromSearch(sinceISO, language, 1)
     const res = await http.getFetch<{ items?: SearchRepoItem[] }>(url)
-    if (!res.result || typeof res.data !== 'object' || res.data === null) {
-      return FALLBACK
-    }
+    if (!res.result || typeof res.data !== 'object' || res.data === null) return null
     const items = (res.data as { items?: SearchRepoItem[] }).items ?? []
-    if (items.length === 0) return FALLBACK
+    if (!items.length) return null
     const sinceLabel = since === 'daily' ? 'today' : since === 'weekly' ? 'this week' : 'this month'
     return items.slice(0, 25).map<TrendItem>((it) => ({
       reposAuthor: it.owner?.login ?? '',
@@ -104,6 +195,17 @@ export async function fetchTrending(
       reposStarsAdded: `★ ${fmtCount(it.stargazers_count)} ${sinceLabel}`
     }))
   } catch {
-    return FALLBACK
+    return null
   }
+}
+
+export async function fetchTrending(
+  since: 'daily' | 'weekly' | 'monthly' = 'daily',
+  language = ''
+): Promise<TrendItem[]> {
+  const fromGsy = await fetchFromGsy(since, language)
+  if (fromGsy && fromGsy.length) return fromGsy
+  const fromSearch = await fetchFromSearch(since, language)
+  if (fromSearch && fromSearch.length) return fromSearch
+  return FALLBACK
 }

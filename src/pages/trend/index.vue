@@ -16,6 +16,17 @@
         </view>
       </view>
 
+      <view class="trend__lang-row">
+        <view
+          v-for="opt in langOptions"
+          :key="opt.value || 'all'"
+          :class="['trend__lang-chip', { 'is-active': language === opt.value }]"
+          @click="onPickLang(opt.value)"
+        >
+          <text>{{ opt.label }}</text>
+        </view>
+      </view>
+
       <view v-if="loading" class="trend__loading">
         <text>加载中…</text>
       </view>
@@ -56,9 +67,24 @@ const sinceOptions = [
   { label: '本月', value: 'monthly' as const }
 ]
 
+const langOptions = [
+  { label: '全部', value: '' },
+  { label: 'JavaScript', value: 'JavaScript' },
+  { label: 'TypeScript', value: 'TypeScript' },
+  { label: 'Vue', value: 'Vue' },
+  { label: 'Java', value: 'Java' },
+  { label: 'Kotlin', value: 'Kotlin' },
+  { label: 'Dart', value: 'Dart' },
+  { label: 'Python', value: 'Python' },
+  { label: 'Go', value: 'Go' },
+  { label: 'Rust', value: 'Rust' }
+]
+
 const since = ref<'daily' | 'weekly' | 'monthly'>('daily')
+const language = ref<string>('')
 const list = ref<TrendItem[]>([])
 const loading = ref(false)
+const loadedKey = ref<string>('')
 const statusBarHeight = ref(0)
 
 try {
@@ -66,18 +92,28 @@ try {
   statusBarHeight.value = sys.statusBarHeight || 0
 } catch (_) {}
 
-async function load() {
+async function load(force = false) {
+  const key = `${since.value}|${language.value}`
+  if (!force && loadedKey.value === key && list.value.length) return
   loading.value = true
   try {
-    list.value = await fetchTrending(since.value)
+    list.value = await fetchTrending(since.value, language.value)
+    loadedKey.value = key
   } finally {
     loading.value = false
   }
 }
 
 function onPickSince(v: 'daily' | 'weekly' | 'monthly') {
+  if (since.value === v) return
   since.value = v
-  load()
+  load(true)
+}
+
+function onPickLang(v: string) {
+  if (language.value === v) return
+  language.value = v
+  load(true)
 }
 
 function openRepo(item: TrendItem) {
@@ -87,7 +123,7 @@ function openRepo(item: TrendItem) {
   })
 }
 
-onShow(load)
+onShow(() => load(false))
 </script>
 
 <style lang="scss" scoped>
@@ -146,6 +182,26 @@ onShow(load)
       color: $gsy-theme-color;
       font-weight: 600;
       border-bottom: 4rpx solid $gsy-theme-color;
+    }
+  }
+  &__lang-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 16rpx;
+  }
+  &__lang-chip {
+    padding: 8rpx 20rpx;
+    margin-right: 12rpx;
+    margin-bottom: 12rpx;
+    background: #ffffff;
+    color: $gsy-gray;
+    border-radius: 30rpx;
+    font-size: 24rpx;
+    box-shadow: $gsy-box-shadow;
+    &.is-active {
+      background: $gsy-theme-color;
+      color: #ffffff;
     }
   }
   &__loading {

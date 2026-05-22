@@ -11,6 +11,16 @@ export default defineConfig({
   },
   server: {
     port: 8080,
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    proxy: {
+      '/gsy-trend': {
+        target: 'https://guoshuyu.cn',
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/gsy-trend/, '/github/trend'),
+        headers: {
+          'api-token': '4d65e2a5626103f92a71867d7b49fea0'
+        }
+      }
+    }
   }
 })

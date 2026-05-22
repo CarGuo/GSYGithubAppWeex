@@ -100,5 +100,19 @@ export const Address = {
     const langPart = language ? `+language:${encodeURIComponent(language)}` : ''
     const q = `created:>${sinceISO}${langPart}`
     return `${HOST_API}search/repositories?q=${q}&sort=stars&order=desc&page=${page}&per_page=${PAGE_SIZE}`
+  },
+  /**
+   * GSY 官方 trend 解析后端（与 RN/Flutter/Kotlin 版 GSY 保持一致）。
+   * 真实接口：https://guoshuyu.cn/github/trend/list?since=&languageType=
+   * H5 端经 vite proxy 走 /gsy-trend 前缀（自动注入 api-token header），
+   * 非 H5 端（App/小程序）直接打绝对地址，需要在 fetch 调用时手动带 api-token。
+   */
+  gsyTrending: (since: 'daily' | 'weekly' | 'monthly' = 'daily', languageType = '') => {
+    // #ifdef H5
+    return `/gsy-trend/list?since=${since}&languageType=${encodeURIComponent(languageType)}`
+    // #endif
+    // #ifndef H5
+    return `https://guoshuyu.cn/github/trend/list?since=${since}&languageType=${encodeURIComponent(languageType)}`
+    // #endif
   }
 }
