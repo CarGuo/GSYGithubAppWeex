@@ -84,9 +84,10 @@ function setState(s: 'open' | 'closed' | 'all') {
 }
 
 function openIssue(it: Issue) {
-  if (it.html_url) {
-    uni.navigateTo({ url: `/pages/web/index?url=${encodeURIComponent(it.html_url)}` })
-  }
+  if (!it.number) return
+  uni.navigateTo({
+    url: `/pages/issue-detail/index?owner=${owner.value}&name=${name.value}&number=${it.number}`
+  })
 }
 
 function openUser(login?: string) {

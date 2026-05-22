@@ -37,8 +37,16 @@
         </view>
       </view>
 
+      <view class="card-white-wrapper repo__menu" @click="openReadme">
+        <text class="content-text-black-bold">README</text>
+        <text class="repo__menu-arrow">›</text>
+      </view>
       <view class="card-white-wrapper repo__menu" @click="openIssues">
         <text class="content-text-black-bold">Issues</text>
+        <text class="repo__menu-arrow">›</text>
+      </view>
+      <view class="card-white-wrapper repo__menu" @click="goCommonList('reposContributor', 'Contributors')">
+        <text class="content-text-black-bold">Contributors</text>
         <text class="repo__menu-arrow">›</text>
       </view>
       <view class="card-white-wrapper repo__menu" @click="openWeb(data.html_url)">
@@ -107,6 +115,9 @@ onLoad(async (q: Record<string, string> | undefined) => {
 
 function openIssues() {
   uni.navigateTo({ url: `/pages/repository-issues/index?owner=${owner.value}&name=${name.value}` })
+}
+function openReadme() {
+  uni.navigateTo({ url: `/pages/repository-detail-info/index?owner=${owner.value}&name=${name.value}` })
 }
 function openWeb(url?: string | null) {
   if (!url) return

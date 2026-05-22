@@ -23,6 +23,20 @@ export const Address = {
   getReposReadme: (owner: string, name: string) => `${HOST_API}repos/${owner}/${name}/readme`,
   getReposIssues: (owner: string, name: string, state = 'open', page = 1) =>
     `${HOST_API}repos/${owner}/${name}/issues?state=${state}&page=${page}&per_page=${PAGE_SIZE}`,
+  getIssueDetail: (owner: string, name: string, number: number | string) =>
+    `${HOST_API}repos/${owner}/${name}/issues/${number}`,
+  getIssueComments: (owner: string, name: string, number: number | string, page = 1) =>
+    `${HOST_API}repos/${owner}/${name}/issues/${number}/comments?page=${page}&per_page=${PAGE_SIZE}`,
+  createIssueComment: (owner: string, name: string, number: number | string) =>
+    `${HOST_API}repos/${owner}/${name}/issues/${number}/comments`,
+  getReposStargazers: (owner: string, name: string, page = 1) =>
+    `${HOST_API}repos/${owner}/${name}/stargazers?page=${page}&per_page=${PAGE_SIZE}`,
+  getReposForks: (owner: string, name: string, page = 1) =>
+    `${HOST_API}repos/${owner}/${name}/forks?page=${page}&per_page=${PAGE_SIZE}`,
+  getReposSubscribers: (owner: string, name: string, page = 1) =>
+    `${HOST_API}repos/${owner}/${name}/subscribers?page=${page}&per_page=${PAGE_SIZE}`,
+  getReposContributors: (owner: string, name: string, page = 1) =>
+    `${HOST_API}repos/${owner}/${name}/contributors?page=${page}&per_page=${PAGE_SIZE}`,
   search: (q: string, page = 1, type: 'repositories' | 'users' = 'repositories') => {
     if (type === 'users') {
       return `${HOST_API}search/users?q=${encodeURIComponent(q)}&page=${page}&per_page=${PAGE_SIZE}`
