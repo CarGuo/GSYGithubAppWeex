@@ -371,6 +371,7 @@ async function loadBranches() {
 }
 
 function onPickTab(v: number) {
+  console.info('[repo-detail] tab clicked', v)
   tab.value = v
   if (v === 0 && !readmeSrcDoc.value) loadReadme()
   if (v === 1 && !events.value.length) loadEvents()
@@ -583,6 +584,9 @@ function goBack() {
   height: 80rpx;
   align-items: center;
   border-top: 1rpx solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 10;
+  flex-shrink: 0;
   &__item {
     flex: 1;
     height: 100%;
@@ -590,12 +594,14 @@ function goBack() {
     align-items: center;
     justify-content: center;
     border-bottom: 4rpx solid transparent;
+    cursor: pointer;
   }
   &__item--active {
     border-bottom-color: #ffffff;
   }
   &__text {
     font-size: 28rpx;
+    pointer-events: none;
   }
 }
 
@@ -605,8 +611,12 @@ function goBack() {
   overflow: hidden;
 }
 .repo__tab {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
 }
 .repo__hint {
   text-align: center;
