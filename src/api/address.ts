@@ -39,6 +39,12 @@ export const Address = {
     `${HOST_API}repos/${owner}/${name}/contributors?page=${page}&per_page=${PAGE_SIZE}`,
   getReposBranches: (owner: string, name: string) =>
     `${HOST_API}repos/${owner}/${name}/branches?per_page=100`,
+  getReposEvent: (owner: string, name: string, page = 1) =>
+    `${HOST_API}repos/${owner}/${name}/events?page=${page}&per_page=${PAGE_SIZE}`,
+  getReposCommits: (owner: string, name: string, branch = '', page = 1) => {
+    const sha = branch ? `&sha=${encodeURIComponent(branch)}` : ''
+    return `${HOST_API}repos/${owner}/${name}/commits?page=${page}&per_page=${PAGE_SIZE}${sha}`
+  },
   getReposContent: (owner: string, name: string, path = '', branch = '') => {
     const cleanPath = path.replace(/^\/+/, '')
     const ref = branch ? `?ref=${encodeURIComponent(branch)}` : ''

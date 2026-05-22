@@ -40,6 +40,21 @@ const dataUri = computed(() => {
   return 'data:text/html;charset=utf-8,' + encodeURIComponent(srcdoc.value)
 })
 
+function detectLang(raw: string, path: string): string {
+  const legacyTag = 'class="instapaper_body '
+  const legacyStart = raw.indexOf(legacyTag)
+  const legacyEnd = raw.indexOf('" data-path="')
+  if (legacyStart >= 0 && legacyEnd >= 0) {
+    const tmp = raw.substring(legacyStart + legacyTag.length, legacyEnd)
+    if (tmp) return formName(tmp.toLowerCase())
+  }
+  if (/<div\s+id="file"\s+class="md"/i.test(raw) || /class="markdown-body/i.test(raw)) {
+    return 'markdown'
+  }
+  const ext = (path.split('.').pop() || '').toLowerCase()
+  return formName(ext) || 'java'
+}
+
 async function load() {
   if (!owner.value || !name.value || !filePath.value) {
     srcdoc.value = '<h1>不支持打开</h1>'
@@ -51,15 +66,7 @@ async function load() {
     const res = await http.getFetch<string>(url, { Accept: 'application/vnd.github.html' })
     if (res.result && typeof res.data === 'string' && res.data.length > 0) {
       const raw = res.data
-      const startTag = 'class="instapaper_body '
-      const startLang = raw.indexOf(startTag)
-      const endLang = raw.indexOf('" data-path="')
-      let lang: string | undefined
-      if (startLang >= 0 && endLang >= 0) {
-        const tmpLang = raw.substring(startLang + startTag.length, endLang)
-        if (tmpLang) lang = formName(tmpLang.toLowerCase())
-      }
-      if (!lang) lang = 'java'
+      const lang = detectLang(raw, filePath.value)
       if (lang === 'markdown') {
         srcdoc.value = generateHtml(raw)
       } else {

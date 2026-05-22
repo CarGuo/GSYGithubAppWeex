@@ -1,9 +1,9 @@
 <template>
   <view class="main">
-    <view class="navbar">
+    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
       <text class="navbar__title">GSYGithubApp</text>
       <view class="navbar__action" @click="goSearch">
-        <text class="iconfont icon-sousuo navbar__icon" />
+        <text class="wxcIconFont navbar__icon">&#xe61c;</text>
       </view>
     </view>
 
@@ -31,7 +31,10 @@
           <text class="empty__hint">暂无动态</text>
         </view>
       </view>
+      <view class="main__bottom-pad" />
     </scroll-view>
+
+    <MainTabBar :active="0" />
   </view>
 </template>
 
@@ -41,6 +44,7 @@ import { onShow } from '@dcloudio/uni-app'
 import { useUserStore } from '@/stores/user'
 import http from '@/api/http'
 import { Address } from '@/api/address'
+import MainTabBar from '@/components/MainTabBar.vue'
 
 interface GhEvent {
   id: string
@@ -56,6 +60,12 @@ const isLoggedIn = computed(() => userStore.isLoggedIn)
 const events = ref<GhEvent[]>([])
 const loading = ref(false)
 const refreshing = ref(false)
+const statusBarHeight = ref(0)
+
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
 
 async function load() {
   if (!userStore.userInfo?.login) return
@@ -146,35 +156,41 @@ onShow(async () => {
 .navbar {
   position: relative;
   width: 100%;
-  height: 88rpx;
+  height: 100rpx;
   background-color: $gsy-theme-color;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
 
   &__title {
     color: #ffffff;
-    font-size: 34rpx;
+    font-size: 36rpx;
     font-weight: bold;
+    line-height: 100rpx;
   }
   &__action {
     position: absolute;
     right: 24rpx;
-    top: 0;
     bottom: 0;
+    height: 100rpx;
     display: flex;
     align-items: center;
   }
   &__icon {
     color: #ffffff;
-    font-size: 36rpx;
+    font-size: 40rpx;
   }
 }
 
 .main__scroll {
   flex: 1;
   width: 100%;
+}
+
+.main__bottom-pad {
+  height: calc(120rpx + env(safe-area-inset-bottom) + 20rpx);
 }
 
 .event-card {

@@ -196,6 +196,77 @@ H5 端会被 CORS 阻断（github.com 不允许跨域）；App / 小程序端没
 ### 一处关键 bug（H5 资源路径）
 `manifest.json > h5.router.base` 和 `h5.publicPath` 默认 `./`（相对路径），导致 `<image src="/static/logo.png">` 在 `pages/login/index` 路由下被解析为 `/pages/login/static/logo.png` 而 404。修复：两者均改为 `/`（站点根），见 [src/manifest.json](./src/manifest.json#L48-L59)。
 
+### 5.6 原工程 UI 词汇表（强制 token 据点）
+
+> 任何 page/widget 的 UI 决策必须从此表取值，不允许"想象"或"按 GSY 风格自由发挥"。
+> 来源已 Read 通：[Config.js](./src/config/Config.js) / [styles.scss](./src/config/styles.scss) / [MainTabConfig.js](./src/config/MainTabConfig.js) / [RepositoryTabConfig.js](./src/config/RepositoryTabConfig.js) / [IconConfig.js](./src/config/IconConfig.js) / [iconfont.css](./src/static/font/iconfont.css) / [NavigationBar.vue](./src/components/widget/NavigationBar.vue) / [TabBar.vue](./src/components/widget/TabBar.vue) / [TopTabBar.vue](./src/components/widget/TopTabBar.vue) / [RepositoryHeadItem.vue](./src/components/widget/RepositoryHeadItem.vue) / [RepositoryItem.vue](./src/components/widget/RepositoryItem.vue) / [SearchPage.vue](./src/components/SearchPage.vue) / [DynamicPage.vue](./src/components/DynamicPage.vue) / [CodeDetailPage.vue](./src/components/CodeDetailPage.vue) / [WebComponent.vue](./src/components/widget/WebComponent.vue) / [PopoverComponent.vue](./src/components/widget/PopoverComponent.vue)。
+
+#### 颜色（[Config.js L17-L22](./src/config/Config.js#L17-L22)）
+| 名称 | 值 | 用途 |
+|---|---|---|
+| primaryColor | `#3c3f41` | 主题色，顶栏 / 深卡 / 主题 tab 选中字 |
+| primaryDarkColor | `#121917` | 深色衬底 |
+| primaryLightColor | `#42464b` | webDracula 等略浅 |
+| actionBlue | `#267aff` | userName 链接色、强调 |
+| miWhite | `#ececec` | 浅白底 chip / 浅分割 |
+| webDraculaBackgroundColor | `#282a36` | code-detail webview 背景 |
+| subTextColor | `rgba(97,97,97,0.9)` | 灰阶副文字 |
+| subLightTextColor | `#f2f3f4` | page 容器底 |
+
+#### 尺寸（750 设计稿，rpx 一致）
+| 名称 | 值 | 用途 |
+|---|---|---|
+| navigatorbBarHeight | `100rpx` | 顶栏（不含 status bar） |
+| statusHeight | `32rpx` | iOS 状态栏占位（H5 用 safe-area） |
+| mainTabBarHeight | `120rpx` | 主页底部 tabBar |
+| reposDetailTopTabBarHeight | `80rpx` | 仓库详情 4tab |
+| controlBarHeight | `80rpx` | "动态/提交"切换条 |
+
+#### iconfont（family **必须** 是 `wxcIconFont`，已在 [global.scss](./src/styles/global.scss#L12-L18) 注册）
+| 用途 | unicode | 用在哪 |
+|---|---|---|
+| 动态 tab | `\e684` | 主页底 tab 1 |
+| 推荐 tab | `\e818` | 主页底 tab 2 |
+| 我的 tab | `\e6d0` | 主页底 tab 3 |
+| 搜索 | `\e61c` | 顶栏右上 / SearchPage |
+| 返回 | `\e78a` | 顶栏左上 |
+| 右箭头 | `\e610` | 文件目录行 / cell 跳转 |
+| 目录 | `\e793` | RepositoryFileListPage |
+| 文件 | `\ea77` | RepositoryFileListPage |
+| star/watchers | `\e643` | RepositoryHeadItem |
+| forks | `\e67e` | RepositoryHeadItem |
+| subscribers | `\e681` | RepositoryHeadItem |
+| issues | `\e661` | RepositoryHeadItem |
+| GitHub | `\ea0a` | "在 GitHub 打开"等 |
+| 评论 | `\e6ba` | IssueItem |
+| user | `\e63e` | RepositoryItem 作者行 |
+
+#### 卡片体系（[styles.scss L26-L33](./src/config/styles.scss#L26-L33)，已迁到 [global.scss L150-L173](./src/styles/global.scss#L150-L173)）
+| class | 宽 | 背景 | 圆角 | 用途 |
+|---|---|---|---|---|
+| `card-white-wrapper` | 700rpx | `#fff` | 10rpx | RepositoryItem 列表卡 |
+| `card-black-wrapper` | 710rpx | `$gsy-theme-color` | 15rpx | RepositoryHeadItem 顶部卡 |
+| `card-black-full-wrapper` | 100% | `$gsy-theme-color` | 15rpx 仅下圆 | 顶栏直连大块（如详情顶部融合） |
+
+#### 主页 tabBar（[MainTabConfig.js L8-L22](./src/config/MainTabConfig.js#L8-L22)）
+- 文案：**动态 / 推荐 / 我的**（不是"动态/趋势/我"——要修 [pages.json L130-L142](./src/pages.json#L130-L142)）
+- 选中字色：`primaryColor`，未选中：`subTextColor`
+- 背景：`#fbfbfb`，iconFontSize：`40px`
+- 实现：用 codePoint 渲染（uni 内置 tabBar 不支持 iconfont，必须自画 [components/widget/TabBar.vue](./src/components/widget/TabBar.vue) 等价物）
+
+#### 仓库详情顶 4tab（[RepositoryTabConfig.js](./src/config/RepositoryTabConfig.js)）
+- 文案：**详细信息 / 动态 / 文件 / Issue**
+- 背景：`primaryColor`，选中字白 `#FFFFFF`，未选中字 `subTextColor`
+
+#### 顶部 NavigationBar（[NavigationBar.vue L1-L46](./src/components/widget/NavigationBar.vue#L1-L46)）
+- 满宽 `750rpx` + 主题色背景 + box-shadow
+- 标题居中 36rpx 白字
+- 左右 30rpx wxcIconFont icon 各占 100rpx
+
+#### "动态/提交"切换 control-container
+- 条高 80rpx，主题色背景，左右 30rpx 圆角，文字白色 32rpx
+- 活动项：略浅 `primaryLightColor` 圆角条衬底
+
 ---
 
 ## 6. 待迁移页面

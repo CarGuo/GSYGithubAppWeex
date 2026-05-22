@@ -1,88 +1,82 @@
 <template>
   <view class="readme">
-    <view v-if="loading" class="readme__hint"><text>加载中…</text></view>
-    <template v-else-if="!content">
-      <view class="readme__hint"><text>未能加载 README</text></view>
-      <view class="card-white-wrapper readme__menu" @click="openWeb">
-        <text class="content-text-black-bold">在 GitHub 查看</text>
-        <text class="readme__arrow">›</text>
+    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+      <view class="navbar__back" @click="goBack">
+        <text class="wxcIconFont navbar__icon">&#xe78a;</text>
       </view>
-    </template>
-    <template v-else>
-      <view class="card-white-wrapper readme__card">
-        <text class="readme__title">{{ fileName || 'README' }}</text>
-        <text class="content-text-gray readme__body">{{ content }}</text>
+      <text class="navbar__title">仓库简介</text>
+      <view class="navbar__action" @click="openWeb">
+        <text class="wxcIconFont navbar__icon">&#xea0a;</text>
       </view>
-      <view class="card-white-wrapper readme__menu" @click="openWeb">
-        <text class="content-text-black-bold">在 GitHub 查看完整 README</text>
-        <text class="readme__arrow">›</text>
+    </view>
+
+    <web-view
+      v-if="srcdoc"
+      :webview-styles="webviewStyles"
+      :update-title="false"
+      :src="dataUri"
+    ></web-view>
+    <view v-else-if="loading" class="readme__hint"><text>加载中…</text></view>
+    <view v-else class="readme__hint">
+      <text>未能加载 README</text>
+      <view class="readme__link" @click="openWeb">
+        <text class="readme__link-text">在 GitHub 查看</text>
       </view>
-    </template>
+    </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import http from '@/api/http'
 import { Address } from '@/api/address'
-
-interface ReadmeRes {
-  content: string
-  encoding: string
-  name?: string
-  html_url?: string
-  download_url?: string
-}
+import { generateHtml } from '@/utils/htmlUtils'
 
 const owner = ref('')
 const name = ref('')
-const content = ref('')
-const fileName = ref('')
-const htmlUrl = ref('')
+const srcdoc = ref('')
 const loading = ref(false)
+const statusBarHeight = ref(0)
 
-function decodeBase64(b64: string): string {
-  const cleaned = b64.replace(/\s+/g, '')
-  try {
-    if (typeof atob === 'function') {
-      const binary = atob(cleaned)
-      try {
-        const bytes = Uint8Array.from(binary, (c) => c.charCodeAt(0))
-        return new TextDecoder('utf-8').decode(bytes)
-      } catch {
-        return decodeURIComponent(escape(binary))
-      }
-    }
-  } catch {
-    // ignore
-  }
-  return cleaned
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
+
+const webviewStyles = {
+  progress: { color: '#3c3f41' }
 }
+
+const dataUri = computed(() => {
+  if (!srcdoc.value) return ''
+  return 'data:text/html;charset=utf-8,' + encodeURIComponent(srcdoc.value)
+})
 
 async function load() {
   if (!owner.value || !name.value) return
   loading.value = true
   try {
-    const res = await http.getFetch<ReadmeRes>(Address.getReposReadme(owner.value, name.value))
-    if (res.result && typeof res.data === 'object') {
-      const r = res.data as ReadmeRes
-      fileName.value = r.name || 'README'
-      htmlUrl.value = r.html_url || ''
-      if (r.encoding === 'base64' && typeof r.content === 'string') {
-        content.value = decodeBase64(r.content)
-      } else if (typeof r.content === 'string') {
-        content.value = r.content
-      }
+    const url = Address.getReposReadme(owner.value, name.value)
+    const res = await http.getFetch<string>(url, { Accept: 'application/vnd.github.html' })
+    if (res.result && typeof res.data === 'string' && res.data.length > 0) {
+      srcdoc.value = generateHtml(res.data)
     }
+  } catch {
+    // ignore
   } finally {
     loading.value = false
   }
 }
 
 function openWeb() {
-  const url = htmlUrl.value || `https://github.com/${owner.value}/${name.value}#readme`
+  const url = `https://github.com/${owner.value}/${name.value}#readme`
   uni.navigateTo({ url: `/pages/web/index?url=${encodeURIComponent(url)}` })
+}
+
+function goBack() {
+  if (getCurrentPages().length > 1) uni.navigateBack()
+  else uni.reLaunch({ url: '/pages/main/index' })
 }
 
 onLoad((q: Record<string, string> | undefined) => {
@@ -94,42 +88,66 @@ onLoad((q: Record<string, string> | undefined) => {
 
 <style lang="scss" scoped>
 .readme {
-  min-height: 100vh;
-  background-color: $gsy-container;
-  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #ffffff;
+}
 
-  &__hint {
-    text-align: center;
-    color: $gsy-gray;
-    padding: 48rpx 0;
-  }
-  &__card {
-    margin-bottom: 16rpx;
-  }
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  background-color: $gsy-theme-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
+
   &__title {
-    color: $gsy-theme-color;
-    font-size: 30rpx;
-    font-weight: 600;
-    margin-bottom: 16rpx;
-  }
-  &__body {
-    display: block;
-    line-height: 1.6;
-    word-break: break-word;
-    white-space: pre-wrap;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 26rpx;
-  }
-  &__menu {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16rpx;
-  }
-  &__arrow {
-    color: $gsy-gray;
+    color: #ffffff;
     font-size: 36rpx;
+    font-weight: bold;
+    line-height: 100rpx;
   }
+  &__back {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100rpx;
+    width: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__action {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 100rpx;
+    width: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__icon {
+    color: #ffffff;
+    font-size: 40rpx;
+  }
+}
+
+.readme__hint {
+  text-align: center;
+  color: $gsy-gray;
+  padding: 60rpx 0;
+}
+.readme__link {
+  margin-top: 30rpx;
+  text-align: center;
+}
+.readme__link-text {
+  color: $gsy-action-blue;
+  font-size: 28rpx;
 }
 </style>

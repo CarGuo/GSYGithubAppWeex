@@ -28,25 +28,25 @@
     {
       "path": "pages/trend/index",
       "style": {
-        "navigationBarTitleText": "趋势"
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/dynamic/index",
       "style": {
-        "navigationBarTitleText": "动态"
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/repository-detail/index",
       "style": {
-        "navigationBarTitleText": "仓库详情"
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/repository-detail-info/index",
       "style": {
-        "navigationBarTitleText": "仓库简介"
+        "navigationStyle": "custom"
       }
     },
     {
@@ -88,7 +88,7 @@
     {
       "path": "pages/person/index",
       "style": {
-        "navigationBarTitleText": "我"
+        "navigationStyle": "custom"
       }
     },
     {
@@ -121,25 +121,5 @@
     "navigationBarTitleText": "GSY GitHub App",
     "navigationBarBackgroundColor": "#3c3f41",
     "backgroundColor": "#f2f3f4"
-  },
-  "tabBar": {
-    "color": "#999999",
-    "selectedColor": "#3c3f41",
-    "backgroundColor": "#FFFFFF",
-    "borderStyle": "black",
-    "list": [
-      {
-        "pagePath": "pages/main/index",
-        "text": "动态"
-      },
-      {
-        "pagePath": "pages/trend/index",
-        "text": "趋势"
-      },
-      {
-        "pagePath": "pages/person/index",
-        "text": "我"
-      }
-    ]
   }
 }

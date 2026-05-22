@@ -1,6 +1,7 @@
 @import '../uni.scss';
 
 /* ========== 原 GSY iconfont 字体 ========== */
+/* 注册两个 family 名：'iconfont'（uni 习惯）+ 'wxcIconFont'（原 Weex widget 内联用） */
 @font-face {
   font-family: 'iconfont';
   src: url('/static/font/iconfont.woff') format('woff'),
@@ -8,8 +9,16 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'wxcIconFont';
+  src: url('/static/font/iconfont.woff') format('woff'),
+       url('/static/font/iconfont.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-.iconfont {
+.iconfont,
+.wxcIconFont {
   font-family: 'iconfont' !important;
   font-size: 32rpx;
   font-style: normal;

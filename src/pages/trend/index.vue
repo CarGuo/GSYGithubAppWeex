@@ -1,37 +1,46 @@
 <template>
   <view class="trend">
-    <view class="trend__filter">
-      <view
-        v-for="opt in sinceOptions"
-        :key="opt.value"
-        :class="['trend__filter-item', { 'is-active': since === opt.value }]"
-        @click="onPickSince(opt.value)"
-      >
-        <text>{{ opt.label }}</text>
-      </view>
+    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+      <text class="navbar__title">趋势</text>
     </view>
 
-    <view v-if="loading" class="trend__loading">
-      <text>加载中…</text>
-    </view>
-
-    <view v-else>
-      <view v-for="(item, idx) in list" :key="idx" class="trend__item" @click="openRepo(item)">
-        <view class="trend__item-row">
-          <text class="trend__item-author">{{ item.reposAuthor }} /</text>
-          <text class="trend__item-name">{{ item.reposName }}</text>
-        </view>
-        <text class="trend__item-desc">{{ item.reposDesc }}</text>
-        <view class="trend__item-meta">
-          <text v-if="item.reposLanguage" class="trend__item-tag">{{ item.reposLanguage }}</text>
-          <text class="iconfont icon-star trend__item-meta-icon" />
-          <text class="trend__item-meta-item">{{ item.reposStars }}</text>
-          <text class="iconfont icon-xing trend__item-meta-icon" />
-          <text class="trend__item-meta-item">{{ item.reposForks }}</text>
-          <text class="trend__item-meta-add">{{ item.reposStarsAdded }}</text>
+    <scroll-view class="trend__scroll" scroll-y>
+      <view class="trend__filter">
+        <view
+          v-for="opt in sinceOptions"
+          :key="opt.value"
+          :class="['trend__filter-item', { 'is-active': since === opt.value }]"
+          @click="onPickSince(opt.value)"
+        >
+          <text>{{ opt.label }}</text>
         </view>
       </view>
-    </view>
+
+      <view v-if="loading" class="trend__loading">
+        <text>加载中…</text>
+      </view>
+
+      <view v-else>
+        <view v-for="(item, idx) in list" :key="idx" class="trend__item" @click="openRepo(item)">
+          <view class="trend__item-row">
+            <text class="trend__item-author">{{ item.reposAuthor }} /</text>
+            <text class="trend__item-name">{{ item.reposName }}</text>
+          </view>
+          <text class="trend__item-desc">{{ item.reposDesc }}</text>
+          <view class="trend__item-meta">
+            <text v-if="item.reposLanguage" class="trend__item-tag">{{ item.reposLanguage }}</text>
+            <text class="wxcIconFont trend__item-meta-icon">&#xe643;</text>
+            <text class="trend__item-meta-item">{{ item.reposStars }}</text>
+            <text class="wxcIconFont trend__item-meta-icon">&#xe67e;</text>
+            <text class="trend__item-meta-item">{{ item.reposForks }}</text>
+            <text class="trend__item-meta-add">{{ item.reposStarsAdded }}</text>
+          </view>
+        </view>
+      </view>
+      <view class="trend__bottom-pad" />
+    </scroll-view>
+
+    <MainTabBar :active="1" />
   </view>
 </template>
 
@@ -39,6 +48,7 @@
 import { ref } from 'vue'
 import { onShow } from '@dcloudio/uni-app'
 import { fetchTrending, type TrendItem } from '@/api/trending'
+import MainTabBar from '@/components/MainTabBar.vue'
 
 const sinceOptions = [
   { label: '今日', value: 'daily' as const },
@@ -49,6 +59,12 @@ const sinceOptions = [
 const since = ref<'daily' | 'weekly' | 'monthly'>('daily')
 const list = ref<TrendItem[]>([])
 const loading = ref(false)
+const statusBarHeight = ref(0)
+
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
 
 async function load() {
   loading.value = true
@@ -76,7 +92,42 @@ onShow(load)
 
 <style lang="scss" scoped>
 .trend {
-  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: $gsy-container;
+}
+
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  background-color: $gsy-theme-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
+
+  &__title {
+    color: #ffffff;
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+  }
+}
+
+.trend__scroll {
+  flex: 1;
+  width: 100%;
+}
+
+.trend__bottom-pad {
+  height: calc(120rpx + env(safe-area-inset-bottom) + 20rpx);
+}
+
+.trend {
+  padding: 0;
 
   &__filter {
     display: flex;

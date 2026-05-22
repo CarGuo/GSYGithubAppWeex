@@ -1,5 +1,10 @@
 <template>
   <view class="person">
+    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+      <text class="navbar__title">我的</text>
+    </view>
+
+    <scroll-view class="person__scroll" scroll-y>
     <view class="card-black-full-wrapper person__head">
       <view class="person__row">
         <image
@@ -18,11 +23,11 @@
           <text class="name-text-white">{{ userInfo?.login || '未登录' }}</text>
           <text class="person__name">{{ userInfo?.name || '---' }}</text>
           <view class="person__line">
-            <text class="iconfont icon-ren person__line-icon" />
+            <text class="wxcIconFont person__line-icon">&#xe604;</text>
             <text class="person__line-text">{{ userInfo?.company || '---' }}</text>
           </view>
           <view class="person__line">
-            <text class="iconfont icon-shijian person__line-icon" />
+            <text class="wxcIconFont person__line-icon">&#xe7e6;</text>
             <text class="person__line-text">{{ userInfo?.location || '---' }}</text>
           </view>
         </view>
@@ -77,6 +82,10 @@
     <view class="card-white-wrapper person__menu" @click="goSetting">
       <text class="content-text-black-bold">设置</text>
     </view>
+    <view class="person__bottom-pad" />
+    </scroll-view>
+
+    <MainTabBar :active="2" />
   </view>
 </template>
 
@@ -86,6 +95,7 @@ import { onShow } from '@dcloudio/uni-app'
 import { useUserStore } from '@/stores/user'
 import http from '@/api/http'
 import { Address } from '@/api/address'
+import MainTabBar from '@/components/MainTabBar.vue'
 
 interface FullUser {
   login: string
@@ -113,6 +123,12 @@ interface GhEvent {
 const userStore = useUserStore()
 const userInfo = computed(() => userStore.userInfo as FullUser | null)
 const events = ref<GhEvent[]>([])
+const statusBarHeight = ref(0)
+
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
 
 const createdLine = computed(() => {
   const u = userInfo.value as FullUser | null
@@ -194,9 +210,38 @@ async function onLogout() {
 
 <style lang="scss" scoped>
 .person {
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   background-color: $gsy-container;
-  padding-bottom: 40rpx;
+}
+
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  background-color: $gsy-theme-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
+
+  &__title {
+    color: #ffffff;
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+  }
+}
+
+.person__scroll {
+  flex: 1;
+  width: 100%;
+}
+
+.person__bottom-pad {
+  height: calc(120rpx + env(safe-area-inset-bottom) + 20rpx);
 }
 
 .person__head {
