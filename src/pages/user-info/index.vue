@@ -33,24 +33,24 @@
         <text class="user__des">{{ info.bio || '' }}{{ createdLine }}</text>
 
         <view class="user__bottom">
-          <view class="user__bottom-item user__bottom-line">
+          <view class="user__bottom-item user__bottom-line" @click.stop="goList('userRepos', '仓库')">
             <text class="user__b-text">仓库</text>
             <text class="user__b-value">{{ info.public_repos ?? '---' }}</text>
           </view>
-          <view class="user__bottom-item user__bottom-line">
+          <view class="user__bottom-item user__bottom-line" @click.stop="goList('followers', '粉丝')">
             <text class="user__b-text">粉丝</text>
             <text class="user__b-value">{{ info.followers ?? '---' }}</text>
           </view>
-          <view class="user__bottom-item user__bottom-line">
+          <view class="user__bottom-item user__bottom-line" @click.stop="goList('following', '关注')">
             <text class="user__b-text">关注</text>
             <text class="user__b-value">{{ info.following ?? '---' }}</text>
           </view>
-          <view class="user__bottom-item user__bottom-line" @click="openWeb(info.html_url)">
+          <view class="user__bottom-item user__bottom-line" @click.stop="openWeb(info.html_url)">
             <text class="user__b-text">主页</text>
             <text class="user__b-value">›</text>
           </view>
-          <view class="user__bottom-item">
-            <text class="user__b-text">荣耀</text>
+          <view class="user__bottom-item" @click.stop="goList('userStars', '星标')">
+            <text class="user__b-text">星标</text>
             <text class="user__b-value">---</text>
           </view>
         </view>
@@ -110,6 +110,7 @@ const events = ref<GhEvent[]>([])
 const loading = ref(false)
 const statusBarHeight = ref(0)
 const navTitle = ref('用户信息')
+const curLogin = ref('')
 
 try {
   const sys = uni.getSystemInfoSync()
@@ -126,6 +127,7 @@ const createdLine = computed(() => {
 onLoad(async (q: Record<string, string> | undefined) => {
   const login = q?.login
   if (!login) return
+  curLogin.value = login
   navTitle.value = login
   loading.value = true
   try {
@@ -177,6 +179,14 @@ function openRepo(fullName?: string) {
 function openWeb(url: string) {
   if (!url) return
   uni.navigateTo({ url: `/pages/web/index?url=${encodeURIComponent(url)}` })
+}
+
+function goList(dataType: string, title: string) {
+  const login = curLogin.value || info.value?.login
+  if (!login) return
+  uni.navigateTo({
+    url: `/pages/common-list/index?dataType=${dataType}&user=${login}&title=${encodeURIComponent(title)}`
+  })
 }
 
 function goBack() {
