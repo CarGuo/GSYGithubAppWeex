@@ -37,6 +37,18 @@ export const Address = {
     `${HOST_API}repos/${owner}/${name}/subscribers?page=${page}&per_page=${PAGE_SIZE}`,
   getReposContributors: (owner: string, name: string, page = 1) =>
     `${HOST_API}repos/${owner}/${name}/contributors?page=${page}&per_page=${PAGE_SIZE}`,
+  getReposBranches: (owner: string, name: string) =>
+    `${HOST_API}repos/${owner}/${name}/branches?per_page=100`,
+  getReposContent: (owner: string, name: string, path = '', branch = '') => {
+    const cleanPath = path.replace(/^\/+/, '')
+    const ref = branch ? `?ref=${encodeURIComponent(branch)}` : ''
+    return `${HOST_API}repos/${owner}/${name}/contents/${cleanPath}${ref}`
+  },
+  getReposFileContent: (owner: string, name: string, path: string, branch = '') => {
+    const cleanPath = path.replace(/^\/+/, '')
+    const ref = branch ? `?ref=${encodeURIComponent(branch)}` : ''
+    return `${HOST_API}repos/${owner}/${name}/contents/${cleanPath}${ref}`
+  },
   search: (q: string, page = 1, type: 'repositories' | 'users' = 'repositories') => {
     if (type === 'users') {
       return `${HOST_API}search/users?q=${encodeURIComponent(q)}&page=${page}&per_page=${PAGE_SIZE}`

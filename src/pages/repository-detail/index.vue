@@ -41,6 +41,10 @@
         <text class="content-text-black-bold">README</text>
         <text class="repo__menu-arrow">›</text>
       </view>
+      <view class="card-white-wrapper repo__menu" @click="openFiles">
+        <text class="content-text-black-bold">文件浏览</text>
+        <text class="repo__menu-arrow">›</text>
+      </view>
       <view class="card-white-wrapper repo__menu" @click="openIssues">
         <text class="content-text-black-bold">Issues</text>
         <text class="repo__menu-arrow">›</text>
@@ -80,6 +84,7 @@ interface RepoDetail {
   open_issues_count: number
   html_url: string
   homepage?: string | null
+  default_branch?: string
   pushed_at?: string
   created_at?: string
   owner: { login: string; avatar_url?: string }
@@ -118,6 +123,12 @@ function openIssues() {
 }
 function openReadme() {
   uni.navigateTo({ url: `/pages/repository-detail-info/index?owner=${owner.value}&name=${name.value}` })
+}
+function openFiles() {
+  const branch = data.value?.default_branch || ''
+  uni.navigateTo({
+    url: `/pages/repository-files/index?owner=${owner.value}&name=${name.value}&branch=${encodeURIComponent(branch)}`
+  })
 }
 function openWeb(url?: string | null) {
   if (!url) return
