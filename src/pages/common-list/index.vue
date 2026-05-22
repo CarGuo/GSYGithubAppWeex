@@ -1,8 +1,14 @@
 <template>
   <view class="list">
+    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+      <view class="navbar__back" @click="goBack">
+        <text class="wxcIconFont navbar__icon">&#xe78a;</text>
+      </view>
+      <text class="navbar__title">{{ navTitle }}</text>
+    </view>
     <view v-if="loading && page === 1" class="list__hint"><text>加载中…</text></view>
     <view v-else-if="items.length === 0" class="list__hint"><text>暂无数据</text></view>
-    <view v-else>
+    <view v-else class="list__inner">
       <view
         v-for="(it, idx) in items"
         :key="it.id || idx"
@@ -18,7 +24,7 @@
           <text class="name-text-theme">{{ it.login }}</text>
           <text v-if="it.subText" class="content-text-gray list__sub">{{ it.subText }}</text>
         </view>
-        <text class="list__arrow">›</text>
+        <text class="wxcIconFont list__arrow">&#xe610;</text>
       </view>
       <view v-if="loading && page > 1" class="list__hint"><text>加载更多…</text></view>
       <view v-else-if="!noMore" class="list__more" @click="loadMore">
@@ -49,6 +55,18 @@ const items = ref<Item[]>([])
 const page = ref(1)
 const loading = ref(false)
 const noMore = ref(false)
+const navTitle = ref('列表')
+const statusBarHeight = ref(0)
+
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
+
+function goBack() {
+  if (getCurrentPages().length > 1) uni.navigateBack()
+  else uni.reLaunch({ url: '/pages/main/index' })
+}
 
 function buildUrl(p: number): string {
   switch (dataType.value) {
@@ -123,18 +141,51 @@ onLoad((q: Record<string, string> | undefined) => {
   owner.value = q?.owner || ''
   name.value = q?.name || ''
   dataType.value = q?.dataType || ''
-  const title = q?.title ? decodeURIComponent(q.title) : '列表'
-  uni.setNavigationBarTitle({ title })
+  navTitle.value = q?.title ? decodeURIComponent(q.title) : '列表'
   load(1)
 })
 </script>
 
 <style lang="scss" scoped>
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  background-color: $gsy-theme-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
+  &__title {
+    color: #ffffff;
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+  }
+  &__back {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100rpx;
+    width: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__icon {
+    color: #ffffff;
+    font-size: 40rpx;
+  }
+}
 .list {
-  padding: 24rpx;
+  padding: 0;
   min-height: 100vh;
   background-color: $gsy-container;
 
+  &__inner {
+    padding: 24rpx;
+  }
   &__hint {
     text-align: center;
     color: $gsy-gray;
@@ -163,7 +214,7 @@ onLoad((q: Record<string, string> | undefined) => {
   }
   &__arrow {
     color: $gsy-gray;
-    font-size: 36rpx;
+    font-size: 32rpx;
     margin-left: 12rpx;
   }
   &__more {

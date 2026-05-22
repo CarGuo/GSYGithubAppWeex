@@ -9,12 +9,15 @@
         创建入口：Settings → Developer settings → Personal access tokens。
       </text>
 
-      <input
-        v-model="token"
-        class="login__input"
-        :placeholder="'ghp_xxxxxxxxxxxxxxxxxxxx'"
-        :password="masked"
-      />
+      <view class="login__input-row">
+        <text class="wxcIconFont login__input-icon">&#xe60e;</text>
+        <input
+          v-model="token"
+          class="login__input"
+          :placeholder="'ghp_xxxxxxxxxxxxxxxxxxxx'"
+          :password="masked"
+        />
+      </view>
 
       <view class="login__row">
         <text class="login__row-label">隐藏 token</text>
@@ -53,7 +56,7 @@ async function onLogin() {
   const ok = await userStore.login(token.value.trim())
   if (ok) {
     uni.showToast({ title: `欢迎，${userStore.userInfo?.login}`, icon: 'success' })
-    setTimeout(() => uni.switchTab({ url: '/pages/main/index' }), 600)
+    setTimeout(() => uni.reLaunch({ url: '/pages/main/index' }), 600)
   }
 }
 </script>
@@ -100,13 +103,26 @@ async function onLogin() {
     text-align: center;
   }
 
+  &__input-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 24rpx;
+  }
+
+  &__input-icon {
+    color: $gsy-theme-color;
+    font-size: 44rpx;
+    margin-right: 20rpx;
+  }
+
   &__input {
+    flex: 1;
     border: 2rpx solid $gsy-theme-color;
     border-radius: 12rpx;
     padding: 20rpx 24rpx;
     font-size: 30rpx;
     color: $gsy-input-color;
-    margin-bottom: 24rpx;
   }
 
   &__row {

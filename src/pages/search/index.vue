@@ -1,13 +1,15 @@
 <template>
   <view class="search">
-    <view class="search__navbar">
-      <text class="iconfont icon-fanhui search__navbar-back" @click="goBack" />
+    <view class="search__navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+      <view class="search__navbar-back" @click="goBack">
+        <text class="wxcIconFont search__navbar-icon">&#xe78a;</text>
+      </view>
       <text class="search__navbar-title">搜索</text>
     </view>
 
     <view class="search__searchbar">
       <view class="search__input-wrap">
-        <text class="iconfont icon-sousuo search__input-icon" />
+        <text class="wxcIconFont search__input-icon">&#xe61c;</text>
         <input
           v-model="keyword"
           class="search__input"
@@ -22,12 +24,13 @@
 
     <view class="search__control">
       <text
-        :class="['search__control-text', { 'is-active': type === 'repositories' }]"
+        class="search__control-text"
+        :style="{ color: type === 'repositories' ? '#FFFFFF' : '#AAAAAA' }"
         @click="setType('repositories')"
       >仓库</text>
-      <text class="search__control-divider">|</text>
       <text
-        :class="['search__control-text', { 'is-active': type === 'users' }]"
+        class="search__control-text"
+        :style="{ color: type === 'users' ? '#FFFFFF' : '#AAAAAA' }"
         @click="setType('users')"
       >用户</text>
     </view>
@@ -63,15 +66,15 @@
           <text class="text-line-three content-text-gray search__repo-desc">{{ item.description || '' }}</text>
           <view class="search__repo-foot">
             <view class="search__repo-iconcell">
-              <text class="iconfont icon-star search__repo-iconfont" />
+              <text class="wxcIconFont search__repo-iconfont">&#xe643;</text>
               <text class="search__repo-icontext">{{ item.stargazers_count }}</text>
             </view>
             <view class="search__repo-iconcell">
-              <text class="iconfont icon-xing search__repo-iconfont" />
+              <text class="wxcIconFont search__repo-iconfont">&#xe67e;</text>
               <text class="search__repo-icontext">{{ item.forks_count }}</text>
             </view>
             <view class="search__repo-iconcell">
-              <text class="iconfont icon-pinglun search__repo-iconfont" />
+              <text class="wxcIconFont search__repo-iconfont">&#xe661;</text>
               <text class="search__repo-icontext">{{ item.open_issues_count ?? 0 }}</text>
             </view>
           </view>
@@ -116,6 +119,12 @@ const repos = ref<Repo[]>([])
 const users = ref<UserHit[]>([])
 const loading = ref(false)
 const hasSearched = ref(false)
+const statusBarHeight = ref(0)
+
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
 
 function setType(t: 'repositories' | 'users') {
   if (type.value === t) return
@@ -159,7 +168,8 @@ function openUser(login: string) {
   uni.navigateTo({ url: `/pages/user-info/index?login=${login}` })
 }
 function goBack() {
-  uni.navigateBack({ delta: 1, fail: () => uni.switchTab({ url: '/pages/main/index' }) })
+  if (getCurrentPages().length > 1) uni.navigateBack()
+  else uni.reLaunch({ url: '/pages/main/index' })
 }
 </script>
 
@@ -174,22 +184,32 @@ function goBack() {
 .search__navbar {
   position: relative;
   width: 100%;
-  height: 88rpx;
+  height: 100rpx;
   background: $gsy-theme-color;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
   &-back {
     position: absolute;
-    left: 24rpx;
+    left: 0;
+    bottom: 0;
+    height: 100rpx;
+    width: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-icon {
     color: #ffffff;
-    font-size: 36rpx;
+    font-size: 40rpx;
   }
   &-title {
     color: #ffffff;
-    font-size: 34rpx;
+    font-size: 36rpx;
     font-weight: bold;
+    line-height: 100rpx;
   }
 }
 
@@ -210,8 +230,8 @@ function goBack() {
   padding: 8rpx 16rpx;
 }
 .search__input-icon {
-  color: $gsy-input-color;
-  font-size: 28rpx;
+  color: $gsy-theme-color;
+  font-size: 32rpx;
   margin-right: 12rpx;
 }
 .search__input {
@@ -227,31 +247,28 @@ function goBack() {
 }
 
 .search__control {
+  width: 710rpx;
+  margin: 20rpx auto;
+  background-color: $gsy-theme-color;
+  border-radius: 30rpx;
+  padding: 20rpx;
+  box-shadow: $gsy-box-shadow;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background: $gsy-theme-color;
-  padding: 14rpx 0 22rpx;
   &-text {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 28rpx;
-    padding: 0 24rpx;
-    &.is-active {
-      color: #ffffff;
-      font-weight: bold;
-    }
-  }
-  &-divider {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 24rpx;
+    flex: 1;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 26rpx;
   }
 }
 
 .search__scroll {
   flex: 1;
   width: 100%;
-  padding: 20rpx 0;
+  padding-bottom: 20rpx;
 }
 
 .search__hint {

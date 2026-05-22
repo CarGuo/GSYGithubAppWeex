@@ -1,5 +1,12 @@
 <template>
   <view class="files">
+    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+      <view class="navbar__back" @click="goBack">
+        <text class="wxcIconFont navbar__icon">&#xe78a;</text>
+      </view>
+      <text class="navbar__title">{{ name || '文件' }}</text>
+    </view>
+
     <scroll-view
       class="files__crumb"
       scroll-x="true"
@@ -26,9 +33,9 @@
       class="card-white-wrapper files__row"
       @click="onItem(index)"
     >
-      <text class="iconfont files__icon">{{ it.type !== 'file' ? '\ue793' : '\uea77' }}</text>
+      <text class="wxcIconFont files__icon">{{ it.type !== 'file' ? '\ue793' : '\uea77' }}</text>
       <text class="content-text-gray text-line-one files__name">{{ it.name }}</text>
-      <text v-if="it.type !== 'file'" class="iconfont files__arrow">{{ '\ue610' }}</text>
+      <text v-if="it.type !== 'file'" class="wxcIconFont files__arrow">&#xe610;</text>
     </view>
   </view>
 </template>
@@ -55,6 +62,17 @@ const branch = ref('')
 const headerList = ref<string[]>(['.'])
 const list = ref<ContentItem[]>([])
 const loading = ref(false)
+const statusBarHeight = ref(0)
+
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
+
+function goBack() {
+  if (getCurrentPages().length > 1) uni.navigateBack()
+  else uni.reLaunch({ url: '/pages/main/index' })
+}
 
 function currentPath(): string {
   if (headerList.value.length <= 1) return ''
@@ -122,6 +140,39 @@ onLoad((q: Record<string, string> | undefined) => {
 .files {
   min-height: 100vh;
   background-color: $gsy-container;
+}
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  background-color: $gsy-theme-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
+  &__title {
+    color: #ffffff;
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+  }
+  &__back {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100rpx;
+    width: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__icon {
+    color: #ffffff;
+    font-size: 40rpx;
+  }
+}
+.files {
 
   &__crumb {
     width: 100%;

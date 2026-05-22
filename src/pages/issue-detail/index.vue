@@ -1,5 +1,11 @@
 <template>
   <view class="issue">
+    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+      <view class="navbar__back" @click="goBack">
+        <text class="wxcIconFont navbar__icon">&#xe78a;</text>
+      </view>
+      <text class="navbar__title">Issue 详情</text>
+    </view>
     <view v-if="loading" class="issue__hint"><text>加载中…</text></view>
     <template v-else-if="!data">
       <view class="issue__hint"><text>未能获取 Issue</text></view>
@@ -8,9 +14,9 @@
       <view class="card-white-wrapper issue__head">
         <view class="issue__title-row">
           <text
-            class="content-text-gray issue__state iconfont"
+            class="wxcIconFont issue__state"
             :style="{ color: data.state === 'open' ? '#2cbe4e' : '#cb2431' }"
-          >{{ '\ue661' }}</text>
+          >&#xe661;</text>
           <text class="issue__number">#{{ data.number }}</text>
           <text class="issue__title">{{ data.title }}</text>
         </view>
@@ -31,7 +37,7 @@
           class="issue__action"
           @click="goEdit"
         >
-          <text class="iconfont icon-pinglun issue__action-icon" />
+          <text class="wxcIconFont issue__action-icon">&#xe6ba;</text>
           <text>发表评论</text>
         </view>
       </view>
@@ -87,6 +93,17 @@ const number = ref('')
 const data = ref<IssueData | null>(null)
 const comments = ref<Comment[]>([])
 const loading = ref(false)
+const statusBarHeight = ref(0)
+
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
+
+function goBack() {
+  if (getCurrentPages().length > 1) uni.navigateBack()
+  else uni.reLaunch({ url: '/pages/main/index' })
+}
 
 async function load() {
   if (!owner.value || !name.value || !number.value) return
@@ -139,8 +156,39 @@ onShow(() => {
 </script>
 
 <style lang="scss" scoped>
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  background-color: $gsy-theme-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
+  &__title {
+    color: #ffffff;
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+  }
+  &__back {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100rpx;
+    width: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__icon {
+    color: #ffffff;
+    font-size: 40rpx;
+  }
+}
 .issue {
-  padding: 24rpx;
+  padding: 0 0 24rpx;
   min-height: 100vh;
   background-color: $gsy-container;
 

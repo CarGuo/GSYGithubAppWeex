@@ -1,9 +1,31 @@
 <template>
   <view class="issues">
+    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+      <view class="navbar__back" @click="goBack">
+        <text class="wxcIconFont navbar__icon">&#xe78a;</text>
+      </view>
+      <text class="navbar__title">Issues</text>
+      <view class="navbar__action" @click="newIssue">
+        <text class="wxcIconFont navbar__icon">&#xe674;</text>
+      </view>
+    </view>
+
     <view class="issues__filter">
-      <text :class="['issues__filter-item', { 'is-active': state === 'open' }]" @click="setState('open')">Open</text>
-      <text :class="['issues__filter-item', { 'is-active': state === 'closed' }]" @click="setState('closed')">Closed</text>
-      <text :class="['issues__filter-item', { 'is-active': state === 'all' }]" @click="setState('all')">All</text>
+      <text
+        class="issues__filter-item"
+        :style="{ color: state === 'open' ? '#FFFFFF' : '#AAAAAA' }"
+        @click="setState('open')"
+      >Open</text>
+      <text
+        class="issues__filter-item"
+        :style="{ color: state === 'closed' ? '#FFFFFF' : '#AAAAAA' }"
+        @click="setState('closed')"
+      >Closed</text>
+      <text
+        class="issues__filter-item"
+        :style="{ color: state === 'all' ? '#FFFFFF' : '#AAAAAA' }"
+        @click="setState('all')"
+      >All</text>
     </view>
 
     <view v-if="loading" class="issues__hint"><text>加载中…</text></view>
@@ -30,11 +52,11 @@
         </view>
         <view class="issues__bottom">
           <text
-            class="content-text-gray issues__state iconfont"
+            class="wxcIconFont issues__state"
             :style="{ color: it.state === 'open' ? '#2cbe4e' : '#cb2431' }"
-          >{{ '\ue661' }}</text>
+          >&#xe661;</text>
           <text class="content-text-gray issues__number">{{ ' #' + it.number }}</text>
-          <text class="content-text-gray issues__comment iconfont">{{ '\ue6ba ' + (it.comments ?? 0) }}</text>
+          <text class="wxcIconFont issues__comment">{{ '\ue6ba ' + (it.comments ?? 0) }}</text>
         </view>
       </view>
     </view>
@@ -64,6 +86,12 @@ const name = ref('')
 const state = ref<'open' | 'closed' | 'all'>('open')
 const list = ref<Issue[]>([])
 const loading = ref(false)
+const statusBarHeight = ref(0)
+
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
 
 async function load() {
   if (!owner.value || !name.value) return
@@ -106,6 +134,15 @@ function formatTime(iso?: string): string {
   return `${Math.floor(diff / 86400)}d 前`
 }
 
+function goBack() {
+  if (getCurrentPages().length > 1) uni.navigateBack()
+  else uni.reLaunch({ url: '/pages/main/index' })
+}
+
+function newIssue() {
+  uni.navigateTo({ url: `/pages/edit-issue/index?owner=${owner.value}&name=${name.value}` })
+}
+
 onLoad((q: Record<string, string> | undefined) => {
   owner.value = q?.owner || ''
   name.value = q?.name || ''
@@ -115,80 +152,111 @@ onLoad((q: Record<string, string> | undefined) => {
 
 <style lang="scss" scoped>
 .issues {
-  padding: 24rpx;
   min-height: 100vh;
   background-color: $gsy-container;
+}
 
-  &__filter {
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  background-color: $gsy-theme-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
+  &__title {
+    color: #ffffff;
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+  }
+  &__back, &__action {
+    position: absolute;
+    bottom: 0;
+    height: 100rpx;
+    width: 100rpx;
     display: flex;
-    background: #ffffff;
-    border-radius: 10rpx;
-    margin-bottom: 24rpx;
-    overflow: hidden;
-    box-shadow: $gsy-box-shadow;
-  }
-  &__filter-item {
-    flex: 1;
-    text-align: center;
-    padding: 24rpx 0;
-    color: $gsy-gray;
-    &.is-active {
-      color: $gsy-theme-color;
-      font-weight: 600;
-      border-bottom: 4rpx solid $gsy-theme-color;
-    }
-  }
-  &__hint {
-    text-align: center;
-    color: $gsy-gray;
-    padding: 64rpx 0;
-  }
-  &__card {
-    margin-bottom: 16rpx;
-  }
-  &__row {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20rpx;
-  }
-  &__avatar {
-    width: 70rpx;
-    height: 70rpx;
-    border-radius: 35rpx;
-    margin-right: 20rpx;
-  }
-  &__main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  &__content {
-    margin-top: 12rpx;
-  }
-  &__time {
-    font-size: 22rpx;
-    margin-top: 6rpx;
-    margin-left: 12rpx;
-  }
-  &__bottom {
-    display: flex;
-    flex-direction: row;
     align-items: center;
-    overflow: hidden;
+    justify-content: center;
   }
-  &__state {
-    margin-left: 90rpx;
-    font-family: 'wxcIconFont';
+  &__back { left: 0; }
+  &__action { right: 0; }
+  &__icon {
+    color: #ffffff;
+    font-size: 40rpx;
   }
-  &__number {
-    font-size: 24rpx;
-    flex: 1;
-    margin-left: 10rpx;
-  }
-  &__comment {
-    text-align: right;
-    font-size: 24rpx;
-    font-family: 'wxcIconFont';
-  }
+}
+
+.issues__filter {
+  width: 710rpx;
+  margin: 20rpx auto;
+  background-color: $gsy-theme-color;
+  border-radius: 30rpx;
+  padding: 20rpx;
+  box-shadow: $gsy-box-shadow;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.issues__filter-item {
+  flex: 1;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 26rpx;
+}
+.issues__hint {
+  text-align: center;
+  color: $gsy-gray;
+  padding: 64rpx 0;
+}
+.issues__card {
+  margin-bottom: 16rpx;
+}
+.issues__row {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20rpx;
+}
+.issues__avatar {
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 35rpx;
+  margin-right: 20rpx;
+}
+.issues__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.issues__content {
+  margin-top: 12rpx;
+}
+.issues__time {
+  font-size: 22rpx;
+  margin-top: 6rpx;
+  margin-left: 12rpx;
+}
+.issues__bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+}
+.issues__state {
+  margin-left: 90rpx;
+  font-size: 24rpx;
+}
+.issues__number {
+  font-size: 24rpx;
+  flex: 1;
+  margin-left: 10rpx;
+}
+.issues__comment {
+  text-align: right;
+  font-size: 24rpx;
+  color: rgba(97, 97, 97, 0.9);
 }
 </style>

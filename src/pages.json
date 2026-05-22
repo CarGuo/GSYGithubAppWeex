@@ -52,13 +52,13 @@
     {
       "path": "pages/repository-issues/index",
       "style": {
-        "navigationBarTitleText": "Issues"
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/repository-files/index",
       "style": {
-        "navigationBarTitleText": "文件"
+        "navigationStyle": "custom"
       }
     },
     {
@@ -70,13 +70,13 @@
     {
       "path": "pages/issue-detail/index",
       "style": {
-        "navigationBarTitleText": "Issue 详情"
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/edit-issue/index",
       "style": {
-        "navigationBarTitleText": "编辑 Issue"
+        "navigationStyle": "custom"
       }
     },
     {
@@ -94,13 +94,13 @@
     {
       "path": "pages/user-info/index",
       "style": {
-        "navigationBarTitleText": "用户信息"
+        "navigationStyle": "custom"
       }
     },
     {
       "path": "pages/setting/index",
       "style": {
-        "navigationBarTitleText": "设置"
+        "navigationStyle": "custom"
       }
     },
     {
@@ -112,7 +112,7 @@
     {
       "path": "pages/common-list/index",
       "style": {
-        "navigationBarTitleText": "列表"
+        "navigationStyle": "custom"
       }
     }
   ],

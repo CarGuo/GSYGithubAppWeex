@@ -1,5 +1,12 @@
 <template>
   <view class="user">
+    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+      <view class="navbar__back" @click="goBack">
+        <text class="wxcIconFont navbar__icon">&#xe78a;</text>
+      </view>
+      <text class="navbar__title">{{ navTitle }}</text>
+    </view>
+
     <view v-if="loading" class="user__hint"><text>加载中…</text></view>
     <view v-else-if="!info" class="user__hint"><text>未能获取用户</text></view>
     <template v-else>
@@ -10,16 +17,19 @@
             <text class="user__user">{{ info.login }}</text>
             <text class="user__name">{{ info.name || '---' }}</text>
             <view class="user__line">
-              <text class="iconfont icon-ren user__line-icon" />
+              <text class="wxcIconFont user__line-icon">&#xe63e;</text>
               <text class="user__line-text">{{ info.company || '---' }}</text>
             </view>
             <view class="user__line">
-              <text class="iconfont icon-shijian user__line-icon" />
+              <text class="wxcIconFont user__line-icon">&#xe7e6;</text>
               <text class="user__line-text">{{ info.location || '---' }}</text>
             </view>
           </view>
         </view>
-        <text class="user__link">{{ info.blog || '---' }}</text>
+        <view class="user__line user__line--full">
+          <text class="wxcIconFont user__line-icon">&#xe670;</text>
+          <text class="user__link">{{ info.blog || '---' }}</text>
+        </view>
         <text class="user__des">{{ info.bio || '' }}{{ createdLine }}</text>
 
         <view class="user__bottom">
@@ -98,6 +108,13 @@ interface GhEvent {
 const info = ref<UserInfo | null>(null)
 const events = ref<GhEvent[]>([])
 const loading = ref(false)
+const statusBarHeight = ref(0)
+const navTitle = ref('用户信息')
+
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
 
 const createdLine = computed(() => {
   if (!info.value?.created_at) return ''
@@ -109,7 +126,7 @@ const createdLine = computed(() => {
 onLoad(async (q: Record<string, string> | undefined) => {
   const login = q?.login
   if (!login) return
-  uni.setNavigationBarTitle({ title: login })
+  navTitle.value = login
   loading.value = true
   try {
     const res = await http.getFetch<UserInfo>(Address.getUser(login))
@@ -161,6 +178,11 @@ function openWeb(url: string) {
   if (!url) return
   uni.navigateTo({ url: `/pages/web/index?url=${encodeURIComponent(url)}` })
 }
+
+function goBack() {
+  if (getCurrentPages().length > 1) uni.navigateBack()
+  else uni.reLaunch({ url: '/pages/main/index' })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -168,6 +190,38 @@ function openWeb(url: string) {
   min-height: 100vh;
   background-color: $gsy-container;
   padding-bottom: 40rpx;
+}
+
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  background-color: $gsy-theme-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
+  &__title {
+    color: #ffffff;
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+  }
+  &__back {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100rpx;
+    width: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__icon {
+    color: #ffffff;
+    font-size: 40rpx;
+  }
 }
 
 .user__hint {

@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 function back() {
-  uni.switchTab({ url: '/pages/main/index' })
+  uni.reLaunch({ url: '/pages/main/index' })
 }
 </script>
 

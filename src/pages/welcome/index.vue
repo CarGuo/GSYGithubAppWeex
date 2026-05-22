@@ -20,7 +20,7 @@ onLoad(async () => {
   await user.restore()
   setTimeout(() => {
     if (user.isLoggedIn) {
-      uni.switchTab({ url: '/pages/main/index' })
+      uni.reLaunch({ url: '/pages/main/index' })
     } else {
       uni.redirectTo({ url: '/pages/login/index' })
     }

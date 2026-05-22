@@ -1,24 +1,32 @@
 <template>
   <view class="edit">
-    <view class="card-white-wrapper edit__card">
-      <text class="edit__title">在 #{{ number }} 添加评论</text>
-      <textarea
-        v-model="body"
-        class="edit__input"
-        :placeholder="'请输入评论内容（支持 Markdown）'"
-        :maxlength="-1"
-        auto-height
-      />
-      <view class="edit__row">
-        <text class="content-text-gray">{{ body.length }} 字</text>
-        <view
-          :class="['edit__submit', { 'is-disabled': submitting || !body.trim() }]"
-          @click="onSubmit"
-        >
-          <text>{{ submitting ? '提交中…' : '提交' }}</text>
-        </view>
+    <view class="navbar" :style="{ paddingTop: statusBarHeight + 'px' }">
+      <view class="navbar__back" @click="goBack">
+        <text class="wxcIconFont navbar__icon">&#xe78a;</text>
       </view>
-      <text v-if="errorMsg" class="edit__error">{{ errorMsg }}</text>
+      <text class="navbar__title">编辑 Issue</text>
+    </view>
+    <view class="edit__inner">
+      <view class="card-white-wrapper edit__card">
+        <text class="edit__title">在 #{{ number }} 添加评论</text>
+        <textarea
+          v-model="body"
+          class="edit__input"
+          :placeholder="'请输入评论内容（支持 Markdown）'"
+          :maxlength="-1"
+          auto-height
+        />
+        <view class="edit__row">
+          <text class="content-text-gray">{{ body.length }} 字</text>
+          <view
+            :class="['edit__submit', { 'is-disabled': submitting || !body.trim() }]"
+            @click="onSubmit"
+          >
+            <text>{{ submitting ? '提交中…' : '提交' }}</text>
+          </view>
+        </view>
+        <text v-if="errorMsg" class="edit__error">{{ errorMsg }}</text>
+      </view>
     </view>
   </view>
 </template>
@@ -35,6 +43,17 @@ const number = ref('')
 const body = ref('')
 const submitting = ref(false)
 const errorMsg = ref('')
+const statusBarHeight = ref(0)
+
+try {
+  const sys = uni.getSystemInfoSync()
+  statusBarHeight.value = sys.statusBarHeight || 0
+} catch (_) {}
+
+function goBack() {
+  if (getCurrentPages().length > 1) uni.navigateBack()
+  else uni.reLaunch({ url: '/pages/main/index' })
+}
 
 async function onSubmit() {
   if (submitting.value) return
@@ -70,11 +89,44 @@ onLoad((q: Record<string, string> | undefined) => {
 </script>
 
 <style lang="scss" scoped>
+.navbar {
+  position: relative;
+  width: 100%;
+  height: 100rpx;
+  background-color: $gsy-theme-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: $gsy-box-shadow;
+  box-sizing: content-box;
+  &__title {
+    color: #ffffff;
+    font-size: 36rpx;
+    font-weight: bold;
+    line-height: 100rpx;
+  }
+  &__back {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100rpx;
+    width: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__icon {
+    color: #ffffff;
+    font-size: 40rpx;
+  }
+}
 .edit {
   min-height: 100vh;
   background-color: $gsy-container;
-  padding: 24rpx;
 
+  &__inner {
+    padding: 24rpx;
+  }
   &__card {
     display: flex;
     flex-direction: column;
