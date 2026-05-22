@@ -29,6 +29,15 @@ export const Address = {
     `${HOST_API}repos/${owner}/${name}/issues/${number}/comments?page=${page}&per_page=${PAGE_SIZE}`,
   createIssueComment: (owner: string, name: string, number: number | string) =>
     `${HOST_API}repos/${owner}/${name}/issues/${number}/comments`,
+  /** PATCH issue 本体：用于关闭/打开/编辑标题与正文 */
+  editIssue: (owner: string, name: string, number: number | string) =>
+    `${HOST_API}repos/${owner}/${name}/issues/${number}`,
+  /** PUT 锁定 / DELETE 解锁 */
+  lockIssue: (owner: string, name: string, number: number | string) =>
+    `${HOST_API}repos/${owner}/${name}/issues/${number}/lock`,
+  /** PATCH 编辑评论 / DELETE 删除评论 */
+  issueComment: (owner: string, name: string, commentId: number | string) =>
+    `${HOST_API}repos/${owner}/${name}/issues/comments/${commentId}`,
   getReposStargazers: (owner: string, name: string, page = 1) =>
     `${HOST_API}repos/${owner}/${name}/stargazers?page=${page}&per_page=${PAGE_SIZE}`,
   getReposForks: (owner: string, name: string, page = 1) =>

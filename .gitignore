@@ -35,3 +35,4 @@ platforms/build/
 # E2E (local-only, not part of the project)
 .e2e/
 e2e-artifacts/
+artifacts/

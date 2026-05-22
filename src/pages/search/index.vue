@@ -37,7 +37,26 @@
 
     <scroll-view scroll-y class="search__scroll">
       <view v-if="loading" class="search__hint"><text>搜索中…</text></view>
-      <view v-else-if="!hasSearched" class="search__hint"><text>输入关键字开始搜索</text></view>
+      <template v-else-if="!hasSearched">
+        <view v-if="history.length === 0" class="search__hint">
+          <text>输入关键字开始搜索</text>
+        </view>
+        <view v-else class="search__history">
+          <view class="search__history-head">
+            <text class="search__history-title">搜索历史</text>
+            <text class="search__history-clear" @click="clearHistory">清空</text>
+          </view>
+          <view
+            v-for="(h, idx) in history"
+            :key="`h-${idx}`"
+            class="search__history-item"
+            @click="onPickHistory(h)"
+          >
+            <text class="wxcIconFont search__history-icon">&#xe61c;</text>
+            <text class="search__history-text">{{ h }}</text>
+          </view>
+        </view>
+      </template>
       <view
         v-else-if="repos.length === 0 && users.length === 0"
         class="search__hint"
@@ -98,7 +117,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import http from '@/api/http'
 import { Address } from '@/api/address'
 
@@ -113,6 +132,9 @@ interface Repo {
 }
 interface UserHit { login: string; avatar_url: string; type: string }
 
+const HISTORY_KEY = 'gsy_search_history'
+const HISTORY_LIMIT = 10
+
 const keyword = ref('')
 const type = ref<'repositories' | 'users'>('repositories')
 const repos = ref<Repo[]>([])
@@ -120,11 +142,37 @@ const users = ref<UserHit[]>([])
 const loading = ref(false)
 const hasSearched = ref(false)
 const statusBarHeight = ref(0)
+const history = ref<string[]>([])
 
 try {
   const sys = uni.getSystemInfoSync()
   statusBarHeight.value = sys.statusBarHeight || 0
 } catch (_) {}
+
+function loadHistory() {
+  try {
+    const raw = uni.getStorageSync(HISTORY_KEY)
+    if (Array.isArray(raw)) history.value = raw.filter((v) => typeof v === 'string')
+  } catch (_) {}
+}
+
+function persistHistory(q: string) {
+  const next = [q, ...history.value.filter((x) => x !== q)].slice(0, HISTORY_LIMIT)
+  history.value = next
+  try { uni.setStorageSync(HISTORY_KEY, next) } catch (_) {}
+}
+
+function clearHistory() {
+  history.value = []
+  try { uni.removeStorageSync(HISTORY_KEY) } catch (_) {}
+}
+
+function onPickHistory(q: string) {
+  keyword.value = q
+  onSearch()
+}
+
+onMounted(() => loadHistory())
 
 function setType(t: 'repositories' | 'users') {
   if (type.value === t) return
@@ -140,6 +188,7 @@ async function onSearch() {
   }
   loading.value = true
   hasSearched.value = true
+  persistHistory(q)
   try {
     const res = await http.getFetch<{ items?: any[] }>(Address.search(q, 1, type.value))
     if (res.result && typeof res.data === 'object' && res.data !== null) {
@@ -345,6 +394,48 @@ function goBack() {
     flex: 1;
     display: flex;
     flex-direction: column;
+  }
+}
+
+.search__history {
+  margin-top: 20rpx;
+  background: #ffffff;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  border-radius: 12rpx;
+  padding: 20rpx 24rpx 8rpx;
+  box-shadow: $gsy-box-shadow;
+  &-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12rpx;
+  }
+  &-title {
+    color: $gsy-theme-color;
+    font-size: 28rpx;
+    font-weight: 600;
+  }
+  &-clear {
+    color: $gsy-action-blue;
+    font-size: 24rpx;
+  }
+  &-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 18rpx 0;
+    border-top: 1rpx solid #ececec;
+  }
+  &-icon {
+    color: $gsy-gray;
+    font-size: 26rpx;
+    margin-right: 12rpx;
+  }
+  &-text {
+    color: $gsy-theme-color;
+    font-size: 28rpx;
   }
 }
 </style>

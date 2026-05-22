@@ -44,24 +44,6 @@
       }
     },
     {
-      "path": "pages/repository-detail-info/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/repository-issues/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
-      "path": "pages/repository-files/index",
-      "style": {
-        "navigationStyle": "custom"
-      }
-    },
-    {
       "path": "pages/code-detail/index",
       "style": {
         "navigationBarTitleText": "代码"
