@@ -46,10 +46,14 @@ interface Item {
   login: string
   avatar_url?: string
   subText?: string
+  /** 仓库类项目 owner/name，用于点击跳 repository-detail */
+  repoOwner?: string
+  repoName?: string
 }
 
 const owner = ref('')
 const name = ref('')
+const user = ref('')
 const dataType = ref('')
 const items = ref<Item[]>([])
 const page = ref(1)
@@ -78,18 +82,30 @@ function buildUrl(p: number): string {
       return Address.getReposSubscribers(owner.value, name.value, p)
     case 'reposContributor':
       return Address.getReposContributors(owner.value, name.value, p)
+    case 'userRepos':
+      return Address.getUserRepos(user.value, p)
+    case 'userStars':
+      return Address.getUserStarred(user.value, p)
+    case 'followers':
+      return Address.getUserFollowers(user.value, p)
+    case 'following':
+      return Address.getUserFollowing(user.value, p)
     default:
       return ''
   }
 }
 
 function normalize(raw: any[]): Item[] {
-  if (dataType.value === 'reposForker') {
+  if (dataType.value === 'reposForker'
+    || dataType.value === 'userRepos'
+    || dataType.value === 'userStars') {
     return raw.map((r) => ({
       id: r.id,
-      login: r.owner?.login || r.full_name || '',
+      login: r.full_name || r.name || (r.owner?.login ? `${r.owner.login}/${r.name}` : ''),
       avatar_url: r.owner?.avatar_url,
-      subText: r.full_name
+      subText: r.description || r.language || '',
+      repoOwner: r.owner?.login,
+      repoName: r.name
     }))
   }
   return raw.map((r) => ({
@@ -126,6 +142,10 @@ function loadMore() {
 }
 
 function onItem(it: Item) {
+  if (it.repoOwner && it.repoName) {
+    uni.navigateTo({ url: `/pages/repository-detail/index?owner=${it.repoOwner}&name=${it.repoName}` })
+    return
+  }
   if (!it.login) return
   if (dataType.value === 'reposForker' && it.subText) {
     const [o, n] = it.subText.split('/')
@@ -140,6 +160,7 @@ function onItem(it: Item) {
 onLoad((q: Record<string, string> | undefined) => {
   owner.value = q?.owner || ''
   name.value = q?.name || ''
+  user.value = q?.user || ''
   dataType.value = q?.dataType || ''
   navTitle.value = q?.title ? decodeURIComponent(q.title) : '列表'
   load(1)

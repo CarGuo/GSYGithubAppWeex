@@ -5,7 +5,7 @@
     </view>
 
     <scroll-view class="person__scroll" scroll-y>
-    <view class="card-black-full-wrapper person__head">
+    <view class="card-black-full-wrapper person__head" @click="goSetting">
       <view class="person__row">
         <image
           v-if="userInfo"
@@ -35,22 +35,22 @@
       <text class="person__link">{{ userInfo?.blog || '---' }}</text>
       <text class="person__des">{{ userInfo?.bio || '' }}{{ createdLine }}</text>
 
-      <view class="person__bottom">
-        <view class="person__bottom-item person__bottom-line" @click="openSelf">
+      <view class="person__bottom" @click.stop>
+        <view class="person__bottom-item person__bottom-line" @click="goUserRepos">
           <text class="person__b-text">仓库</text>
           <text class="person__b-value">{{ userInfo?.public_repos ?? '---' }}</text>
         </view>
-        <view class="person__bottom-item person__bottom-line" @click="openSelf">
+        <view class="person__bottom-item person__bottom-line" @click="goFollowers">
           <text class="person__b-text">粉丝</text>
           <text class="person__b-value">{{ userInfo?.followers ?? '---' }}</text>
         </view>
-        <view class="person__bottom-item person__bottom-line" @click="openSelf">
+        <view class="person__bottom-item person__bottom-line" @click="goFollowing">
           <text class="person__b-text">关注</text>
           <text class="person__b-value">{{ userInfo?.following ?? '---' }}</text>
         </view>
-        <view class="person__bottom-item person__bottom-line" @click="openSelf">
+        <view class="person__bottom-item person__bottom-line" @click="goUserStarred">
           <text class="person__b-text">星标</text>
-          <text class="person__b-value">---</text>
+          <text class="person__b-value">{{ starredCount }}</text>
         </view>
         <view class="person__bottom-item">
           <text class="person__b-text">荣耀</text>
@@ -124,6 +124,7 @@ const userStore = useUserStore()
 const userInfo = computed(() => userStore.userInfo as FullUser | null)
 const events = ref<GhEvent[]>([])
 const statusBarHeight = ref(0)
+const starredCount = ref<string | number>('---')
 
 try {
   const sys = uni.getSystemInfoSync()
@@ -154,11 +155,23 @@ async function loadEvents() {
   }
 }
 
+async function loadStarredCount() {
+  if (!userStore.userInfo?.login) return
+  try {
+    const res = await http.getFetch<any[]>(Address.getUserStarred(userStore.userInfo.login, 1))
+    if (res.result && Array.isArray(res.data)) {
+      const len = (res.data as any[]).length
+      starredCount.value = len >= 30 ? `${len}+` : len
+    }
+  } catch (_) {}
+}
+
 onShow(async () => {
   await userStore.restore()
   if (userStore.isLoggedIn) {
     refreshFull()
     loadEvents()
+    loadStarredCount()
   }
 })
 
@@ -197,6 +210,35 @@ function openRepo(fullName?: string) {
 function openSelf() {
   if (!userInfo.value) return
   uni.navigateTo({ url: `/pages/user-info/index?login=${userInfo.value.login}` })
+}
+
+function goUserRepos() {
+  const u = userInfo.value
+  if (!u) return
+  uni.navigateTo({
+    url: `/pages/common-list/index?dataType=userRepos&user=${u.login}&title=${encodeURIComponent(u.login + '/repos')}`
+  })
+}
+function goUserStarred() {
+  const u = userInfo.value
+  if (!u) return
+  uni.navigateTo({
+    url: `/pages/common-list/index?dataType=userStars&user=${u.login}&title=${encodeURIComponent(u.login + '/starred')}`
+  })
+}
+function goFollowers() {
+  const u = userInfo.value
+  if (!u) return
+  uni.navigateTo({
+    url: `/pages/common-list/index?dataType=followers&user=${u.login}&title=${encodeURIComponent(u.login + '/followers')}`
+  })
+}
+function goFollowing() {
+  const u = userInfo.value
+  if (!u) return
+  uni.navigateTo({
+    url: `/pages/common-list/index?dataType=following&user=${u.login}&title=${encodeURIComponent(u.login + '/following')}`
+  })
 }
 
 function goLogin() { uni.reLaunch({ url: '/pages/login/index' }) }

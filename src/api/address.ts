@@ -39,6 +39,30 @@ export const Address = {
     `${HOST_API}repos/${owner}/${name}/contributors?page=${page}&per_page=${PAGE_SIZE}`,
   getReposBranches: (owner: string, name: string) =>
     `${HOST_API}repos/${owner}/${name}/branches?per_page=100`,
+  /** 仓库 star 状态（GET 200=已 star / 404=未 star） */
+  getReposStarStatus: (owner: string, name: string) =>
+    `${HOST_API}user/starred/${owner}/${name}`,
+  /** 仓库 watch 状态（GET 200=已订阅 / 404=未订阅） */
+  getReposWatchStatus: (owner: string, name: string) =>
+    `${HOST_API}repos/${owner}/${name}/subscription`,
+  /** PUT/DELETE 都用这个端点，PUT=Star，DELETE=Unstar */
+  doStar: (owner: string, name: string) =>
+    `${HOST_API}user/starred/${owner}/${name}`,
+  /** PUT 订阅 watch 时 body 是 { subscribed: true }；DELETE 退订 */
+  doWatch: (owner: string, name: string) =>
+    `${HOST_API}repos/${owner}/${name}/subscription`,
+  /** POST 创建 fork */
+  doFork: (owner: string, name: string) =>
+    `${HOST_API}repos/${owner}/${name}/forks`,
+  /** 用户的仓库 / 星标 / 粉丝 / 关注列表 */
+  getUserRepos: (userName: string, page = 1) =>
+    `${HOST_API}users/${userName}/repos?page=${page}&per_page=${PAGE_SIZE}&sort=pushed`,
+  getUserStarred: (userName: string, page = 1) =>
+    `${HOST_API}users/${userName}/starred?page=${page}&per_page=${PAGE_SIZE}`,
+  getUserFollowers: (userName: string, page = 1) =>
+    `${HOST_API}users/${userName}/followers?page=${page}&per_page=${PAGE_SIZE}`,
+  getUserFollowing: (userName: string, page = 1) =>
+    `${HOST_API}users/${userName}/following?page=${page}&per_page=${PAGE_SIZE}`,
   getReposEvent: (owner: string, name: string, page = 1) =>
     `${HOST_API}repos/${owner}/${name}/events?page=${page}&per_page=${PAGE_SIZE}`,
   getReposCommits: (owner: string, name: string, branch = '', page = 1) => {
