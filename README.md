@@ -28,22 +28,22 @@
 
 ---
 
-## ✨ Features
+## Features
 
-- 🔐 **PAT 登录**：使用 GitHub Personal Access Token 登录（GitHub 已废弃 Basic Auth）
-- 🏠 **动态主页**：聚合用户/关注者 events，30 条流式列表，长按事件跳仓库 / 用户
-- 📈 **Trend 趋势**：接入 GSY 官方 trend API（[guoshuyu.cn](https://guoshuyu.cn/)），daily/weekly/monthly + 10 种语言 chip 切换；三级回退（GSY → GitHub Search → 本地 mock）保证可用
-- 🔍 **多维搜索**：仓库 / 用户 双 tab，本地搜索历史（最多 10 条 + 一键清空）
-- 📦 **仓库详情**：README / 动态 / 文件 / Issue 4 个 sub-tab + Star/Watch/Fork/Branch 4 个操作；切 tab 不重拉数据
-- 📄 **代码查看**：generateHtml / generateCode2Html 走 GitHub HTML 渲染 + Dracula 主题，大文件友好
-- 💬 **Issue 全功能**：评论流（分页 + 下拉刷新）、长按评论弹层（编辑/删除/复制）、关闭/打开/锁定/解锁 issue、回复评论、新建/编辑 issue
-- 👤 **个人中心**：UserHeadItem 5 列计数（仓库 / followers / following / stars / 主页）+ 跳转
-- ⚙️ **设置页**：关于 cell + 退出登录
-- 🎨 **GSY 设计语言**：完整移植原 GSY iconfont（wxcIconFont）+ 主题色 token（`#3c3f41` / `#267aff` / `#ececec`）+ 700/710rpx 卡片体系，UI 与原版逐像素对齐
+- **PAT 登录**：使用 GitHub Personal Access Token 登录（GitHub 已废弃 Basic Auth）
+- **动态主页**：聚合用户/关注者 events，30 条流式列表，长按事件跳仓库 / 用户
+- **Trend 趋势**：接入 GSY 官方 trend API（[guoshuyu.cn](https://guoshuyu.cn/)），daily/weekly/monthly + 10 种语言 chip 切换；三级回退（GSY 到 GitHub Search 到 本地 mock）保证可用
+- **多维搜索**：仓库 / 用户 双 tab，本地搜索历史（最多 10 条 + 一键清空）
+- **仓库详情**：README / 动态 / 文件 / Issue 4 个 sub-tab + Star/Watch/Fork/Branch 4 个操作；切 tab 不重拉数据
+- **代码查看**：generateHtml / generateCode2Html 走 GitHub HTML 渲染 + Dracula 主题，大文件友好
+- **Issue 全功能**：评论流（分页 + 下拉刷新）、长按评论弹层（编辑/删除/复制）、关闭/打开/锁定/解锁 issue、回复评论、新建/编辑 issue
+- **个人中心**：UserHeadItem 5 列计数（仓库 / followers / following / stars / 主页）+ 跳转
+- **设置页**：关于 cell + 退出登录
+- **GSY 设计语言**：完整移植原 GSY iconfont（wxcIconFont）+ 主题色 token（`#3c3f41` / `#267aff` / `#ececec`）+ 700/710rpx 卡片体系，UI 与原版逐像素对齐
 
 ---
 
-## 📱 截图
+## 截图
 
 > 与原 Weex 版 UI 完全对齐（深主题色 navbar + GSY 卡片 + iconfont）。
 
@@ -53,11 +53,11 @@
 
 ---
 
-## 🚀 Quickstart
+## Quickstart
 
 ### 环境要求
 
-- Node ≥ 18.20（已校验 20.18.1 可用）
+- Node >= 18.20（已校验 20.18.1 可用）
 - 推荐 npm（不要混用 pnpm/yarn）
 
 ### 安装
@@ -88,13 +88,13 @@ npm run build:app
 
 ### 登录
 
-1. 打开 https://github.com/settings/tokens → Generate new token (classic)
+1. 打开 https://github.com/settings/tokens 选 Generate new token (classic)
 2. 至少勾选 `repo` / `user` / `notifications` scope
 3. 在 App 登录页粘贴 PAT 即可
 
 ---
 
-## 🛠 技术栈
+## 技术栈
 
 | 层 | 选型 | pinned 版本 |
 |---|---|---|
@@ -111,17 +111,17 @@ npm run build:app
 
 ---
 
-## 🛡️ 供应链安全：15 天冷却
+## 供应链安全：15 天冷却
 
 为防御 npm typosquat / supply-chain 攻击，本工程**强制要求所有直接依赖的 pinned 版本必须发布满 15 天**：
 
 - 实现：[scripts/check-deps-cooldown.mjs](./scripts/check-deps-cooldown.mjs)
 - 触发点：`npm install` 前由 `preinstall` 钩子执行；CI 中 `npm run verify:cooldown`
-- 调整窗口：`DEPS_COOLDOWN_DAYS=30 npm install`（仅本地，**生产 / 发版必须 ≥ 15**）
+- 调整窗口：`DEPS_COOLDOWN_DAYS=30 npm install`（仅本地，**生产 / 发版必须 >= 15**）
 
 ---
 
-## 📂 项目结构
+## 项目结构
 
 ```
 .
@@ -149,19 +149,19 @@ npm run build:app
 
 ---
 
-## 🧪 测试与回归
+## 测试与回归
 
 - **类型检查**：`npm run type-check`（vue-tsc，0 报错）
 - **E2E**：Playwright 1.59.x 直跑 H5；测试脚本不在仓内，单独放在 `%TEMP%/gsy-e2e/`，确保零 cooldown 污染
-- **当前 e2e 矩阵**（14/14 PASS）：login → main events → repo-detail 4 tab + click + README 不重拉 → setting logout → trend filter/language/list 真实数据 + 切换重发请求
+- **当前 e2e 矩阵**（14/14 PASS）：login 到 main events 到 repo-detail 4 tab + click + README 不重拉 到 setting logout 到 trend filter/language/list 真实数据 + 切换重发请求
 
 详细矩阵见 [docs/parity-checklist.md](./docs/parity-checklist.md)。
 
 ---
 
-## 📦 发布
+## 发布
 
-打 tag → 触发 [.github/workflows/release.yml](./.github/workflows/release.yml)：
+打 tag 触发 [.github/workflows/release.yml](./.github/workflows/release.yml)：
 
 ```bash
 # 在 master 上确认无误后
@@ -173,7 +173,7 @@ git push origin v2.x.y
 
 ---
 
-## 🗺 Roadmap
+## Roadmap
 
 - [x] 15 个页面全量迁移（与原 Weex UI 1:1）
 - [x] GSY 官方 trend API + 三级回退
@@ -186,7 +186,7 @@ git push origin v2.x.y
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 欢迎 PR / Issue / Star。提交 PR 前请：
 

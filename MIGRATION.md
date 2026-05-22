@@ -36,10 +36,10 @@
 
 | 方案 | 端覆盖 | 与 Vue 兼容 | 鸿蒙 | 维护活跃度 | 工作量 |
 |---|---|---|---|---|---|
-| **uni-app（传统 Vue 3 版）** | H5 / 小程序 / Android / iOS | ✅ 直接复用 Vue 模板 | ❌ | 高 | 中 |
-| uni-app x（uvue + UTS） | + HarmonyOS Next | ❌ 改写为 UTS 语言 | ✅ | 高 | 高 |
-| React Native | Android / iOS | ❌ 完全异构 | △ 第三方支持 | 高 | 极高 |
-| Flutter | 全端 | ❌ 完全异构 | ✅ | 高 | 极高（已有 Flutter 版） |
+| **uni-app（传统 Vue 3 版）** | H5 / 小程序 / Android / iOS | yes 直接复用 Vue 模板 | no | 高 | 中 |
+| uni-app x（uvue + UTS） | + HarmonyOS Next | no 改写为 UTS 语言 | yes | 高 | 高 |
+| React Native | Android / iOS | no 完全异构 | partial 第三方支持 | 高 | 极高 |
+| Flutter | 全端 | no 完全异构 | yes | 高 | 极高（已有 Flutter 版） |
 
 最终选 **uni-app 传统版**：
 * 旧工程是 Vue 模板，迁移路径最直接；
@@ -75,7 +75,7 @@ uni-app 自带 `uni.request` 已可工作，但：
 
 成本：H5 端体积 +13 KB（gzipped），可接受。
 
-### 3.4 登录方式：Basic Auth → PAT
+### 3.4 登录方式：Basic Auth -> PAT
 
 GitHub 在 2020-11-13 起强制弃用 `POST /authorizations` 端点（返回 410）。原 Weex 工程仍使用 Basic Auth + 自动换 OAuth token 流程，已不可用。
 
@@ -137,7 +137,7 @@ H5 端通过 [vite.config.ts](./vite.config.ts) 的 `/gsy-trend` 代理绕过 CO
 | `src/components/*.vue`（页面） | `src/pages/<route>/index.vue` | uni-app 强制每页一个目录 |
 | `src/components/widget/*.vue`（widget） | `src/components/*.vue`（待补） | 命名空间合并；本轮还未搬 |
 | `src/core/net/*.js` | `src/api/*.ts` | TS + axios |
-| `src/core/store/modules/*.js` | `src/stores/*.ts` | Vuex → Pinia |
+| `src/core/store/modules/*.js` | `src/stores/*.ts` | Vuex -> Pinia |
 | `src/core/common/*.js` | `src/utils/*.ts` | TS 化 |
 | `src/config/Config.js` | `src/config/index.ts` | TS 化 |
 | `configs/webpack.*.conf.js` | `vite.config.ts` | 全部消失，由 vite 接管 |
@@ -157,16 +157,16 @@ H5 端通过 [vite.config.ts](./vite.config.ts) 的 `/gsy-trend` 代理绕过 CO
 1. **读原文件**：`src/components/<同名>Page.vue`（旧 Weex Vue2 实装），逐节看 template / script / style
 2. **读引用 widget**：原 Page 引用的 `src/components/widget/*.vue` 全部读完，理解 list item / icon / 颜色 / 字号
 3. **读 token**：[`src/config/Config.js`](./src/config/Config.js) + [`src/config/styles.scss`](./src/config/styles.scss)，确认色值、间距、iconfont 编码
-4. **写差异清单**：在 PR 描述或 commit body 列出「原版 X 的 UI 元素 → 新版用 Y 实现」的对照
+4. **写差异清单**：在 PR 描述或 commit body 列出「原版 X 的 UI 元素 -> 新版用 Y 实现」的对照
 5. **再写代码**：严格用对照表里的元素，不允许"想象成 GSY 风格"，不允许新造卡片/icon/色彩
 6. **截图比对**（H5 dev 模式 + 原 app 截屏，并排对比）：列出还存在的差异并说明是否平台限制
 
 **反例**（已经发生过的，必须避免）：
-- ❌ 自创"两行 crumb 卡片"代替原版「水平 scroller 面包屑 ` . > a > b > `」
-- ❌ 给目录 icon 涂蓝色（原版统一 `$--theme-color` 深灰）
-- ❌ 给文件行加右箭头（原版只有目录才有箭头 `\ue610`）
-- ❌ 用 `<pre>` 本地渲染代码（原版借 GitHub HTML 走 webview）
-- ❌ 用 iconfont 编码 `\ue6e1` / `\ue63e`（原版是 `\ue793` / `\uea77`，且字体族是 `wxcIconFont`）
+- [ ] 自创"两行 crumb 卡片"代替原版「水平 scroller 面包屑 ` . > a > b > `」
+- [ ] 给目录 icon 涂蓝色（原版统一 `$--theme-color` 深灰）
+- [ ] 给文件行加右箭头（原版只有目录才有箭头 `\ue610`）
+- [ ] 用 `<pre>` 本地渲染代码（原版借 GitHub HTML 走 webview）
+- [ ] 用 iconfont 编码 `\ue6e1` / `\ue63e`（原版是 `\ue793` / `\uea77`，且字体族是 `wxcIconFont`）
 
 ### 设计 token 对照（从原 [`src/config/Config.js`](https://github.com/CarGuo/GSYGithubAppWeex) 抽取）
 | Token | 旧（Weex Config） | 新（[`src/uni.scss`](./src/uni.scss)） |
@@ -191,11 +191,11 @@ H5 端通过 [vite.config.ts](./vite.config.ts) 的 `/gsy-trend` 代理绕过 CO
 - [`src/static/font/iconfont.{ttf,woff,css}`](./src/static/font/)（iconfont 字体）
 
 ### 已落地的页面对齐
-- **WelcomePage** → [`pages/welcome/index.vue`](./src/pages/welcome/index.vue)：全屏 `welcome.png`（aspectFill）+ 底部版本号
-- **LoginPage** → [`pages/login/index.vue`](./src/pages/login/index.vue)：深主题色背景 + 600rpx 居中白卡（border-radius 10rpx + box-shadow）+ 160rpx logo + "登录到 GitHub" 标题 + PAT 说明 + 主题色描边输入框 + 主题色按钮 + 主题色 switch（**注意**：因 GitHub 已弃用 Basic Auth，登录方式从用户名/密码改为 PAT）
-- **MainPage** → [`pages/main/index.vue`](./src/pages/main/index.vue)：顶部深主题色 NavigationBar（标题居中 + 右侧 iconfont 搜索图标）+ 主体白卡 + iconfont 占位
-- **TrendPage** → [`pages/trend/index.vue`](./src/pages/trend/index.vue)：今日/本周/本月 segmented + 仓库白卡（作者蓝 + 仓库名主题色加粗 + 描述灰 + 语言 chip 浅白底主题色字 + iconfont star/xing + stars-added 警告色）
-- **TabBar** → [`pages.json`](./src/pages.json) 全局 tabBar：深主题色选中、灰未选、白底，4 项（动态 / 趋势 / 搜索 / 我）
+- **WelcomePage** -> [`pages/welcome/index.vue`](./src/pages/welcome/index.vue)：全屏 `welcome.png`（aspectFill）+ 底部版本号
+- **LoginPage** -> [`pages/login/index.vue`](./src/pages/login/index.vue)：深主题色背景 + 600rpx 居中白卡（border-radius 10rpx + box-shadow）+ 160rpx logo + "登录到 GitHub" 标题 + PAT 说明 + 主题色描边输入框 + 主题色按钮 + 主题色 switch（**注意**：因 GitHub 已弃用 Basic Auth，登录方式从用户名/密码改为 PAT）
+- **MainPage** -> [`pages/main/index.vue`](./src/pages/main/index.vue)：顶部深主题色 NavigationBar（标题居中 + 右侧 iconfont 搜索图标）+ 主体白卡 + iconfont 占位
+- **TrendPage** -> [`pages/trend/index.vue`](./src/pages/trend/index.vue)：今日/本周/本月 segmented + 仓库白卡（作者蓝 + 仓库名主题色加粗 + 描述灰 + 语言 chip 浅白底主题色字 + iconfont star/xing + stars-added 警告色）
+- **TabBar** -> [`pages.json`](./src/pages.json) 全局 tabBar：深主题色选中、灰未选、白底，4 项（动态 / 趋势 / 搜索 / 我）
 
 ### 一处关键 bug（H5 资源路径）
 `manifest.json > h5.router.base` 和 `h5.publicPath` 默认 `./`（相对路径），导致 `<image src="/static/logo.png">` 在 `pages/login/index` 路由下被解析为 `/pages/login/static/logo.png` 而 404。修复：两者均改为 `/`（站点根），见 [src/manifest.json](./src/manifest.json#L48-L59)。
@@ -279,21 +279,21 @@ H5 端通过 [vite.config.ts](./vite.config.ts) 的 `/gsy-trend` 代理绕过 CO
 
 | 路由 | 原工程文件 | 状态 |
 |---|---|---|
-| `pages/welcome/index.vue` | `WelcomePage.vue` | ✅ |
-| `pages/login/index.vue` | `LoginPage.vue` | ✅ PAT 登录 |
-| `pages/main/index.vue` | `MainPage.vue` + `DynamicPage.vue` | ✅ 合一 |
-| `pages/trend/index.vue` | `TrendPage.vue` | ✅ GSY 官方 API + 三级回退 + 10 语言 chip |
-| `pages/person/index.vue` | `PersonPage.vue` | ✅ |
-| `pages/search/index.vue` | `SearchPage.vue` | ✅ 仓库/用户 2 tab + 搜索历史 |
-| `pages/setting/index.vue` | `SettingPage.vue` | ✅ |
-| `pages/repository-detail/index.vue` | `RepositoryDetailPage.vue` + 三个 sub Tab | ✅ 4 tab 内 v-show + Star/Watch/Fork/Branch + tab 切不重拉 |
-| `pages/user-info/index.vue` | `UserInfoPage.vue` | ✅ |
-| `pages/code-detail/index.vue` | `CodeDetailPage.vue` | ✅ Dracula 主题 |
-| `pages/issue-detail/index.vue` | `IssueDetailPage.vue` | ✅ 4 操作栏 + 评论长按弹层 + 分页 |
-| `pages/edit-issue/index.vue` | `EditIssuePage.vue` | ✅ 4 种 type |
-| `pages/common-list/index.vue` | `CommonListPage.vue` | ✅ 7 dataType 分支 |
-| `pages/web/index.vue` | `WebPage.vue` | ✅ |
-| `pages/dynamic/index.vue` | `DynamicPage.vue`（独立入口保留） | ✅ |
+| `pages/welcome/index.vue` | `WelcomePage.vue` | [x] |
+| `pages/login/index.vue` | `LoginPage.vue` | [x] PAT 登录 |
+| `pages/main/index.vue` | `MainPage.vue` + `DynamicPage.vue` | [x] 合一 |
+| `pages/trend/index.vue` | `TrendPage.vue` | [x] GSY 官方 API + 三级回退 + 10 语言 chip |
+| `pages/person/index.vue` | `PersonPage.vue` | [x] |
+| `pages/search/index.vue` | `SearchPage.vue` | [x] 仓库/用户 2 tab + 搜索历史 |
+| `pages/setting/index.vue` | `SettingPage.vue` | [x] |
+| `pages/repository-detail/index.vue` | `RepositoryDetailPage.vue` + 三个 sub Tab | [x] 4 tab 内 v-show + Star/Watch/Fork/Branch + tab 切不重拉 |
+| `pages/user-info/index.vue` | `UserInfoPage.vue` | [x] |
+| `pages/code-detail/index.vue` | `CodeDetailPage.vue` | [x] Dracula 主题 |
+| `pages/issue-detail/index.vue` | `IssueDetailPage.vue` | [x] 4 操作栏 + 评论长按弹层 + 分页 |
+| `pages/edit-issue/index.vue` | `EditIssuePage.vue` | [x] 4 种 type |
+| `pages/common-list/index.vue` | `CommonListPage.vue` | [x] 7 dataType 分支 |
+| `pages/web/index.vue` | `WebPage.vue` | [x] |
+| `pages/dynamic/index.vue` | `DynamicPage.vue`（独立入口保留） | [x] |
 
 **冗余路由清理**：原 `RepositoryDetailInfoPage` / `RepositoryFileListPage` / `RepositoryIssueListPage` 这 3 个独立路由已被 RepositoryDetailPage 4 tab 内的 v-show 实现替代，独立路由文件已删除（见 commit a117106）。
 
@@ -332,7 +332,7 @@ H5 端通过 [vite.config.ts](./vite.config.ts) 的 `/gsy-trend` 代理绕过 CO
 * [x] 接入 GSY 官方 trend API（替代原 himalaya 爬虫）
 * [x] Playwright H5 e2e（14/14 PASS，含 trend 真实数据）
 * [x] git 历史 author 全量重写为 `carguo <35936982@qq.com>`
-* [x] 合并 `feat/full-features` → `master`，发布 `v2.0.0-uniapp` GA
+* [x] 合并 `feat/full-features` -> `master`，发布 `v2.0.0-uniapp` GA
 * [ ] vue-i18n 入口接入 + 抽出现有中文 hardcode（保持原工程默认中文行为）
 * [ ] 引入 Vitest 单测覆盖 stores / utils
 * [ ] iOS 端真机验证（需 Mac 环境）
