@@ -21,10 +21,11 @@
 | 技术栈 | 仓库 |
 |---|---|
 | **uni-app（本仓库）** | https://github.com/CarGuo/GSYGithubAppWeex |
-| React Native | https://github.com/CarGuo/GSYGithubAPP |
+| React Native | https://github.com/CarGuo/GSYGithubApp |
 | Flutter | https://github.com/CarGuo/GSYGithubAppFlutter |
 | Android Kotlin（View） | https://github.com/CarGuo/GSYGithubAppKotlin |
-| Android Kotlin Compose | https://github.com/CarGuo/GSYGithubAppKotlinCompose |
+| Android Kotlin Compose | https://github.com/CarGuo/GSYGithubAppCompose |
+| Compose Multiplatform | https://github.com/CarGuo/GSYGithubAppCMP |
 
 ---
 
