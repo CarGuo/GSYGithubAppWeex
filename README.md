@@ -22,10 +22,11 @@
 |---|---|
 | **uni-app（本仓库）** | https://github.com/CarGuo/GSYGithubAppWeex |
 | React Native | https://github.com/CarGuo/GSYGithubApp |
-| Flutter | https://github.com/CarGuo/GSYGithubAppFlutter |
+| Flutter | https://github.com/CarGuo/gsy_github_app_flutter |
 | Android Kotlin（View） | https://github.com/CarGuo/GSYGithubAppKotlin |
-| Android Kotlin Compose | https://github.com/CarGuo/GSYGithubAppCompose |
+| Android Kotlin Compose | https://github.com/CarGuo/GSYGithubAPPCompose |
 | Compose Multiplatform | https://github.com/CarGuo/GSYGithubAppCMP |
+| HarmonyOS ArkUI | https://github.com/CarGuo/GSYGithubAppOH |
 
 ---
 
