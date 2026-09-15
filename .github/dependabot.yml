@@ -1,0 +1,60 @@
+# Dependabot 配置
+#
+# 目的：
+#   1. 只对生态用得上的更新开 PR，减少噪音
+#   2. 把 lockfile-only（间接依赖）更新分组成一个周更 PR，
+#      避免 nanoid / immutable / browserslist 各刷一个
+#   3. 显式忽略生态没跟上的 major 升级（vite 6、@dcloudio/*、@vue/*）
+#      —— 具体证据见 test_evidence/pr-triage-20260915/vite6-plugin-uni-peers.txt
+#   4. 与 scripts/check-deps-cooldown.mjs 的 15 天冷却护栏协作：
+#      Dependabot 会开 PR，但供应链冷却脚本会在 preinstall 时阻断
+#      未过 15 天的直接依赖。cooldown 只有 GitHub Enterprise 才有原生支持，
+#      OSS 仓库靠脚本兜底。
+
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '09:00'
+      timezone: Asia/Shanghai
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - javascript
+    groups:
+      lockfile-transitive:
+        applies-to: version-updates
+        dependency-type: indirect
+        update-types:
+          - patch
+          - minor
+    ignore:
+      # vite 6 需要 @dcloudio/vite-plugin-uni 升级 exact peer 到 ^6.0.0
+      # 目前锁在 vite@5.2.8（exact），任何 6.x 都会 npm ci 失败
+      - dependency-name: 'vite'
+        update-types:
+          - 'version-update:semver-major'
+      # dcloudio 全家桶只发同版本号快照，major 需要整批同步
+      - dependency-name: '@dcloudio/*'
+        update-types:
+          - 'version-update:semver-major'
+      # Vue 3 与 pinia/vue-i18n 的 major 升级需要额外验证
+      - dependency-name: 'vue'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'vue-i18n'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'pinia'
+        update-types:
+          - 'version-update:semver-major'
+      # TypeScript / vue-tsc 6 之后 API 变动较多，major 需人工验证
+      - dependency-name: 'typescript'
+        update-types:
+          - 'version-update:semver-major'
+      - dependency-name: 'vue-tsc'
+        update-types:
+          - 'version-update:semver-major'
